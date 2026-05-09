@@ -51,7 +51,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     .from("posts")
     .select("id, title, slug, excerpt, category, published_at, featured_image", { count: "exact" })
     .eq("category", categoryName)
-    .eq("post_type", "post")
+    // .eq("post_type", "post")  // 👈 COMMENTED OUT - Calculator posts have post_type = 'page'
     .order("published_at", { ascending: false })
     .range(from, to);
 
