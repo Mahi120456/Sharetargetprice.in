@@ -26,7 +26,6 @@ export default async function CategoryPage({ params }: Props) {
     .from("posts")
     .select("id, title, slug, excerpt, category, published_at")
     .eq("category", categoryName)
-    .eq("post_type", "post")
     .order("published_at", { ascending: false })
     .limit(24);
 
