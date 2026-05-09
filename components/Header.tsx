@@ -24,14 +24,11 @@ export default function Header() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="bg-orange-500 text-white font-black text-lg px-3 py-1 rounded-lg">
-            STP
-          </div>
-          <div>
-            <div className="font-bold text-lg leading-tight">ShareTargetPrice</div>
-            <div className="text-orange-400 text-xs">.in</div>
-          </div>
+        {/* Logo - Sirf Text */}
+        <Link href="/" className="flex items-center">
+          <div className="text-white font-black text-xl leading-tight">
+  Share Target Price
+</div>
         </Link>
 
         {/* Desktop Nav */}
@@ -50,9 +47,9 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
           <div className="space-y-1">
-            <span className="block w-5 h-0.5 bg-white"></span>
-            <span className="block w-5 h-0.5 bg-white"></span>
-            <span className="block w-5 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
           </div>
         </button>
       </div>
