@@ -71,7 +71,7 @@ export default async function PostPage({ params }: Props) {
   const post = await getPost(params.slug);
   if (!post) notFound();
 
-  // 🔥 Redirect calculator posts to /calculator/[slug]
+  // Redirect calculator posts to /calculator/[slug]
   if (post.category === 'Calculator') {
     redirect(`/calculator/${post.slug}`);
   }
