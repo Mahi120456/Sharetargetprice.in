@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -70,6 +70,11 @@ function formatContent(content: string): string {
 export default async function PostPage({ params }: Props) {
   const post = await getPost(params.slug);
   if (!post) notFound();
+
+  // 🔥 Redirect calculator posts to /calculator/[slug]
+  if (post.category === 'Calculator') {
+    redirect(`/calculator/${post.slug}`);
+  }
 
   const relatedPosts = await getRelatedPosts(post.category || '', post.slug);
   const formattedContent = formatContent(post.content || '');
