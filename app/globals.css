@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Sharetargetprice.in — Government Job Portal Style
-   Trust Blue + Saffron Accent (Rojgar Info like)
-*/
+/* Sharetargetprice.in — Government Job Portal Style (Rojgar Info like) */
 
 @layer base {
   :root {
@@ -17,12 +15,12 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Trust Blue (government job portals) */
+    /* Trust Blue */
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 217 91% 65%;
 
-    /* Saffron accent */
+    /* Saffron */
     --secondary: 24 94% 53%;
     --secondary-foreground: 0 0% 100%;
 
@@ -32,7 +30,6 @@
     --accent: 24 94% 53%;
     --accent-foreground: 0 0% 100%;
 
-    /* Indian green */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
 
@@ -45,16 +42,13 @@
 
     --radius: 0.5rem;
 
-    /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 80% 50%) 60%, hsl(24 94% 53%) 130%);
     --gradient-tricolor: linear-gradient(90deg, hsl(24 94% 53%) 0%, hsl(0 0% 100%) 50%, hsl(142 76% 36%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 40% 96.1%) 100%);
 
-    /* Shadows */
     --shadow-elegant: 0 10px 40px -12px hsl(217 91% 60% / 0.18);
     --shadow-card: 0 2px 12px -2px hsl(222.2 84% 4.9% / 0.08);
     --shadow-glow: 0 0 40px hsl(24 94% 53% / 0.3);
-
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
@@ -77,7 +71,6 @@
     --popover: 217 33% 15%;
     --popover-foreground: 210 40% 96%;
 
-    /* Saffron as primary action in dark */
     --primary: 24 94% 53%;
     --primary-foreground: 222.2 84% 4.9%;
     --primary-glow: 28 96% 62%;
@@ -88,7 +81,6 @@
     --muted: 217 33% 18%;
     --muted-foreground: 215 20% 70%;
 
-    /* Professional blue accent */
     --accent: 217 91% 60%;
     --accent-foreground: 222.2 84% 4.9%;
 
@@ -136,12 +128,16 @@
 }
 
 @layer base {
-  * { @apply border-border; }
+  * {
+    @apply border-border;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
 }
 
 @layer components {
@@ -158,28 +154,97 @@
   .article-prose h3 {
     @apply text-xl font-semibold mt-6 mb-3 text-primary;
   }
-  .article-prose p { @apply my-4 text-base md:text-lg; }
-  .article-prose ul { @apply list-disc pl-6 my-4 space-y-2; }
-  .article-prose ol { @apply list-decimal pl-6 my-4 space-y-2; }
-  .article-prose strong { @apply font-semibold text-primary; }
-  .article-prose a { @apply text-secondary underline underline-offset-2; }
+  .article-prose p {
+    @apply my-4 text-base md:text-lg;
+  }
+  .article-prose ul {
+    @apply list-disc pl-6 my-4 space-y-2;
+  }
+  .article-prose ol {
+    @apply list-decimal pl-6 my-4 space-y-2;
+  }
+  .article-prose strong {
+    @apply font-semibold text-primary;
+  }
+  .article-prose a {
+    @apply text-secondary underline underline-offset-2;
+  }
 }
 
+/* 🔥 IMPORTANT FIX: Manually define missing Tailwind utilities 🔥 */
 @layer utilities {
-  .bg-hero { background: var(--gradient-hero); }
-  .bg-card-gradient { background: var(--gradient-card); }
-  .shadow-elegant { box-shadow: var(--shadow-elegant); }
-  .shadow-card-soft { box-shadow: var(--shadow-card); }
-  .shadow-glow { box-shadow: var(--shadow-glow); }
-  .transition-smooth { transition: var(--transition-smooth); }
-  
-  /* Yeh class add ki gayi hai error fix karne ke liye */
+  .bg-background {
+    background-color: hsl(var(--background));
+  }
+  .text-foreground {
+    color: hsl(var(--foreground));
+  }
   .border-border {
     border-color: hsl(var(--border));
+  }
+  .bg-card {
+    background-color: hsl(var(--card));
+  }
+  .text-card-foreground {
+    color: hsl(var(--card-foreground));
+  }
+  .bg-primary {
+    background-color: hsl(var(--primary));
+  }
+  .text-primary {
+    color: hsl(var(--primary));
+  }
+  .bg-secondary {
+    background-color: hsl(var(--secondary));
+  }
+  .text-secondary {
+    color: hsl(var(--secondary));
+  }
+  .bg-muted {
+    background-color: hsl(var(--muted));
+  }
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+  }
+  .bg-accent {
+    background-color: hsl(var(--accent));
+  }
+  .text-accent-foreground {
+    color: hsl(var(--accent-foreground));
+  }
+  .bg-destructive {
+    background-color: hsl(var(--destructive));
+  }
+  .text-destructive-foreground {
+    color: hsl(var(--destructive-foreground));
+  }
+  .border-input {
+    border-color: hsl(var(--input));
+  }
+  .ring-ring {
+    --tw-ring-color: hsl(var(--ring));
   }
 }
 
 @layer utilities {
+  .bg-hero {
+    background: var(--gradient-hero);
+  }
+  .bg-card-gradient {
+    background: var(--gradient-card);
+  }
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  .shadow-card-soft {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
