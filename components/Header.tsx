@@ -3,12 +3,15 @@ import Link from "next/link";
 import { useState } from "react";
 
 const categories = [
-  { name: "Share Price Target", slug: "share-price-target" },
-  { name: "Stock Analysis", slug: "stock-analysis" },
-  { name: "IPO", slug: "ipo" },
-  { name: "Mutual Funds", slug: "mutual-funds" },
-  { name: "SIP", slug: "sip" },
-  { name: "Calculators", slug: "calculator" },
+  { name: "Home", slug: "/" },
+  { name: "Share Price Target", slug: "/category/share-price-target" },
+  { name: "Stock Analysis", slug: "/category/stock-analysis" },
+  { name: "IPO", slug: "/category/ipo" },
+  { name: "Mutual Funds", slug: "/category/mutual-funds" },
+  { name: "SIP", slug: "/category/sip" },
+  { name: "Calculators", slug: "/category/calculator" },
+  { name: "About Us", slug: "/about-us" },
+  { name: "Contact Us", slug: "/contact-us" },
 ];
 
 export default function Header() {
@@ -16,14 +19,11 @@ export default function Header() {
 
   return (
     <header className="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
-      {/* Top Bar */}
       <div className="bg-orange-500 text-white text-xs text-center py-1 px-4">
         📈 India&apos;s #1 Share Price Target Analysis Platform
       </div>
 
-      {/* Main Header */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div className="bg-orange-500 text-white font-black text-lg px-3 py-1 rounded-lg">
             STP
@@ -35,11 +35,11 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm">
+        <nav className="hidden md:flex items-center gap-5 text-sm">
           {categories.map((cat) => (
             <Link
               key={cat.slug}
-              href={`/category/${cat.slug}`}
+              href={cat.slug}
               className="hover:text-orange-400 transition-colors font-medium"
             >
               {cat.name}
@@ -48,10 +48,7 @@ export default function Header() {
         </nav>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
+        <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
           <div className="space-y-1">
             <span className="block w-5 h-0.5 bg-white"></span>
             <span className="block w-5 h-0.5 bg-white"></span>
@@ -66,7 +63,7 @@ export default function Header() {
           {categories.map((cat) => (
             <Link
               key={cat.slug}
-              href={`/category/${cat.slug}`}
+              href={cat.slug}
               className="block py-2 text-sm hover:text-orange-400 border-b border-slate-700"
               onClick={() => setMenuOpen(false)}
             >
