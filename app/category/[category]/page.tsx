@@ -11,7 +11,7 @@ const categoryMap: Record<string, { name: string; icon: string; desc: string }> 
   "ipo": { name: "IPO", icon: "🚀", desc: "IPO reviews, GMP, and listing predictions" },
   "mutual-funds": { name: "Mutual Funds", icon: "💼", desc: "Fund performance & analysis" },
   "sip": { name: "SIP", icon: "💰", desc: "SIP calculators & investment planning" },
-  "calculator": { name: "Calculators", icon: "🧮", desc: "Financial tools & calculators" },
+  "calculator": { name: "Calculator", icon: "🧮", desc: "Financial tools & calculators" },
 };
 
 const POSTS_PER_PAGE = 12;
