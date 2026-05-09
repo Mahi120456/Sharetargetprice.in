@@ -11,7 +11,7 @@ export default function Footer() {
               <div className="bg-orange-500 text-white font-black text-lg px-3 py-1 rounded-lg">
                 STP
               </div>
-              <span className="font-bold text-white text-xl">ShareTargetPrice.in</span>
+              <span className="font-bold text-white text-xl">Share Target Price</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
               India&apos;s trusted platform for share price targets, stock analysis, 
