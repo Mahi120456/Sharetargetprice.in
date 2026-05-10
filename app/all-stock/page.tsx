@@ -1,13 +1,13 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, Suspense } from 'react';
 import Link from 'next/link';
 
-export default function AllStocks() {
+// Main content ko separate function mein rakha taaki build fail na ho
+function StockDirectory() {
   const [activeLetter, setActiveLetter] = useState('A');
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-  // Aapki CSV se nikaali gayi main stocks list
-  const allStocks = useMemo(() => [
+  const allStocks = [
     { name: "Adani Power", slug: "adani-power-share-price-target" },
     { name: "Adani Green", slug: "adani-green-share-price-target" },
     { name: "Alok Industries", slug: "alok-industries-share-price-target" },
@@ -44,15 +44,14 @@ export default function AllStocks() {
     { name: "Wipro", slug: "wipro-share-price-target" },
     { name: "Yes Bank", slug: "yes-bank-share-price-target" },
     { name: "Zomato", slug: "zomato-share-price-target" },
-    // Aap isme aur bhi names add kar sakte hain...
-  ], []);
+  ];
 
   const filteredStocks = allStocks.filter(stock => 
     stock.name.toUpperCase().startsWith(activeLetter)
   );
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-10 min-h-screen">
+    <div className="max-w-7xl mx-auto px-4 py-10 min-h-screen">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-extrabold text-slate-900 mb-4">Stock Market Directory</h1>
         <p className="text-slate-600 max-w-xl mx-auto">Explore share price targets and deep-dive technical analysis for all NSE/BSE listed companies.</p>
@@ -89,17 +88,25 @@ export default function AllStocks() {
               </div>
               <div className="overflow-hidden">
                 <span className="font-bold text-slate-800 group-hover:text-orange-600 block truncate">{stock.name}</span>
-                <span className="text-[10px] text-slate-400 uppercase font-bold">View Forecast</span>
+                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">View Forecast</span>
               </div>
             </Link>
           ))
         ) : (
           <div className="col-span-full text-center py-20 bg-white rounded-3xl border border-dashed">
             <p className="text-slate-400 text-lg">No stocks found starting with "{activeLetter}" in this section.</p>
-            <p className="text-sm text-slate-300 mt-2">Try clicking another letter or check back later.</p>
           </div>
         )}
       </div>
-    </main>
+    </div>
+  );
+}
+
+// Ye Export zaroori hai Next.js build ke liye
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="text-center p-20 text-xl">Loading Directory...</div>}>
+      <StockDirectory />
+    </Suspense>
   );
 }
