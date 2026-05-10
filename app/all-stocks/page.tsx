@@ -12,13 +12,21 @@ function StockDirectory() {
   useEffect(() => {
     async function fetchStocks() {
       setLoading(true);
+      // Logic Update: Space aur Case dono ko handle karne ke liye
       const { data, error } = await supabase
         .from('stocks')
         .select('name, slug, sector')
-        .ilike('name', `${activeLetter}%`)
+        // Is line se agar naam ke aage space bhi hoga toh data aa jayega
+        .or(`name.ilike.${activeLetter}%,name.ilike. ${activeLetter}%`)
         .order('name', { ascending: true });
 
-      if (!error) setStocks(data || []);
+      if (!error) {
+        // Name se extra space hatane ke liye
+        const cleanedData = data?.map(s => ({ ...s, name: s.name.trim() })) || [];
+        setStocks(cleanedData);
+      } else {
+        console.error("Supabase Error:", error);
+      }
       setLoading(false);
     }
     fetchStocks();
@@ -37,9 +45,7 @@ function StockDirectory() {
         </p>
       </div>
       
-      {/* Sticky & Scrollable Navigation 
-          Mobile mein ye ek line mein rahega aur scroll hoga (Left-to-Right)
-      */}
+      {/* Sticky & Scrollable Navigation */}
       <div className="sticky top-4 z-40 mb-12">
         <div className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-xl rounded-3xl p-3 md:p-4 overflow-hidden">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth px-2">
@@ -64,7 +70,7 @@ function StockDirectory() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {loading ? (
            <div className="col-span-full text-center py-20">
-              <div className="animate-spin w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+              <div className="animate-spin w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
               <p className="font-bold text-slate-400">Fetching "{activeLetter}" stocks...</p>
            </div>
         ) : stocks.length > 0 ? (
@@ -92,20 +98,14 @@ function StockDirectory() {
         ) : (
           <div className="col-span-full text-center py-24 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
             <h3 className="text-xl font-bold text-slate-800">No data in database for "{activeLetter}"</h3>
-            <p className="text-slate-400 mt-2">Our AI is currently populating the "{activeLetter}" list.</p>
+            <p className="text-slate-400 mt-2">Check back in a moment while we update the list.</p>
           </div>
         )}
       </div>
 
-      {/* Hiding Scrollbar CSS */}
       <style jsx global>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
     </div>
   );
