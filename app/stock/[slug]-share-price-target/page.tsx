@@ -2,14 +2,23 @@ import StockHero from "@/components/StockHero";
 import TradingViewChart from "@/components/TradingViewChart";
 import NewsCarousel from "@/components/NewsCarousel";
 
-export default function Page({ params }: { params: { slug: string } }) {
-  // 1. URL se stock ka naam nikaalna (Example: 'tata-motors' from URL)
-  const slug = params.slug.replace('-share-price-target', '');
+// Ye interface add kiya taaki TypeScript error na de
+interface PageProps {
+  params: { slug: string };
+}
+
+export default function Page({ params }: PageProps) {
+  // Yahan check laga diya taaki agar slug na mile toh build fail na ho
+  const currentSlug = params?.slug || ""; 
+  
+  if (!currentSlug) return <div>Loading...</div>;
+
+  // URL se stock ka naam nikaalne ka logic
+  const slug = currentSlug.replace('-share-price-target', '');
   const cleanName = slug.replace(/-/g, ' ');
   const stockName = cleanName.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   const symbol = slug.split('-')[0].toUpperCase();
 
-  // 2. 25 Automatic Low Competition Keywords
   const autoKeywords = [
     `${stockName} share price target 2025`,
     `${stockName} price prediction 2030`,
