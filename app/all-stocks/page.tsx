@@ -7,25 +7,28 @@ function StockDirectory() {
   const [activeLetter, setActiveLetter] = useState('A');
   const [stocks, setStocks] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [debugError, setDebugError] = useState<string | null>(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   useEffect(() => {
     async function fetchStocks() {
       setLoading(true);
-      setDebugError(null);
       
-      // Filter logic ko simple rakhte hain check karne ke liye
+      // Step 1: Bina filter ke saare stocks mangwao check karne ke liye
       const { data, error } = await supabase
         .from('stocks')
-        .select('name, slug, sector')
-        .ilike('name', `${activeLetter}%`)
-        .order('name', { ascending: true });
+        .select('name, slug, sector');
 
-      if (error) {
-        setDebugError(error.message);
+      if (!error && data) {
+        // Step 2: Frontend par hi filter karo taaki database ka koi issue na rahe
+        // Hum check kar rahe hain: Trim (space hatao) -> First Letter -> Match karo
+        const filtered = data.filter(stock => {
+          const firstChar = stock.name.trim().charAt(0).toUpperCase();
+          return firstChar === activeLetter;
+        });
+        
+        setStocks(filtered);
       } else {
-        setStocks(data || []);
+        console.error("Supabase Fetch Error:", error);
       }
       setLoading(false);
     }
@@ -34,27 +37,25 @@ function StockDirectory() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 min-h-screen bg-slate-50/50">
-      
-      {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-2 uppercase tracking-tighter">
+        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-2 tracking-tight">
           A-Z <span className="text-orange-500">Stock</span> Directory
         </h1>
-        <p className="text-slate-500">Accessing 3,000+ share price forecasts.</p>
+        <p className="text-slate-500">Accessing share price targets and forecasts.</p>
       </div>
       
-      {/* Scrollable Letters */}
-      <div className="sticky top-4 z-40 mb-10 overflow-hidden">
-        <div className="bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-3xl p-3">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 px-1">
+      {/* Scrollable Alphabet Bar */}
+      <div className="sticky top-4 z-40 mb-12">
+        <div className="bg-white/80 backdrop-blur-xl border border-slate-200 shadow-xl rounded-3xl p-3">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar px-2">
             {alphabet.map(letter => (
               <button 
                 key={letter} 
                 onClick={() => setActiveLetter(letter)}
-                className={`flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-2xl font-black transition-all ${
+                className={`flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-2xl font-black transition-all duration-300 ${
                   activeLetter === letter 
                   ? 'bg-slate-900 text-orange-400 scale-110 shadow-lg' 
-                  : 'bg-white text-slate-400 hover:bg-slate-50 border border-slate-100'
+                  : 'bg-white text-slate-400 hover:bg-orange-50 border border-slate-100'
                 }`}
               >
                 {letter}
@@ -64,43 +65,38 @@ function StockDirectory() {
         </div>
       </div>
 
-      {/* Error Message if any */}
-      {debugError && (
-        <div className="bg-red-50 text-red-500 p-4 rounded-xl mb-6 text-center border border-red-100">
-          Database Error: {debugError}
-        </div>
-      )}
-
       {/* Stocks Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {loading ? (
-          <div className="col-span-full text-center py-20 animate-pulse text-slate-400 font-bold">
-            Searching for "{activeLetter}" Stocks...
-          </div>
+           <div className="col-span-full text-center py-20 font-bold text-slate-400">
+             Checking Database for "{activeLetter}"...
+           </div>
         ) : stocks.length > 0 ? (
           stocks.map((stock) => (
             <Link 
               key={stock.slug} 
               href={`/stock/${stock.slug}-share-price-target`}
-              className="group p-5 bg-white border border-slate-200 rounded-3xl hover:border-orange-500 hover:shadow-xl transition-all"
+              className="group p-6 bg-white border border-slate-200 rounded-[2rem] hover:border-orange-500 hover:shadow-xl transition-all duration-500"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-slate-100 text-slate-900 rounded-xl flex items-center justify-center font-bold group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                  {stock.name[0]}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center font-black text-xl group-hover:bg-orange-500 group-hover:text-white transition-all">
+                  {stock.name.trim()[0]}
                 </div>
-                <div className="truncate">
-                  <h3 className="font-bold text-slate-800 group-hover:text-orange-600 truncate uppercase text-sm">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-extrabold text-slate-800 group-hover:text-orange-600 truncate text-sm uppercase">
                     {stock.name}
                   </h3>
-                  <p className="text-[10px] text-slate-400 font-bold">{stock.sector || 'NSE / BSE'}</p>
+                  <span className="text-[10px] text-slate-400 font-bold tracking-widest uppercase">
+                    {stock.sector || 'NIFTY'}
+                  </span>
                 </div>
               </div>
             </Link>
           ))
         ) : (
-          <div className="col-span-full text-center py-24 bg-white rounded-[2.5rem] border border-slate-200">
-            <p className="text-slate-400 font-medium">No stocks found starting with "{activeLetter}"</p>
-            <p className="text-[10px] mt-2 text-slate-300">Tip: Check if RLS is disabled in Supabase.</p>
+          <div className="col-span-full text-center py-24 bg-white rounded-[3rem] border border-slate-200 shadow-sm">
+            <h3 className="text-xl font-bold text-slate-800">No stocks starting with "{activeLetter}"</h3>
+            <p className="text-slate-400 mt-2">Try selecting another letter from the directory.</p>
           </div>
         )}
       </div>
