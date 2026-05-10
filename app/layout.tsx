@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Script from "next/script";
+import PushSetup from "@/components/PushSetup"; // Push notification setup component
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google AdSense */}
+        {/* Google AdSense Script */}
         {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
           <Script
             async
@@ -47,8 +48,18 @@ export default function RootLayout({
         )}
       </head>
       <body className={inter.className}>
+        {/* Invisible component to initialize push notifications */}
+        <PushSetup />
+        
+        {/* Existing Header */}
         <Header />
-        <main className="min-h-screen">{children}</main>
+        
+        {/* Main Content Area */}
+        <main className="min-h-screen">
+          {children}
+        </main>
+        
+        {/* Existing Footer */}
         <Footer />
       </body>
     </html>
