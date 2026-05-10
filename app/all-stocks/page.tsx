@@ -1,72 +1,51 @@
 'use client';
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase'; // Supabase connection
 
-// Main content ko separate function mein rakha taaki build fail na ho
 function StockDirectory() {
   const [activeLetter, setActiveLetter] = useState('A');
+  const [stocks, setStocks] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-  const allStocks = [
-    { name: "Adani Power", slug: "adani-power-share-price-target" },
-    { name: "Adani Green", slug: "adani-green-share-price-target" },
-    { name: "Alok Industries", slug: "alok-industries-share-price-target" },
-    { name: "Ambuja Cement", slug: "ambuja-cement-share-price-target" },
-    { name: "BSE Ltd", slug: "bse-share-price-target" },
-    { name: "Bajaj Auto", slug: "bajaj-auto-share-price-target" },
-    { name: "Coal India", slug: "coal-india-share-price-target" },
-    { name: "HDFC Bank", slug: "hdfc-bank-share-price-target" },
-    { name: "HAL", slug: "hal-share-price-target" },
-    { name: "HUDCO", slug: "hudco-share-price-target" },
-    { name: "IEX", slug: "iex-share-price-target" },
-    { name: "IRFC", slug: "irfc-share-price-target" },
-    { name: "IREDA", slug: "ireda-share-price-target" },
-    { name: "IRCTC", slug: "irctc-share-price-target" },
-    { name: "ITC", slug: "itc-share-price-target" },
-    { name: "Jio Financial", slug: "jio-financial-share-price-target" },
-    { name: "L&T", slug: "l-and-t-share-price-target" },
-    { name: "Mankind Pharma", slug: "mankind-pharma-share-price-target" },
-    { name: "NHPC", slug: "nhpc-share-price-target" },
-    { name: "NBCC", slug: "nbcc-share-price-target" },
-    { name: "Nykaa", slug: "nykaa-share-price-target" },
-    { name: "Ola Electric", slug: "ola-electric-share-price-target" },
-    { name: "ONGC", slug: "ongc-share-price-target" },
-    { name: "Paytm", slug: "paytm-share-price-target" },
-    { name: "Reliance Industries", slug: "reliance-industries-share-price-target" },
-    { name: "RVNL", slug: "rvnl-share-price-target" },
-    { name: "Suzlon Energy", slug: "suzlon-energy-share-price-target" },
-    { name: "SJVN", slug: "sjvn-share-price-target" },
-    { name: "Tata Motors", slug: "tata-motors-share-price-target" },
-    { name: "Tata Steel", slug: "tata-steel-share-price-target" },
-    { name: "Tata Power", slug: "tata-power-share-price-target" },
-    { name: "TCS", slug: "tcs-share-price-target" },
-    { name: "Trident", slug: "trident-share-price-target" },
-    { name: "Wipro", slug: "wipro-share-price-target" },
-    { name: "Yes Bank", slug: "yes-bank-share-price-target" },
-    { name: "Zomato", slug: "zomato-share-price-target" },
-  ];
+  // Database se stocks fetch karna based on Letter
+  useEffect(() => {
+    async function fetchStocks() {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('stocks')
+        .select('name, slug, sector')
+        .ilike('name', `${activeLetter}%`) // Sirf us letter se shuru hone wale stocks
+        .order('name', { ascending: true });
 
-  const filteredStocks = allStocks.filter(stock => 
-    stock.name.toUpperCase().startsWith(activeLetter)
-  );
+      if (!error) setStocks(data || []);
+      setLoading(false);
+    }
+    fetchStocks();
+  }, [activeLetter]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10 min-h-screen">
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-extrabold text-slate-900 mb-4">Stock Market Directory</h1>
-        <p className="text-slate-600 max-w-xl mx-auto">Explore share price targets and deep-dive technical analysis for all NSE/BSE listed companies.</p>
+    <div className="max-w-7xl mx-auto px-4 py-12 min-h-screen bg-slate-50/50">
+      <div className="text-center mb-12">
+        <h1 className="text-5xl font-black text-slate-900 mb-4 tracking-tight">
+          A-Z <span className="text-orange-500">Stock</span> Directory
+        </h1>
+        <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+          Accessing <span className="font-bold text-slate-800">3,000+</span> share price forecasts.
+        </p>
       </div>
       
       {/* Alphabet Filter */}
-      <div className="flex flex-wrap justify-center gap-2 mb-12 sticky top-4 bg-white/80 backdrop-blur-md py-4 z-20 border-y shadow-sm">
+      <div className="flex flex-wrap justify-center gap-2 mb-16 sticky top-6 bg-white/70 backdrop-blur-xl py-6 z-30 border border-white/20 shadow-2xl rounded-[2rem] px-4">
         {alphabet.map(letter => (
           <button 
             key={letter} 
             onClick={() => setActiveLetter(letter)}
-            className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl font-bold transition-all shadow-sm border ${
+            className={`w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-2xl font-bold transition-all duration-300 ${
               activeLetter === letter 
-              ? 'bg-orange-500 text-white border-orange-500 scale-110' 
-              : 'bg-white text-slate-600 hover:bg-orange-50 border-slate-200'
+              ? 'bg-slate-900 text-orange-400 scale-125' 
+              : 'bg-white text-slate-500 hover:bg-orange-50 border border-slate-100'
             }`}
           >
             {letter}
@@ -75,26 +54,36 @@ function StockDirectory() {
       </div>
 
       {/* Stocks Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {filteredStocks.length > 0 ? (
-          filteredStocks.map((stock) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {loading ? (
+           <div className="col-span-full text-center py-20 font-bold text-slate-400">Fetching "{activeLetter}" stocks...</div>
+        ) : stocks.length > 0 ? (
+          stocks.map((stock) => (
             <Link 
               key={stock.slug} 
-              href={`/stock/${stock.slug}`}
-              className="p-5 bg-white border border-slate-100 rounded-2xl hover:border-orange-400 hover:shadow-xl transition-all flex items-center gap-4 group"
+              // Prompt ke hisaab se slug pattern set kiya
+              href={`/stock/${stock.slug}-share-price-target`}
+              className="group p-6 bg-white border border-slate-200 rounded-[2rem] hover:border-orange-500 hover:shadow-xl transition-all duration-500"
             >
-              <div className="w-12 h-12 bg-slate-900 text-orange-400 rounded-xl flex items-center justify-center font-bold text-xl group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                {stock.name[0]}
-              </div>
-              <div className="overflow-hidden">
-                <span className="font-bold text-slate-800 group-hover:text-orange-600 block truncate">{stock.name}</span>
-                <span className="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">View Forecast</span>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center font-black text-xl group-hover:bg-orange-500 group-hover:text-white transition-all">
+                  {stock.name[0]}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-extrabold text-slate-800 group-hover:text-orange-600 truncate text-md uppercase">
+                    {stock.name}
+                  </h3>
+                  <span className="text-[10px] text-slate-400 font-bold tracking-widest">
+                    {stock.sector || 'NSE/BSE'}
+                  </span>
+                </div>
               </div>
             </Link>
           ))
         ) : (
-          <div className="col-span-full text-center py-20 bg-white rounded-3xl border border-dashed">
-            <p className="text-slate-400 text-lg">No stocks found starting with "{activeLetter}" in this section.</p>
+          <div className="col-span-full text-center py-24 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
+            <h3 className="text-xl font-bold text-slate-800">No data in database for "{activeLetter}"</h3>
+            <p className="text-slate-400 mt-2">Database filling is in progress...</p>
           </div>
         )}
       </div>
@@ -102,10 +91,9 @@ function StockDirectory() {
   );
 }
 
-// Ye Export zaroori hai Next.js build ke liye
 export default function Page() {
   return (
-    <Suspense fallback={<div className="text-center p-20 text-xl">Loading Directory...</div>}>
+    <Suspense fallback={<div className="text-center p-20">Loading...</div>}>
       <StockDirectory />
     </Suspense>
   );
