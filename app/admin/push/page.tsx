@@ -1,10 +1,14 @@
 'use client';
+export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, Send, Bell, AlertCircle, Key, ExternalLink, Loader2 } from 'lucide-react';
 
 export default function AdminPushPage() {
+  // ... rest of your code remains exactly the same
+
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
