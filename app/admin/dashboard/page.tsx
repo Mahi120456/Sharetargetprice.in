@@ -1,4 +1,6 @@
 "use client";
+export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,6 +20,8 @@ type Post = {
 };
 
 export default function AdminDashboard() {
+  // ... rest of your code remains exactly the same
+
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
