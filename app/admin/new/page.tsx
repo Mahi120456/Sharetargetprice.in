@@ -1,4 +1,6 @@
 "use client";
+export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -7,6 +9,8 @@ import { ChevronLeft, Send, Image as ImageIcon, FileText, Eye, EyeOff } from 'lu
 const categories = ["Share Price Target", "Stock Analysis", "IPO", "Mutual Funds", "SIP", "Calculator"];
 
 export default function NewPost() {
+  // ... rest of your code remains exactly the same
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
