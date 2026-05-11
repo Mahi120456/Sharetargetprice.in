@@ -5,11 +5,9 @@ import Link from "next/link";
 import { ArrowLeft, Home, Search, TrendingUp } from 'lucide-react';
 
 export default function NotFound() {
-  // ... rest of your code stays exactly the same
-
+  return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center px-4 py-12">
       <div className="max-w-2xl mx-auto text-center">
-        
         {/* Animated 404 icon */}
         <div className="relative mb-8">
           <div className="text-9xl mb-2 animate-bounce">📉</div>
