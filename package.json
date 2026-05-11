@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "import-posts": "node scripts/import-to-supabase.js"
+    "import-posts": "node scripts/import-to-supabase.js",
+    "generate-keywords": "node scripts/generate-keywords.js",
+    "generate-ai-articles": "node scripts/generate-ai-articles.js",
+    "seed": "npm run import-posts && npm run generate-keywords && npm run generate-ai-articles"
   },
   "dependencies": {
     "next": "14.2.5",
@@ -19,13 +22,20 @@
     "@google/generative-ai": "^0.21.0",
     "lucide-react": "^0.454.0",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^2.5.4"
+    "tailwind-merge": "^2.5.4",
+    "jsonwebtoken": "^9.0.2",
+    "rss-parser": "^3.13.0",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/web-push": "^3.6.4",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/rss-parser": "^3.12.0",
+    "@types/axios": "^0.14.0",
     "typescript": "^5",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
