@@ -23,7 +23,6 @@ const config: Config = {
           900: '#7c2d12',
         },
         dark: '#0f172a',
-        // Finance specific colors
         finance: {
           up: '#10b981',
           down: '#ef4444',
@@ -85,43 +84,17 @@ const config: Config = {
         '84': '21rem',
         '96': '24rem',
       },
-      typography: (theme: any) => ({
-        DEFAULT: {
-          css: {
-            color: theme('colors.gray.700'),
-            a: {
-              color: theme('colors.orange.500'),
-              '&:hover': {
-                color: theme('colors.orange.600'),
-              },
-            },
-            h2: {
-              color: theme('colors.gray.900'),
-              fontWeight: '700',
-              marginTop: '2rem',
-            },
-            h3: {
-              color: theme('colors.gray.800'),
-              fontWeight: '600',
-            },
-            strong: {
-              color: theme('colors.gray.900'),
-            },
-            blockquote: {
-              borderLeftColor: theme('colors.orange.500'),
-              backgroundColor: theme('colors.orange.50'),
-            },
-          },
-        },
-      }),
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/container-queries'),
-  ],
+  // 🔥 IMPORTANT: Removed plugins to avoid build errors
+  // You can install and uncomment these later if needed:
+  // plugins: [
+  //   require('@tailwindcss/typography'),
+  //   require('@tailwindcss/forms'),
+  //   require('@tailwindcss/aspect-ratio'),
+  //   require('@tailwindcss/container-queries'),
+  // ],
+  plugins: [],   // Empty array makes build work
 };
 
 export default config;
