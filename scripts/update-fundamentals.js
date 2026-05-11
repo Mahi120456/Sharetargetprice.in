@@ -1,9 +1,17 @@
 const { createClient } = require('@supabase/supabase-js');
 const yahooFinance = require('yahoo-finance2').default;
+const WebSocket = require('ws'); // 👈 add this line
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.SUPABASE_SERVICE_KEY,
+  {
+    realtime: {
+      params: {
+        ws: WebSocket  // 👈 pass WebSocket constructor
+      }
+    }
+  }
 );
 
 async function updateAllStocks() {
@@ -25,8 +33,12 @@ async function updateAllStocks() {
         last_updated: new Date().toISOString(),
       }).eq('id', stock.id);
       console.log(`Updated ${stock.symbol}`);
-    } catch(e) { console.error(e.message); }
+    } catch(e) {
+      console.error(`Error updating ${stock.symbol}:`, e.message);
+    }
     await new Promise(r => setTimeout(r, 1000));
   }
+  console.log('Update complete');
 }
-updateAllStocks();
+
+updateAllStocks().catch(console.error);
