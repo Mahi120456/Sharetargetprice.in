@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
 
-interface PriceTargetsTableProps {
+// ✅ Export interface so that page can use it (though not required, it helps)
+export interface PriceTargetsTableProps {
   stockName: string;
   symbol: string;
   targets: Record<string, string>;
@@ -11,7 +12,7 @@ interface PriceTargetsTableProps {
 export default function PriceTargetsTable({ stockName, symbol, targets, currentPrice }: PriceTargetsTableProps) {
   const [view, setView] = useState<'table' | 'cards'>('table');
 
-  const years: number[] = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
+  const years = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
   const basePrice = currentPrice || 100;
 
   const getTargetValue = (target: string): number => {
@@ -35,13 +36,11 @@ export default function PriceTargetsTable({ stockName, symbol, targets, currentP
 
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-      {/* Header */}
       <div className="p-5 bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 flex flex-wrap justify-between items-center gap-3">
         <div>
           <h2 className="text-xl font-bold text-gray-900">{stockName} Share Price Targets (2025-2050)</h2>
           <p className="text-sm text-gray-500 mt-1">Long-term price forecasts based on fundamental analysis</p>
         </div>
-        {/* Toggle buttons */}
         <div className="flex gap-2">
           <button
             onClick={() => setView('table')}
@@ -58,28 +57,26 @@ export default function PriceTargetsTable({ stockName, symbol, targets, currentP
         </div>
       </div>
 
-      {/* Table View */}
-      {view === 'table' && (
+      {view === 'table' ? (
         <div className="overflow-x-auto p-4">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-gray-800 text-white rounded-xl">
+              <tr className="bg-gray-800 text-white">
                 <th className="p-3 rounded-l-xl">Year</th>
-                <th className="p-3">Target Price</th>
-                <th className="p-3">Potential Return</th>
-                <th className="p-3 rounded-r-xl">CAGR</th>
+                <th>Target Price</th>
+                <th>Potential Return</th>
+                <th className="rounded-r-xl">CAGR</th>
               </tr>
             </thead>
             <tbody>
               {years.map((year, idx) => {
-                const yearKey = String(year);
-                const target = targets[yearKey] || 'N/A';
+                const target = targets[String(year)];
                 const returnPct = getReturnPct(target);
                 const cagr = getCAGR(target, year);
                 return (
                   <tr key={year} className={idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                    <td className="p-3 font-bold text-gray-900">{year}</td>
-                    <td className="p-3 font-bold text-orange-600">{target}</td>
+                    <td className="p-3 font-bold">{year}</td>
+                    <td className="p-3 font-bold text-orange-600">{target || 'N/A'}</td>
                     <td className={`p-3 font-semibold ${returnPct >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                       {returnPct >= 0 ? '+' : ''}{returnPct.toFixed(0)}%
                     </td>
@@ -90,20 +87,16 @@ export default function PriceTargetsTable({ stockName, symbol, targets, currentP
             </tbody>
           </table>
         </div>
-      )}
-
-      {/* Cards View (Horizontal scroll for mobile) */}
-      {view === 'cards' && (
+      ) : (
         <div className="overflow-x-auto p-4 scrollbar-hide">
           <div className="flex gap-4 min-w-max">
             {years.map((year) => {
-              const yearKey = String(year);
-              const target = targets[yearKey] || 'N/A';
+              const target = targets[String(year)];
               const returnPct = getReturnPct(target);
               return (
-                <div key={year} className="w-56 bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl p-4 shadow-sm flex-shrink-0">
+                <div key={year} className="w-56 bg-gradient-to-br from-gray-50 to-white border p-4 rounded-xl shadow-sm flex-shrink-0">
                   <div className="text-sm text-gray-500">Target {year}</div>
-                  <div className="text-2xl font-bold text-orange-600 mt-1">{target}</div>
+                  <div className="text-2xl font-bold text-orange-600 mt-1">{target || 'N/A'}</div>
                   <div className={`text-xs font-semibold mt-2 ${returnPct >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                     {returnPct >= 0 ? '↑' : '↓'} {Math.abs(returnPct).toFixed(0)}% from current
                   </div>
