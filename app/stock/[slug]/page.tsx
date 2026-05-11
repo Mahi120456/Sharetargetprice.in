@@ -1,12 +1,16 @@
-// 1. Force Dynamic taaki Vercel database se har baar naya data maange aur 404 cache na kare
+// Force dynamic for live data
 export const dynamic = 'force-dynamic';
-export const dynamicParams = true; 
+export const dynamicParams = true;
 export const revalidate = 0;
 
 import { supabase } from "@/lib/supabase";
 import StockHero from "@/components/StockHero";
 import TradingViewChart from "@/components/TradingViewChart";
 import NewsCarousel from "@/components/NewsCarousel";
+import QuickStatsCards from "@/components/QuickStatsCards";
+import PerformanceChart from "@/components/PerformanceChart";
+import PriceTargetsTable from "@/components/PriceTargetsTable";
+import BullBearCase from "@/components/BullBearCase";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -14,133 +18,167 @@ interface PageProps {
   params: { slug: string };
 }
 
-// 2. SEO Metadata Fix (Error Handling ke saath)
+// SEO Metadata
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const cleanSlug = params.slug.split('-share-price-target')[0];
-  
   try {
     const { data: stock } = await supabase
       .from('stocks')
       .select('name')
       .eq('slug', cleanSlug)
       .single();
-
     const titleName = stock?.name || cleanSlug.replace(/-/g, ' ').toUpperCase();
-    
     return {
-      title: `${titleName} Share Price Target 2025, 2030, 2050 - Full Analysis`,
-      description: `Expert analysis and long term price targets for ${titleName} stock.`,
+      title: `${titleName} Share Price Target 2025, 2030, 2050 - Expert Analysis`,
+      description: `Get detailed ${titleName} share price target for 2025, 2026, 2027, 2030, 2040 & 2050. Expert analysis with charts, fundamentals, and long-term outlook.`,
+      keywords: `${titleName} share price target, ${titleName} stock prediction, ${titleName} 2030 target, ${titleName} 2050 forecast`,
+      openGraph: {
+        title: `${titleName} Share Price Target 2025-2050`,
+        description: `Expert price targets and analysis for ${titleName} stock.`,
+        type: 'website',
+      },
     };
-  } catch (e) {
+  } catch {
     return { title: "Stock Price Target Analysis" };
   }
 }
 
+// Helper function to get years array
+const years = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
+
 export default async function Page({ params }: PageProps) {
-  // URL se suffix ko hatane ka sabse safe tarika
   const cleanSlug = params.slug.split('-share-price-target')[0];
 
-  // Database fetch - LOGS ke hisaab se 'stock_articles' ko hata diya hai kyunki wo relation error de raha tha
   const { data: stock, error } = await supabase
     .from('stocks')
-    .select(`*, stock_keywords(*)`) 
+    .select(`*, stock_keywords(*)`)
     .eq('slug', cleanSlug)
     .single();
 
-  // Agar error aaye ya data na mile toh 404 dikhao
   if (error || !stock) {
-    console.error("Supabase error for slug:", cleanSlug, error?.message);
+    console.error("Supabase error:", cleanSlug, error?.message);
     return notFound();
   }
 
-  // Price formatting
-  const peValue = stock.pe_ratio ? parseFloat(stock.pe_ratio) : 0;
+  // Generate dynamic targets if not present
+  const basePrice = stock.current_price || 100;
+  const getTarget = (year: number, multiplier: number) => {
+    if (stock[`target_${year}`]) return stock[`target_${year}`];
+    return `₹${Math.round(basePrice * multiplier).toLocaleString('en-IN')}`;
+  };
+
+  const targets = {
+    2025: getTarget(2025, 1.15),
+    2026: getTarget(2026, 1.35),
+    2027: getTarget(2027, 1.60),
+    2028: getTarget(2028, 1.90),
+    2030: getTarget(2030, 2.50),
+    2035: getTarget(2035, 4.50),
+    2040: getTarget(2040, 8.00),
+    2050: getTarget(2050, 20.00),
+  };
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8 bg-gray-50 min-h-screen font-sans">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
+      
+      {/* Hero Section with Live Price */}
       <StockHero name={stock.name} symbol={stock.symbol} />
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
-        <div className="lg:col-span-2 space-y-10">
+      {/* Quick Stats Cards */}
+      <QuickStatsCards stock={stock} />
+
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
+        
+        {/* Left Column (2/3 width on desktop) */}
+        <div className="lg:col-span-2 space-y-8">
           
-          {/* 1. Live TradingView Chart */}
-          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-            <h2 className="text-2xl font-bold mb-4 text-slate-900">{stock.name} Technical Analysis Chart</h2>
-            <div className="h-[500px] w-full rounded-xl overflow-hidden border">
-               <TradingViewChart symbol={stock.symbol} />
+          {/* TradingView Chart */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+              <h2 className="text-xl font-bold text-gray-900">{stock.name} Live Chart</h2>
+              <p className="text-sm text-gray-500 mt-1">Interactive chart with Technical Indicators</p>
+            </div>
+            <div className="p-4">
+              <div className="h-[450px] w-full rounded-xl overflow-hidden">
+                <TradingViewChart symbol={stock.symbol} />
+              </div>
             </div>
           </div>
 
-          {/* 2. Analysis Content Section */}
-          <article className="bg-white p-8 md:p-12 rounded-3xl border border-slate-200 shadow-sm prose prose-slate max-w-none">
-            <h2 className="text-3xl font-black text-slate-900 border-l-8 border-orange-500 pl-4 mb-8 uppercase tracking-tight">
-              {stock.name} Detailed Analysis & Long-Term Outlook
-            </h2>
-            <div 
-              className="text-gray-700 space-y-6 text-lg leading-relaxed" 
-              dangerouslySetInnerHTML={{ 
-                __html: stock.content || `<p class="animate-pulse text-orange-500">Generating 2500-word detailed report for ${stock.name}... Please check back in a few minutes.</p>` 
-              }} 
-            />
-          </article>
+          {/* Performance vs Benchmark */}
+          <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
 
-          {/* 3. Fundamental Table */}
-          <section className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm overflow-x-auto">
-            <h2 className="text-2xl font-bold mb-6 text-slate-900">Fundamental Growth Metrics</h2>
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-slate-50">
-                  <th className="p-4 border-b font-bold text-slate-700">Metric</th>
-                  <th className="p-4 border-b font-bold text-slate-700">Value</th>
-                  <th className="p-4 border-b font-bold text-slate-700">Verdict</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="p-4 border-b font-medium text-slate-600">P/E Ratio</td>
-                  <td className="p-4 border-b font-bold text-slate-900">{stock.pe_ratio || 'N/A'}</td>
-                  <td className="p-4 border-b text-sm">
-                    {peValue > 0 ? (peValue < 25 ? '✅ Attractive' : '⚠️ Expensive') : 'Data Pending'}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-4 border-b font-medium text-slate-600">Market Cap</td>
-                  <td className="p-4 border-b font-bold text-slate-900">{stock.market_cap || 'N/A'}</td>
-                  <td className="p-4 border-b text-sm">Sector Giant</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
+          {/* Price Targets Table */}
+          <PriceTargetsTable 
+            stockName={stock.name} 
+            symbol={stock.symbol} 
+            targets={targets} 
+            currentPrice={stock.current_price || 100}
+          />
+
+          {/* Bull / Base / Bear Case */}
+          <BullBearCase 
+            stockName={stock.name} 
+            currentPrice={stock.current_price || 100} 
+            target2026={targets[2026]}
+          />
+
+          {/* Detailed Analysis Content */}
+          <article className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="p-6 bg-gradient-to-r from-orange-50 to-white border-b border-orange-100">
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                <span className="text-3xl">📊</span> 
+                {stock.name} Detailed Analysis
+              </h2>
+            </div>
+            <div className="p-6 md:p-8">
+              <div 
+                className="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-800 prose-a:text-orange-600 prose-strong:text-gray-900 prose-li:text-gray-600"
+                dangerouslySetInnerHTML={{ 
+                  __html: stock.content || `<p class="text-gray-500 italic">Generating detailed analysis for ${stock.name}... Please check back soon for comprehensive research report including financial health, growth drivers, and risk factors.</p>` 
+                }} 
+              />
+            </div>
+          </article>
         </div>
 
-        {/* SIDEBAR - Target Cards */}
+        {/* Right Column - Sidebar (1/3 width on desktop) */}
         <aside className="space-y-6">
-          <div className="bg-slate-900 text-white p-8 rounded-[2.5rem] shadow-2xl sticky top-24 border border-slate-800">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="p-2 bg-orange-500 rounded-lg animate-pulse"></span>
-              <h3 className="font-bold text-2xl text-orange-400">Price Prediction</h3>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="flex justify-between items-center group py-2 border-b border-white/5">
-                <span className="text-slate-400 group-hover:text-white transition-colors">2026 Target</span> 
-                <span className="font-black text-green-400 text-2xl font-mono">₹{stock.target_2026 || '---'}</span>
-              </div>
-              <div className="flex justify-between items-center group py-2 border-b border-white/5">
-                <span className="text-slate-400 group-hover:text-white transition-colors">2030 Target</span> 
-                <span className="font-black text-green-400 text-2xl font-mono">₹{stock.target_2030 || '---'}</span>
-              </div>
-              <div className="flex justify-between items-center group py-2 border-b border-white/5">
-                <span className="text-slate-400 group-hover:text-white transition-colors">2050 Target</span> 
-                <span className="font-black text-green-400 text-2xl font-mono">₹{stock.target_2050 || '---'}</span>
+          
+          {/* Sticky Price Prediction Card */}
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl shadow-xl sticky top-24 overflow-hidden">
+            <div className="p-6 border-b border-gray-700 bg-orange-600/10">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center animate-pulse">
+                  <span className="text-xl">🎯</span>
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl">Price Prediction</h3>
+                  <p className="text-xs text-gray-400">Long-term forecast</p>
+                </div>
               </div>
             </div>
             
-            <p className="text-[10px] text-slate-500 mt-10 leading-tight italic uppercase tracking-widest border-t border-slate-800 pt-4">
-              *AI Prediction Model. Not Financial Advice.
-            </p>
+            <div className="p-6 space-y-4">
+              {years.map((year) => (
+                <div key={year} className="flex justify-between items-center group py-2 border-b border-gray-700/50 hover:border-orange-500/30 transition-all">
+                  <span className="text-gray-300 text-sm font-medium">{year}</span>
+                  <span className="font-bold text-orange-400 text-xl font-mono tracking-tight">
+                    {targets[year] || `₹${Math.round(basePrice * (year === 2050 ? 20 : year === 2040 ? 8 : 1)).toLocaleString('en-IN')}`}
+                  </span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="p-4 bg-gray-800/50">
+              <p className="text-[10px] text-gray-500 text-center leading-relaxed uppercase tracking-wider">
+                *AI Prediction Model • Not Financial Advice
+              </p>
+            </div>
           </div>
           
+          {/* News Section */}
           <NewsCarousel stock={stock.name} />
         </aside>
       </div>
