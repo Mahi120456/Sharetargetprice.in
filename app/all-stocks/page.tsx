@@ -1,9 +1,12 @@
 'use client';
+export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+
 import { useState, useEffect, Suspense, useMemo } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Search, ArrowUp, X } from 'lucide-react';
 
+// ... rest of your code remains exactly the same (StockDirectory component and default export)
 // Client component with search and alphabet filter
 function StockDirectory() {
   const [activeLetter, setActiveLetter] = useState('A');
