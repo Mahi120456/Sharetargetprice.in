@@ -11,19 +11,21 @@ interface PriceTargetsTableProps {
 export default function PriceTargetsTable({ stockName, symbol, targets, currentPrice }: PriceTargetsTableProps) {
   const [view, setView] = useState<'table' | 'cards'>('table');
 
-  const years = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
+  const years: number[] = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
   const basePrice = currentPrice || 100;
 
-  const getTargetValue = (target: string) => {
-    return parseInt(String(target).replace('₹', '').replace(/,/g, '')) || basePrice;
+  const getTargetValue = (target: string): number => {
+    if (!target) return basePrice;
+    const numeric = parseInt(String(target).replace(/[^0-9]/g, ''));
+    return isNaN(numeric) ? basePrice : numeric;
   };
 
-  const getReturnPct = (target: string) => {
+  const getReturnPct = (target: string): number => {
     const targetVal = getTargetValue(target);
     return ((targetVal - basePrice) / basePrice) * 100;
   };
 
-  const getCAGR = (target: string, year: number) => {
+  const getCAGR = (target: string, year: number): number => {
     const targetVal = getTargetValue(target);
     const yearsDiff = year - 2025;
     if (yearsDiff <= 0) return 0;
@@ -70,7 +72,8 @@ export default function PriceTargetsTable({ stockName, symbol, targets, currentP
             </thead>
             <tbody>
               {years.map((year, idx) => {
-                const target = targets[year as keyof typeof targets];
+                const yearKey = String(year);
+                const target = targets[yearKey] || 'N/A';
                 const returnPct = getReturnPct(target);
                 const cagr = getCAGR(target, year);
                 return (
@@ -94,7 +97,8 @@ export default function PriceTargetsTable({ stockName, symbol, targets, currentP
         <div className="overflow-x-auto p-4 scrollbar-hide">
           <div className="flex gap-4 min-w-max">
             {years.map((year) => {
-              const target = targets[year as keyof typeof targets];
+              const yearKey = String(year);
+              const target = targets[yearKey] || 'N/A';
               const returnPct = getReturnPct(target);
               return (
                 <div key={year} className="w-56 bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl p-4 shadow-sm flex-shrink-0">
