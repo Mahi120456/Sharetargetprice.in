@@ -3,6 +3,8 @@ import PostCard from "@/components/PostCard";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+
 export const metadata: Metadata = {
   title: "ShareTargetPrice.in – Share Price Target & Stock Market Analysis",
   description:
@@ -16,6 +18,8 @@ export const metadata: Metadata = {
     siteName: "ShareTargetPrice.in",
   },
 };
+
+// ... rest of the code remains exactly as you had (featuredCategories, featuredStocks, async functions, and the component)
 
 // Categories for homepage
 const featuredCategories = [
