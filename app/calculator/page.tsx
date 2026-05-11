@@ -2,6 +2,8 @@ import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+
 export const metadata: Metadata = {
   title: 'Free Financial Calculators for Indian Investors | ShareTargetPrice.in',
   description: '50+ free financial calculators for SIP, EMI, CAGR, PPF, FD, RD, loans, retirement planning, and more – designed for Indian investors.',
@@ -12,6 +14,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
+
+// ... rest of your code remains exactly the same (all imports, categories, functions, component, client‑side script)
 
 // Calculator categories for organizing
 const calculatorCategories = [
