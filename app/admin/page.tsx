@@ -1,9 +1,13 @@
 "use client";
+export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Lock, LogIn, AlertCircle } from 'lucide-react';
 
 export default function AdminLogin() {
+  // ... rest of your code remains exactly the same
+
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
