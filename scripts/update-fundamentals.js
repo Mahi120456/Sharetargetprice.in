@@ -8,50 +8,48 @@ const supabase = createClient(
 
 const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
 
-// Headers for Yahoo Finance (to avoid 401)
+// Yahoo headers
 const yahooHeaders = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
   'Accept': 'application/json',
 };
 
-// Fetch 52-week high/low from Yahoo Finance chart endpoint
+// Fetch 52-week from Yahoo
 async function fetchYahoo52Week(symbol) {
   try {
     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}.NS`;
     const res = await axios.get(url, { headers: yahooHeaders });
     const meta = res.data.chart.result[0]?.meta;
-    return {
-      high52: meta?.fiftyTwoWeekHigh || null,
-      low52: meta?.fiftyTwoWeekLow || null,
-    };
+    return { high52: meta?.fiftyTwoWeekHigh || null, low52: meta?.fiftyTwoWeekLow || null };
   } catch (err) {
-    console.error(`Yahoo 52‑week error for ${symbol}:`, err.message);
+    console.error(`Yahoo error for ${symbol}:`, err.message);
     return { high52: null, low52: null };
   }
 }
 
-// Fetch fundamentals from Finnhub
+// Fetch from Finnhub with correct symbol format
 async function fetchFinnhubData(symbol) {
+  const finnhubSymbol = `NSE:${symbol}`;
   try {
-    // Quote (current price, daily high/low, volume)
-    const quoteUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_API_KEY}`;
+    // Quote endpoint
+    const quoteUrl = `https://finnhub.io/api/v1/quote?symbol=${finnhubSymbol}&token=${FINNHUB_API_KEY}`;
     const quoteRes = await axios.get(quoteUrl);
     const quote = quoteRes.data;
 
-    // Company profile (market cap)
-    const profileUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${FINNHUB_API_KEY}`;
-    const profileRes = await axios.get(profileUrl);
-    const profile = profileRes.data;
-
-    // Financial metrics (ROE, ROCE, dividend yield, debt/equity, book value, P/E, EPS)
-    const metricsUrl = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${FINNHUB_API_KEY}`;
+    // Metrics endpoint
+    const metricsUrl = `https://finnhub.io/api/v1/stock/metric?symbol=${finnhubSymbol}&metric=all&token=${FINNHUB_API_KEY}`;
     const metricsRes = await axios.get(metricsUrl);
     const metrics = metricsRes.data.metric || {};
+
+    // Profile for market cap
+    const profileUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${finnhubSymbol}&token=${FINNHUB_API_KEY}`;
+    const profileRes = await axios.get(profileUrl);
+    const profile = profileRes.data;
 
     // 52-week from Yahoo
     const yahoo52 = await fetchYahoo52Week(symbol);
 
-    const data = {
+    return {
       current_price: quote.c || null,
       pe_ratio: metrics.peBasicExclExtraTTM || null,
       eps: metrics.epsBasicExclExtraTTM || null,
@@ -66,7 +64,6 @@ async function fetchFinnhubData(symbol) {
       book_value: metrics.bookValuePerShareAnnual || null,
       last_updated: new Date().toISOString(),
     };
-    return data;
   } catch (err) {
     console.error(`Finnhub error for ${symbol}:`, err.message);
     return null;
@@ -86,13 +83,13 @@ async function updateAllStocks() {
       if (error) {
         console.error(`Update error for ${stock.symbol}:`, error.message);
       } else {
-        console.log(`✅ Updated ${stock.symbol}`, data);
+        console.log(`✅ Updated ${stock.symbol}`);
         updated++;
       }
     } else {
       console.error(`❌ Failed for ${stock.symbol}`);
     }
-    await new Promise(r => setTimeout(r, 1000)); // respect Finnhub rate limit (60/min)
+    await new Promise(r => setTimeout(r, 2000)); // Increase delay to 2 seconds to avoid 429
   }
   console.log(`Complete: Updated ${updated} of ${stocks.length}`);
 }
