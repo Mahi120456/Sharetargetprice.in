@@ -3,44 +3,35 @@ const axios = require('axios');
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
 
 async function insertStocks() {
-  // Step 1: Get a JSESSIONID cookie by visiting the homepage
-  const homeUrl = 'https://www.nseindia.com';
-  const headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.5',
-  };
-  let cookie = '';
+  const csvUrl = 'https://raw.githubusercontent.com/dhruv-patel/NSE-data/master/equity_list.csv';
   try {
-    const homeRes = await axios.get(homeUrl, { headers });
-    const setCookie = homeRes.headers['set-cookie'];
-    if (setCookie) cookie = setCookie.map(c => c.split(';')[0]).join('; ');
-  } catch (err) {
-    console.error('Failed to get cookie:', err.message);
-  }
-  // Step 2: Request the equity list with the cookie
-  const apiUrl = 'https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20500';
-  const apiHeaders = { ...headers, Cookie: cookie };
-  try {
-    const res = await axios.get(apiUrl, { headers: apiHeaders });
-    const stocks = res.data.data || [];
-    console.log(`Fetched ${stocks.length} stocks from NSE`);
+    const response = await axios.get(csvUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const lines = response.data.split('\n');
+    const header = lines[0].split(',');
+    const symbolIdx = header.findIndex(h => h.toLowerCase().includes('symbol'));
+    const nameIdx = header.findIndex(h => h.toLowerCase().includes('name'));
     let count = 0;
-    for (const stock of stocks) {
-      const symbol = stock.symbol;
-      const name = stock.companyName || symbol;
+    for (let i = 1; i < lines.length; i++) {
+      const parts = lines[i].split(',');
+      let symbol = symbolIdx !== -1 ? parts[symbolIdx]?.trim() : parts[0]?.trim();
+      if (!symbol) continue;
+      let name = nameIdx !== -1 ? parts[nameIdx]?.trim() : symbol;
       const slug = symbol.toLowerCase().replace(/&/g, '-');
-      const { error } = await supabase.from('stocks').upsert(
-        { slug, name, symbol },
-        { onConflict: 'symbol', ignoreDuplicates: true }
-      );
-      if (error) console.error(`Error for ${symbol}:`, error.message);
-      else count++;
-      if (count % 100 === 0) console.log(`Inserted ${count} stocks`);
+      // Use simple insert (ignore conflicts) because we already have a unique constraint
+      const { error } = await supabase.from('stocks').insert({ slug, name, symbol }).select();
+      if (error && error.code === '23505') {
+        // duplicate key, skip
+        console.log(`Skipping duplicate: ${symbol}`);
+      } else if (error) {
+        console.error(`Error for ${symbol}:`, error.message);
+      } else {
+        count++;
+        if (count % 100 === 0) console.log(`Inserted ${count} stocks`);
+      }
     }
-    console.log(`✅ Done! Inserted/updated ${count} stocks.`);
+    console.log(`✅ Done! Inserted ${count} new stocks.`);
   } catch (err) {
-    console.error('API request failed:', err.message);
+    console.error('Failed:', err.message);
   }
 }
 insertStocks();
