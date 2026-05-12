@@ -14,10 +14,17 @@ async function fetchStockData(symbol) {
       current_price: quote.regularMarketPrice || null,
       pe_ratio: quote.trailingPE || null,
       eps: quote.epsTrailingTwelveMonths || null,
+      // ROE (Return on Equity) as percentage
       roe: quote.returnOnEquity ? (quote.returnOnEquity * 100).toFixed(2) : null,
-      roce: quote.returnOnAssets ? (quote.returnOnAssets * 100).toFixed(2) : null, // approximate ROCE
+      // ROCE approximated using returnOnAssets (can be improved later)
+      roce: quote.returnOnAssets ? (quote.returnOnAssets * 100).toFixed(2) : null,
       dividend_yield: quote.dividendYield ? (quote.dividendYield * 100).toFixed(2) : null,
       debt_to_equity: quote.debtToEquity || null,
+      // Book value per share (Yahoo Finance provides 'bookValue')
+      book_value: quote.bookValue || null,
+      // Face value not directly available in quote; can use 'sharesOutstanding' and 'marketCap'? No. We'll leave null or get from another API.
+      // For now, leave face_value as null or manually update later.
+      face_value: quote.faceValue || null, // Yahoo Finance sometimes has 'faceValue'?
       market_cap: quote.marketCap || null,
       high52: quote.fiftyTwoWeekHigh || null,
       low52: quote.fiftyTwoWeekLow || null,
@@ -41,11 +48,13 @@ async function updateAllStocks() {
     const symbol = stock.symbol;
     const data = await fetchStockData(symbol);
     if (data) {
-      const { error } = await supabase.from('stocks').update(data).eq('id', stock.id);
+      // Remove undefined fields (like face_value if not available)
+      const cleanData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== undefined));
+      const { error } = await supabase.from('stocks').update(cleanData).eq('id', stock.id);
       if (error) {
         console.error(`Update error for ${symbol}:`, error.message);
       } else {
-        console.log(`✅ Updated ${symbol}`);
+        console.log(`✅ Updated ${symbol}`, cleanData);
         updated++;
       }
     } else {
