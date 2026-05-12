@@ -1,5 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
-const yahooFinance = require('yahoo-finance2');   // ✅ No `.default`, no `new`
+const yahooFinance = require('yahoo-finance2');  // v2: returns object with quote method
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -9,11 +9,10 @@ const supabase = createClient(
 async function fetchStockData(symbol) {
   try {
     const quote = await yahooFinance.quote(`${symbol}.NS`);
-    // Additional fundamentals can be fetched via quoteSummary
+    // Use quoteSummary for extra fields
     const summary = await yahooFinance.quoteSummary(`${symbol}.NS`, { modules: ['financialData', 'defaultKeyStatistics'] });
     const finData = summary.financialData || {};
     const keyStats = summary.defaultKeyStatistics || {};
-
     return {
       current_price: quote.regularMarketPrice || null,
       pe_ratio: quote.trailingPE || null,
@@ -25,7 +24,7 @@ async function fetchStockData(symbol) {
       roe: finData.returnOnEquity ? (finData.returnOnEquity * 100).toFixed(2) : null,
       roce: finData.returnOnAssets ? (finData.returnOnAssets * 100).toFixed(2) : null,
       dividend_yield: finData.dividendYield ? (finData.dividendYield * 100).toFixed(2) : null,
-      debt_to_equity: finData.totalDebt ? (finData.totalDebt / keyStats.totalShareholderEquity) : null,
+      debt_to_equity: finData.totalDebt && keyStats.totalShareholderEquity ? (finData.totalDebt / keyStats.totalShareholderEquity) : null,
       book_value: keyStats.bookValue || null,
       last_updated: new Date().toISOString(),
     };
