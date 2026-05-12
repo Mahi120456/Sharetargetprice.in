@@ -1,6 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
-const { YahooFinance } = require('yahoo-finance2');
-const yahooFinance = new YahooFinance();
+const yahooFinance = require('yahoo-finance2');   // 👈 direct require, no `new`
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
