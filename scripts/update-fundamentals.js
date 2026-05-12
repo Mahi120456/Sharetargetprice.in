@@ -1,52 +1,36 @@
 const { createClient } = require('@supabase/supabase-js');
-const axios = require('axios');
+const yahooFinance = require('yahoo-finance2');   // ✅ No `.default`, no `new`
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
 
-const headers = {
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-  'Accept': 'application/json',
-  'Accept-Language': 'en-US,en;q=0.9',
-};
-
-async function fetchAllData(symbol) {
-  const yahooSymbol = `${symbol}.NS`;
+async function fetchStockData(symbol) {
   try {
-    // Chart endpoint for price, 52w range, volume, market cap (no auth needed)
-    const chartUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}`;
-    const chartRes = await axios.get(chartUrl, { headers });
-    const chart = chartRes.data.chart.result[0];
-    const meta = chart.meta;
-    const quote = chart.indicators.quote[0];
-
-    // QuoteSummary endpoint for fundamentals (now with headers)
-    const summaryUrl = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${yahooSymbol}?modules=financialData,defaultKeyStatistics`;
-    const summaryRes = await axios.get(summaryUrl, { headers });
-    const summary = summaryRes.data.quoteSummary?.result?.[0];
-    const finData = summary?.financialData || {};
-    const keyStats = summary?.defaultKeyStatistics || {};
+    const quote = await yahooFinance.quote(`${symbol}.NS`);
+    // Additional fundamentals can be fetched via quoteSummary
+    const summary = await yahooFinance.quoteSummary(`${symbol}.NS`, { modules: ['financialData', 'defaultKeyStatistics'] });
+    const finData = summary.financialData || {};
+    const keyStats = summary.defaultKeyStatistics || {};
 
     return {
-      current_price: meta.regularMarketPrice || null,
-      pe_ratio: meta.trailingPE || null,
-      eps: keyStats.epsTrailingTwelveMonths?.raw || null,
-      market_cap: meta.marketCap || null,
-      high52: meta.fiftyTwoWeekHigh || null,
-      low52: meta.fiftyTwoWeekLow || null,
-      volume: quote.volume?.[0] || null,
-      roe: finData.returnOnEquity?.raw ? (finData.returnOnEquity.raw * 100).toFixed(2) : null,
-      roce: finData.returnOnAssets?.raw ? (finData.returnOnAssets.raw * 100).toFixed(2) : null,
-      dividend_yield: finData.dividendYield?.raw ? (finData.dividendYield.raw * 100).toFixed(2) : null,
-      debt_to_equity: finData.totalDebt?.raw ? (finData.totalDebt.raw / keyStats.totalShareholderEquity?.raw) : null,
-      book_value: keyStats.bookValue?.raw || null,
-      face_value: null, // Still not available; manually update later
+      current_price: quote.regularMarketPrice || null,
+      pe_ratio: quote.trailingPE || null,
+      eps: quote.epsTrailingTwelveMonths || null,
+      market_cap: quote.marketCap || null,
+      high52: quote.fiftyTwoWeekHigh || null,
+      low52: quote.fiftyTwoWeekLow || null,
+      volume: quote.regularMarketVolume || null,
+      roe: finData.returnOnEquity ? (finData.returnOnEquity * 100).toFixed(2) : null,
+      roce: finData.returnOnAssets ? (finData.returnOnAssets * 100).toFixed(2) : null,
+      dividend_yield: finData.dividendYield ? (finData.dividendYield * 100).toFixed(2) : null,
+      debt_to_equity: finData.totalDebt ? (finData.totalDebt / keyStats.totalShareholderEquity) : null,
+      book_value: keyStats.bookValue || null,
       last_updated: new Date().toISOString(),
     };
   } catch (err) {
-    console.error(`Error fetching ${symbol}:`, err.message);
+    console.error(`Fetch error for ${symbol}:`, err.message);
     return null;
   }
 }
@@ -58,7 +42,7 @@ async function updateAllStocks() {
 
   let updated = 0;
   for (const stock of stocks) {
-    const data = await fetchAllData(stock.symbol);
+    const data = await fetchStockData(stock.symbol);
     if (data) {
       const { error } = await supabase.from('stocks').update(data).eq('id', stock.id);
       if (error) console.error(`Update error for ${stock.symbol}:`, error.message);
@@ -73,4 +57,4 @@ async function updateAllStocks() {
   }
   console.log(`Complete: Updated ${updated} of ${stocks.length}`);
 }
-updateAllStocks();
+updateAllStocks().catch(console.error);
