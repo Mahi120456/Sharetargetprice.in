@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'          # Node 22 has native WebSocket
-      - run: npm install yahoo-finance2 @supabase/supabase-js
+          node-version: '22'
+      - run: npm install yahoo-finance2 @supabase/supabase-js axios
       - run: node scripts/update-fundamentals.js
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
