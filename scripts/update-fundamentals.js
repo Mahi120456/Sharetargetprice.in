@@ -6,19 +6,25 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
+const headers = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Accept': 'application/json',
+  'Accept-Language': 'en-US,en;q=0.9',
+};
+
 async function fetchAllData(symbol) {
   const yahooSymbol = `${symbol}.NS`;
   try {
-    // Chart endpoint for price, 52w high/low, volume, market cap
+    // Chart endpoint for price, 52w range, volume, market cap (no auth needed)
     const chartUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}`;
-    const chartRes = await axios.get(chartUrl);
+    const chartRes = await axios.get(chartUrl, { headers });
     const chart = chartRes.data.chart.result[0];
     const meta = chart.meta;
     const quote = chart.indicators.quote[0];
-    
-    // QuoteSummary endpoint for fundamentals (ROE, debt, book value, etc.)
+
+    // QuoteSummary endpoint for fundamentals (now with headers)
     const summaryUrl = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${yahooSymbol}?modules=financialData,defaultKeyStatistics`;
-    const summaryRes = await axios.get(summaryUrl);
+    const summaryRes = await axios.get(summaryUrl, { headers });
     const summary = summaryRes.data.quoteSummary?.result?.[0];
     const finData = summary?.financialData || {};
     const keyStats = summary?.defaultKeyStatistics || {};
@@ -31,14 +37,12 @@ async function fetchAllData(symbol) {
       high52: meta.fiftyTwoWeekHigh || null,
       low52: meta.fiftyTwoWeekLow || null,
       volume: quote.volume?.[0] || null,
-      // ROE (as percentage)
       roe: finData.returnOnEquity?.raw ? (finData.returnOnEquity.raw * 100).toFixed(2) : null,
-      // ROCE – not directly in Yahoo, but we can approximate using returnOnAssets (or leave null)
       roce: finData.returnOnAssets?.raw ? (finData.returnOnAssets.raw * 100).toFixed(2) : null,
       dividend_yield: finData.dividendYield?.raw ? (finData.dividendYield.raw * 100).toFixed(2) : null,
       debt_to_equity: finData.totalDebt?.raw ? (finData.totalDebt.raw / keyStats.totalShareholderEquity?.raw) : null,
       book_value: keyStats.bookValue?.raw || null,
-      face_value: keyStats.faceValue?.raw || null,
+      face_value: null, // Still not available; manually update later
       last_updated: new Date().toISOString(),
     };
   } catch (err) {
