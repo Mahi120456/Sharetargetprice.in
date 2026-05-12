@@ -1,6 +1,6 @@
 const { createClient } = require('@supabase/supabase-js');
 const yahooFinance = require('yahoo-finance2').default;
-const WebSocket = require('ws'); // 👈 add this line
+const WebSocket = require('ws');   // 👈 MUST be at top
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -8,7 +8,7 @@ const supabase = createClient(
   {
     realtime: {
       params: {
-        ws: WebSocket  // 👈 pass WebSocket constructor
+        ws: WebSocket          // 👈 this tells Supabase to use ws
       }
     }
   }
