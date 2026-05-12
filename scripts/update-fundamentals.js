@@ -1,5 +1,6 @@
 const { createClient } = require('@supabase/supabase-js');
-const yahooFinance = require('yahoo-finance2').default;
+const { YahooFinance } = require('yahoo-finance2');
+const yahooFinance = new YahooFinance();
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -55,7 +56,7 @@ async function updateAllStocks() {
       console.error(`❌ Failed for ${symbol}:`, err.message);
       failed++;
     }
-    await new Promise(r => setTimeout(r, 1000)); // rate limit
+    await new Promise(r => setTimeout(r, 1000));
   }
   console.log(`Complete: Updated ${updated}, Failed ${failed}, Total ${stocks.length}`);
 }
