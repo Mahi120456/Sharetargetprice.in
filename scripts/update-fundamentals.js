@@ -1,17 +1,9 @@
 const { createClient } = require('@supabase/supabase-js');
 const yahooFinance = require('yahoo-finance2').default;
-const WebSocket = require('ws');   // 👈 MUST be at top
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY,
-  {
-    realtime: {
-      params: {
-        ws: WebSocket          // 👈 this tells Supabase to use ws
-      }
-    }
-  }
+  process.env.SUPABASE_SERVICE_KEY
 );
 
 async function updateAllStocks() {
