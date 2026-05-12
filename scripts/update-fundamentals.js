@@ -1,38 +1,48 @@
 const { createClient } = require('@supabase/supabase-js');
-const YahooFinance = require('yahoo-finance2').default;
-const yahooFinance = new YahooFinance();
+const axios = require('axios');
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
 
-async function fetchStockData(symbol) {
+async function fetchAllData(symbol) {
+  const yahooSymbol = `${symbol}.NS`;
   try {
-    const quote = await yahooFinance.quote(`${symbol}.NS`);
+    // Chart endpoint for price, 52w high/low, volume, market cap
+    const chartUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}`;
+    const chartRes = await axios.get(chartUrl);
+    const chart = chartRes.data.chart.result[0];
+    const meta = chart.meta;
+    const quote = chart.indicators.quote[0];
+    
+    // QuoteSummary endpoint for fundamentals (ROE, debt, book value, etc.)
+    const summaryUrl = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${yahooSymbol}?modules=financialData,defaultKeyStatistics`;
+    const summaryRes = await axios.get(summaryUrl);
+    const summary = summaryRes.data.quoteSummary?.result?.[0];
+    const finData = summary?.financialData || {};
+    const keyStats = summary?.defaultKeyStatistics || {};
+
     return {
-      current_price: quote.regularMarketPrice || null,
-      pe_ratio: quote.trailingPE || null,
-      eps: quote.epsTrailingTwelveMonths || null,
-      // ROE (Return on Equity) as percentage
-      roe: quote.returnOnEquity ? (quote.returnOnEquity * 100).toFixed(2) : null,
-      // ROCE approximated using returnOnAssets (can be improved later)
-      roce: quote.returnOnAssets ? (quote.returnOnAssets * 100).toFixed(2) : null,
-      dividend_yield: quote.dividendYield ? (quote.dividendYield * 100).toFixed(2) : null,
-      debt_to_equity: quote.debtToEquity || null,
-      // Book value per share (Yahoo Finance provides 'bookValue')
-      book_value: quote.bookValue || null,
-      // Face value not directly available in quote; can use 'sharesOutstanding' and 'marketCap'? No. We'll leave null or get from another API.
-      // For now, leave face_value as null or manually update later.
-      face_value: quote.faceValue || null, // Yahoo Finance sometimes has 'faceValue'?
-      market_cap: quote.marketCap || null,
-      high52: quote.fiftyTwoWeekHigh || null,
-      low52: quote.fiftyTwoWeekLow || null,
-      volume: quote.regularMarketVolume || null,
+      current_price: meta.regularMarketPrice || null,
+      pe_ratio: meta.trailingPE || null,
+      eps: keyStats.epsTrailingTwelveMonths?.raw || null,
+      market_cap: meta.marketCap || null,
+      high52: meta.fiftyTwoWeekHigh || null,
+      low52: meta.fiftyTwoWeekLow || null,
+      volume: quote.volume?.[0] || null,
+      // ROE (as percentage)
+      roe: finData.returnOnEquity?.raw ? (finData.returnOnEquity.raw * 100).toFixed(2) : null,
+      // ROCE – not directly in Yahoo, but we can approximate using returnOnAssets (or leave null)
+      roce: finData.returnOnAssets?.raw ? (finData.returnOnAssets.raw * 100).toFixed(2) : null,
+      dividend_yield: finData.dividendYield?.raw ? (finData.dividendYield.raw * 100).toFixed(2) : null,
+      debt_to_equity: finData.totalDebt?.raw ? (finData.totalDebt.raw / keyStats.totalShareholderEquity?.raw) : null,
+      book_value: keyStats.bookValue?.raw || null,
+      face_value: keyStats.faceValue?.raw || null,
       last_updated: new Date().toISOString(),
     };
-  } catch (error) {
-    console.error(`Error fetching data for ${symbol}:`, error);
+  } catch (err) {
+    console.error(`Error fetching ${symbol}:`, err.message);
     return null;
   }
 }
@@ -40,29 +50,23 @@ async function fetchStockData(symbol) {
 async function updateAllStocks() {
   const { data: stocks } = await supabase.from('stocks').select('symbol, id');
   if (!stocks) return;
-
-  console.log(`Found ${stocks.length} stocks. Starting update...`);
+  console.log(`Found ${stocks.length} stocks.`);
 
   let updated = 0;
   for (const stock of stocks) {
-    const symbol = stock.symbol;
-    const data = await fetchStockData(symbol);
+    const data = await fetchAllData(stock.symbol);
     if (data) {
-      // Remove undefined fields (like face_value if not available)
-      const cleanData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== undefined));
-      const { error } = await supabase.from('stocks').update(cleanData).eq('id', stock.id);
-      if (error) {
-        console.error(`Update error for ${symbol}:`, error.message);
-      } else {
-        console.log(`✅ Updated ${symbol}`, cleanData);
+      const { error } = await supabase.from('stocks').update(data).eq('id', stock.id);
+      if (error) console.error(`Update error for ${stock.symbol}:`, error.message);
+      else {
+        console.log(`✅ Updated ${stock.symbol}`);
         updated++;
       }
     } else {
-      console.error(`❌ Failed to fetch ${symbol}`);
+      console.error(`❌ Failed for ${stock.symbol}`);
     }
     await new Promise(r => setTimeout(r, 1000));
   }
-  console.log(`Complete: Updated ${updated} out of ${stocks.length}`);
+  console.log(`Complete: Updated ${updated} of ${stocks.length}`);
 }
-
-updateAllStocks().catch(console.error);
+updateAllStocks();
