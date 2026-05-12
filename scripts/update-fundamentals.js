@@ -1,5 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
-import yahooFinance from 'yahoo-finance2';
+const { createClient } = require('@supabase/supabase-js');
+const yahooFinance = require('yahoo-finance2').default;   // ✅ No ES modules
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
