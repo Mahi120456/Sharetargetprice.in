@@ -1,7 +1,4 @@
 // scripts/generate-ai-articles.js
-// Generate AI articles for stocks missing content (2000-4000 words per stock)
-// Uses OpenAI GPT-4o-mini with ultra-detailed prompt and strict HTML formatting
-
 const { createClient } = require('@supabase/supabase-js');
 const axios = require('axios');
 const fs = require('fs');
@@ -46,7 +43,6 @@ function saveCheckpoint(slug) {
   console.log(`💾 Checkpoint saved: ${slug}`);
 }
 
-// ========== ULTRA HIGH QUALITY PROMPT WITH STRICT HTML FORMATTING ==========
 function buildPrompt(stock) {
   const {
     name,
@@ -72,22 +68,11 @@ function buildPrompt(stock) {
   const roceValue = roce ? `${roce}%` : 'N/A';
   const currentYear = new Date().getFullYear();
 
+  // Build prompt as normal string without backticks inside
   return `
-You are an ELITE Indian stock market analyst, CFA-level equity researcher, professional financial journalist, institutional-grade equity strategist, and senior SEO content expert.
+You are an ELITE Indian stock market analyst. Write a premium quality, human-like, SEO-optimized stock analysis article in valid HTML.
 
-Your task is to generate a PREMIUM QUALITY, HUMAN-LIKE, TRUSTWORTHY, SEO-OPTIMIZED long-form stock analysis article in VALID HTML format for ${name} (${symbol}) listed on NSE/BSE.
-
-The article must feel like it was manually researched and professionally written by a real experienced Indian market analyst for retail investors and long-term readers.
-
-The writing quality should be comparable to:
-- Moneycontrol
-- Tickertape
-- ET Markets
-- Economic Times
-- Financial Express
-- Groww
-- Screener
-- LiveMint
+Use the exact data provided. Output only pure HTML, no markdown, no extra text.
 
 ==================================================
 COMPANY DATA (USE EXACTLY AS PROVIDED)
@@ -106,92 +91,32 @@ COMPANY DATA (USE EXACTLY AS PROVIDED)
 - ROCE: ${roceValue}
 
 ==================================================
-STRICT HTML FORMATTING RULES (MUST FOLLOW)
+STRICT HTML FORMATTING RULES
 ==================================================
 
-1. **EVERY paragraph of text MUST be wrapped in \`<p>\` tags.**
-2. **After EVERY \`<h2>\` or \`<h3>\` heading, the next line MUST be a \`<p>\` tag** – no naked text allowed.
-3. **Tables**:
-   - Use \`90 with border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;"\`
-   - Include \`<thead>\` and \`<tbody>\`
-   - Example of correct table:
-     <table border="1" style="border-collapse: collapse; width: 100%;">
-       <thead>
-         <tr><th>Year</th><th>Min Target</th><th>Max Target</th></tr>
-       </thead>
-       <tbody>
-         <tr><td>2026</td><td>₹1000</td><td>₹1200</td></tr>
-       </tbody>
-     </table>
-4. **Headings hierarchy**:
-   - Main sections: \`<h2>\`
-   - Subsections (e.g., individual year targets): \`<h3>\`
-5. **Lists**: Use \`<ul>\` and \`<li>\` for bullet points. Ensure each \`<li>\` is on its own line.
-6. **Spacing**: Insert a blank line between \`</h2>\` and the following \`<p>\`. Similarly between \`</p>\` and next \`<h3>\`.
-7. **NO raw text** outside of \`<p>\`, \`<li>\`, or table cells.
-8. **DO NOT** include any markdown, code fences, or extra commentary.
-9. **Start** directly with \`<!DOCTYPE html>\`.
-10. **End** directly with \`</body></html>\`.
+1. EVERY paragraph MUST be in <p> tags.
+2. After every <h2> or <h3>, the next element MUST be <p> (no raw text).
+3. Tables: use <table border="1" style="border-collapse: collapse; width: 100%;"> with <thead> and <tbody>.
+4. Headings: <h1>, <h2> (main sections), <h3> (subsections).
+5. Use <ul> and <li> for lists.
+6. Start with <!DOCTYPE html> and end with </body></html>.
+7. Do NOT include any markdown or explanations outside HTML.
 
 ==================================================
-STRICT WRITING STYLE RULES
+META TAGS (include inside <head>)
 ==================================================
 
-1. Write like a REAL HUMAN financial expert.
-2. The writing should feel naturally researched and editorially written.
-3. Use professional, investor-focused, balanced, factual tone.
-4. Keep paragraphs short and mobile readable (2-3 sentences per paragraph).
-5. Do NOT guarantee returns, avoid hype, avoid cinematic storytelling.
-6. Avoid AI-typical phrases like "Furthermore", "Moreover", "In conclusion".
-7. Use investor-focused phrasing: "may", "could", "potential", "investors should monitor".
-
-==================================================
-FACTUAL WRITING RULES
-==================================================
-
-1. ONLY use the provided metrics. DO NOT invent fake numbers.
-2. If data is unavailable, discuss cautiously and qualitatively.
-3. Keep analysis grounded in business quality, valuation, profitability, sector outlook.
-
-==================================================
-SEO OPTIMIZATION RULES
-==================================================
-
-PRIMARY KEYWORD: "${name} Share Price Target"
-
-SECONDARY KEYWORDS:
-"${name} share price target ${currentYear+1}"
-"${name} share price target ${currentYear+2}"
-"${name} share price target 2030"
-"${name} share price target 2035"
-"${name} share price target 2040"
-"${name} share price target 2045"
-"${name} share price target 2050"
-"${name} stock analysis"
-"${name} long term investment"
-"${symbol} share price target"
-
-Use keywords naturally in title, headings, and paragraphs.
-
-==================================================
-META SEO REQUIREMENTS
-==================================================
-
-Inside <head> include:
-- <title>${name} Share Price Target ${currentYear+1}, 2030, 2040 & 2050</title>
-- <meta name="description" content="Get detailed ${name} share price target for ${currentYear+1}, 2030, 2040 & 2050. Expert analysis, financial health, and long-term outlook.">
-- <meta name="keywords" content="${name} share price target, ${symbol} target, stock analysis">
-- <link rel="canonical" href="https://sharetargetprice.in/stock/${name.toLowerCase().replace(/ /g, '-')}-share-price-target">
-- <meta property="og:title" content="${name} Share Price Target Analysis">
-- <meta property="og:type" content="article">
-- <meta name="twitter:card" content="summary_large_image">
-- <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${name} Share Price Target ${currentYear+1}, 2030, 2040 & 2050</title>
+<meta name="description" content="Get detailed ${name} share price target for ${currentYear+1}, 2030, 2040 & 2050. Expert analysis, financial health, and long-term outlook.">
+<meta name="keywords" content="${name} share price target, ${symbol} target, stock analysis">
+<link rel="canonical" href="https://sharetargetprice.in/stock/${name.toLowerCase().replace(/ /g, '-')}-share-price-target">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 ==================================================
 ARTICLE STRUCTURE (MANDATORY)
 ==================================================
 
-<article class="stock-article">
+<article>
 
 <h1>${name} Share Price Target ${currentYear+1}, 2030, 2040 & 2050</h1>
 
@@ -206,7 +131,7 @@ ARTICLE STRUCTURE (MANDATORY)
 
 <h2>4. Financial Health Analysis</h2>
 <p>Brief intro sentence.</p>
-`<table border="1" style="border-collapse: collapse; width: 100%;">`
+<table border="1" style="border-collapse: collapse; width: 100%;">
   <thead><tr><th>Metric</th><th>Value</th></tr></thead>
   <tbody>
     <tr><td>Current Price</td><td>₹${currentPrice}</td></tr>
@@ -237,7 +162,7 @@ ARTICLE STRUCTURE (MANDATORY)
 
 <h2>8. ${name} Share Price Target (${currentYear+1} to 2050)</h2>
 <p>Based on realistic CAGR of 10-15% per year from current price ₹${currentPrice}.</p>
-`<table border="1" style="border-collapse: collapse; width: 100%;">`
+<table border="1" style="border-collapse: collapse; width: 100%;">
   <thead><tr><th>Year</th><th>Minimum Target</th><th>Maximum Target</th><th>Expected Sentiment</th></tr></thead>
   <tbody>
     <tr><td>${currentYear+1}</td><td>₹${Math.round(currentPrice*1.10)}</td><td>₹${Math.round(currentPrice*1.15)}</td><td>Positive</td></tr>
@@ -251,36 +176,14 @@ ARTICLE STRUCTURE (MANDATORY)
 </table>
 
 <h3>${name} Share Price Target ${currentYear+1}</h3>
-<p>Detailed analysis for ${currentYear+1}. 2-3 paragraphs.</p>
-<ul>
-  <li><strong>Bull Case:</strong> ...</li>
-  <li><strong>Bear Case:</strong> ...</li>
-  <li><strong>Neutral Case:</strong> ...</li>
-</ul>
+<p>Detailed analysis. 2-3 paragraphs.</p>
+<ul><li><strong>Bull Case:</strong> ...</li><li><strong>Bear Case:</strong> ...</li><li><strong>Neutral Case:</strong> ...</li></ul>
 
 <h3>${name} Share Price Target ${currentYear+2}</h3>
 <p>Detailed analysis...</p>
 <ul>...</ul>
 
-<h3>${name} Share Price Target 2030</h3>
-<p>...</p>
-<ul>...</ul>
-
-<h3>${name} Share Price Target 2035</h3>
-<p>...</p>
-<ul>...</ul>
-
-<h3>${name} Share Price Target 2040</h3>
-<p>...</p>
-<ul>...</ul>
-
-<h3>${name} Share Price Target 2045</h3>
-<p>...</p>
-<ul>...</ul>
-
-<h3>${name} Share Price Target 2050</h3>
-<p>...</p>
-<ul>...</ul>
+... (repeat similarly for 2030, 2035, 2040, 2045, 2050) ...
 
 <h2>9. Shareholding Pattern & Investor Sentiment</h2>
 <p>Discuss institutional confidence, retail participation. 2 paragraphs.</p>
@@ -292,7 +195,7 @@ ARTICLE STRUCTURE (MANDATORY)
 <ul><li>Competition</li><li>Market volatility</li><li>Economic slowdown</li><li>Regulatory risks</li></ul>
 
 <h2>12. Is ${name} a Good Long-Term Investment?</h2>
-<p>Balanced viewpoint, long-term suitability, risk-reward discussion. 2-3 paragraphs. Avoid direct buy/sell.</p>
+<p>Balanced viewpoint, long-term suitability, risk-reward discussion. 2-3 paragraphs.</p>
 
 <h2>13. Conclusion</h2>
 <p>Strong human-written summary, balanced perspective. 2 paragraphs.</p>
@@ -343,9 +246,7 @@ ARTICLE STRUCTURE (MANDATORY)
 FINAL OUTPUT RULE
 ==================================================
 
-Return ONLY COMPLETE HTML DOCUMENT starting with \`<!DOCTYPE html>\` and ending with \`</body></html>\`. NO markdown, NO explanations, NO AI commentary.
-
-Generate the complete PREMIUM QUALITY stock analysis article now.
+Return ONLY COMPLETE HTML DOCUMENT starting with <!DOCTYPE html> and ending with </body></html>. NO extra text.
 `;
 }
 
