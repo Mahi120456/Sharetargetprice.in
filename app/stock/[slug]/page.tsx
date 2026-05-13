@@ -7,7 +7,7 @@ import NewsCarousel from "@/components/NewsCarousel";
 import QuickStatsCards from "@/components/QuickStatsCards";
 import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
-import StockFAQ from "@/components/StockFAQ";   // 👈 ADDED
+import StockFAQ from "@/components/StockFAQ";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -102,7 +102,7 @@ export default function Page({ params }: PageProps) {
             </div>
             <div className="p-6 md:p-8">
               <div 
-                className="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-800 prose-a:text-orange-600 prose-strong:text-gray-900 prose-li:text-gray-600"
+                className="post-content max-w-none"
                 dangerouslySetInnerHTML={{ 
                   __html: stock.content || `<p class="text-gray-500 italic">Generating detailed analysis for ${stock.name}... Please check back soon for comprehensive research report including financial health, growth drivers, and risk factors.</p>` 
                 }} 
