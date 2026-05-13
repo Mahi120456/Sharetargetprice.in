@@ -7,6 +7,7 @@ import NewsCarousel from "@/components/NewsCarousel";
 import QuickStatsCards from "@/components/QuickStatsCards";
 import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
+import StockFAQ from "@/components/StockFAQ";   // 👈 ADDED
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -108,6 +109,9 @@ export default function Page({ params }: PageProps) {
               />
             </div>
           </article>
+
+          {/* FAQ Section */}
+          <StockFAQ stockName={stock.name} />
         </div>
 
         <aside className="space-y-6">
