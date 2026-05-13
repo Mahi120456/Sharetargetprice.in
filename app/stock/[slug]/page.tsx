@@ -62,7 +62,8 @@ export default function Page({ params }: PageProps) {
   const years = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
+    // 🔽 Reduced horizontal padding: px-2 on mobile, sm:px-4, md:px-6
+    <main className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
       <StockHero name={stock.name} symbol={stock.symbol} />
       <QuickStatsCards stock={stock} />
 
@@ -100,7 +101,8 @@ export default function Page({ params }: PageProps) {
                 {stock.name} Detailed Analysis
               </h2>
             </div>
-            <div className="p-6 md:p-8">
+            {/* 🔽 Reduced padding inside article content */}
+            <div className="p-4 md:p-6">
               <div 
                 className="post-content max-w-none"
                 dangerouslySetInnerHTML={{ 
