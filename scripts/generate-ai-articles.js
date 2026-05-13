@@ -43,6 +43,9 @@ function saveCheckpoint(slug) {
   console.log(`💾 Checkpoint saved: ${slug}`);
 }
 
+// ============================================================
+// FINAL MASTER PROMPT – 2000-3000 words, clean HTML, proper spacing
+// ============================================================
 function buildPrompt(stock) {
   const {
     name,
@@ -68,65 +71,168 @@ function buildPrompt(stock) {
   const roceValue = roce ? `${roce}%` : 'N/A';
   const currentYear = new Date().getFullYear();
 
-  // The prompt uses the HDFC vs ICICI example as a quality reference
   return `
-Write a detailed, investor‑friendly article about ${name} (${symbol}) listed on NSE/BSE.
-The article should be written in **Hinglish** (mix of Hindi and English), professional yet easy to understand, similar to a financial blog post.
+You are a professional financial analyst and a senior content writer for an Indian stock market website. Your task is to write a **high-quality, detailed, SEO-optimized stock analysis article** of **2000 to 3000 words** for the company ${name} (${symbol}) listed on NSE/BSE.
 
-Use the following real data (do not invent any numbers):
+**IMPORTANT – OUTPUT FORMAT RULES (STRICT):**
+1. Output ONLY pure HTML. Start directly with <h1>. DO NOT include <!DOCTYPE>, <html>, <head>, <body>, or any meta tags.
+2. No markdown, no code fences, no explanations outside HTML.
+3. Every paragraph MUST be wrapped in <p> tags. After every heading (<h1>, <h2>, <h3>), the next element must be a <p> (never raw text).
+4. Use proper heading hierarchy: <h1> for main title, <h2> for sections, <h3> for subsections (e.g., each target year).
+5. Use <ul> and <li> for bullet points. Tables must have border="1", cellpadding="5", style="border-collapse: collapse; width: 100%;".
+6. Write in Hinglish (Hindi + English) – natural, conversational, yet professional. Short paragraphs (2-4 sentences) for readability and automatic spacing.
+7. **Length:** The final article must be between 2000 and 3000 words. Expand each section with meaningful, original analysis. Do not be brief.
 
-- Current share price: ₹${currentPrice}
+**REAL DATA TO USE (exactly as given, do not invent numbers):**
+- Company name: ${name}
+- Symbol: ${symbol}
+- Current Price: ₹${currentPrice}
+- Sector: ${sector || 'General'}
 - P/E Ratio: ${pe}
 - EPS (TTM): ₹${epsValue}
-- 52‑week high/low: ₹${high} / ₹${low}
-- Market capitalisation: ₹${mcap} crore
+- 52‑week High / Low: ₹${high} / ₹${low}
+- Market Capitalization: ₹${mcap} crore
 - ROE: ${roeValue}
 - ROCE: ${roceValue}
-- Sector: ${sector || 'General'}
 
-## Article structure (must follow exactly)
+**MANDATORY ARTICLE STRUCTURE (follow exactly, but expand each section with sufficient detail to reach 2000-3000 words):**
 
-1. **Start with an engaging introduction** – 2‑3 paragraphs about the company and its recent performance, referencing the current price and why investors are interested.
+<h1>${name} Share Price Target ${currentYear+1}, 2030, 2040 & 2050</h1>
 
-2. **Key Financials table** – present the above metrics in a clean HTML table with borders.
+<h2>1. Executive Summary</h2>
+<p>Write 3-4 substantial paragraphs. Cover: company overview, current market standing, recent performance, why this stock is in news, and a balanced long-term outlook.</p>
 
-3. **Section: Why investors are watching ${name}** – write 2‑3 short paragraphs on sector growth, government policies, or company‑specific triggers.
+<h2>2. About ${name}</h2>
+<p>4-5 paragraphs: history, founding year, business segments, revenue streams, key subsidiaries, competitive advantages, market share.</p>
 
-4. **Share price targets** – create a table for years: ${currentYear+1}, 2028, 2030, 2035, 2040, 2050. Use realistic CAGR (10‑15% per year) based on current price ₹${currentPrice}.
+<h2>3. Why Investors Are Watching ${name}</h2>
+<p>3-4 paragraphs: growth drivers, sector trends (like government initiatives, digital transformation, infrastructure spending), expansion plans, and any recent positive developments.</p>
 
-5. **For each target year** (as separate H3 subsections), add:
-   - A very short introductory sentence.
-   - A bullet list with "Bull case", "Bear case", "Neutral case" (each 1‑2 lines).
+<h2>4. Financial Health Analysis</h2>
+<p>1 introductory paragraph, then the table, then 2-3 paragraphs discussing the meaning of each metric (valuation, efficiency, profitability, debt position, etc.).</p>
+<table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%;">
+  <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Current Price</td><td>₹${currentPrice}</td></tr>
+    <tr><td>Market Cap</td><td>₹${mcap} Cr</td></tr>
+    <tr><td>P/E Ratio</td><td>${pe}</td></tr>
+    <tr><td>EPS (TTM)</td><td>₹${epsValue}</td></tr>
+    <tr><td>ROE</td><td>${roeValue}</td></tr>
+    <tr><td>ROCE</td><td>${roceValue}</td></tr>
+    <tr><td>52‑week High</td><td>₹${high}</td></tr>
+    <tr><td>52‑week Low</td><td>₹${low}</td></tr>
+  </tbody>
+</table>
+<p>Detailed analysis of each metric – what it means for investors, how it compares to industry peers, and whether the current valuation is justified.</p>
 
-6. **Section: Risks to consider** – bullet list with 4‑5 genuine risks.
+<h2>5. Profitability & Valuation Analysis</h2>
+<p>3-4 paragraphs: deeper dive into P/E, EPS quality, ROE and ROCE trends, historical valuation ranges, and sector comparison.</p>
 
-7. **Conclusion** – 2‑3 paragraphs summarising the long‑term outlook, without "buy/sell" advice.
+<h2>6. Technical Analysis Overview</h2>
+<p>2-3 paragraphs: recent price action, support and resistance levels (derive from 52‑week range), moving averages, volume trends, and chart patterns if any.</p>
 
-8. **FAQ** – at least 4 questions with short answers.
+<h2>7. SWOT Analysis</h2>
+<ul>
+  <li><strong>Strengths:</strong> at least 4-5 points</li>
+  <li><strong>Weaknesses:</strong> at least 3-4 points</li>
+  <li><strong>Opportunities:</strong> at least 4-5 points</li>
+  <li><strong>Threats:</strong> at least 3-4 points</li>
+</ul>
 
-## Formatting rules (strict)
+<h2>8. Share Price Targets (${currentYear+1} to 2050)</h2>
+<p>Based on realistic CAGR of 10‑15% from current price ₹${currentPrice}. The following table summarises the expected price range for each milestone year.</p>
+<table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%;">
+  <thead><tr><th>Year</th><th>Minimum Target (₹)</th><th>Maximum Target (₹)</th><th>Expected Sentiment</th></tr></thead>
+  <tbody>
+    <tr><td>${currentYear+1}</td><td>${Math.round(currentPrice*1.10)}</td><td>${Math.round(currentPrice*1.15)}</td><td>Positive</td></tr>
+    <tr><td>${currentYear+2}</td><td>${Math.round(currentPrice*1.21)}</td><td>${Math.round(currentPrice*1.32)}</td><td>Positive</td></tr>
+    <tr><td>2030</td><td>${Math.round(currentPrice*1.61)}</td><td>${Math.round(currentPrice*2.01)}</td><td>Optimistic</td></tr>
+    <tr><td>2035</td><td>${Math.round(currentPrice*2.59)}</td><td>${Math.round(currentPrice*4.05)}</td><td>Very Positive</td></tr>
+    <tr><td>2040</td><td>${Math.round(currentPrice*4.18)}</td><td>${Math.round(currentPrice*8.14)}</td><td>Optimistic</td></tr>
+    <tr><td>2045</td><td>${Math.round(currentPrice*6.73)}</td><td>${Math.round(currentPrice*16.37)}</td><td>Very Positive</td></tr>
+    <tr><td>2050</td><td>${Math.round(currentPrice*10.83)}</td><td>${Math.round(currentPrice*32.92)}</td><td>Extremely Positive</td></tr>
+  </tbody>
+</table>
 
-- Use <h1> for the main title, <h2> for main sections, <h3> for target years.
-- **Every paragraph must be wrapped in <p> tags**.
-- Tables must have border="1" cellpadding="5" style="border-collapse: collapse; width: 100%;".
-- Use <ul> and <li> for lists.
-- **Do NOT include any extra <html>, <head>, or <body> tags** – only the article content starting with <h1>.
-- Do NOT write any meta‑commentary ("Here is your article", "Certainly", etc.).
-- Write short, varied sentences; keep paragraphs to 2‑3 lines.
+<h3>${name} Share Price Target ${currentYear+1}</h3>
+<p>Write 3-4 paragraphs explaining the rationale for the ${currentYear+1} target. Discuss expected earnings growth, sector tailwinds, and potential risks.</p>
+<ul><li><strong>Bull Case:</strong> (1-2 lines)</li><li><strong>Bear Case:</strong> (1-2 lines)</li><li><strong>Neutral Case:</strong> (1-2 lines)</li></ul>
 
-## Example of the desired quality (copy this style exactly)
+<h3>${name} Share Price Target ${currentYear+2}</h3>
+<p>Similar detailed analysis for ${currentYear+2} – 3-4 paragraphs plus bull/bear/neutral bullets.</p>
 
-Here is a short example of the tone and formatting we want:
+<h3>${name} Share Price Target 2030</h3>
+<p>3-4 paragraphs. Focus on long-term structural growth, expected changes in the sector, and the company’s positioning by 2030.</p>
+<ul>… (same structure)</ul>
 
-<h1>HDFC Bank vs ICICI Bank Analysis: 2026 में कौन सा Stock बनेगा Multibagger?</h1>
+<h3>${name} Share Price Target 2035</h3>
+<p>3-4 paragraphs. Discuss how technological shifts and economic cycles might affect the stock.</p>
 
-<p><strong>Budget 2026</strong> के बाद भारतीय बैंकिंग सेक्टर एक अहम मोड़ पर खड़ा है... (full example as provided).</p>
+<h3>${name} Share Price Target 2040</h3>
+<p>3-4 paragraphs. Talk about the company’s potential to scale and adapt over two decades.</p>
 
-<p>इसके अलावा, मार्केट को उम्मीद है कि फरवरी 2026 की मॉनेटरी पॉलिसी में RBI और रेट कट दे सकता है...</p>
+<h3>${name} Share Price Target 2045</h3>
+<p>3-4 paragraphs. Consider demographic changes, climate policies, and global trends.</p>
 
-... (etc.)
+<h3>${name} Share Price Target 2050</h3>
+<p>3-4 paragraphs. Very long-term vision – what would make the stock achieve the highest targets.</p>
 
-Now write the article for ${name} using the data above. Follow the structure and formatting rules strictly.
+<h2>9. Shareholding Pattern & Investor Sentiment</h2>
+<p>3 paragraphs: promoter holding, FII/DII trends, retail participation, and what recent quarterly data suggests about institutional confidence.</p>
+
+<h2>10. Future Growth Catalysts</h2>
+<p>3-4 paragraphs: upcoming projects, new product lines, policy announcements (e.g., budget, PLI schemes), digital transformation, and any likely triggers.</p>
+
+<h2>11. Risk Factors</h2>
+<ul>
+  <li>Intensifying competition from domestic and global players</li>
+  <li>Regulatory changes in the ${sector || 'financial'} sector</li>
+  <li>Economic slowdown affecting demand</li>
+  <li>High valuation multiples leading to volatility</li>
+  <li>Execution risks in expansion plans</li>
+</ul>
+
+<h2>12. Is ${name} a Good Long‑Term Investment?</h2>
+<p>4-5 paragraphs. Present a balanced view – who should consider this stock, what time horizon suits, and how it fits into a diversified portfolio. Do NOT give direct “buy” or “sell” recommendations. Use phrases like “may be suitable for”, “investors with high risk appetite could consider”, etc.</p>
+
+<h2>13. Conclusion</h2>
+<p>3-4 paragraphs summarising the entire analysis. Restate key takeaways: financial health, growth potential, risks, and the long‑term outlook. End with a forward-looking statement.</p>
+
+<h2>14. Frequently Asked Questions (FAQs)</h2>
+<div itemscope itemtype="https://schema.org/FAQPage">
+  <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <h3 itemprop="name">What is the realistic ${name} share price target for ${currentYear+1}?</h3>
+    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text"><p>Based on current fundamentals, the stock could trade between ₹${Math.round(currentPrice*1.10)} and ₹${Math.round(currentPrice*1.15)}.</p></div>
+    </div>
+  </div>
+  <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <h3 itemprop="name">Is ${name} a good long-term investment?</h3>
+    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text"><p>Given its strong ROE and sector tailwinds, it has long-term potential, but investors should watch valuation and market conditions.</p></div>
+    </div>
+  </div>
+  <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <h3 itemprop="name">What is the 52‑week range of ${name}?</h3>
+    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text"><p>₹${low} – ₹${high}.</p></div>
+    </div>
+  </div>
+  <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <h3 itemprop="name">What are the major risks of investing in ${name}?</h3>
+    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text"><p>Competition, economic cycles, regulatory changes, and high valuation multiples.</p></div>
+    </div>
+  </div>
+  <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    <h3 itemprop="name">Can ${name} become a multibagger by 2030?</h3>
+    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+      <div itemprop="text"><p>Possible if earnings grow at 20%+ annually, but such returns come with higher risk.</p></div>
+    </div>
+  </div>
+</div>
+
+Now generate the complete article for ${name}. Ensure the total length is **2000 to 3000 words**. Write in a natural, human-like, Hinglish style. Start directly with <h1> and output only valid HTML.
 `;
 }
 
@@ -162,19 +268,27 @@ async function generateHeavyContent() {
     console.log(`\n📝 [${i+1}/${stocks.length}] Generating article for ${stock.name} (${stock.symbol})`);
     try {
       const prompt = buildPrompt(stock);
-      const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-        model: 'gpt-4o-mini',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.5,
-        max_tokens: 3000,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${OPENAI_API_KEY}`,
-          'Content-Type': 'application/json',
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-4o-mini',
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.6,
+          max_tokens: 4000,   // Increased to allow 2000-3000 words output
         },
-      });
-      const content = response.data.choices[0].message.content;
-      if (!content || content.length < 800) throw new Error('Content too short');
+        {
+          headers: {
+            'Authorization': `Bearer ${OPENAI_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      let content = response.data.choices[0].message.content;
+
+      // Basic validation: ensure content is not too short
+      if (!content || content.length < 1500) throw new Error('Content too short');
+      // Optional: remove any stray markdown code fences if present
+      content = content.replace(/^```html\s*/, '').replace(/\s*```$/, '');
       await supabase.from('stocks').update({ content, last_updated: new Date().toISOString() }).eq('slug', stock.slug);
       console.log(`✅ Saved article for ${stock.name}`);
       success++;
