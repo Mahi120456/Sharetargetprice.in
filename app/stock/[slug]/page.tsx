@@ -2,7 +2,7 @@
 
 import { supabase } from "@/lib/supabase";
 import StockHero from "@/components/StockHero";
-import TradingViewChart from "@/components/TradingViewChart";
+import LightweightChart from "@/components/LightweightChart";
 import NewsCarousel from "@/components/NewsCarousel";
 import QuickStatsCards from "@/components/QuickStatsCards";
 import PerformanceChart from "@/components/PerformanceChart";
@@ -76,7 +76,7 @@ export default function Page({ params }: PageProps) {
             </div>
             <div className="p-4">
               <div className="h-[450px] w-full rounded-xl overflow-hidden">
-                <TradingViewChart symbol={stock.symbol} />
+                <LightweightChart symbol={stock.symbol} height={450} /> />
               </div>
             </div>
           </div>
