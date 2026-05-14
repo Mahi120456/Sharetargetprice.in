@@ -21,6 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <head>
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="hafalse8HQrL6F1jcch_jCMJKRaE7JrUCFezXd3eG1o" />
+
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
