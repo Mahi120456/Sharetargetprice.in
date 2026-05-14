@@ -3,126 +3,117 @@ import { useEffect, useRef, useState } from 'react';
 
 interface TradingViewChartProps {
   symbol: string;
-  theme?: 'light' | 'dark';
-  interval?: '1' | '5' | '15' | '30' | '60' | 'D' | 'W' | 'M';
   height?: number;
-  hideSideToolbar?: boolean;
-  allowSymbolChange?: boolean;
 }
 
-export default function TradingViewChart({ 
-  symbol, 
-  theme = 'light', 
-  interval = 'D',
-  height = 500,
-  hideSideToolbar = false,
-  allowSymbolChange = true
-}: TradingViewChartProps) {
+export default function TradingViewChart({ symbol, height = 450 }: TradingViewChartProps) {
   const container = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+  const [currentSymbol, setCurrentSymbol] = useState<string | null>(null);
+  const retryCount = useRef(0);
+
+  // Try multiple symbol formats
+  const getSymbolVariants = (sym: string): string[] => {
+    const cleanSym = sym.toUpperCase().replace(/\.NS$/, '');
+    return [
+      `NSE:${cleanSym}`,
+      `${cleanSym}.NS`,
+      `NSE:${cleanSym}-EQ`,
+      `BSE:${cleanSym}`,
+    ];
+  };
 
   useEffect(() => {
     if (!symbol) return;
+    setError(false);
+    retryCount.current = 0;
+    loadChart();
+  }, [symbol]);
 
-    setIsLoading(true);
-    setError(null);
+  const loadChart = (variantIndex = 0) => {
+    if (!container.current) return;
 
-    // Clean up previous script
-    if (container.current) {
-      container.current.innerHTML = '';
+    const variants = getSymbolVariants(symbol);
+    if (variantIndex >= variants.length) {
+      setError(true);
+      return;
     }
+
+    const trySymbol = variants[variantIndex];
+    setCurrentSymbol(trySymbol);
+
+    // Clear previous content
+    container.current.innerHTML = '';
 
     const script = document.createElement('script');
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
     script.type = 'text/javascript';
     script.async = true;
-    
+
     const widgetConfig = {
       autosize: true,
-      symbol: `NSE:${symbol}`,
-      interval: interval,
+      symbol: trySymbol,
+      interval: 'D',
       timezone: 'Asia/Kolkata',
-      theme: theme,
+      theme: 'light',
       style: '1',
       locale: 'in',
-      toolbar_bg: theme === 'light' ? '#f1f3f6' : '#1e222d',
+      toolbar_bg: '#f1f3f6',
       enable_publishing: false,
+      allow_symbol_change: true,
+      container_id: container.current.id,
       hide_top_toolbar: false,
-      hide_side_toolbar: hideSideToolbar,
-      allow_symbol_change: allowSymbolChange,
-      save_image: false,
-      container_id: 'tv-chart-container',
-      studies: [
-        'MASimple@tv-basicstudies',
-        'RSI@tv-basicstudies',
-        'MACD@tv-basicstudies',
-        'StochasticRSI@tv-basicstudies'
-      ],
-      drawing_access: {
-        type: 'black',
-        tools: [
-          'TrendLine', 'Ray', 'Arrow', 'HorizontalLine', 
-          'VerticalLine', 'Rectangle', 'Circle', 'Ellipse',
-          'Text', 'FibRetracement', 'SupportResistance'
-        ]
-      },
-      time_frames: [
-        { text: '1m', resolution: '1' },
-        { text: '5m', resolution: '5' },
-        { text: '15m', resolution: '15' },
-        { text: '30m', resolution: '30' },
-        { text: '1h', resolution: '60' },
-        { text: '1d', resolution: 'D' },
-        { text: '1w', resolution: 'W' },
-        { text: '1M', resolution: 'M' }
-      ],
-      charts_storage_api_version: '1.1',
-      client_id: 'sharetargetprice.in',
-      user_id: 'public_user'
+      hide_side_toolbar: false,
+      studies: ['MASimple@tv-basicstudies', 'RSI@tv-basicstudies', 'MACD@tv-basicstudies'],
     };
 
     script.innerHTML = JSON.stringify(widgetConfig);
-    
-    script.onload = () => {
-      setIsLoading(false);
-    };
-    
+
+    // Error handling for script load failure
     script.onerror = () => {
-      setError('Failed to load TradingView chart. Please refresh the page.');
-      setIsLoading(false);
+      console.warn(`TradingView failed for ${trySymbol}, trying next variant`);
+      loadChart(variantIndex + 1);
     };
 
-    container.current?.appendChild(script);
+    container.current.appendChild(script);
 
-    return () => {
-      if (container.current) {
-        container.current.innerHTML = '';
+    // Set a timeout to detect if widget fails to render (no chart after 5 seconds)
+    const timeout = setTimeout(() => {
+      if (container.current && container.current.children.length === 0) {
+        console.warn(`TradingView timeout for ${trySymbol}, trying next`);
+        loadChart(variantIndex + 1);
       }
-    };
-  }, [symbol, theme, interval, hideSideToolbar, allowSymbolChange]);
+    }, 5000);
 
-  return (
-    <div className="relative w-full rounded-xl overflow-hidden bg-gray-100" style={{ height: `${height}px` }}>
-      {isLoading && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 z-10">
-          <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
-          <p className="mt-3 text-gray-500 text-sm">Loading {symbol} Chart...</p>
-        </div>
-      )}
-      {error && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 z-10">
-          <div className="text-red-500 text-4xl mb-3">⚠️</div>
-          <p className="text-red-600 text-sm text-center px-4">{error}</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg text-sm hover:bg-orange-600 transition"
+    return () => clearTimeout(timeout);
+  };
+
+  if (error) {
+    return (
+      <div className="w-full bg-gray-100 rounded-xl flex items-center justify-center flex-col p-8" style={{ height: `${height}px` }}>
+        <div className="text-center">
+          <div className="text-4xl mb-3">📊</div>
+          <p className="text-gray-600 text-sm">Chart temporarily unavailable for this stock.</p>
+          <button
+            onClick={() => {
+              setError(false);
+              loadChart(0);
+            }}
+            className="mt-3 text-orange-500 text-sm hover:underline"
           >
-            Refresh
+            Retry
           </button>
         </div>
-      )}
-      <div id="tv-chart-container" ref={container} className="w-full h-full" />
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      id={`tv-chart-${symbol}`}
+      ref={container}
+      className="w-full rounded-xl overflow-hidden bg-gray-100"
+      style={{ height: `${height}px` }}
+    />
   );
 }
