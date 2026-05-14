@@ -6,11 +6,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="bg-orange-500 text-white font-black text-lg px-3 py-1 rounded-lg">
-                STP
-              </div>
+          
               <span className="font-bold text-white text-xl">Share Target Price</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
