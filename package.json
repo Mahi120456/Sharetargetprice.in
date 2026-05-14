@@ -27,7 +27,8 @@
     "jsonwebtoken": "^9.0.2",
     "rss-parser": "^3.13.0",
     "axios": "^1.7.2",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "lightweight-charts": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
