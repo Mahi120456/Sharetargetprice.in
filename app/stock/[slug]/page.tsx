@@ -1,4 +1,4 @@
-'use client'; // 👈 Temporary: Convert to client component to bypass event handler issues
+'use client';
 
 import { supabase } from "@/lib/supabase";
 import StockHero from "@/components/StockHero";
@@ -62,7 +62,6 @@ export default function Page({ params }: PageProps) {
   const years = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
 
   return (
-    // 🔽 Reduced horizontal padding: px-2 on mobile, sm:px-4, md:px-6
     <main className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
       <StockHero name={stock.name} symbol={stock.symbol} />
       <QuickStatsCards stock={stock} />
@@ -76,14 +75,13 @@ export default function Page({ params }: PageProps) {
             </div>
             <div className="p-4">
               <div className="h-[450px] w-full rounded-xl overflow-hidden">
-                <LightweightChart symbol={stock.symbol} height={450} /> />
+                <LightweightChart symbol={stock.symbol} height={450} />
               </div>
             </div>
           </div>
 
           <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
 
-          {/* ⚠️ PriceTargetsTable temporarily removed – causing build timeout */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 text-center text-gray-500">
             <p>Price targets table will be restored after build fix.</p>
           </div>
@@ -101,7 +99,6 @@ export default function Page({ params }: PageProps) {
                 {stock.name} Detailed Analysis
               </h2>
             </div>
-            {/* 🔽 Reduced padding inside article content */}
             <div className="p-4 md:p-6">
               <div 
                 className="post-content max-w-none"
@@ -112,7 +109,6 @@ export default function Page({ params }: PageProps) {
             </div>
           </article>
 
-          {/* FAQ Section */}
           <StockFAQ stockName={stock.name} />
         </div>
 
