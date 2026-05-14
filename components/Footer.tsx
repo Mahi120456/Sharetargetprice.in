@@ -6,7 +6,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About */}
-          
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
               <span className="font-bold text-white text-xl">Share Target Price</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
@@ -45,11 +46,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-          <p>Copyright © 2025 ShareTargetPrice.in. All rights reserved.</p>
-          <p className="mt-2 md:mt-0">
-            <center> Made with ❤️ for Indian Investors | NSE & BSE Stock Analysis </center>
-            
+        {/* Centered footer bottom */}
+        <div className="border-t border-slate-700 mt-8 pt-6 text-center text-xs text-gray-500">
+          <p>Copyright © 2026 Share Target Price. All rights reserved.</p>
+          <p className="mt-2">
+            Made with ❤️ for Indian Investors | NSE & BSE Stock Analysis
           </p>
         </div>
       </div>
