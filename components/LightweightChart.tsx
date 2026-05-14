@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { createChart, IChartApi, ISeriesApi, CandlestickData } from 'lightweight-charts';
+import { createChart, IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
 
 interface LightweightChartProps {
   symbol: string;
@@ -25,7 +25,6 @@ export default function LightweightChart({ symbol, height = 450 }: LightweightCh
           return;
         }
 
-        // Create chart if not exists
         if (!chartRef.current) {
           chartRef.current = createChart(chartContainerRef.current!, {
             layout: {
@@ -53,9 +52,9 @@ export default function LightweightChart({ symbol, height = 450 }: LightweightCh
           });
         }
 
-        // Format data for Lightweight Charts (expects { time: number (Unix timestamp), open, high, low, close })
-        const formattedData: CandlestickData[] = data.map((item: any) => ({
-          time: Math.floor(new Date(item.date).getTime() / 1000),
+        // Format data: time as Unix timestamp (seconds) - cast to Time
+        const formattedData = data.map((item: any) => ({
+          time: Math.floor(new Date(item.date).getTime() / 1000) as Time,
           open: item.open,
           high: item.high,
           low: item.low,
@@ -91,7 +90,7 @@ export default function LightweightChart({ symbol, height = 450 }: LightweightCh
     <div
       ref={chartContainerRef}
       style={{ width: '100%', height: `${height}px` }}
-      className="rounded-xl overflow-hidden bg-white"
+      className="rounded-xl overflow-hidden bg-white border border-gray-200"
     />
   );
 }
