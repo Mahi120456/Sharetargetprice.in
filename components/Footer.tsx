@@ -50,7 +50,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-slate-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-          <p>© 2025 ShareTargetPrice.in. All rights reserved.</p>
+          <p>Copyright © 2025 ShareTargetPrice.in. All rights reserved.</p>
           <p className="mt-2 md:mt-0">
             <center> Made with ❤️ for Indian Investors | NSE & BSE Stock Analysis </center>
             
