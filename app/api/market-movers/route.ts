@@ -1,33 +1,36 @@
 import { NextResponse } from 'next/server';
-import yahooFinance from 'yahoo-finance2';
 
 export async function GET() {
   try {
-    // Fetch gainers and losers in parallel
-    const [gainersData, losersData] = await Promise.all([
-      yahooFinance.screener({ scrIds: 'day_gainers', region: 'IN', count: 10 }),
-      yahooFinance.screener({ scrIds: 'day_losers', region: 'IN', count: 10 }),
+    // Yahoo Finance screener endpoints (unofficial, no API key required)
+    const gainersUrl = 'https://query1.finance.yahoo.com/v1/finance/screener?scrIds=day_gainers&region=IN&count=10';
+    const losersUrl = 'https://query1.finance.yahoo.com/v1/finance/screener?scrIds=day_losers&region=IN&count=10';
+
+    const [gainersRes, losersRes] = await Promise.all([
+      fetch(gainersUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } }),
+      fetch(losersUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } }),
     ]);
 
-    // Format gainers
-    const gainers = gainersData.quotes.map((stock: any) => ({
-      symbol: stock.symbol,
-      name: stock.longName || stock.shortName || stock.symbol,
-      price: stock.regularMarketPrice,
-      change: stock.regularMarketChange,
-      changePercent: stock.regularMarketChangePercent,
-      volume: stock.regularMarketVolume,
-    }));
+    const gainersData = await gainersRes.json();
+    const losersData = await losersRes.json();
 
-    // Format losers
-    const losers = losersData.quotes.map((stock: any) => ({
+    const gainers = gainersData.finance?.result?.[0]?.quotes?.map((stock: any) => ({
       symbol: stock.symbol,
       name: stock.longName || stock.shortName || stock.symbol,
       price: stock.regularMarketPrice,
       change: stock.regularMarketChange,
       changePercent: stock.regularMarketChangePercent,
       volume: stock.regularMarketVolume,
-    }));
+    })) || [];
+
+    const losers = losersData.finance?.result?.[0]?.quotes?.map((stock: any) => ({
+      symbol: stock.symbol,
+      name: stock.longName || stock.shortName || stock.symbol,
+      price: stock.regularMarketPrice,
+      change: stock.regularMarketChange,
+      changePercent: stock.regularMarketChangePercent,
+      volume: stock.regularMarketVolume,
+    })) || [];
 
     return NextResponse.json({
       success: true,
