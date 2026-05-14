@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { createChart, IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
 
 interface LightweightChartProps {
   symbol: string;
@@ -8,89 +7,69 @@ interface LightweightChartProps {
 }
 
 export default function LightweightChart({ symbol, height = 450 }: LightweightChartProps) {
-  const chartContainerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<IChartApi | null>(null);
-  const seriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!chartContainerRef.current || !symbol) return;
+    if (!symbol) return;
 
-    const fetchData = async () => {
+    const fetchAndRender = async () => {
       try {
         const res = await fetch(`/api/stock/history?symbol=${symbol}`);
         const data = await res.json();
+        console.log('Chart data:', data);  // Debug
 
-        if (!Array.isArray(data) || data.length === 0) {
-          console.warn('No historical data for', symbol);
-          return;
-        }
+        if (!containerRef.current) return;
+        
+        // Fallback: show simple text if library fails
+        containerRef.current.innerHTML = `
+          <div class="p-4 bg-gray-100 rounded-lg">
+            <p class="text-sm text-gray-600">Debug: Data received for ${symbol}</p>
+            <p class="text-xs font-mono mt-2">${JSON.stringify(data.slice(0, 3), null, 2)}</p>
+          </div>
+        `;
 
-        if (!chartRef.current) {
-          chartRef.current = createChart(chartContainerRef.current!, {
-            layout: {
-              background: { color: '#ffffff' },
-              textColor: '#333',
-            },
-            grid: {
-              vertLines: { color: '#f0f0f0' },
-              horzLines: { color: '#f0f0f0' },
-            },
-            width: chartContainerRef.current!.clientWidth,
+        // Try to dynamically load lightweight-charts
+        try {
+          const { createChart } = await import('lightweight-charts');
+          if (!containerRef.current) return;
+          
+          containerRef.current.innerHTML = ''; // clear
+          const chart = createChart(containerRef.current, {
+            width: containerRef.current.clientWidth,
             height: height,
-            timeScale: {
-              timeVisible: true,
-              secondsVisible: false,
-            },
+            layout: { background: { color: '#fff' }, textColor: '#333' }
           });
-
-          seriesRef.current = chartRef.current.addCandlestickSeries({
-            upColor: '#26a69a',
-            downColor: '#ef5350',
-            borderVisible: false,
-            wickUpColor: '#26a69a',
-            wickDownColor: '#ef5350',
-          });
+          const candlestickSeries = chart.addCandlestickSeries();
+          const formatted = data.map((item: any) => ({
+            time: Math.floor(new Date(item.date).getTime() / 1000),
+            open: item.open,
+            high: item.high,
+            low: item.low,
+            close: item.close,
+          }));
+          candlestickSeries.setData(formatted);
+          chart.timeScale().fitContent();
+          console.log('Chart rendered successfully');
+        } catch (err) {
+          console.error('Lightweight Charts error:', err);
+          // Keep fallback visible
         }
-
-        // Format data: time as Unix timestamp (seconds) - cast to Time
-        const formattedData = data.map((item: any) => ({
-          time: Math.floor(new Date(item.date).getTime() / 1000) as Time,
-          open: item.open,
-          high: item.high,
-          low: item.low,
-          close: item.close,
-        }));
-
-        seriesRef.current?.setData(formattedData);
-        chartRef.current?.timeScale().fitContent();
       } catch (err) {
-        console.error('Failed to load chart data:', err);
+        console.error('Fetch error:', err);
+        if (containerRef.current) {
+          containerRef.current.innerHTML = `<div class="text-red-500 p-4">Failed to load chart data</div>`;
+        }
       }
     };
 
-    fetchData();
+    fetchAndRender();
 
     const handleResize = () => {
-      if (chartRef.current && chartContainerRef.current) {
-        chartRef.current.applyOptions({ width: chartContainerRef.current.clientWidth });
-      }
+      // Simple resize handling not critical for debug
     };
     window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (chartRef.current) {
-        chartRef.current.remove();
-        chartRef.current = null;
-        seriesRef.current = null;
-      }
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, [symbol, height]);
 
-  return (
-    <div
-      ref={chartContainerRef}
-      style={{ width: '100%', height: `${height}px` }}
-      className="rounded-xl overflow-hidden bg-white border border-gray-200"
-    />
-  );
+  return <div ref={containerRef} style={{ width: '100%', height: `${height}px` }} className="rounded-xl overflow-hidden bg-white border" />;
 }
