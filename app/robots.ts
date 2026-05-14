@@ -20,7 +20,6 @@ export default function robots(): MetadataRoute.Robots {
         '/api/push/',
         '/_vercel/',       // Vercel internal
         '/*.json$',        // JSON files
-        '/*.xml$',         // XML files except sitemap
         '/*.txt$',         // Text files
         '/sw.js',          // Service worker (should not be indexed)
       ],
