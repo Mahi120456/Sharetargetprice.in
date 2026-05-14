@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/generate-sitemap.js",
     "start": "next start",
     "lint": "next lint",
     "import-posts": "node scripts/import-to-supabase.js",
     "generate-keywords": "node scripts/generate-keywords.js",
     "generate-ai-articles": "node scripts/generate-ai-articles.js",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
     "seed": "npm run import-posts && npm run generate-keywords && npm run generate-ai-articles"
   },
   "dependencies": {
