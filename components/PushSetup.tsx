@@ -6,13 +6,11 @@ export default function PushSetup() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Register service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').then(() => {
         console.log('Service Worker Registered');
       });
     }
-    // Check existing subscription
     checkExistingSubscription();
   }, []);
 
@@ -24,11 +22,16 @@ export default function PushSetup() {
     }
   };
 
+  // Convert base64 VAPID key to Uint8Array (no spread operator)
   const urlBase64ToUint8Array = (base64String: string) => {
     const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
     const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-    const rawData = window.atob(base64);
-    return Uint8Array.from([...rawData].map(char => char.charCodeAt(0)));
+    const rawData = atob(base64);
+    const arr = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; i++) {
+      arr[i] = rawData.charCodeAt(i);
+    }
+    return arr;
   };
 
   const subscribe = async () => {
