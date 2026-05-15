@@ -70,6 +70,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <head>
+        {/* ✅ Favicon - Add this line */}
+        <link rel="icon" type="image/png" href="/favicon.png" />
+
         {/* Google Search Console Verification */}
         <meta
           name="google-site-verification"
