@@ -8,6 +8,7 @@ import QuickStatsCards from "@/components/QuickStatsCards";
 import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
 import StockFAQ from "@/components/StockFAQ";
+import PriceTargetsTable from "@/components/PriceTargetsTable"; // ✅ Added import
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -148,9 +149,13 @@ export default function Page({ params }: PageProps) {
 
           <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
 
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 text-center text-gray-500">
-            <p>Price targets table will be restored after build fix.</p>
-          </div>
+          {/* ✅ Price Targets Table - restored */}
+          <PriceTargetsTable 
+            stockName={stock.name}
+            symbol={stock.symbol}
+            currentPrice={basePrice}
+            targets={targets}
+          />
 
           <BullBearCase 
             stockName={stock.name} 
