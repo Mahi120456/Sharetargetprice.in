@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 
-// Apne 5-7 favorite stocks ke symbols (jo bhi chahiye)
+// Apne favorite stocks ke symbols (jo bhi chahiye)
 const FAVORITE_SYMBOLS = [
   'RELIANCE',
   'TCS',
@@ -14,17 +14,17 @@ const FAVORITE_SYMBOLS = [
 
 export async function GET() {
   try {
-    // 1️⃣ Supabase se slug + name fetch karo
+    // Supabase se slug + name fetch
     const { data: stocksData, error } = await supabase
       .from('stocks')
       .select('symbol, name, slug')
       .in('symbol', FAVORITE_SYMBOLS);
 
     if (error || !stocksData || stocksData.length === 0) {
-      throw new Error('No stocks found in DB');
+      throw new Error('No stocks found');
     }
 
-    // 2️⃣ Live price Yahoo se
+    // Live price from Yahoo
     const results = await Promise.all(
       stocksData.map(async (stock) => {
         try {
@@ -37,27 +37,25 @@ export async function GET() {
           if (!meta) return null;
           const price = meta.regularMarketPrice;
           const prevClose = meta.previousClose;
-          if (!price || !prevClose) return null;
           const change = price - prevClose;
           const changePercent = (change / prevClose) * 100;
           return {
             symbol: stock.symbol,
             name: stock.name,
-            slug: stock.slug,   // base slug (e.g., 'reliance')
+            slug: stock.slug,          // ✅ base slug
             price,
             change,
             changePercent,
           };
-        } catch (err) {
+        } catch {
           return null;
         }
       })
     );
 
     const validStocks = results.filter(s => s !== null);
-
     if (validStocks.length === 0) {
-      // Fallback with hardcoded slugs (as per your DB)
+      // Fallback with correct slugs (as per your DB)
       const fallback = [
         { symbol: 'RELIANCE', name: 'Reliance Industries', slug: 'reliance', price: 2850, change: 45, changePercent: 1.6 },
         { symbol: 'TCS', name: 'Tata Consultancy Services', slug: 'tcs', price: 3950, change: 62, changePercent: 1.54 },
@@ -77,12 +75,11 @@ export async function GET() {
     });
   } catch (error) {
     console.error('API error:', error);
-    // Final fallback
-    const mockStocks = [
+    const mock = [
       { symbol: 'RELIANCE', name: 'Reliance Industries', slug: 'reliance', price: 2850, change: 45, changePercent: 1.6 },
       { symbol: 'TCS', name: 'Tata Consultancy Services', slug: 'tcs', price: 3950, change: 62, changePercent: 1.54 },
       { symbol: 'HDFCBANK', name: 'HDFC Bank', slug: 'hdfcbank', price: 1650, change: -22, changePercent: -1.31 },
     ];
-    return NextResponse.json({ success: true, stocks: mockStocks, lastUpdated: new Date().toISOString() });
+    return NextResponse.json({ success: true, stocks: mock, lastUpdated: new Date().toISOString() });
   }
 }
