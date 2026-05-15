@@ -46,7 +46,17 @@ export async function GET(request: Request) {
     // 2️⃣ Fetch 2y data for performance (closing prices only)
     const perfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=2y`;
     const perfRes = await fetch(perfUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-    let performance = { oneMonth: null, threeMonth: null, sixMonth: null, oneYear: null };
+    let performance: {
+      oneMonth: number | null;
+      threeMonth: number | null;
+      sixMonth: number | null;
+      oneYear: number | null;
+    } = {
+      oneMonth: null,
+      threeMonth: null,
+      sixMonth: null,
+      oneYear: null,
+    };
     if (perfRes.ok) {
       const perfJson = await perfRes.json();
       const closes = perfJson.chart?.result?.[0]?.indicators?.quote?.[0]?.close || [];
