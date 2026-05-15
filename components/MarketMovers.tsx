@@ -5,6 +5,7 @@ import Link from 'next/link';
 interface StockMover {
   symbol: string;
   name: string;
+  slug: string;        // 👈 added slug
   price: number;
   change: number;
   changePercent: number;
@@ -33,7 +34,7 @@ export default function MarketMovers() {
 
   useEffect(() => {
     fetchStocks();
-    const interval = setInterval(fetchStocks, 60 * 1000); // update every minute
+    const interval = setInterval(fetchStocks, 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -63,7 +64,7 @@ export default function MarketMovers() {
         {stocks.map((stock) => (
           <Link
             key={stock.symbol}
-            href={`/stock/${stock.symbol.toLowerCase()}-share-price-target`}
+            href={`/stock/${stock.slug}-share-price-target`}   // ✅ sahi slug + suffix
             className="block p-4 hover:bg-orange-50 transition group"
           >
             <div className="flex items-center justify-between">
