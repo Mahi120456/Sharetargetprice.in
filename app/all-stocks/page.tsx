@@ -1,14 +1,14 @@
 'use client';
-export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+export const dynamic = 'force-dynamic';
 
 import { useState, useEffect, Suspense, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';   // 👈 ADDED for back button
 import { supabase } from '@/lib/supabase';
-import { Search, ArrowUp, X } from 'lucide-react';
+import { Search, ArrowUp, X, ArrowLeft } from 'lucide-react';  // 👈 ADDED ArrowLeft
 
-// ... rest of your code remains exactly the same (StockDirectory component and default export)
-// Client component with search and alphabet filter
 function StockDirectory() {
+  const router = useRouter();   // 👈 ADDED
   const [activeLetter, setActiveLetter] = useState('A');
   const [stocks, setStocks] = useState<any[]>([]);
   const [filteredStocks, setFilteredStocks] = useState<any[]>([]);
@@ -18,7 +18,6 @@ function StockDirectory() {
   
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-  // Fetch all stocks once
   useEffect(() => {
     async function fetchAllStocks() {
       setLoading(true);
@@ -27,7 +26,6 @@ function StockDirectory() {
         const { data, error } = await supabase
           .from('stocks')
           .select('name, slug, sector, symbol');
-
         if (error) throw error;
         setStocks(data || []);
       } catch (err) {
@@ -40,18 +38,13 @@ function StockDirectory() {
     fetchAllStocks();
   }, []);
 
-  // Filter by active letter and search query
   useEffect(() => {
     let filtered = [...stocks];
-    
-    // Filter by letter (first character)
     if (activeLetter) {
       filtered = filtered.filter(stock => 
         stock.name.trim().charAt(0).toUpperCase() === activeLetter
       );
     }
-    
-    // Filter by search query (name or symbol)
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
       filtered = filtered.filter(stock =>
@@ -59,20 +52,18 @@ function StockDirectory() {
         (stock.symbol && stock.symbol.toLowerCase().includes(query))
       );
     }
-    
     setFilteredStocks(filtered);
   }, [stocks, activeLetter, searchQuery]);
 
   const handleLetterClick = (letter: string) => {
     setActiveLetter(letter);
-    setSearchQuery(''); // clear search when clicking alphabet
+    setSearchQuery('');
   };
 
   const clearSearch = () => {
     setSearchQuery('');
   };
 
-  // Get count of stocks per letter (for badge)
   const stockCountByLetter = useMemo(() => {
     const counts: Record<string, number> = {};
     stocks.forEach(stock => {
@@ -82,7 +73,6 @@ function StockDirectory() {
     return counts;
   }, [stocks]);
 
-  // Loading skeleton
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8 min-h-screen">
@@ -134,6 +124,18 @@ function StockDirectory() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* 👇 BACK BUTTON ADDED HERE */}
+      <div className="flex items-center justify-between mb-4">
+        <button
+          onClick={() => router.back()}
+          className="inline-flex items-center gap-1.5 text-gray-600 hover:text-orange-500 transition-colors bg-white border border-gray-200 hover:border-orange-200 rounded-full px-3 py-1.5 text-sm font-medium shadow-sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </button>
+        <div className="w-20"></div> {/* Spacer to balance */}
+      </div>
+
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-2 tracking-tight">
@@ -154,7 +156,7 @@ function StockDirectory() {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              if (e.target.value) setActiveLetter(''); // clear letter filter when searching
+              if (e.target.value) setActiveLetter('');
               else setActiveLetter('A');
             }}
             className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-orange-300 focus:ring-1 focus:ring-orange-200 text-gray-700 bg-white shadow-sm"
@@ -168,7 +170,7 @@ function StockDirectory() {
         </div>
       </div>
 
-      {/* Alphabet Bar – sticky with backdrop blur */}
+      {/* Alphabet Bar */}
       <div className="sticky top-4 z-40 mb-12">
         <div className="bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-3xl p-3">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar px-2 pb-1">
@@ -241,7 +243,6 @@ function StockDirectory() {
               className="group p-5 bg-white border border-gray-100 rounded-2xl hover:border-orange-200 hover:shadow-lg transition-all duration-300"
             >
               <div className="flex items-start gap-4">
-                {/* Stock initial badge */}
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-amber-100 text-orange-700 rounded-2xl flex items-center justify-center font-black text-xl group-hover:bg-orange-500 group-hover:text-white transition-all shadow-sm">
                   {stock.name.trim()[0]}
                 </div>
@@ -261,14 +262,13 @@ function StockDirectory() {
                   </div>
                 </div>
               </div>
-              {/* Decorative line on hover */}
               <div className="mt-3 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 w-0 group-hover:w-full transition-all duration-300 rounded-full"></div>
             </Link>
           ))}
         </div>
       )}
 
-      {/* Back to top button (appears after scrolling) – optional */}
+      {/* Back to top button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className="fixed bottom-6 right-6 bg-slate-800 text-white p-3 rounded-full shadow-lg hover:bg-orange-500 transition-all z-50"
@@ -277,7 +277,6 @@ function StockDirectory() {
         <ArrowUp size={20} />
       </button>
 
-      {/* Hide scrollbar utility */}
       <style jsx global>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -286,7 +285,6 @@ function StockDirectory() {
   );
 }
 
-// Wrap with Suspense and export
 export default function Page() {
   return (
     <Suspense fallback={<div className="text-center p-20 text-gray-500">Loading directory...</div>}>
