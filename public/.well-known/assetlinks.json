@@ -1,0 +1,30 @@
+[
+  {
+    "relation": ["lookalikes/allowlist"],
+    "target": {
+      "namespace": "web",
+      "site": "https://sharetargetprice.in"
+    }
+  },
+  {
+    "relation": ["lookalikes/allowlist"],
+    "target": {
+      "namespace": "web",
+      "site": "https://www.sharetargetprice.in"
+    }
+  },
+  {
+    "relation": ["lookalikes/allowlist"],
+    "target": {
+      "namespace": "web",
+      "site": "http://sharetargetprice.in"
+    }
+  },
+  {
+    "relation": ["lookalikes/allowlist"],
+    "target": {
+      "namespace": "web",
+      "site": "http://www.sharetargetprice.in"
+    }
+  }
+]
