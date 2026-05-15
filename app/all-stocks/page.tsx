@@ -3,12 +3,12 @@ export const dynamic = 'force-dynamic';
 
 import { useState, useEffect, Suspense, useMemo } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';   // 👈 ADDED for back button
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
-import { Search, ArrowUp, X, ArrowLeft } from 'lucide-react';  // 👈 ADDED ArrowLeft
+import { Search, ArrowUp, X, ArrowLeft } from 'lucide-react';
 
 function StockDirectory() {
-  const router = useRouter();   // 👈 ADDED
+  const router = useRouter();
   const [activeLetter, setActiveLetter] = useState('A');
   const [stocks, setStocks] = useState<any[]>([]);
   const [filteredStocks, setFilteredStocks] = useState<any[]>([]);
@@ -80,7 +80,7 @@ function StockDirectory() {
           <div className="h-10 w-48 bg-gray-200 rounded-lg animate-pulse mx-auto mb-2"></div>
           <div className="h-5 w-64 bg-gray-100 rounded animate-pulse mx-auto"></div>
         </div>
-        <div className="sticky top-4 z-40 mb-12">
+        <div className="sticky top-20 z-30 mb-12">
           <div className="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-3">
             <div className="flex gap-2 overflow-x-auto no-scrollbar">
               {alphabet.map(letter => (
@@ -124,7 +124,7 @@ function StockDirectory() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* 👇 BACK BUTTON ADDED HERE */}
+      {/* Back Button */}
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={() => router.back()}
@@ -133,7 +133,7 @@ function StockDirectory() {
           <ArrowLeft className="w-4 h-4" />
           Back
         </button>
-        <div className="w-20"></div> {/* Spacer to balance */}
+        <div className="w-20"></div>
       </div>
 
       {/* Header */}
@@ -170,8 +170,8 @@ function StockDirectory() {
         </div>
       </div>
 
-      {/* Alphabet Bar */}
-      <div className="sticky top-4 z-40 mb-12">
+      {/* Alphabet Bar – now sticky below header (top-20 = 5rem = 80px) */}
+      <div className="sticky top-20 z-30 mb-12">
         <div className="bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-3xl p-3">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar px-2 pb-1">
             {alphabet.map(letter => {
