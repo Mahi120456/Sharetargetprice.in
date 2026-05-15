@@ -8,9 +8,11 @@ import QuickStatsCards from "@/components/QuickStatsCards";
 import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
 import StockFAQ from "@/components/StockFAQ";
-import PriceTargetsTable from "@/components/PriceTargetsTable"; // ✅ Added import
+import PriceTargetsTable from "@/components/PriceTargetsTable";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 
 interface PageProps {
   params: { slug: string };
@@ -31,7 +33,6 @@ function createFallbackStock(slug: string) {
     current_price: 1000,
     content: `<p>Detailed analysis for ${name} (${symbol}) is currently being generated. Please refresh after some time or check back later.</p><p>In the meantime, you can view the live chart and price targets below.</p>`,
     stock_keywords: [],
-    target_2025: null,
     target_2026: null,
     target_2027: null,
     target_2028: null,
@@ -43,26 +44,25 @@ function createFallbackStock(slug: string) {
 }
 
 export default function Page({ params }: PageProps) {
+  const router = useRouter();
   const [stock, setStock] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const originalSlug = params.slug; // e.g., "reliance-share-price-target"
-  const cleanSlug = originalSlug.split('-share-price-target')[0]; // "reliance"
+  const originalSlug = params.slug;
+  const cleanSlug = originalSlug.split('-share-price-target')[0];
 
   useEffect(() => {
     let isMounted = true;
 
     async function fetchStock() {
       try {
-        // Try 1: with original slug (full)
         let { data, error } = await supabase
           .from('stocks')
           .select(`*, stock_keywords(*)`)
           .eq('slug', originalSlug)
           .single();
 
-        // Try 2: with cleaned slug if first fails
         if (error || !data) {
           console.log(`No data for slug "${originalSlug}", trying "${cleanSlug}"`);
           const result = await supabase
@@ -111,8 +111,8 @@ export default function Page({ params }: PageProps) {
     return `₹${Math.round(basePrice * multiplier).toLocaleString('en-IN')}`;
   };
 
+  // 🔥 2025 removed from targets and years
   const targets = {
-    2025: getTarget(2025, 1.15),
     2026: getTarget(2026, 1.35),
     2027: getTarget(2027, 1.60),
     2028: getTarget(2028, 1.90),
@@ -121,10 +121,21 @@ export default function Page({ params }: PageProps) {
     2040: getTarget(2040, 8.00),
     2050: getTarget(2050, 20.00),
   };
-  const years = [2025, 2026, 2027, 2028, 2030, 2035, 2040, 2050];
+  const years = [2026, 2027, 2028, 2030, 2035, 2040, 2050];
 
   return (
     <main className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
+      {/* Back Button */}
+      <div className="mb-4">
+        <button
+          onClick={() => router.back()}
+          className="inline-flex items-center gap-1.5 text-gray-600 hover:text-orange-500 transition-colors bg-white border border-gray-200 hover:border-orange-200 rounded-full px-3 py-1.5 text-sm font-medium shadow-sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </button>
+      </div>
+
       {errorMsg && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg mb-4 text-sm">
           ⚠️ {errorMsg}
@@ -135,6 +146,7 @@ export default function Page({ params }: PageProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
         <div className="lg:col-span-2 space-y-8">
+          {/* Chart */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
               <h2 className="text-xl font-bold text-gray-900">{stock.name} Live Chart</h2>
@@ -149,7 +161,7 @@ export default function Page({ params }: PageProps) {
 
           <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
 
-          {/* ✅ Price Targets Table - restored */}
+          {/* Price Targets Table (2025 removed) */}
           <PriceTargetsTable 
             stockName={stock.name}
             symbol={stock.symbol}
@@ -183,6 +195,7 @@ export default function Page({ params }: PageProps) {
           <StockFAQ stockName={stock.name} />
         </div>
 
+        {/* Sidebar Price Prediction */}
         <aside className="space-y-6">
           <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl shadow-xl sticky top-24 overflow-hidden">
             <div className="p-6 border-b border-gray-700 bg-orange-600/10">
