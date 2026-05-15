@@ -30,7 +30,7 @@ async function getStock(slug: string) {
   return error || !data ? null : data;
 }
 
-// ✅ Generate Metadata for SEO (dynamic title, description, canonical)
+// ✅ Generate Metadata for SEO (dynamic title, description, canonical + OG image)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const stock = await getStock(params.slug);
   if (!stock) {
@@ -40,6 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
   const stockName = stock.name;
+  const ogImageUrl = 'https://sharetargetprice.in/og-image.jpg';
   return {
     title: `${stockName} Share Price Target 2026-2050 | Analysis & Forecast`,
     description: `Get detailed ${stockName} share price targets for 2026, 2027, 2028, 2030, 2035, 2040, 2050. Based on fundamental analysis, earnings growth, and sector outlook.`,
@@ -53,11 +54,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: 'Share Target Price',
       type: 'website',
       locale: 'en_IN',
+      images: [   // ✅ ADDED FOR WHATSAPP/FACEBOOK PREVIEW
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${stockName} Share Price Target - Share Target Price`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${stockName} Share Price Target`,
       description: `Long-term price targets and analysis for ${stockName}.`,
+      images: [ogImageUrl],
     },
   };
 }
@@ -86,7 +96,7 @@ export default async function Page({ params }: PageProps) {
   };
   const years = [2026, 2027, 2028, 2030, 2035, 2040, 2050];
 
-  // ✅ JSON-LD Schema (structured data)
+  // JSON-LD Schema (structured data)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FinancialProduct",
