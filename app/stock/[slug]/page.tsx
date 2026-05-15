@@ -15,7 +15,6 @@ interface PageProps {
   params: { slug: string };
 }
 
-// Helper to create a fallback stock object when Supabase fails
 function createFallbackStock(slug: string) {
   const cleanSlug = slug.split('-share-price-target')[0];
   const name = cleanSlug
@@ -45,60 +44,65 @@ function createFallbackStock(slug: string) {
 export default function Page({ params }: PageProps) {
   const [stock, setStock] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const cleanSlug = params.slug.split('-share-price-target')[0];
+  const originalSlug = params.slug; // e.g., "reliance-share-price-target"
+  const cleanSlug = originalSlug.split('-share-price-target')[0]; // "reliance"
 
   useEffect(() => {
     let isMounted = true;
-    let timeoutId: NodeJS.Timeout;
 
     async function fetchStock() {
       try {
-        // Query Supabase
-        const { data, error } = await supabase
+        // Try 1: with original slug (full)
+        let { data, error } = await supabase
           .from('stocks')
           .select(`*, stock_keywords(*)`)
-          .eq('slug', cleanSlug)
+          .eq('slug', originalSlug)
           .single();
+
+        // Try 2: with cleaned slug if first fails
+        if (error || !data) {
+          console.log(`No data for slug "${originalSlug}", trying "${cleanSlug}"`);
+          const result = await supabase
+            .from('stocks')
+            .select(`*, stock_keywords(*)`)
+            .eq('slug', cleanSlug)
+            .single();
+          data = result.data;
+          error = result.error;
+        }
 
         if (isMounted) {
           if (error || !data) {
-            console.error("Supabase error or no data for slug:", cleanSlug, error?.message);
-            // Use fallback instead of notFound()
-            setStock(createFallbackStock(params.slug));
+            console.error("Supabase error for both slugs:", error?.message);
+            setErrorMsg(`Stock not found: ${originalSlug}. Please check back later.`);
+            setStock(createFallbackStock(originalSlug));
           } else {
             setStock(data);
+            setErrorMsg(null);
           }
           setLoading(false);
         }
-      } catch (err) {
-        console.error("Unexpected error fetching stock:", err);
+      } catch (err: any) {
+        console.error("Unexpected error:", err);
         if (isMounted) {
-          setStock(createFallbackStock(params.slug));
+          setErrorMsg(err.message || "Failed to load stock data");
+          setStock(createFallbackStock(originalSlug));
           setLoading(false);
         }
       }
     }
 
-    // Set a timeout to prevent infinite loading (5 seconds)
-    timeoutId = setTimeout(() => {
-      if (isMounted && loading) {
-        console.warn("Loading timeout – using fallback stock data");
-        setStock(createFallbackStock(params.slug));
-        setLoading(false);
-      }
-    }, 5000);
-
     fetchStock();
 
     return () => {
       isMounted = false;
-      clearTimeout(timeoutId);
     };
-  }, [cleanSlug, params.slug, loading]);
+  }, [originalSlug, cleanSlug]);
 
   if (loading) return <div className="text-center p-10">Loading stock data...</div>;
-  if (!stock) return notFound(); // fallback will always set stock, so this shouldn't happen
+  if (!stock) return notFound();
 
   const basePrice = stock.current_price || 100;
   const getTarget = (year: number, multiplier: number) => {
@@ -120,6 +124,11 @@ export default function Page({ params }: PageProps) {
 
   return (
     <main className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
+      {errorMsg && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg mb-4 text-sm">
+          ⚠️ {errorMsg}
+        </div>
+      )}
       <StockHero name={stock.name} symbol={stock.symbol} />
       <QuickStatsCards stock={stock} />
 
