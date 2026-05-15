@@ -1,14 +1,12 @@
 import { NextResponse } from 'next/server';
 
 let cache: { symbol: string; data: any; timestamp: number } | null = null;
-const CACHE_TTL = 60 * 1000; // 1 minute
+const CACHE_TTL = 60 * 1000;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   let symbol = searchParams.get('symbol');
-  if (!symbol) {
-    return NextResponse.json({ error: 'Symbol missing' }, { status: 400 });
-  }
+  if (!symbol) return NextResponse.json({ error: 'Symbol missing' }, { status: 400 });
 
   symbol = symbol.toUpperCase().replace(/\.NS$/, '');
   const yahooSymbol = `${symbol}.NS`;
@@ -18,10 +16,10 @@ export async function GET(request: Request) {
   }
 
   try {
-    // 1️⃣ Fetch TODAY's intraday data (range=1d) – gives correct open/high/low/prev close
+    // 1️⃣ Today's intraday data (range=1d) – gives correct open/high/low/prev close
     const todayUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=1d`;
     const todayRes = await fetch(todayUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-    if (!todayRes.ok) throw new Error(`Today data error: ${todayRes.status}`);
+    if (!todayRes.ok) throw new Error(`Today error: ${todayRes.status}`);
     const todayJson = await todayRes.json();
     const todayResult = todayJson.chart?.result?.[0];
     if (!todayResult) throw new Error('No today data');
@@ -29,13 +27,34 @@ export async function GET(request: Request) {
     const meta = todayResult.meta;
     const quoteToday = todayResult.indicators?.quote?.[0];
 
-    // Today's live price & change
-    const price = meta.regularMarketPrice;
-    const previousClose = meta.previousClose;
-    const change = price - previousClose;
-    const changePercent = (change / previousClose) * 100;
+    let price = meta.regularMarketPrice;
+    let previousClose = meta.previousClose;
 
-    // Today's open, high, low – prefer meta fields, else from quote array (which for 1d range is correct)
+    // 🔥 Fix for missing previousClose
+    if (previousClose === null || previousClose === undefined) {
+      // Option 1: Use change if available
+      const change = meta.regularMarketChange;
+      if (change !== null && change !== undefined && price !== null) {
+        previousClose = price - change;
+      }
+      // Option 2: Fallback to the last close from quote array (previous day's close)
+      else if (quoteToday?.close?.[0]) {
+        previousClose = quoteToday.close[0];
+      }
+    }
+
+    // Now calculate change and changePercent safely
+    let change = null;
+    let changePercent = null;
+    if (price !== null && previousClose !== null && previousClose !== 0) {
+      change = price - previousClose;
+      changePercent = (change / previousClose) * 100;
+    } else {
+      // Use meta change if available
+      change = meta.regularMarketChange ?? null;
+      changePercent = meta.regularMarketChangePercent ?? null;
+    }
+
     const open = meta.regularMarketOpen ?? quoteToday?.open?.[0] ?? null;
     const high = meta.regularMarketDayHigh ?? quoteToday?.high?.[0] ?? null;
     const low = meta.regularMarketDayLow ?? quoteToday?.low?.[0] ?? null;
@@ -43,7 +62,7 @@ export async function GET(request: Request) {
     const high52 = meta.fiftyTwoWeekHigh;
     const low52 = meta.fiftyTwoWeekLow;
 
-    // 2️⃣ Fetch 2y data for performance (closing prices only)
+    // 2️⃣ Performance from 2y data
     const perfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=2y`;
     const perfRes = await fetch(perfUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
     let performance: {
@@ -51,12 +70,7 @@ export async function GET(request: Request) {
       threeMonth: number | null;
       sixMonth: number | null;
       oneYear: number | null;
-    } = {
-      oneMonth: null,
-      threeMonth: null,
-      sixMonth: null,
-      oneYear: null,
-    };
+    } = { oneMonth: null, threeMonth: null, sixMonth: null, oneYear: null };
     if (perfRes.ok) {
       const perfJson = await perfRes.json();
       const closes = perfJson.chart?.result?.[0]?.indicators?.quote?.[0]?.close || [];
@@ -68,7 +82,7 @@ export async function GET(request: Request) {
       if (closes.length > 252) performance.oneYear = ((current - getPrice(252)) / getPrice(252)) * 100;
     }
 
-    // 3️⃣ Market Cap from quoteSummary (reliable)
+    // 3️⃣ Market Cap – automatic (no manual mapping)
     let marketCap = null;
     try {
       const summaryUrl = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${yahooSymbol}?modules=price`;
@@ -77,9 +91,7 @@ export async function GET(request: Request) {
         const summaryJson = await summaryRes.json();
         marketCap = summaryJson?.quoteSummary?.result?.[0]?.price?.marketCap?.raw;
       }
-    } catch (e) { console.warn('Market cap fetch failed', e); }
-
-    // Fallback to meta.marketCap if still null
+    } catch (e) { /* silent fail */ }
     if (!marketCap && meta.marketCap) marketCap = meta.marketCap;
 
     const stockData = {
