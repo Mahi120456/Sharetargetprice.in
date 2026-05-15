@@ -16,10 +16,10 @@ export async function GET(request: Request) {
   }
 
   try {
-    // 1️⃣ Today's intraday data (range=1d) – gives correct open/high/low/prev close
+    // Step 1: Today's 1d data (for open, high, low, current price)
     const todayUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=1d`;
     const todayRes = await fetch(todayUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-    if (!todayRes.ok) throw new Error(`Today error: ${todayRes.status}`);
+    if (!todayRes.ok) throw new Error(`Today data error: ${todayRes.status}`);
     const todayJson = await todayRes.json();
     const todayResult = todayJson.chart?.result?.[0];
     if (!todayResult) throw new Error('No today data');
@@ -27,34 +27,7 @@ export async function GET(request: Request) {
     const meta = todayResult.meta;
     const quoteToday = todayResult.indicators?.quote?.[0];
 
-    let price = meta.regularMarketPrice;
-    let previousClose = meta.previousClose;
-
-    // 🔥 Fix for missing previousClose
-    if (previousClose === null || previousClose === undefined) {
-      // Option 1: Use change if available
-      const change = meta.regularMarketChange;
-      if (change !== null && change !== undefined && price !== null) {
-        previousClose = price - change;
-      }
-      // Option 2: Fallback to the last close from quote array (previous day's close)
-      else if (quoteToday?.close?.[0]) {
-        previousClose = quoteToday.close[0];
-      }
-    }
-
-    // Now calculate change and changePercent safely
-    let change = null;
-    let changePercent = null;
-    if (price !== null && previousClose !== null && previousClose !== 0) {
-      change = price - previousClose;
-      changePercent = (change / previousClose) * 100;
-    } else {
-      // Use meta change if available
-      change = meta.regularMarketChange ?? null;
-      changePercent = meta.regularMarketChangePercent ?? null;
-    }
-
+    const price = meta.regularMarketPrice;
     const open = meta.regularMarketOpen ?? quoteToday?.open?.[0] ?? null;
     const high = meta.regularMarketDayHigh ?? quoteToday?.high?.[0] ?? null;
     const low = meta.regularMarketDayLow ?? quoteToday?.low?.[0] ?? null;
@@ -62,27 +35,54 @@ export async function GET(request: Request) {
     const high52 = meta.fiftyTwoWeekHigh;
     const low52 = meta.fiftyTwoWeekLow;
 
-    // 2️⃣ Performance from 2y data
-    const perfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=2y`;
-    const perfRes = await fetch(perfUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-    let performance: {
-      oneMonth: number | null;
-      threeMonth: number | null;
-      sixMonth: number | null;
-      oneYear: number | null;
-    } = { oneMonth: null, threeMonth: null, sixMonth: null, oneYear: null };
-    if (perfRes.ok) {
-      const perfJson = await perfRes.json();
-      const closes = perfJson.chart?.result?.[0]?.indicators?.quote?.[0]?.close || [];
-      const current = price;
-      const getPrice = (daysAgo: number) => closes[closes.length - 1 - daysAgo];
-      if (closes.length > 22) performance.oneMonth = ((current - getPrice(22)) / getPrice(22)) * 100;
-      if (closes.length > 66) performance.threeMonth = ((current - getPrice(66)) / getPrice(66)) * 100;
-      if (closes.length > 132) performance.sixMonth = ((current - getPrice(132)) / getPrice(132)) * 100;
-      if (closes.length > 252) performance.oneYear = ((current - getPrice(252)) / getPrice(252)) * 100;
+    // Step 2: Historical 2y data (for reliable previous close + performance)
+    const histUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=2y`;
+    const histRes = await fetch(histUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    if (!histRes.ok) throw new Error(`History data error: ${histRes.status}`);
+    const histJson = await histRes.json();
+    const histResult = histJson.chart?.result?.[0];
+    if (!histResult) throw new Error('No history data');
+
+    const histMeta = histResult.meta;
+    const histQuote = histResult.indicators?.quote?.[0];
+    const closes = histQuote?.close || [];
+
+    // 🔥 Previous close: use meta.previousClose if valid, else second-last close from array
+    let previousClose = histMeta.previousClose;
+    if (!previousClose || previousClose === 0) {
+      if (closes.length >= 2) {
+        previousClose = closes[closes.length - 2]; // previous trading day's close
+      } else if (closes.length === 1) {
+        previousClose = closes[0];
+      }
     }
 
-    // 3️⃣ Market Cap – automatic (no manual mapping)
+    // Calculate change & percent
+    let change = null;
+    let changePercent = null;
+    if (price !== null && previousClose !== null && previousClose !== 0) {
+      change = price - previousClose;
+      changePercent = (change / previousClose) * 100;
+    } else {
+      change = histMeta.regularMarketChange ?? null;
+      changePercent = histMeta.regularMarketChangePercent ?? null;
+    }
+
+    // Performance from same historical closes
+    const current = price;
+    const getPrice = (daysAgo: number) => closes[closes.length - 1 - daysAgo];
+    const performance = {
+      oneMonth: null as number | null,
+      threeMonth: null as number | null,
+      sixMonth: null as number | null,
+      oneYear: null as number | null,
+    };
+    if (closes.length > 22) performance.oneMonth = ((current - getPrice(22)) / getPrice(22)) * 100;
+    if (closes.length > 66) performance.threeMonth = ((current - getPrice(66)) / getPrice(66)) * 100;
+    if (closes.length > 132) performance.sixMonth = ((current - getPrice(132)) / getPrice(132)) * 100;
+    if (closes.length > 252) performance.oneYear = ((current - getPrice(252)) / getPrice(252)) * 100;
+
+    // Market cap: quoteSummary first, then meta.marketCap
     let marketCap = null;
     try {
       const summaryUrl = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${yahooSymbol}?modules=price`;
@@ -91,11 +91,11 @@ export async function GET(request: Request) {
         const summaryJson = await summaryRes.json();
         marketCap = summaryJson?.quoteSummary?.result?.[0]?.price?.marketCap?.raw;
       }
-    } catch (e) { /* silent fail */ }
-    if (!marketCap && meta.marketCap) marketCap = meta.marketCap;
+    } catch (e) {}
+    if (!marketCap && histMeta.marketCap) marketCap = histMeta.marketCap;
 
     const stockData = {
-      symbol: meta.symbol || symbol,
+      symbol: histMeta.symbol || symbol,
       price,
       change,
       changePercent,
@@ -118,9 +118,18 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error(`Live API error for ${symbol}:`, error);
     return NextResponse.json({
-      symbol, price: null, change: null, changePercent: null,
-      open: null, high: null, low: null, prevClose: null,
-      volume: null, high52: null, low52: null, marketCap: null,
+      symbol,
+      price: null,
+      change: null,
+      changePercent: null,
+      open: null,
+      high: null,
+      low: null,
+      prevClose: null,
+      volume: null,
+      high52: null,
+      low52: null,
+      marketCap: null,
       performance: { oneMonth: null, threeMonth: null, sixMonth: null, oneYear: null },
       lastUpdated: null,
     });
