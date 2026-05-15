@@ -15,6 +15,33 @@ interface PageProps {
   params: { slug: string };
 }
 
+// Helper to create a fallback stock object when Supabase fails
+function createFallbackStock(slug: string) {
+  const cleanSlug = slug.split('-share-price-target')[0];
+  const name = cleanSlug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+  const symbol = cleanSlug.split('-')[0].toUpperCase();
+  return {
+    id: 0,
+    slug: cleanSlug,
+    name: name,
+    symbol: symbol,
+    current_price: 1000,
+    content: `<p>Detailed analysis for ${name} (${symbol}) is currently being generated. Please refresh after some time or check back later.</p><p>In the meantime, you can view the live chart and price targets below.</p>`,
+    stock_keywords: [],
+    target_2025: null,
+    target_2026: null,
+    target_2027: null,
+    target_2028: null,
+    target_2030: null,
+    target_2035: null,
+    target_2040: null,
+    target_2050: null,
+  };
+}
+
 export default function Page({ params }: PageProps) {
   const [stock, setStock] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -22,26 +49,56 @@ export default function Page({ params }: PageProps) {
   const cleanSlug = params.slug.split('-share-price-target')[0];
 
   useEffect(() => {
-    async function fetchStock() {
-      const { data, error } = await supabase
-        .from('stocks')
-        .select(`*, stock_keywords(*)`)
-        .eq('slug', cleanSlug)
-        .single();
+    let isMounted = true;
+    let timeoutId: NodeJS.Timeout;
 
-      if (error || !data) {
-        console.error("Supabase error:", cleanSlug, error?.message);
-        notFound();
-      } else {
-        setStock(data);
+    async function fetchStock() {
+      try {
+        // Query Supabase
+        const { data, error } = await supabase
+          .from('stocks')
+          .select(`*, stock_keywords(*)`)
+          .eq('slug', cleanSlug)
+          .single();
+
+        if (isMounted) {
+          if (error || !data) {
+            console.error("Supabase error or no data for slug:", cleanSlug, error?.message);
+            // Use fallback instead of notFound()
+            setStock(createFallbackStock(params.slug));
+          } else {
+            setStock(data);
+          }
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Unexpected error fetching stock:", err);
+        if (isMounted) {
+          setStock(createFallbackStock(params.slug));
+          setLoading(false);
+        }
       }
-      setLoading(false);
     }
+
+    // Set a timeout to prevent infinite loading (5 seconds)
+    timeoutId = setTimeout(() => {
+      if (isMounted && loading) {
+        console.warn("Loading timeout – using fallback stock data");
+        setStock(createFallbackStock(params.slug));
+        setLoading(false);
+      }
+    }, 5000);
+
     fetchStock();
-  }, [cleanSlug]);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timeoutId);
+    };
+  }, [cleanSlug, params.slug, loading]);
 
   if (loading) return <div className="text-center p-10">Loading stock data...</div>;
-  if (!stock) return notFound();
+  if (!stock) return notFound(); // fallback will always set stock, so this shouldn't happen
 
   const basePrice = stock.current_price || 100;
   const getTarget = (year: number, multiplier: number) => {
