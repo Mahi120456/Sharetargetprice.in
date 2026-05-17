@@ -1,5 +1,5 @@
 "use client";
-export const dynamic = 'force-dynamic';   // 👈 ADD THIS LINE
+export const dynamic = 'force-dynamic';
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -20,12 +20,10 @@ type Post = {
 };
 
 export default function AdminDashboard() {
-  // ... rest of your code remains exactly the same
-
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [tab, setTab] = useState<"post" | "page">("post");
+  const [tab, setTab] = useState<"post" | "page" | "stock">("post");
   const router = useRouter();
 
   useEffect(() => { fetchPosts(); }, []);
@@ -52,13 +50,17 @@ export default function AdminDashboard() {
   const filtered = posts.filter(p =>
     p.title.toLowerCase().includes(search.toLowerCase())
   );
+  
   const blogPosts = filtered.filter(p => p.post_type === "post");
   const pages = filtered.filter(p => p.post_type === "page");
-  const currentList = tab === "post" ? blogPosts : pages;
+  const stocks = filtered.filter(p => p.post_type === "stock");
+  
+  const currentList = tab === "post" ? blogPosts : tab === "page" ? pages : stocks;
 
-  // Calculate stats for current tab (without search filter)
+  // Stats (without search filter)
   const totalBlog = posts.filter(p => p.post_type === "post").length;
   const totalPages = posts.filter(p => p.post_type === "page").length;
+  const totalStocks = posts.filter(p => p.post_type === "stock").length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -83,8 +85,8 @@ export default function AdminDashboard() {
       </div>
 
       <div className="max-w-5xl mx-auto px-4 py-8">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+        {/* Stats Cards - Updated to include Stocks */}
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-5 mb-8">
           <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
               <FileText className="w-6 h-6 text-orange-600" />
@@ -101,6 +103,15 @@ export default function AdminDashboard() {
             <div>
               <div className="text-2xl font-black text-gray-800">{totalPages}</div>
               <div className="text-xs text-gray-500">Pages</div>
+            </div>
+          </div>
+          <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+              <TrendingUp className="w-6 h-6 text-purple-600" />
+            </div>
+            <div>
+              <div className="text-2xl font-black text-gray-800">{totalStocks}</div>
+              <div className="text-xs text-gray-500">Stock Pages</div>
             </div>
           </div>
           <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
@@ -131,8 +142,8 @@ export default function AdminDashboard() {
           )}
         </div>
 
-        {/* Tabs */}
-        <div className="flex gap-2 mb-6 border-b border-gray-200 pb-2">
+        {/* Tabs - Added Stocks */}
+        <div className="flex gap-2 mb-6 border-b border-gray-200 pb-2 flex-wrap">
           <button
             onClick={() => setTab("post")}
             className={`flex items-center gap-2 px-5 py-2 rounded-xl font-semibold text-sm transition-all ${
@@ -155,6 +166,17 @@ export default function AdminDashboard() {
             <Layout size={16} />
             Pages ({pages.length})
           </button>
+          <button
+            onClick={() => setTab("stock")}
+            className={`flex items-center gap-2 px-5 py-2 rounded-xl font-semibold text-sm transition-all ${
+              tab === "stock"
+                ? "bg-purple-500 text-white shadow-md"
+                : "text-gray-600 hover:bg-gray-100"
+            }`}
+          >
+            <TrendingUp size={16} />
+            Stocks ({stocks.length})
+          </button>
         </div>
 
         {/* Content List */}
@@ -165,10 +187,14 @@ export default function AdminDashboard() {
           </div>
         ) : currentList.length === 0 ? (
           <div className="bg-white rounded-2xl p-12 text-center border border-gray-100">
-            <div className="text-5xl mb-4">{tab === "post" ? "📝" : "📄"}</div>
-            <p className="text-gray-500 mb-4">No {tab === "post" ? "posts" : "pages"} found</p>
+            <div className="text-5xl mb-4">
+              {tab === "post" ? "📝" : tab === "page" ? "📄" : "📈"}
+            </div>
+            <p className="text-gray-500 mb-4">
+              No {tab === "post" ? "posts" : tab === "page" ? "pages" : "stocks"} found
+            </p>
             <Link href="/admin/new" className="inline-flex items-center gap-1 bg-orange-500 text-white px-4 py-2 rounded-xl hover:bg-orange-600 transition">
-              <Plus size={16} /> Create New {tab === "post" ? "Post" : "Page"}
+              <Plus size={16} /> Create New {tab === "post" ? "Post" : tab === "page" ? "Page" : "Stock Page"}
             </Link>
           </div>
         ) : (
@@ -180,11 +206,12 @@ export default function AdminDashboard() {
                     <h3 className="font-semibold text-gray-800 line-clamp-1">{post.title}</h3>
                     <div className="flex flex-wrap items-center gap-2 mt-1.5">
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                        post.post_type === "post"
-                          ? "bg-orange-100 text-orange-700"
-                          : "bg-blue-100 text-blue-700"
+                        post.post_type === "post" ? "bg-orange-100 text-orange-700" :
+                        post.post_type === "page" ? "bg-blue-100 text-blue-700" :
+                        "bg-purple-100 text-purple-700"
                       }`}>
-                        {post.post_type === "post" ? post.category || "Post" : "Page"}
+                        {post.post_type === "post" ? post.category || "Post" :
+                         post.post_type === "page" ? "Page" : "Stock"}
                       </span>
                       <span className="text-xs text-gray-400 flex items-center gap-1">
                         <Calendar size={10} /> {new Date(post.published_at).toLocaleDateString("en-IN")}
