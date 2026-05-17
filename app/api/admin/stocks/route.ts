@@ -7,7 +7,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
-const JWT_SECRET = process.env.JWT_ADMIN_SECRET || "a-very-secure-secret";
+const JWT_SECRET = process.env.JWT_ADMIN_SECRET || process.env.ADMIN_PASSWORD || "a-very-secure-secret-change-this";
 
 function verifyAdmin() {
   const token = cookies().get("admin_token")?.value;
