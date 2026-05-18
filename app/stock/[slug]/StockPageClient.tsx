@@ -15,6 +15,9 @@ import FundamentalsSection from "@/components/FundamentalsSection";
 import TechnicalSection from "@/components/TechnicalSection";
 import ShareholdingSection from "@/components/ShareholdingSection";
 import QuarterlyFinancials from "@/components/QuarterlyFinancials";
+import EventsSection from "@/components/EventsSection";
+import TopMutualFunds from "@/components/TopMutualFunds";
+import SimilarStocks from "@/components/SimilarStocks";
 
 interface StockPageClientProps {
   stock: any;
@@ -67,6 +70,15 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
 
           {/* Quarterly Financials */}
           <QuarterlyFinancials quarterlyData={stock.quarterly_results || []} />
+
+          {/* Events Section */}
+          <EventsSection events={stock.upcoming_events || []} />
+
+          {/* Top Mutual Funds / Institutional Holdings */}
+          <TopMutualFunds holdings={stock.institutional_holdings || []} />
+
+          {/* Similar Stocks */}
+          <SimilarStocks similarStocks={stock.similar_stocks || []} />
 
           {/* Live Chart */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
