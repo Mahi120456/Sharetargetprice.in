@@ -10,7 +10,6 @@ import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
 import StockFAQ from "@/components/StockFAQ";
 import PriceTargetsTable from "@/components/PriceTargetsTable";
-import PerformanceSection from "@/components/PerformanceSection";
 import TechnicalSection from "@/components/TechnicalSection";
 import ShareholdingSection from "@/components/ShareholdingSection";
 import QuarterlyFinancials from "@/components/QuarterlyFinancials";
