@@ -1,46 +1,59 @@
-// FMP Helper Functions
-
-const FMP_API_KEY = process.env.FMP_API_KEY;
+// lib/fmp.ts
+const API_KEY = process.env.FMP_API_KEY;
 const BASE_URL = 'https://financialmodelingprep.com/api/v3';
 
-interface TechnicalIndicator {
-  rsi?: number;
-  macd?: number;
-  sma?: number;
-  ema?: number;
+export async function fetchFromFMP(endpoint: string) {
+  const url = `${BASE_URL}/${endpoint}?apikey=${API_KEY}`;
+  const res = await fetch(url, { next: { revalidate: 3600 } }); // cache 1 hour
+  if (!res.ok) return null;
+  return res.json();
 }
 
-export async function getTechnicalData(symbol: string): Promise<TechnicalIndicator | null> {
-  if (!FMP_API_KEY) {
-    console.error('FMP_API_KEY is not set');
-    return null;
-  }
+// Company profile (for sector, industry, etc.)
+export async function getCompanyProfile(symbol: string) {
+  const data = await fetchFromFMP(`profile/${symbol}`);
+  return Array.isArray(data) ? data[0] : null;
+}
 
-  try {
-    // RSI (14 period)
-    const rsiRes = await fetch(
-      `\( {BASE_URL}/technical_indicator/daily/ \){symbol}?period=14&type=rsi&apikey=${FMP_API_KEY}`
-    );
-    const rsiData = await rsiRes.json();
+// Shareholding (institutional ownership, etc.) – FMP has /institutional-holder/:symbol
+export async function getShareholding(symbol: string) {
+  const data = await fetchFromFMP(`institutional-holder/${symbol}`);
+  return Array.isArray(data) ? data : [];
+}
 
-    // MACD
-    const macdRes = await fetch(
-      `\( {BASE_URL}/technical_indicator/daily/ \){symbol}?period=12&type=macd&apikey=${FMP_API_KEY}`
-    );
-    const macdData = await macdRes.json();
+// Quarterly financials (income statement)
+export async function getQuarterlyIncome(symbol: string, limit = 8) {
+  const data = await fetchFromFMP(`income-statement/${symbol}?period=quarter&limit=${limit}`);
+  return Array.isArray(data) ? data : [];
+}
 
-    if (!rsiData || !macdData) return null;
+// Events (calendar)
+export async function getEvents(symbol: string) {
+  const data = await fetchFromFMP(`earning_calendar?symbol=${symbol}`);
+  return data || [];
+}
 
-    // Latest values lo
-    const latestRSI = rsiData[0]?.rsi;
-    const latestMACD = macdData[0]?.macd;
+// Top mutual funds (FMP has /etf-holder/:symbol or /mutual-fund-holder/:symbol)
+export async function getTopMutualFunds(symbol: string) {
+  const data = await fetchFromFMP(`etf-holder/${symbol}`);
+  return Array.isArray(data) ? data : [];
+}
 
-    return {
-      rsi: latestRSI,
-      macd: latestMACD,
-    };
-  } catch (error) {
-    console.error('FMP Technical Data Error:', error);
-    return null;
-  }
+// Similar stocks (FMP has /stock_peers?symbol=...)
+export async function getSimilarStocks(symbol: string) {
+  const data = await fetchFromFMP(`stock_peers?symbol=${symbol}`);
+  if (data && data.peersList) return data.peersList.split(',').slice(0, 8);
+  return [];
+}
+
+// Technical indicators (RSI, MACD, etc.) – using FMP's technical endpoint
+export async function getTechnicalData(symbol: string) {
+  const rsi = await fetchFromFMP(`technical_indicator/1day/${symbol}?period=14&type=rsi`);
+  const macd = await fetchFromFMP(`technical_indicator/1day/${symbol}?period=26&type=macd`);
+  const beta = await fetchFromFMP(`beta/${symbol}`);
+  return {
+    rsi: Array.isArray(rsi) && rsi.length ? rsi[0].rsi : null,
+    macd: Array.isArray(macd) && macd.length ? macd[0].macd : null,
+    beta: beta ? beta.beta : null,
+  };
 }
