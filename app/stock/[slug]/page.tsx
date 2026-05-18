@@ -3,7 +3,14 @@ import { Metadata } from "next";
 import StockPageClient from "./StockPageClient";
 import { supabase } from "@/lib/supabase";
 import { updateStockPerformance } from "@/lib/updateStockPerformance";
-import { getTechnicalData } from "@/lib/fmp";
+import { 
+  getTechnicalData,
+  getShareholding,
+  getQuarterlyIncome,
+  getEvents,
+  getTopMutualFunds,
+  getSimilarStocks
+} from "@/lib/fmp";
 
 interface PageProps {
   params: { slug: string };
@@ -83,11 +90,25 @@ export default async function Page({ params }: PageProps) {
 
   const basePrice = stock.current_price || 100;
 
-  // ✅ FMP se Technical Data fetch karo
-  const technicalData = await getTechnicalData(stock.symbol);
+  // ✅ Fetch all FMP data in parallel
+  const [
+    technicalData,
+    shareholding,
+    quarterly,
+    events,
+    mutualFunds,
+    similarStocks
+  ] = await Promise.all([
+    getTechnicalData(stock.symbol),
+    getShareholding(stock.symbol),
+    getQuarterlyIncome(stock.symbol),
+    getEvents(stock.symbol),
+    getTopMutualFunds(stock.symbol),
+    getSimilarStocks(stock.symbol)
+  ]);
 
   const getTarget = (year: number, multiplier: number) => {
-    if (stock[`target_\( {year}`]) return stock[`target_ \){year}`];
+    if (stock[`target_${year}`]) return stock[`target_${year}`];
     return `₹${Math.round(basePrice * multiplier).toLocaleString('en-IN')}`;
   };
 
@@ -122,7 +143,12 @@ export default async function Page({ params }: PageProps) {
         targets={targets}
         years={years}
         errorMsg={null}
-        technicalData={technicalData}     // ← FMP se aaya data
+        technicalData={technicalData}
+        shareholding={shareholding}
+        quarterlyData={quarterly}
+        events={events}
+        mutualFunds={mutualFunds}
+        similarStocks={similarStocks}
       />
     </>
   );
