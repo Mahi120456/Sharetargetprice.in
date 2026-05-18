@@ -11,7 +11,6 @@ import BullBearCase from "@/components/BullBearCase";
 import StockFAQ from "@/components/StockFAQ";
 import PriceTargetsTable from "@/components/PriceTargetsTable";
 import PerformanceSection from "@/components/PerformanceSection";
-import FundamentalsSection from "@/components/FundamentalsSection";
 import TechnicalSection from "@/components/TechnicalSection";
 import ShareholdingSection from "@/components/ShareholdingSection";
 import QuarterlyFinancials from "@/components/QuarterlyFinancials";
@@ -68,7 +67,6 @@ export default function StockPageClient({
         <div className="lg:col-span-2 space-y-8">
 
           <PerformanceSection stock={stock} />
-          <FundamentalsSection stock={stock} />
 
           {/* Technical Section with real FMP data */}
           <TechnicalSection 
