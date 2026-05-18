@@ -10,6 +10,12 @@ import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
 import StockFAQ from "@/components/StockFAQ";
 import PriceTargetsTable from "@/components/PriceTargetsTable";
+import ShareholdingSection from "@/components/ShareholdingSection";
+import QuarterlyFinancials from "@/components/QuarterlyFinancials";
+import EventsSection from "@/components/EventsSection";
+import TopMutualFunds from "@/components/TopMutualFunds";
+import SimilarStocks from "@/components/SimilarStocks";
+import TechnicalSection from "@/components/TechnicalSection";
 
 interface StockPageClientProps {
   stock: any;
@@ -20,7 +26,13 @@ interface StockPageClientProps {
   technicalData?: {
     rsi?: number;
     macd?: number;
+    beta?: number;
   } | null;
+  shareholding?: any[];
+  quarterlyData?: any[];
+  events?: any[];
+  mutualFunds?: any[];
+  similarStocks?: string[];
 }
 
 export default function StockPageClient({ 
@@ -29,7 +41,12 @@ export default function StockPageClient({
   targets, 
   years, 
   errorMsg,
-  technicalData 
+  technicalData,
+  shareholding,
+  quarterlyData,
+  events,
+  mutualFunds,
+  similarStocks
 }: StockPageClientProps) {
   const router = useRouter();
 
@@ -55,6 +72,16 @@ export default function StockPageClient({
 
       <StockHero name={stock.name} symbol={stock.symbol} />
       <QuickStatsCards stock={stock} />
+
+      {/* ✅ NEW SECTIONS – after fundamentals, before chart */}
+      <div className="space-y-6 mt-6">
+        <TechnicalSection rsi={technicalData?.rsi} macd={technicalData?.macd} beta={technicalData?.beta} />
+        <ShareholdingSection shareholding={shareholding || []} />
+        <QuarterlyFinancials quarterlyData={quarterlyData || []} />
+        <EventsSection events={events || []} />
+        <TopMutualFunds holdings={mutualFunds || []} />
+        <SimilarStocks similarStocks={similarStocks || []} />
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
         <div className="lg:col-span-2 space-y-8">
