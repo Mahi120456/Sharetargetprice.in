@@ -12,6 +12,9 @@ import StockFAQ from "@/components/StockFAQ";
 import PriceTargetsTable from "@/components/PriceTargetsTable";
 import PerformanceSection from "@/components/PerformanceSection";
 import FundamentalsSection from "@/components/FundamentalsSection";
+import TechnicalSection from "@/components/TechnicalSection";
+import ShareholdingSection from "@/components/ShareholdingSection";
+import QuarterlyFinancials from "@/components/QuarterlyFinancials";
 
 interface StockPageClientProps {
   stock: any;
@@ -50,11 +53,20 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
         <div className="lg:col-span-2 space-y-8">
 
-          {/* Performance Section (Groww Style) */}
+          {/* Performance Section */}
           <PerformanceSection stock={stock} />
 
           {/* Fundamentals Section */}
           <FundamentalsSection stock={stock} />
+
+          {/* Technical Section */}
+          <TechnicalSection stock={stock} />
+
+          {/* Shareholding Pattern */}
+          <ShareholdingSection shareholding={stock.shareholding || []} />
+
+          {/* Quarterly Financials */}
+          <QuarterlyFinancials quarterlyData={stock.quarterly_results || []} />
 
           {/* Live Chart */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
@@ -105,7 +117,7 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
           <StockFAQ stockName={stock.name} />
         </div>
 
-        {/* Sidebar - Price Prediction */}
+        {/* Sidebar */}
         <aside className="space-y-6">
           <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl shadow-xl sticky top-24 overflow-hidden">
             <div className="p-6 border-b border-gray-700 bg-orange-600/10">
