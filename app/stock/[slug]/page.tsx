@@ -1,23 +1,24 @@
-import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import StockPageClient from "./StockPageClient";
+import { supabase } from "@/lib/supabase";
 
 interface PageProps {
   params: { slug: string };
 }
 
-// Helper to fetch stock data (server-side)
+// ✅ Updated getStock with Caching Logic
 async function getStock(slug: string) {
   const cleanSlug = slug.split('-share-price-target')[0];
-  // Try original slug
+
+  // Try original slug first
   let { data, error } = await supabase
     .from('stocks')
     .select('*, stock_keywords(*)')
     .eq('slug', slug)
     .single();
 
-  // Try cleaned slug if not found
+  // If not found, try cleaned slug
   if (error || !data) {
     const result = await supabase
       .from('stocks')
@@ -27,10 +28,25 @@ async function getStock(slug: string) {
     data = result.data;
     error = result.error;
   }
-  return error || !data ? null : data;
+
+  if (error || !data) return null;
+
+  // ✅ Caching Logic: Check if data is fresh (24 hours)
+  const lastUpdated = new Date(data.last_updated);
+  const hoursSinceUpdate = (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60);
+
+  // Agar data 24 hours se purana hai to last_updated update kar do
+  if (hoursSinceUpdate > 24) {
+    await supabase
+      .from('stocks')
+      .update({ last_updated: new Date().toISOString() })
+      .eq('slug', data.slug);
+  }
+
+  return data;
 }
 
-// ✅ Generate Metadata for SEO (dynamic title, description, canonical + OG image)
+// Dynamic Metadata
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const stock = await getStock(params.slug);
   if (!stock) {
@@ -39,8 +55,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: 'The requested stock analysis page could not be found.',
     };
   }
+
   const stockName = stock.name;
   const ogImageUrl = 'https://sharetargetprice.in/og-image.jpg';
+
   return {
     title: `${stockName} Share Price Target 2026-2050 | Analysis & Forecast`,
     description: `Get detailed ${stockName} share price targets for 2026, 2027, 2028, 2030, 2035, 2040, 2050. Based on fundamental analysis, earnings growth, and sector outlook.`,
@@ -54,7 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: 'Share Target Price',
       type: 'website',
       locale: 'en_IN',
-      images: [   // ✅ ADDED FOR WHATSAPP/FACEBOOK PREVIEW
+      images: [
         {
           url: ogImageUrl,
           width: 1200,
@@ -72,16 +90,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// Main Server Component
+// Main Page
 export default async function Page({ params }: PageProps) {
   const stock = await getStock(params.slug);
-  if (!stock) {
-    notFound();
-  }
+  if (!stock) notFound();
 
   const basePrice = stock.current_price || 100;
+
   const getTarget = (year: number, multiplier: number) => {
-    if (stock[`target_${year}`]) return stock[`target_${year}`];
+    if (stock[`target_\( {year}`]) return stock[`target_ \){year}`];
     return `₹${Math.round(basePrice * multiplier).toLocaleString('en-IN')}`;
   };
 
@@ -94,9 +111,10 @@ export default async function Page({ params }: PageProps) {
     2040: getTarget(2040, 8.00),
     2050: getTarget(2050, 20.00),
   };
+
   const years = [2026, 2027, 2028, 2030, 2035, 2040, 2050];
 
-  // JSON-LD Schema (structured data)
+  // JSON-LD
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FinancialProduct",
