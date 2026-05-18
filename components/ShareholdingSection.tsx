@@ -5,44 +5,31 @@ interface ShareholdingSectionProps {
 }
 
 export default function ShareholdingSection({ shareholding }: ShareholdingSectionProps) {
-  if (!shareholding || shareholding.length === 0) {
-    return null;
-  }
-
-  // Latest quarter ka data lo
-  const latest = shareholding[0];
-
-  const holders = [
-    { label: 'Promoters', value: latest.promoter_pct, color: 'bg-green-500' },
-    { label: 'FIIs', value: latest.fii_pct, color: 'bg-blue-500' },
-    { label: 'DIIs', value: latest.dii_pct, color: 'bg-purple-500' },
-    { label: 'Public', value: latest.public_pct, color: 'bg-gray-400' },
-  ];
-
+  if (!shareholding || shareholding.length === 0) return null;
+  // Group by holder type? For simplicity, show table
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-      <h2 className="text-xl font-bold text-gray-900 mb-5">Shareholding Pattern</h2>
-
-      <div className="space-y-4">
-        {holders.map((holder, index) => (
-          <div key={index}>
-            <div className="flex justify-between text-sm mb-1">
-              <span className="text-gray-700">{holder.label}</span>
-              <span className="font-semibold">{holder.value || 0}%</span>
-            </div>
-            <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-              <div 
-                className={`h-3 rounded-full ${holder.color} transition-all`} 
-                style={{ width: `${holder.value || 0}%` }}
-              />
-            </div>
-          </div>
-        ))}
+      <h2 className="text-xl font-bold text-gray-900 mb-4">Shareholding Pattern</h2>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left py-2">Holder</th>
+              <th className="text-right py-2">Shares Held</th>
+              <th className="text-right py-2">%</th>
+            </tr>
+          </thead>
+          <tbody>
+            {shareholding.slice(0, 10).map((item, idx) => (
+              <tr key={idx} className="border-b">
+                <td className="py-2">{item.holder || item.name}</td>
+                <td className="text-right py-2">{(item.shares || 0).toLocaleString()}</td>
+                <td className="text-right py-2">{((item.percentage || 0) * 100).toFixed(2)}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-
-      <p className="text-xs text-gray-400 mt-4">
-        Latest quarter data
-      </p>
     </div>
   );
 }
