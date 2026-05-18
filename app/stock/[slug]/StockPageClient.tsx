@@ -10,12 +10,6 @@ import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
 import StockFAQ from "@/components/StockFAQ";
 import PriceTargetsTable from "@/components/PriceTargetsTable";
-import TechnicalSection from "@/components/TechnicalSection";
-import ShareholdingSection from "@/components/ShareholdingSection";
-import QuarterlyFinancials from "@/components/QuarterlyFinancials";
-import EventsSection from "@/components/EventsSection";
-import TopMutualFunds from "@/components/TopMutualFunds";
-import SimilarStocks from "@/components/SimilarStocks";
 
 interface StockPageClientProps {
   stock: any;
@@ -65,20 +59,6 @@ export default function StockPageClient({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
         <div className="lg:col-span-2 space-y-8">
 
-          <PerformanceSection stock={stock} />
-
-          {/* Technical Section with real FMP data */}
-          <TechnicalSection 
-            rsi={technicalData?.rsi} 
-            macd={technicalData?.macd} 
-          />
-
-          <ShareholdingSection shareholding={stock.shareholding || []} />
-          <QuarterlyFinancials quarterlyData={stock.quarterly_results || []} />
-          <EventsSection events={stock.upcoming_events || []} />
-          <TopMutualFunds holdings={stock.institutional_holdings || []} />
-          <SimilarStocks similarStocks={stock.similar_stocks || []} />
-
           {/* Live Chart */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
@@ -93,12 +73,14 @@ export default function StockPageClient({
           </div>
 
           <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
+          
           <PriceTargetsTable 
             stockName={stock.name}
             symbol={stock.symbol}
             currentPrice={basePrice}
             targets={targets}
           />
+          
           <BullBearCase 
             stockName={stock.name} 
             currentPrice={stock.current_price || 100} 
@@ -126,7 +108,7 @@ export default function StockPageClient({
           <StockFAQ stockName={stock.name} />
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar Price Prediction */}
         <aside className="space-y-6">
           <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl shadow-xl sticky top-24 overflow-hidden">
             <div className="p-6 border-b border-gray-700 bg-orange-600/10">
