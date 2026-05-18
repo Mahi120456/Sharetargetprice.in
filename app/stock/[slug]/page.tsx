@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import StockPageClient from "./StockPageClient";
 import { supabase } from "@/lib/supabase";
 import { updateStockPerformance } from "@/lib/updateStockPerformance";
+import { getTechnicalData } from "@/lib/fmp";
 
 interface PageProps {
   params: { slug: string };
@@ -12,14 +13,12 @@ interface PageProps {
 async function getStock(slug: string) {
   const cleanSlug = slug.split('-share-price-target')[0];
 
-  // Try original slug
   let { data, error } = await supabase
     .from('stocks')
     .select('*, stock_keywords(*)')
     .eq('slug', slug)
     .single();
 
-  // Try cleaned slug if not found
   if (error || !data) {
     const result = await supabase
       .from('stocks')
@@ -32,15 +31,13 @@ async function getStock(slug: string) {
 
   if (error || !data) return null;
 
-  // ✅ Check freshness (1 hour)
+  // Caching logic (1 hour)
   const lastUpdated = new Date(data.last_updated);
   const hoursSinceUpdate = (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60);
 
-  // Agar 1 ghante se purana hai to Yahoo se update karo
   if (hoursSinceUpdate > 1) {
     await updateStockPerformance(data.slug, data.symbol);
-    
-    // Dobara fresh data lo
+
     const { data: freshData } = await supabase
       .from('stocks')
       .select('*, stock_keywords(*)')
@@ -86,6 +83,9 @@ export default async function Page({ params }: PageProps) {
 
   const basePrice = stock.current_price || 100;
 
+  // ✅ FMP se Technical Data fetch karo
+  const technicalData = await getTechnicalData(stock.symbol);
+
   const getTarget = (year: number, multiplier: number) => {
     if (stock[`target_\( {year}`]) return stock[`target_ \){year}`];
     return `₹${Math.round(basePrice * multiplier).toLocaleString('en-IN')}`;
@@ -122,6 +122,7 @@ export default async function Page({ params }: PageProps) {
         targets={targets}
         years={years}
         errorMsg={null}
+        technicalData={technicalData}     // ← FMP se aaya data
       />
     </>
   );
