@@ -10,7 +10,8 @@ import PerformanceChart from "@/components/PerformanceChart";
 import BullBearCase from "@/components/BullBearCase";
 import StockFAQ from "@/components/StockFAQ";
 import PriceTargetsTable from "@/components/PriceTargetsTable";
-import PerformanceSection from "@/components/PerformanceSection";   // ← NEW IMPORT
+import PerformanceSection from "@/components/PerformanceSection";
+import FundamentalsSection from "@/components/FundamentalsSection";
 
 interface StockPageClientProps {
   stock: any;
@@ -49,10 +50,13 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
         <div className="lg:col-span-2 space-y-8">
 
-          {/* ✅ NEW: Performance Section (Groww Style) */}
+          {/* Performance Section (Groww Style) */}
           <PerformanceSection stock={stock} />
 
-          {/* Existing Chart */}
+          {/* Fundamentals Section */}
+          <FundamentalsSection stock={stock} />
+
+          {/* Live Chart */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
               <h2 className="text-xl font-bold text-gray-900">{stock.name} Live Chart</h2>
@@ -80,7 +84,7 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
             target2026={targets[2026]}
           />
 
-          {/* Analysis Article */}
+          {/* Detailed Analysis Article */}
           <article className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
             <div className="p-6 bg-gradient-to-r from-orange-50 to-white border-b border-orange-100">
               <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -101,7 +105,7 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
           <StockFAQ stockName={stock.name} />
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar - Price Prediction */}
         <aside className="space-y-6">
           <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl shadow-xl sticky top-24 overflow-hidden">
             <div className="p-6 border-b border-gray-700 bg-orange-600/10">
