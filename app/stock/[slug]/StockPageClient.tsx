@@ -25,9 +25,20 @@ interface StockPageClientProps {
   targets: Record<number, string>;
   years: number[];
   errorMsg?: string | null;
+  technicalData?: {
+    rsi?: number;
+    macd?: number;
+  } | null;
 }
 
-export default function StockPageClient({ stock, basePrice, targets, years, errorMsg }: StockPageClientProps) {
+export default function StockPageClient({ 
+  stock, 
+  basePrice, 
+  targets, 
+  years, 
+  errorMsg,
+  technicalData 
+}: StockPageClientProps) {
   const router = useRouter();
 
   return (
@@ -56,28 +67,19 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-8">
         <div className="lg:col-span-2 space-y-8">
 
-          {/* Performance Section */}
           <PerformanceSection stock={stock} />
-
-          {/* Fundamentals Section */}
           <FundamentalsSection stock={stock} />
 
-          {/* Technical Section */}
-          <TechnicalSection stock={stock} />
+          {/* Technical Section with real FMP data */}
+          <TechnicalSection 
+            rsi={technicalData?.rsi} 
+            macd={technicalData?.macd} 
+          />
 
-          {/* Shareholding Pattern */}
           <ShareholdingSection shareholding={stock.shareholding || []} />
-
-          {/* Quarterly Financials */}
           <QuarterlyFinancials quarterlyData={stock.quarterly_results || []} />
-
-          {/* Events Section */}
           <EventsSection events={stock.upcoming_events || []} />
-
-          {/* Top Mutual Funds / Institutional Holdings */}
           <TopMutualFunds holdings={stock.institutional_holdings || []} />
-
-          {/* Similar Stocks */}
           <SimilarStocks similarStocks={stock.similar_stocks || []} />
 
           {/* Live Chart */}
@@ -94,14 +96,12 @@ export default function StockPageClient({ stock, basePrice, targets, years, erro
           </div>
 
           <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
-
           <PriceTargetsTable 
             stockName={stock.name}
             symbol={stock.symbol}
             currentPrice={basePrice}
             targets={targets}
           />
-
           <BullBearCase 
             stockName={stock.name} 
             currentPrice={stock.current_price || 100} 
