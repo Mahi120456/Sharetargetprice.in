@@ -146,7 +146,8 @@ export default async function Home() {
                   <span>🔍</span> Explore 3000+ Stocks
                   <span className="group-hover:translate-x-1 transition">→</span>
                 </Link>
-                <Link href="/category/calculator" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-xl transition-all border border-white/20 flex items-center gap-2">
+                {/* ✅ FIXED: Link changed to /calculator */}
+                <Link href="/calculator" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-xl transition-all border border-white/20 flex items-center gap-2">
                   <span>🧮</span> Financial Calculators
                 </Link>
               </div>
@@ -243,7 +244,8 @@ export default async function Home() {
                 ))}
               </div>
               <div className="text-center mt-8">
-                <Link href="/category/calculator" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition-all">
+                {/* ✅ FIXED: Link changed to /calculator */}
+                <Link href="/calculator" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition-all">
                   View All 50+ Calculators →
                 </Link>
               </div>
