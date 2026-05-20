@@ -63,8 +63,9 @@ export default function NotFound() {
           >
             <TrendingUp size={18} /> Browse All Stocks
           </Link>
+          {/* ✅ FIXED: Replaced /category/calculator with /calculator */}
           <Link
-            href="/category/calculator"
+            href="/calculator"
             className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-xl transition-all"
           >
             🧮 Calculators
