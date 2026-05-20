@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getCalculatorComponent } from '@/components/calculators';   // 👈 ADDED
+import { getCalculatorComponent } from '@/components/calculators';
 
 type Props = {
   params: { slug: string };
@@ -67,7 +67,6 @@ export default async function CalculatorPage({ params }: Props) {
   const calculator = await getCalculator(params.slug);
   if (!calculator) notFound();
 
-  // 👇 Get the calculator component if it exists for this slug
   const CalculatorComponent = getCalculatorComponent(params.slug);
 
   const formattedContent = formatCalculatorContent(calculator.content || '');
@@ -85,7 +84,7 @@ export default async function CalculatorPage({ params }: Props) {
         <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
           <Link href="/" className="hover:text-orange-500 transition">Home</Link>
           <span>›</span>
-          <Link href="/category/calculator" className="hover:text-orange-500 transition">Calculators</Link>
+          <Link href="/calculator" className="hover:text-orange-500 transition">Calculators</Link>
           <span>›</span>
           <span className="text-gray-700 font-medium line-clamp-1">{calculator.title}</span>
         </nav>
@@ -132,7 +131,7 @@ export default async function CalculatorPage({ params }: Props) {
           </div>
         </div>
 
-        {/* 👇 RENDER CALCULATOR COMPONENT (IF EXISTS) */}
+        {/* Render Calculator Component (if exists) */}
         {CalculatorComponent && (
           <div className="mb-8">
             <CalculatorComponent />
@@ -164,7 +163,7 @@ export default async function CalculatorPage({ params }: Props) {
               <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2">
                 <span>📚</span> Other Calculators You May Like
               </h2>
-              <Link href="/category/calculator" className="text-orange-500 text-sm font-medium hover:underline">
+              <Link href="/calculator" className="text-orange-500 text-sm font-medium hover:underline">
                 View All →
               </Link>
             </div>
@@ -195,7 +194,7 @@ export default async function CalculatorPage({ params }: Props) {
         <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 text-center text-white">
           <h3 className="text-lg font-bold mb-2">Need More Financial Tools?</h3>
           <p className="text-sm text-gray-300 mb-4">Explore our collection of 50+ calculators for SIP, EMI, CAGR, and more.</p>
-          <Link href="/category/calculator" className="inline-block bg-orange-500 hover:bg-orange-600 px-5 py-2 rounded-full text-sm font-semibold transition">
+          <Link href="/calculator" className="inline-block bg-orange-500 hover:bg-orange-600 px-5 py-2 rounded-full text-sm font-semibold transition">
             Browse All Calculators →
           </Link>
         </div>
