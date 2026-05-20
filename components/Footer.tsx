@@ -29,7 +29,8 @@ export default function Footer() {
               <li><Link href="/category/ipo" className="hover:text-orange-400">IPO Analysis</Link></li>
               <li><Link href="/category/stock-analysis" className="hover:text-orange-400">Stock Analysis</Link></li>
               <li><Link href="/category/sip" className="hover:text-orange-400">SIP Calculator</Link></li>
-              <li><Link href="/category/calculator" className="hover:text-orange-400">Financial Calculators</Link></li>
+              {/* ✅ Changed from /category/calculator to /calculator */}
+              <li><Link href="/calculator" className="hover:text-orange-400">Financial Calculators</Link></li>
             </ul>
           </div>
 
