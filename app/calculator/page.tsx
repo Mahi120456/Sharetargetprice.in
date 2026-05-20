@@ -35,7 +35,7 @@ async function getAllCalculators() {
   const { data } = await supabase
     .from('posts')
     .select('slug, title, excerpt, category, featured_image')
-    .eq('category', 'Calculator')
+    .in('category', ['Calculator', 'SIP'])
     .order('title', { ascending: true });
   return data || [];
 }
