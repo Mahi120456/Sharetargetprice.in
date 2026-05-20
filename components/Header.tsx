@@ -9,7 +9,8 @@ const categories = [
   { name: "IPO", slug: "/category/ipo" },
   { name: "Mutual Funds", slug: "/category/mutual-funds" },
   { name: "SIP", slug: "/category/sip" },
-  { name: "Calculators", slug: "/category/calculator" },
+  // ✅ Changed from /category/calculator to /calculator
+  { name: "Calculators", slug: "/calculator" },
   { name: "About Us", slug: "/about-us" },
   { name: "Contact Us", slug: "/contact-us" },
 ];
@@ -27,8 +28,8 @@ export default function Header() {
         {/* Logo - Sirf Text */}
         <Link href="/" className="flex items-center">
           <div className="text-white font-black text-xl leading-tight">
-  Share Target Price
-</div>
+            Share Target Price
+          </div>
         </Link>
 
         {/* Desktop Nav */}
