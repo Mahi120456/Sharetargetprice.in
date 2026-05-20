@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { getCalculatorComponent } from '@/components/calculators';   // 👈 ADDED
 
 type Props = {
   params: { slug: string };
@@ -66,6 +67,9 @@ export default async function CalculatorPage({ params }: Props) {
   const calculator = await getCalculator(params.slug);
   if (!calculator) notFound();
 
+  // 👇 Get the calculator component if it exists for this slug
+  const CalculatorComponent = getCalculatorComponent(params.slug);
+
   const formattedContent = formatCalculatorContent(calculator.content || '');
   const publishDate = new Date(calculator.published_at).toLocaleDateString('en-IN', {
     year: 'numeric', month: 'long', day: 'numeric',
@@ -128,7 +132,14 @@ export default async function CalculatorPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Calculator Main Content */}
+        {/* 👇 RENDER CALCULATOR COMPONENT (IF EXISTS) */}
+        {CalculatorComponent && (
+          <div className="mb-8">
+            <CalculatorComponent />
+          </div>
+        )}
+
+        {/* Calculator Main Content (Article / How to use) */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
           <div className="p-6 md:p-8">
             {formattedContent ? (
