@@ -6,28 +6,17 @@ import MarketMovers from "@/components/MarketMovers";
 
 export const dynamic = 'force-dynamic';
 
-// ✅ Enhanced metadata for SEO (including Twitter Card, Canonical, Robots)
 export const metadata: Metadata = {
   title: "Share Target Price – India's #1 Share Price Target Analysis Platform",
-  description:
-    "Accurate share price targets for 500+ NSE/BSE stocks. Long-term forecasts, live charts, fundamentals, and expert analysis for Indian investors.",
-  keywords:
-    "share target price, stock price target, nse target price, bse target price, stock analysis, indian stock market, nifty 50 targets",
+  description: "Accurate share price targets for 500+ NSE/BSE stocks. Long-term forecasts, live charts, fundamentals, and expert analysis for Indian investors.",
+  keywords: "share target price, stock price target, nse target price, bse target price, stock analysis, indian stock market, nifty 50 targets",
   authors: [{ name: "Share Target Price Team" }],
   openGraph: {
     title: "Share Target Price – India's #1 Share Price Target Analysis Platform",
-    description:
-      "Get accurate share price targets for 500+ Indian stocks. Long-term forecasts, charts, and fundamental analysis.",
+    description: "Get accurate share price targets for 500+ Indian stocks. Long-term forecasts, charts, and fundamental analysis.",
     url: "https://sharetargetprice.in",
     siteName: "Share Target Price",
-    images: [
-      {
-        url: "https://sharetargetprice.in/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Share Target Price – India's #1 Stock Price Forecast Platform",
-      },
-    ],
+    images: [{ url: "https://sharetargetprice.in/og-image.jpg", width: 1200, height: 630, alt: "Share Target Price – India's #1 Stock Price Forecast Platform" }],
     locale: "en_IN",
     type: "website",
   },
@@ -37,23 +26,10 @@ export const metadata: Metadata = {
     description: "Accurate share price targets for Indian stocks.",
     images: ["https://sharetargetprice.in/og-image.jpg"],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  alternates: {
-    canonical: "https://sharetargetprice.in",
-  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 } },
+  alternates: { canonical: "https://sharetargetprice.in" },
 };
 
-// Categories for homepage (unchanged)
 const featuredCategories = [
   { name: "Share Price Target", slug: "share-price-target", icon: "📈", desc: "Stock price analysis", color: "from-orange-500 to-red-500" },
   { name: "Stock Analysis", slug: "stock-analysis", icon: "🔍", desc: "Deep dive research", color: "from-blue-500 to-cyan-500" },
@@ -63,18 +39,27 @@ const featuredCategories = [
   { name: "Calculators", slug: "calculator", icon: "🧮", desc: "Financial tools", color: "from-indigo-500 to-purple-500" },
 ];
 
+// ✅ FIXED: Now fetches both 'post' and 'page' types
 async function getPostsByCategory(categoryName: string, limit = 4) {
   const { data, error } = await supabase
     .from("posts")
     .select("id, title, slug, excerpt, category, published_at, featured_image")
     .eq("category", categoryName)
-    .eq("post_type", "post")
+    .in("post_type", ["post", "page"])   // 👈 YAHAN CHANGE KIYA
     .order("published_at", { ascending: false })
     .limit(limit);
-  if (error) {
-    console.error(`Error fetching ${categoryName}:`, error);
-    return [];
-  }
+  if (error) return [];
+  return data || [];
+}
+
+async function getCalculatorsForHome(limit = 4) {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("id, title, slug, excerpt, featured_image")
+    .in("category", ["Calculator", "SIP"])
+    .order("published_at", { ascending: false })
+    .limit(limit);
+  if (error) return [];
   return data || [];
 }
 
@@ -82,7 +67,7 @@ async function getLatestCalculators(limit = 6) {
   const { data, error } = await supabase
     .from("posts")
     .select("id, title, slug, excerpt, featured_image")
-    .eq("category", "Calculator")
+    .in("category", ["Calculator", "SIP"])
     .order("published_at", { ascending: false })
     .limit(limit);
   if (error) return [];
@@ -91,15 +76,20 @@ async function getLatestCalculators(limit = 6) {
 
 export default async function Home() {
   const categoriesWithPosts = await Promise.all(
-    featuredCategories.map(async (cat) => ({
-      ...cat,
-      posts: await getPostsByCategory(cat.name, 4),
-    }))
+    featuredCategories.map(async (cat) => {
+      if (cat.name === "Calculators") {
+        return { ...cat, posts: [] };
+      }
+      return {
+        ...cat,
+        posts: await getPostsByCategory(cat.name, 4),
+      };
+    })
   );
 
+  const calculatorsForHome = await getCalculatorsForHome(4);
   const latestCalculators = await getLatestCalculators(6);
 
-  // ✅ JSON-LD Schema for WebSite (improves search presence)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -115,13 +105,9 @@ export default async function Home() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        
-        {/* ========== HERO SECTION ========== */}
+        {/* Hero Section (unchanged) */}
         <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full filter blur-3xl animate-pulse"></div>
@@ -138,15 +124,13 @@ export default async function Home() {
                 <span className="text-orange-400 block mt-2">Analysis & Predictions</span>
               </h1>
               <p className="text-gray-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-                Data-driven share price targets for 3000+ NSE & BSE stocks. 
-                Expert analysis, long-term forecasts, and financial tools for Indian investors.
+                Data-driven share price targets for 3000+ NSE & BSE stocks. Expert analysis, long-term forecasts, and financial tools for Indian investors.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link href="/all-stocks" className="group bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
                   <span>🔍</span> Explore 3000+ Stocks
                   <span className="group-hover:translate-x-1 transition">→</span>
                 </Link>
-                {/* ✅ FIXED: Link changed to /calculator */}
                 <Link href="/calculator" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-xl transition-all border border-white/20 flex items-center gap-2">
                   <span>🧮</span> Financial Calculators
                 </Link>
@@ -160,7 +144,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ========== STOCK DIRECTORY A-Z SECTION ========== */}
+        {/* A-Z Directory */}
         <section className="py-12 bg-white border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-8">
@@ -177,7 +161,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ========== TODAY'S MARKET MOVERS (Dynamic) ========== */}
+        {/* Market Movers */}
         <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-8">
@@ -188,42 +172,49 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ========== CATEGORY WISE SECTIONS ========== */}
+        {/* Category Sections */}
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-16">
-          {categoriesWithPosts.map(({ name, slug, icon, desc, color, posts }) => (
-            <section key={slug} className="scroll-mt-20">
-              <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white text-xl shadow-md`}>
-                    {icon}
+          {categoriesWithPosts.map(({ name, slug, icon, desc, color, posts }) => {
+            let displayPosts = posts;
+            let viewAllLink = `/category/${slug}`;
+            if (name === "Calculators") {
+              displayPosts = calculatorsForHome;
+              viewAllLink = "/calculator";
+            }
+            return (
+              <section key={slug} className="scroll-mt-20">
+                <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white text-xl shadow-md`}>
+                      {icon}
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900">{name}</h2>
+                      <p className="text-sm text-gray-500">{desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-2xl font-bold text-gray-900">{name}</h2>
-                    <p className="text-sm text-gray-500">{desc}</p>
+                  <Link href={viewAllLink} className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
+                    View All →
+                  </Link>
+                </div>
+                {displayPosts.length === 0 ? (
+                  <div className="bg-white rounded-2xl p-12 text-center text-gray-400 border border-dashed border-gray-200">
+                    <div className="text-4xl mb-2">📭</div>
+                    <p>No posts in {name} yet.</p>
                   </div>
-                </div>
-                <Link href={`/category/${slug}`} className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
-                  View All →
-                </Link>
-              </div>
-
-              {posts.length === 0 ? (
-                <div className="bg-white rounded-2xl p-12 text-center text-gray-400 border border-dashed border-gray-200">
-                  <div className="text-4xl mb-2">📭</div>
-                  <p>No posts in {name} yet.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {posts.map((post) => (
-                    <PostCard key={post.id} post={post} />
-                  ))}
-                </div>
-              )}
-            </section>
-          ))}
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {displayPosts.map((post) => (
+                      <PostCard key={post.id} post={post} />
+                    ))}
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </div>
 
-        {/* ========== CALCULATORS SHOWCASE ========== */}
+        {/* Calculators Showcase (bottom) */}
         {latestCalculators.length > 0 && (
           <section className="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-16">
             <div className="max-w-7xl mx-auto px-4">
@@ -244,7 +235,6 @@ export default async function Home() {
                 ))}
               </div>
               <div className="text-center mt-8">
-                {/* ✅ FIXED: Link changed to /calculator */}
                 <Link href="/calculator" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition-all">
                   View All 50+ Calculators →
                 </Link>
@@ -253,7 +243,7 @@ export default async function Home() {
           </section>
         )}
 
-        {/* ========== STATS BAR ========== */}
+        {/* Stats Bar */}
         <section className="py-12 bg-white border-t border-gray-100">
           <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div><div className="text-4xl font-black text-orange-500">3000+</div><div className="text-gray-600 text-sm mt-1">Stock Targets</div></div>
@@ -263,7 +253,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ========== CALL TO ACTION ========== */}
+        {/* CTA */}
         <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Start Your Investment Journey Today</h2>
