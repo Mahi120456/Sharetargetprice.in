@@ -39,23 +39,23 @@ const featuredCategories = [
   { name: "Calculators", slug: "calculator", icon: "🧮", desc: "Financial tools", color: "from-indigo-500 to-purple-500" },
 ];
 
-// ✅ FIXED: Now fetches both 'post' and 'page' types
 async function getPostsByCategory(categoryName: string, limit = 4) {
   const { data, error } = await supabase
     .from("posts")
     .select("id, title, slug, excerpt, category, published_at, featured_image")
     .eq("category", categoryName)
-    .in("post_type", ["post", "page"])   // 👈 YAHAN CHANGE KIYA
+    .in("post_type", ["post", "page"])
     .order("published_at", { ascending: false })
     .limit(limit);
   if (error) return [];
   return data || [];
 }
 
+// ✅ FIXED: added category and published_at fields
 async function getCalculatorsForHome(limit = 4) {
   const { data, error } = await supabase
     .from("posts")
-    .select("id, title, slug, excerpt, featured_image")
+    .select("id, title, slug, excerpt, category, published_at, featured_image")
     .in("category", ["Calculator", "SIP"])
     .order("published_at", { ascending: false })
     .limit(limit);
@@ -63,10 +63,11 @@ async function getCalculatorsForHome(limit = 4) {
   return data || [];
 }
 
+// ✅ FIXED: added category and published_at fields
 async function getLatestCalculators(limit = 6) {
   const { data, error } = await supabase
     .from("posts")
-    .select("id, title, slug, excerpt, featured_image")
+    .select("id, title, slug, excerpt, category, published_at, featured_image")
     .in("category", ["Calculator", "SIP"])
     .order("published_at", { ascending: false })
     .limit(limit);
