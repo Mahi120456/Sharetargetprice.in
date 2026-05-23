@@ -1,167 +1,172 @@
-import { notFound } from "next/navigation";
-import { Metadata } from "next";
-import StockPageClient from "./StockPageClient";
-import { supabase } from "@/lib/supabase";
-import { updateStockPerformance } from "@/lib/updateStockPerformance";
-import { 
-  getTechnicalData,
-  getShareholding,
-  getQuarterlyIncome,
-  getEvents,
-  getTopMutualFunds,
-  getSimilarStocks
-} from "@/lib/fmp";
+import { createClient } from '@supabase/supabase-js';
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
-interface PageProps {
-  params: { slug: string };
-}
-
-// Get stock with caching + auto update
-async function getStock(slug: string) {
-  const cleanSlug = slug.split('-share-price-target')[0];
-
-  let { data, error } = await supabase
-    .from('stocks')
-    .select('*, stock_keywords(*)')
+async function getAuthor(slug: string) {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+  const { data: author, error } = await supabase
+    .from('authors')
+    .select('*')
     .eq('slug', slug)
     .single();
+  if (error || !author) return null;
 
-  if (error || !data) {
-    const result = await supabase
-      .from('stocks')
-      .select('*, stock_keywords(*)')
-      .eq('slug', cleanSlug)
-      .single();
-    data = result.data;
-    error = result.error;
-  }
-
-  if (error || !data) return null;
-
-  // Caching logic (1 hour)
-  const lastUpdated = new Date(data.last_updated);
-  const hoursSinceUpdate = (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60);
-
-  if (hoursSinceUpdate > 1) {
-    await updateStockPerformance(data.slug, data.symbol);
-
-    const { data: freshData } = await supabase
-      .from('stocks')
-      .select('*, stock_keywords(*)')
-      .eq('slug', data.slug)
-      .single();
-
-    if (freshData) data = freshData;
-  }
-
-  return data;
+  const { data: posts } = await supabase
+    .from('posts')
+    .select('slug, title, excerpt, published_at')
+    .eq('author_id', author.id)
+    .order('published_at', { ascending: false });
+  return { ...author, posts: posts || [] };
 }
 
-// Dynamic Metadata
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const stock = await getStock(params.slug);
-  if (!stock) {
-    return {
-      title: 'Stock Not Found | Share Target Price',
-      description: 'The requested stock analysis page could not be found.',
-    };
-  }
+export async function generateStaticParams() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+  const { data: authors } = await supabase.from('authors').select('slug');
+  return authors?.map(a => ({ slug: a.slug })) || [];
+}
 
-  const stockName = stock.name;
-  const ogImageUrl = 'https://sharetargetprice.in/og-image.jpg';
-
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const author = await getAuthor(params.slug);
+  if (!author) return { title: 'Author Not Found' };
   return {
-    title: `${stockName} Share Price Target 2026-2050 | Analysis & Forecast`,
-    description: `Get detailed ${stockName} share price targets for 2026, 2027, 2028, 2030, 2035, 2040, 2050.`,
-    alternates: {
-      canonical: `https://sharetargetprice.in/stock/${params.slug}`,
-    },
-    openGraph: {
-      title: `${stockName} Share Price Target 2026-2050`,
-      description: `Check ${stockName} long-term price targets and analysis.`,
-      images: [{ url: ogImageUrl }],
-    },
+    title: `${author.name} – Author | Share Target Price`,
+    description: author.bio?.substring(0, 160),
   };
 }
 
-export default async function Page({ params }: PageProps) {
-  const stock = await getStock(params.slug);
-  if (!stock) notFound();
-
-  const basePrice = stock.current_price || 100;
-
-  // ✅ Fetch all FMP data in parallel
-  const [
-    technicalData,
-    shareholding,
-    quarterly,
-    events,
-    mutualFunds,
-    similarStocks
-  ] = await Promise.all([
-    getTechnicalData(stock.symbol),
-    getShareholding(stock.symbol),
-    getQuarterlyIncome(stock.symbol),
-    getEvents(stock.symbol),
-    getTopMutualFunds(stock.symbol),
-    getSimilarStocks(stock.symbol)
-  ]);
-
-  // ✅ Fetch author data if author_id exists
-  let author = null;
-  if (stock.author_id) {
-    const { data: authorData } = await supabase
-      .from('authors')
-      .select('id, name, slug, bio, avatar_url, experience, linkedin_url')
-      .eq('id', stock.author_id)
-      .single();
-    author = authorData;
-  }
-
-  const getTarget = (year: number, multiplier: number) => {
-    if (stock[`target_${year}`]) return stock[`target_${year}`];
-    return `₹${Math.round(basePrice * multiplier).toLocaleString('en-IN')}`;
-  };
-
-  const targets = {
-    2026: getTarget(2026, 1.35),
-    2027: getTarget(2027, 1.60),
-    2028: getTarget(2028, 1.90),
-    2030: getTarget(2030, 2.50),
-    2035: getTarget(2035, 4.50),
-    2040: getTarget(2040, 8.00),
-    2050: getTarget(2050, 20.00),
-  };
-
-  const years = [2026, 2027, 2028, 2030, 2035, 2040, 2050];
+export default async function AuthorPage({ params }: { params: { slug: string } }) {
+  const author = await getAuthor(params.slug);
+  if (!author) notFound();
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "FinancialProduct",
-    "name": stock.name,
-    "description": `${stock.name} share price targets from 2026 to 2050.`,
+    "@type": "Person",
+    "name": author.name,
+    "description": author.bio,
+    "image": author.avatar_url,
+    "sameAs": [author.linkedin_url, author.facebook_url].filter(Boolean),
+    "email": author.contact_email,
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <StockPageClient
-        stock={stock}
-        basePrice={basePrice}
-        targets={targets}
-        years={years}
-        errorMsg={null}
-        technicalData={technicalData}
-        shareholding={shareholding}
-        quarterlyData={quarterly}
-        events={events}
-        mutualFunds={mutualFunds}
-        similarStocks={similarStocks}
-        author={author}   // ✅ Pass author to client component
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          {/* Back Button */}
+          <div className="mb-6">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 text-gray-600 hover:text-orange-500 transition-colors bg-white border border-gray-200 hover:border-orange-200 rounded-full px-3 py-1.5 text-sm font-medium shadow-sm"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
+            </Link>
+          </div>
+
+          {/* Profile Header */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+            <div className="bg-gradient-to-r from-orange-50 to-white p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center md:items-start">
+              {author.avatar_url && (
+                <img
+                  src={author.avatar_url}
+                  alt={author.name}
+                  className="w-32 h-32 rounded-full object-cover border-4 border-orange-200 shadow-md"
+                />
+              )}
+              <div className="text-center md:text-left">
+                <h1 className="text-3xl md:text-4xl font-black text-gray-900">{author.name}</h1>
+                {author.experience && (
+                  <p className="text-orange-600 text-sm font-medium mt-1">{author.experience}</p>
+                )}
+                <p className="text-gray-600 mt-3 max-w-2xl">{author.bio}</p>
+                <div className="flex flex-wrap gap-4 mt-4 justify-center md:justify-start">
+                  {author.linkedin_url && (
+                    <a
+                      href={author.linkedin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline text-sm"
+                    >
+                      LinkedIn
+                    </a>
+                  )}
+                  {author.facebook_url && (
+                    <a
+                      href={author.facebook_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline text-sm"
+                    >
+                      Facebook
+                    </a>
+                  )}
+                  {author.contact_email && (
+                    <a
+                      href={`mailto:${author.contact_email}`}
+                      className="text-gray-600 hover:text-orange-500 text-sm"
+                    >
+                      Email
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Long Bio (HTML content) */}
+          {author.long_bio && (
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+              <div className="p-6 md:p-8">
+                <div
+                  className="prose prose-slate max-w-none"
+                  dangerouslySetInnerHTML={{ __html: author.long_bio }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Articles List */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="p-6 border-b border-gray-100 bg-gray-50">
+              <h2 className="text-2xl font-bold text-gray-900">📝 Articles by {author.name}</h2>
+            </div>
+            <div className="p-6">
+              {author.posts.length === 0 ? (
+                <p className="text-gray-500">No articles published yet.</p>
+              ) : (
+                <div className="space-y-4">
+                  {author.posts.map((post: any) => (
+                    <Link
+                      key={post.slug}
+                      href={`/${post.slug}`}
+                      className="block p-4 rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all"
+                    >
+                      <h3 className="font-semibold text-gray-800 hover:text-orange-600">
+                        {post.title}
+                      </h3>
+                      {post.excerpt && (
+                        <p className="text-sm text-gray-500 mt-1 line-clamp-2">{post.excerpt}</p>
+                      )}
+                      <p className="text-xs text-gray-400 mt-2">
+                        {new Date(post.published_at).toLocaleDateString('en-IN')}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
