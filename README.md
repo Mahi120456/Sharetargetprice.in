@@ -138,3 +138,5 @@ sharetargetprice/
 ## Support
 
 Koi bhi problem aaye toh Claude se poochho! 😊
+
+error 
