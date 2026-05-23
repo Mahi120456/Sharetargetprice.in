@@ -76,19 +76,61 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
     'Financial Content Research'
   ];
 
+  // ✅ Proper JSON-LD Schema (Person)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": author.name,
+    "alternateName": "Mahendra Maurya",
     "description": author.bio,
     "image": author.avatar_url,
-    "sameAs": [author.linkedin_url, author.facebook_url].filter(Boolean),
+    "sameAs": [
+      author.linkedin_url,
+      author.facebook_url,
+      "https://sharetargetprice.in"
+    ].filter(Boolean),
     "email": author.contact_email,
+    "jobTitle": "Financial Analyst & Author",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Share Target Price"
+    },
+    "url": "https://sharetargetprice.in/author/mahendra-maurya",
+    "knowsAbout": expertiseList
+  };
+
+  // ✅ Breadcrumb Schema
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://sharetargetprice.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Author",
+        "item": "https://sharetargetprice.in/author/mahendra-maurya"
+      }
+    ]
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {/* JSON-LD Scripts in Head */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           {/* Back Button */}
@@ -159,7 +201,7 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
             </div>
           </div>
 
-          {/* About Me / Long Bio – with proper paragraph spacing */}
+          {/* About Me Section */}
           {author.long_bio && (
             <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden mb-10">
               <div className="border-b border-gray-100 bg-gray-50 px-6 py-4">
@@ -167,10 +209,7 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
                   <BookOpen className="w-5 h-5 text-orange-500" /> About Me
                 </h2>
               </div>
-              <div className="p-6 md:p-8 prose prose-slate max-w-none 
-                prose-p:mb-4 prose-p:leading-relaxed 
-                prose-headings:mt-6 prose-headings:mb-3 prose-headings:font-bold 
-                prose-ul:my-3 prose-li:my-1">
+              <div className="p-6 md:p-8 prose prose-slate prose-orange max-w-none">
                 <div dangerouslySetInnerHTML={{ __html: author.long_bio }} />
               </div>
             </div>
