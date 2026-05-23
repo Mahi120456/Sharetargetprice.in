@@ -1,9 +1,7 @@
-'use client';
-import Link from 'next/link';
+import Link from "next/link";
 
 interface AuthorCardProps {
   author: {
-    id: number;
     name: string;
     slug: string;
     bio: string;
@@ -15,6 +13,7 @@ interface AuthorCardProps {
 
 export default function AuthorCard({ author }: AuthorCardProps) {
   if (!author) return null;
+
   return (
     <div className="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex flex-col sm:flex-row gap-4 items-center sm:items-start mt-8">
       {author.avatar_url && (
@@ -27,9 +26,14 @@ export default function AuthorCard({ author }: AuthorCardProps) {
         </div>
         <p className="text-sm text-gray-600 mt-1">{author.bio}</p>
         <div className="flex flex-wrap gap-3 mt-2 justify-center sm:justify-start">
-          <Link href={`/author/${author.slug}`} className="text-orange-500 text-sm font-medium hover:underline">View all articles →</Link>
+          {/* ✅ View all articles ka link dynamic route se match karega */}
+          <Link href={`/author/${author.slug}`} className="text-orange-500 text-sm font-medium hover:underline">
+            View all articles →
+          </Link>
           {author.linkedin_url && (
-            <a href={author.linkedin_url} target="_blank" rel="noopener" className="text-blue-600 text-sm hover:underline">📄 LinkedIn</a>
+            <a href={author.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm hover:underline">
+              LinkedIn
+            </a>
           )}
         </div>
       </div>
