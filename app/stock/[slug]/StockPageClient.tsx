@@ -16,6 +16,7 @@ import EventsSection from "@/components/EventsSection";
 import TopMutualFunds from "@/components/TopMutualFunds";
 import SimilarStocks from "@/components/SimilarStocks";
 import TechnicalSection from "@/components/TechnicalSection";
+import AuthorCard from "@/components/AuthorCard";   // ✅ Import AuthorCard
 
 interface StockPageClientProps {
   stock: any;
@@ -33,6 +34,7 @@ interface StockPageClientProps {
   events?: any[];
   mutualFunds?: any[];
   similarStocks?: string[];
+  author?: any;   // ✅ Add author prop
 }
 
 export default function StockPageClient({ 
@@ -46,7 +48,8 @@ export default function StockPageClient({
   quarterlyData,
   events,
   mutualFunds,
-  similarStocks
+  similarStocks,
+  author   // ✅ Receive author
 }: StockPageClientProps) {
   const router = useRouter();
 
@@ -131,6 +134,9 @@ export default function StockPageClient({
               />
             </div>
           </article>
+
+          {/* ✅ Author Card – only if author exists */}
+          <AuthorCard author={author} />
 
           <StockFAQ stockName={stock.name} />
         </div>
