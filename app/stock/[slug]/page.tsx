@@ -107,6 +107,17 @@ export default async function Page({ params }: PageProps) {
     getSimilarStocks(stock.symbol)
   ]);
 
+  // ✅ Fetch author data if author_id exists
+  let author = null;
+  if (stock.author_id) {
+    const { data: authorData } = await supabase
+      .from('authors')
+      .select('id, name, slug, bio, avatar_url, experience, linkedin_url')
+      .eq('id', stock.author_id)
+      .single();
+    author = authorData;
+  }
+
   const getTarget = (year: number, multiplier: number) => {
     if (stock[`target_${year}`]) return stock[`target_${year}`];
     return `₹${Math.round(basePrice * multiplier).toLocaleString('en-IN')}`;
@@ -149,6 +160,7 @@ export default async function Page({ params }: PageProps) {
         events={events}
         mutualFunds={mutualFunds}
         similarStocks={similarStocks}
+        author={author}   // ✅ Pass author to client
       />
     </>
   );
