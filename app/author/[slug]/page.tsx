@@ -51,12 +51,16 @@ export async function generateStaticParams() {
   return authorsData.map(author => ({ slug: author.slug }));
 }
 
+// ✅ Fixed: Proper metadata without duplicate title and correct canonical
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const author = await getAuthor(params.slug);
   if (!author) return { title: 'Author Not Found' };
   return {
     title: `${author.name} – Author | Share Target Price`,
     description: author.bio?.substring(0, 160),
+    alternates: {
+      canonical: `https://sharetargetprice.in/author/${params.slug}`,
+    },
   };
 }
 
@@ -76,31 +80,28 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
     'Financial Content Research'
   ];
 
-  // ✅ Proper JSON-LD Schema (Person)
-  const jsonLd = {
+  // ✅ Person Schema (Author)
+  const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": author.name,
     "alternateName": "Mahendra Maurya",
     "description": author.bio,
     "image": author.avatar_url,
-    "sameAs": [
-      author.linkedin_url,
-      author.facebook_url,
-      "https://sharetargetprice.in"
-    ].filter(Boolean),
+    "sameAs": [author.linkedin_url, author.facebook_url].filter(Boolean),
     "email": author.contact_email,
     "jobTitle": "Financial Analyst & Author",
     "worksFor": {
       "@type": "Organization",
-      "name": "Share Target Price"
+      "name": "Share Target Price",
+      "url": "https://sharetargetprice.in"
     },
     "url": "https://sharetargetprice.in/author/mahendra-maurya",
     "knowsAbout": expertiseList
   };
 
   // ✅ Breadcrumb Schema
-  const breadcrumbLd = {
+  const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -114,21 +115,21 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
         "@type": "ListItem",
         "position": 2,
         "name": "Author",
-        "item": "https://sharetargetprice.in/author/mahendra-maurya"
+        "item": `https://sharetargetprice.in/author/${params.slug}`
       }
     ]
   };
 
   return (
     <>
-      {/* JSON-LD Scripts in Head */}
+      {/* ✅ JSON-LD Schemas */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
