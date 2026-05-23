@@ -282,6 +282,69 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
   }
+
+  /* ========== PROSE STYLES FOR AUTHOR PAGE (Tailwind Typography Override) ========== */
+  .prose {
+    max-width: none;
+    color: #374151;
+    line-height: 1.75;
+  }
+
+  .prose h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
+    border-left: 4px solid #f97316;
+    padding-left: 1rem;
+  }
+
+  .prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #ea580c;
+  }
+
+  .prose p {
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    margin-bottom: 0.35rem;
+    color: #4b5563;
+  }
+
+  .prose a {
+    color: #f97316;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose a:hover {
+    color: #ea580c;
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  /* For the orange accent variant */
+  .prose-orange {
+    --tw-prose-links: #f97316;
+    --tw-prose-invert-links: #f97316;
+  }
 }
 
 @layer utilities {
