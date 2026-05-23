@@ -11,6 +11,7 @@ import {
   getTopMutualFunds,
   getSimilarStocks
 } from "@/lib/fmp";
+import { getAuthorBySlug } from "@/data/authors";   // ✅ Import from JSON
 
 interface PageProps {
   params: { slug: string };
@@ -107,16 +108,10 @@ export default async function Page({ params }: PageProps) {
     getSimilarStocks(stock.symbol)
   ]);
 
-  // ✅ Fetch author data if author_id exists
-  let author = null;
-  if (stock.author_id) {
-    const { data: authorData } = await supabase
-      .from('authors')
-      .select('id, name, slug, bio, avatar_url, experience, linkedin_url')
-      .eq('id', stock.author_id)
-      .single();
-    author = authorData;
-  }
+  // ✅ Fetch author from JSON file (no Supabase)
+  // For now, all stocks show the same author (mahendra-maurya)
+  // In future, if you have author_slug in stock table, you can use it
+  const author = getAuthorBySlug('mahendra-maurya');
 
   const getTarget = (year: number, multiplier: number) => {
     if (stock[`target_${year}`]) return stock[`target_${year}`];
@@ -160,7 +155,7 @@ export default async function Page({ params }: PageProps) {
         events={events}
         mutualFunds={mutualFunds}
         similarStocks={similarStocks}
-        author={author}   // ✅ Pass author to client
+        author={author}   // ✅ Pass author from JSON
       />
     </>
   );
