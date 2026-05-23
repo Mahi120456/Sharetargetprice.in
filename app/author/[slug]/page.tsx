@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Linkedin, Facebook, Mail, Briefcase, BookOpen, Award, TrendingUp, Users, Shield, BarChart } from 'lucide-react';
+import { ArrowLeft, Linkedin, Facebook, Mail, Briefcase, BookOpen, Award, TrendingUp, BarChart } from 'lucide-react';
 import authorsData from '@/data/authors.json';
 import PostCard from '@/components/PostCard';
 
@@ -66,7 +66,6 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
 
   const posts = await getAuthorPosts(author.name);
 
-  // Parse expertise from long_bio if present, else hardcoded
   const expertiseList = [
     'Share Price Target Analysis',
     'Fundamental Stock Research',
@@ -102,7 +101,7 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
             </Link>
           </div>
 
-          {/* Hero Section – Modern Profile Card */}
+          {/* Hero Section */}
           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-10">
             <div className="relative bg-gradient-to-r from-orange-50 via-amber-50 to-white p-6 md:p-10">
               <div className="absolute top-0 right-0 w-64 h-64 bg-orange-200/20 rounded-full blur-3xl -z-0"></div>
@@ -126,30 +125,17 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
                   <p className="text-gray-600 mt-4 text-base leading-relaxed max-w-2xl">{author.bio}</p>
                   <div className="flex flex-wrap gap-3 mt-5 justify-center md:justify-start">
                     {author.linkedin_url && (
-                      <a
-                        href={author.linkedin_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-[#0077b5] hover:bg-[#005e8c] text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-sm"
-                      >
+                      <a href={author.linkedin_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#0077b5] hover:bg-[#005e8c] text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-sm">
                         <Linkedin className="w-4 h-4" /> LinkedIn
                       </a>
                     )}
                     {author.facebook_url && (
-                      <a
-                        href={author.facebook_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-[#1877f2] hover:bg-[#0d65d9] text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-sm"
-                      >
+                      <a href={author.facebook_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#1877f2] hover:bg-[#0d65d9] text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-sm">
                         <Facebook className="w-4 h-4" /> Facebook
                       </a>
                     )}
                     {author.contact_email && (
-                      <a
-                        href={`mailto:${author.contact_email}`}
-                        className="inline-flex items-center gap-2 bg-gray-700 hover:bg-gray-800 text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-sm"
-                      >
+                      <a href={`mailto:${author.contact_email}`} className="inline-flex items-center gap-2 bg-gray-700 hover:bg-gray-800 text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-sm">
                         <Mail className="w-4 h-4" /> Email
                       </a>
                     )}
@@ -159,24 +145,21 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
             </div>
           </div>
 
-          {/* Expertise Section – Pill Badges */}
+          {/* Expertise Section */}
           <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 md:p-8 mb-10">
             <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2 mb-5">
               <Award className="w-6 h-6 text-orange-500" /> My Expertise
             </h2>
             <div className="flex flex-wrap gap-3">
               {expertiseList.map((item, idx) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 px-3 py-1.5 rounded-full text-sm font-medium border border-orange-100"
-                >
+                <span key={idx} className="inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 px-3 py-1.5 rounded-full text-sm font-medium border border-orange-100">
                   <BarChart className="w-3.5 h-3.5" /> {item}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Long Bio / About Me – Styled Article */}
+          {/* About Me / Long Bio – with proper paragraph spacing */}
           {author.long_bio && (
             <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden mb-10">
               <div className="border-b border-gray-100 bg-gray-50 px-6 py-4">
@@ -184,7 +167,10 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
                   <BookOpen className="w-5 h-5 text-orange-500" /> About Me
                 </h2>
               </div>
-              <div className="p-6 md:p-8 prose prose-slate max-w-none leading-relaxed">
+              <div className="p-6 md:p-8 prose prose-slate max-w-none 
+                prose-p:mb-4 prose-p:leading-relaxed 
+                prose-headings:mt-6 prose-headings:mb-3 prose-headings:font-bold 
+                prose-ul:my-3 prose-li:my-1">
                 <div dangerouslySetInnerHTML={{ __html: author.long_bio }} />
               </div>
             </div>
