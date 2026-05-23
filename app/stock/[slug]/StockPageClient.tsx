@@ -136,6 +136,10 @@ export default function StockPageClient({
           </article>
 
           {/* ✅ Author Card – only if author exists */}
+          {/* 🔥 DEBUG BOX – Check if author exists */}
+<div className="bg-gray-200 p-3 rounded-lg text-center text-sm font-mono">
+  {author ? `✅ Author loaded: ${author.name}` : '❌ No author data (author is null)'}
+</div>
           <AuthorCard author={author} />
 
           <StockFAQ stockName={stock.name} />
