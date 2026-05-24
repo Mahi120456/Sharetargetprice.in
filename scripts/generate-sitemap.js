@@ -5,14 +5,14 @@ require('dotenv').config();
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY   // 👈 use anon key (already in Vercel)
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 async function generateSitemap() {
   const baseUrl = 'https://sharetargetprice.in';
   const now = new Date().toISOString();
 
-  // 1. Static pages
+  // Static pages
   const staticPages = [
     { url: '', priority: 1.0, freq: 'daily' },
     { url: '/all-stocks', priority: 0.9, freq: 'daily' },
@@ -47,6 +47,11 @@ async function generateSitemap() {
     .from('posts')
     .select('slug')
     .eq('category', 'Calculator');
+
+  // ✅ Fetch authors
+  const { data: authors } = await supabase
+    .from('authors')
+    .select('slug, updated_at');
 
   let urls = [];
 
@@ -90,6 +95,17 @@ async function generateSitemap() {
     <loc>${baseUrl}/calculator/${calc.slug}</loc>
     <lastmod>${now}</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`);
+  });
+
+  // ✅ Author pages
+  (authors || []).forEach(author => {
+    urls.push(`
+  <url>
+    <loc>${baseUrl}/author/${author.slug}</loc>
+    <lastmod>${author.updated_at || now}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>`);
   });
