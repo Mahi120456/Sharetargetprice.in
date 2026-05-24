@@ -2,21 +2,54 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
+import FundHero from '@/components/FundHero';
+import ReturnCalculator from '@/components/ReturnCalculator';
+import HoldingsTable from '@/components/HoldingsTable';
+import FundReturnsTable from '@/components/FundReturnsTable';
+import FundDetailsCard from '@/components/FundDetailsCard';
+import RelatedFunds from '@/components/RelatedFunds';
 
-// Temporary simple version – we'll add full components later
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
 export default function FundPageClient({ fund }: { fund: any }) {
   const router = useRouter();
   const [navData, setNavData] = useState<any>(null);
+  const [relatedFunds, setRelatedFunds] = useState<any[]>([]);
+  const [holdings, setHoldings] = useState<any[]>([]); // We'll leave empty for now
+
+  // Returns data for the table (from fund object)
+  const returnsData = [
+    { period: '1Y', fundReturn: fund.returns_1y, categoryAvg: null, rank: null },
+    { period: '3Y', fundReturn: fund.returns_3y, categoryAvg: null, rank: null },
+    { period: '5Y', fundReturn: fund.returns_5y, categoryAvg: null, rank: null },
+  ];
 
   useEffect(() => {
+    // Fetch live NAV
     fetch(`/api/mutual-fund/live?code=${fund.scheme_code}`)
       .then(res => res.json())
       .then(setNavData)
       .catch(console.error);
-  }, [fund.scheme_code]);
+
+    // Fetch related funds (same category)
+    async function fetchRelated() {
+      const { data, error } = await supabase
+        .from('mutual_funds')
+        .select('slug, scheme_name, category, returns_3y, nav')
+        .eq('category', fund.category)
+        .neq('slug', fund.slug)
+        .limit(6);
+      if (!error && data) setRelatedFunds(data);
+    }
+    fetchRelated();
+  }, [fund.scheme_code, fund.category, fund.slug]);
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <main className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
       {/* Back Button */}
       <div className="mb-4">
         <button
@@ -28,45 +61,43 @@ export default function FundPageClient({ fund }: { fund: any }) {
         </button>
       </div>
 
-      {/* Fund Header */}
-      <div className="bg-white rounded-2xl shadow-lg border p-6 mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{fund.scheme_name}</h1>
-        <div className="flex flex-wrap gap-2 mt-2">
-          <span className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full">{fund.category}</span>
-          <span className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full">{fund.riskometer} Risk</span>
-          <span className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full">{fund.fund_house}</span>
-        </div>
-        {navData && (
-          <div className="mt-4">
-            <div className="text-3xl font-bold">₹{navData.nav.toFixed(2)}</div>
-            <div className="text-sm text-gray-500">NAV as on {navData.date}</div>
-          </div>
-        )}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-center">
-          <div className="bg-gray-50 p-3 rounded-xl">
-            <div className="text-xs text-gray-500">AUM</div>
-            <div className="font-semibold">{fund.aum ? `₹${(fund.aum).toLocaleString()} Cr` : 'N/A'}</div>
-          </div>
-          <div className="bg-gray-50 p-3 rounded-xl">
-            <div className="text-xs text-gray-500">Expense Ratio</div>
-            <div className="font-semibold">{fund.expense_ratio ? `${fund.expense_ratio}%` : 'N/A'}</div>
-          </div>
-          <div className="bg-gray-50 p-3 rounded-xl">
-            <div className="text-xs text-gray-500">Min SIP</div>
-            <div className="font-semibold">₹{fund.min_sip_amount || 500}</div>
-          </div>
-          <div className="bg-gray-50 p-3 rounded-xl">
-            <div className="text-xs text-gray-500">3Y Returns</div>
-            <div className={`font-semibold ${fund.returns_3y && fund.returns_3y > 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {fund.returns_3y ? `${fund.returns_3y.toFixed(2)}%` : 'N/A'}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Fund Hero Section */}
+      <FundHero fund={fund} navData={navData} />
 
-      {/* Placeholder for article and other sections */}
-      <div className="bg-white rounded-2xl shadow-lg border p-6">
-        <p className="text-gray-500">Detailed analysis, return calculator, holdings, and FAQ coming soon...</p>
+      {/* Return Calculator */}
+      <ReturnCalculator fundName={fund.scheme_name} nav={navData?.nav} />
+
+      {/* Holdings Table (currently empty, but component handles empty state) */}
+      <HoldingsTable holdings={holdings} fundName={fund.scheme_name} />
+
+      {/* Returns & Rankings Table */}
+      <FundReturnsTable returns={returnsData} fundName={fund.scheme_name} />
+
+      {/* Fund Details Card */}
+      <FundDetailsCard
+        expenseRatio={fund.expense_ratio}
+        exitLoad="Exit load of 1%, if redeemed within 15 days."
+        stampDuty="0.005% (from July 1st, 2020)"
+        taxImplication="If redeemed within 2 years: as per income tax slab. After 2 years: 12.5% LTCG."
+        fundManagers={[]}
+        fundHouse={fund.fund_house}
+        launchDate={fund.launch_date}
+        benchmark={fund.benchmark}
+      />
+
+      {/* Detailed AI‑generated article (if available) */}
+      {fund.content && (
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 mb-6">
+          <div className="prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: fund.content }} />
+        </div>
+      )}
+
+      {/* Related Funds (Same Category) */}
+      <RelatedFunds funds={relatedFunds} currentFundName={fund.scheme_name} category={fund.category} />
+
+      {/* Disclaimer */}
+      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-sm text-yellow-800">
+        ⚠️ <strong>Disclaimer:</strong> Mutual fund investments are subject to market risks. Read all scheme related documents carefully. Past performance is not indicative of future returns. This information is for educational purposes only.
       </div>
     </main>
   );
