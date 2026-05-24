@@ -7,9 +7,8 @@ const categories = [
   { name: "Share Price Target", slug: "/category/share-price-target" },
   { name: "Stock Analysis", slug: "/category/stock-analysis" },
   { name: "IPO", slug: "/category/ipo" },
-  { name: "Mutual Funds", slug: "/category/mutual-funds" },
+  { name: "Mutual Funds", slug: "/mutual-fund" }, // ✅ fixed: points to mutual funds listing page
   { name: "SIP", slug: "/category/sip" },
-  // ✅ Changed from /category/calculator to /calculator
   { name: "Calculators", slug: "/calculator" },
   { name: "About Us", slug: "/about-us" },
   { name: "Contact Us", slug: "/contact-us" },
@@ -25,14 +24,12 @@ export default function Header() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo - Sirf Text */}
         <Link href="/" className="flex items-center">
           <div className="text-white font-black text-xl leading-tight">
             Share Target Price
           </div>
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-5 text-sm">
           {categories.map((cat) => (
             <Link
@@ -45,8 +42,11 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className="md:hidden p-2"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menu"
+        >
           <div className="space-y-1">
             <span className="block w-6 h-0.5 bg-white"></span>
             <span className="block w-6 h-0.5 bg-white"></span>
@@ -55,7 +55,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-slate-800 px-4 py-3 space-y-2">
           {categories.map((cat) => (
