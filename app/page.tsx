@@ -51,7 +51,6 @@ async function getPostsByCategory(categoryName: string, limit = 4) {
   return data || [];
 }
 
-// ✅ FIXED: added category and published_at fields
 async function getCalculatorsForHome(limit = 4) {
   const { data, error } = await supabase
     .from("posts")
@@ -63,13 +62,23 @@ async function getCalculatorsForHome(limit = 4) {
   return data || [];
 }
 
-// ✅ FIXED: added category and published_at fields
 async function getLatestCalculators(limit = 6) {
   const { data, error } = await supabase
     .from("posts")
     .select("id, title, slug, excerpt, category, published_at, featured_image")
     .in("category", ["Calculator", "SIP"])
     .order("published_at", { ascending: false })
+    .limit(limit);
+  if (error) return [];
+  return data || [];
+}
+
+// ✅ NEW: Fetch top mutual funds for homepage
+async function getTopMutualFunds(limit = 6) {
+  const { data, error } = await supabase
+    .from('mutual_funds')
+    .select('scheme_name, slug, category, nav, returns_3y, aum')
+    .order('aum', { ascending: false })
     .limit(limit);
   if (error) return [];
   return data || [];
@@ -90,6 +99,7 @@ export default async function Home() {
 
   const calculatorsForHome = await getCalculatorsForHome(4);
   const latestCalculators = await getLatestCalculators(6);
+  const topMutualFunds = await getTopMutualFunds(6);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -108,7 +118,7 @@ export default async function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero Section (unchanged) */}
+        {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full filter blur-3xl animate-pulse"></div>
@@ -173,6 +183,35 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ✅ NEW: Top Mutual Funds Section */}
+        {topMutualFunds.length > 0 && (
+          <section className="py-12 bg-white">
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">💰 Top Mutual Funds by AUM</h2>
+                <Link href="/mutual-fund" className="text-orange-500 hover:underline text-sm font-semibold">View All →</Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {topMutualFunds.map(fund => (
+                  <Link
+                    key={fund.slug}
+                    href={`/mutual-fund/${fund.slug}`}
+                    className="bg-gray-50 rounded-xl p-4 border hover:border-orange-200 hover:shadow transition group"
+                  >
+                    <div className="font-semibold text-gray-800 group-hover:text-orange-600 text-sm line-clamp-2">
+                      {fund.scheme_name}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">{fund.category || 'Others'}</div>
+                    <div className="mt-2 text-sm font-medium text-green-600">
+                      3Y: {fund.returns_3y?.toFixed(1)}%
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Category Sections */}
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-16">
           {categoriesWithPosts.map(({ name, slug, icon, desc, color, posts }) => {
@@ -215,7 +254,7 @@ export default async function Home() {
           })}
         </div>
 
-        {/* Calculators Showcase (bottom) */}
+        {/* Calculators Showcase */}
         {latestCalculators.length > 0 && (
           <section className="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-16">
             <div className="max-w-7xl mx-auto px-4">
