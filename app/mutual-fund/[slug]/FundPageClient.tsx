@@ -21,11 +21,11 @@ export default function FundPageClient({ fund }: { fund: any }) {
   const [relatedFunds, setRelatedFunds] = useState<any[]>([]);
   const [holdings, setHoldings] = useState<any[]>([]);
 
-  // ✅ Fixed: use null instead of undefined to match ReturnsData type
+  // ✅ Match component expected types: categoryAvg = null, rank = undefined
   const returnsData = [
-    { period: '1Y', fundReturn: fund.returns_1y, categoryAvg: null, rank: null },
-    { period: '3Y', fundReturn: fund.returns_3y, categoryAvg: null, rank: null },
-    { period: '5Y', fundReturn: fund.returns_5y, categoryAvg: null, rank: null },
+    { period: '1Y', fundReturn: fund.returns_1y, categoryAvg: null, rank: undefined },
+    { period: '3Y', fundReturn: fund.returns_3y, categoryAvg: null, rank: undefined },
+    { period: '5Y', fundReturn: fund.returns_5y, categoryAvg: null, rank: undefined },
   ];
 
   useEffect(() => {
