@@ -21,11 +21,11 @@ export default function FundPageClient({ fund }: { fund: any }) {
   const [relatedFunds, setRelatedFunds] = useState<any[]>([]);
   const [holdings, setHoldings] = useState<any[]>([]);
 
-  // ✅ Fixed: rank as undefined instead of null
+  // ✅ Fixed: use null instead of undefined to match ReturnsData type
   const returnsData = [
-    { period: '1Y', fundReturn: fund.returns_1y, categoryAvg: undefined, rank: undefined },
-    { period: '3Y', fundReturn: fund.returns_3y, categoryAvg: undefined, rank: undefined },
-    { period: '5Y', fundReturn: fund.returns_5y, categoryAvg: undefined, rank: undefined },
+    { period: '1Y', fundReturn: fund.returns_1y, categoryAvg: null, rank: null },
+    { period: '3Y', fundReturn: fund.returns_3y, categoryAvg: null, rank: null },
+    { period: '5Y', fundReturn: fund.returns_5y, categoryAvg: null, rank: null },
   ];
 
   useEffect(() => {
@@ -48,14 +48,12 @@ export default function FundPageClient({ fund }: { fund: any }) {
 
   return (
     <main className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-6 sm:py-8 bg-gradient-to-b from-gray-50 to-white min-h-screen font-sans">
-      {/* Back Button */}
       <div className="mb-4">
         <button
           onClick={() => router.back()}
           className="inline-flex items-center gap-1.5 text-gray-600 hover:text-orange-500 transition-colors bg-white border border-gray-200 hover:border-orange-200 rounded-full px-3 py-1.5 text-sm font-medium shadow-sm"
         >
-          <ArrowLeft className="w-4 h-4" />
-          Back
+          <ArrowLeft className="w-4 h-4" /> Back
         </button>
       </div>
 
