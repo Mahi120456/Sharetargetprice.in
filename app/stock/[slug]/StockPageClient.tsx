@@ -16,7 +16,8 @@ import EventsSection from "@/components/EventsSection";
 import TopMutualFunds from "@/components/TopMutualFunds";
 import SimilarStocks from "@/components/SimilarStocks";
 import TechnicalSection from "@/components/TechnicalSection";
-import AuthorCard from "@/components/AuthorCard";   // ✅ Import AuthorCard
+import AuthorCard from "@/components/AuthorCard";
+import StockSuggestionCard from "@/components/StockSuggestionCard";   // ✅ New import
 
 interface StockPageClientProps {
   stock: any;
@@ -34,7 +35,14 @@ interface StockPageClientProps {
   events?: any[];
   mutualFunds?: any[];
   similarStocks?: string[];
-  author?: any;   // ✅ Add author prop
+  author?: any;
+  relatedStocksData?: {                       // ✅ New prop
+    sectorTop: any;
+    industryHigh: any;
+    randomSector: any;
+    similarPe: any;
+    sectorLeaderAlt: any;
+  };
 }
 
 export default function StockPageClient({ 
@@ -49,7 +57,8 @@ export default function StockPageClient({
   events,
   mutualFunds,
   similarStocks,
-  author   // ✅ Receive author
+  author,
+  relatedStocksData                               // ✅ Receive prop
 }: StockPageClientProps) {
   const router = useRouter();
 
@@ -76,7 +85,12 @@ export default function StockPageClient({
       <StockHero name={stock.name} symbol={stock.symbol} />
       <QuickStatsCards stock={stock} />
 
-      {/* ✅ NEW SECTIONS – after fundamentals, before chart */}
+      {/* ✅ CARD #1: SECTOR LEADER */}
+      {relatedStocksData?.sectorTop && (
+        <StockSuggestionCard stock={relatedStocksData.sectorTop} label="📊 SECTOR LEADER" />
+      )}
+
+      {/* NEW SECTIONS (technical, shareholding, etc.) */}
       <div className="space-y-6 mt-6">
         <TechnicalSection rsi={technicalData?.rsi} macd={technicalData?.macd} beta={technicalData?.beta} />
         <ShareholdingSection shareholding={shareholding || []} />
@@ -103,6 +117,11 @@ export default function StockPageClient({
           </div>
 
           <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
+
+          {/* ✅ CARD #2: SAME INDUSTRY GIANT */}
+          {relatedStocksData?.industryHigh && (
+            <StockSuggestionCard stock={relatedStocksData.industryHigh} label="🏭 SAME INDUSTRY GIANT" />
+          )}
           
           <PriceTargetsTable 
             stockName={stock.name}
@@ -110,6 +129,11 @@ export default function StockPageClient({
             currentPrice={basePrice}
             targets={targets}
           />
+
+          {/* ✅ CARD #3: SIMILAR VALUATION STOCK */}
+          {relatedStocksData?.randomSector && (
+            <StockSuggestionCard stock={relatedStocksData.randomSector} label="🎯 SIMILAR VALUATION STOCK" />
+          )}
           
           <BullBearCase 
             stockName={stock.name} 
@@ -135,11 +159,19 @@ export default function StockPageClient({
             </div>
           </article>
 
-          {/* ✅ Author Card – only if author exists */}
-          
+          {/* ✅ CARD #4: PE-RELATED STOCK */}
+          {relatedStocksData?.similarPe && (
+            <StockSuggestionCard stock={relatedStocksData.similarPe} label="📈 PE-RELATED STOCK" />
+          )}
+
           <AuthorCard author={author} />
 
           <StockFAQ stockName={stock.name} />
+
+          {/* ✅ CARD #5: ANOTHER SECTOR LEADER */}
+          {relatedStocksData?.sectorLeaderAlt && (
+            <StockSuggestionCard stock={relatedStocksData.sectorLeaderAlt} label="🏆 ANOTHER SECTOR LEADER" />
+          )}
         </div>
 
         {/* Sidebar Price Prediction */}
