@@ -17,7 +17,7 @@ import TopMutualFunds from "@/components/TopMutualFunds";
 import SimilarStocks from "@/components/SimilarStocks";
 import TechnicalSection from "@/components/TechnicalSection";
 import AuthorCard from "@/components/AuthorCard";
-import StockSuggestionCard from "@/components/StockSuggestionCard";   // ✅ New import
+import StockSuggestionCard from "@/components/StockSuggestionCard";
 
 interface StockPageClientProps {
   stock: any;
@@ -36,13 +36,7 @@ interface StockPageClientProps {
   mutualFunds?: any[];
   similarStocks?: string[];
   author?: any;
-  relatedStocksData?: {                       // ✅ New prop
-    sectorTop: any;
-    industryHigh: any;
-    randomSector: any;
-    similarPe: any;
-    sectorLeaderAlt: any;
-  };
+  relatedStocksData?: any;
 }
 
 export default function StockPageClient({ 
@@ -58,7 +52,7 @@ export default function StockPageClient({
   mutualFunds,
   similarStocks,
   author,
-  relatedStocksData                               // ✅ Receive prop
+  relatedStocksData
 }: StockPageClientProps) {
   const router = useRouter();
 
@@ -85,12 +79,11 @@ export default function StockPageClient({
       <StockHero name={stock.name} symbol={stock.symbol} />
       <QuickStatsCards stock={stock} />
 
-      {/* ✅ CARD #1: SECTOR LEADER */}
+      {/* Card #1 */}
       {relatedStocksData?.sectorTop && (
         <StockSuggestionCard stock={relatedStocksData.sectorTop} label="📊 SECTOR LEADER" />
       )}
 
-      {/* NEW SECTIONS (technical, shareholding, etc.) */}
       <div className="space-y-6 mt-6">
         <TechnicalSection rsi={technicalData?.rsi} macd={technicalData?.macd} beta={technicalData?.beta} />
         <ShareholdingSection shareholding={shareholding || []} />
@@ -118,7 +111,7 @@ export default function StockPageClient({
 
           <PerformanceChart symbol={stock.symbol} stockName={stock.name} />
 
-          {/* ✅ CARD #2: SAME INDUSTRY GIANT */}
+          {/* Card #2 */}
           {relatedStocksData?.industryHigh && (
             <StockSuggestionCard stock={relatedStocksData.industryHigh} label="🏭 SAME INDUSTRY GIANT" />
           )}
@@ -130,7 +123,7 @@ export default function StockPageClient({
             targets={targets}
           />
 
-          {/* ✅ CARD #3: SIMILAR VALUATION STOCK */}
+          {/* Card #3 */}
           {relatedStocksData?.randomSector && (
             <StockSuggestionCard stock={relatedStocksData.randomSector} label="🎯 SIMILAR VALUATION STOCK" />
           )}
@@ -159,19 +152,21 @@ export default function StockPageClient({
             </div>
           </article>
 
-          {/* ✅ CARD #4: PE-RELATED STOCK */}
+          {/* Card #4 */}
           {relatedStocksData?.similarPe && (
             <StockSuggestionCard stock={relatedStocksData.similarPe} label="📈 PE-RELATED STOCK" />
           )}
 
-          <AuthorCard author={author} />
-
-          <StockFAQ stockName={stock.name} />
-
-          {/* ✅ CARD #5: ANOTHER SECTOR LEADER */}
+          {/* Card #5 */}
           {relatedStocksData?.sectorLeaderAlt && (
             <StockSuggestionCard stock={relatedStocksData.sectorLeaderAlt} label="🏆 ANOTHER SECTOR LEADER" />
           )}
+
+          <StockFAQ stockName={stock.name} />
+
+          {/* ✅ AuthorCard – Last in the main column */}
+          <AuthorCard author={author} />
+
         </div>
 
         {/* Sidebar Price Prediction */}
