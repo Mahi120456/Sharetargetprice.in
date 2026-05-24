@@ -111,8 +111,8 @@ export default async function Page({ params }: PageProps) {
   // Fetch author from JSON
   const author = getAuthorBySlug('mahendra-maurya');
 
-  // ========== 🆕 FETCH 5 RELATED STOCKS FOR INTERLINKING ==========
-  let relatedStocksData = {
+  // ========== FETCH 5 RELATED STOCKS FOR INTERLINKING ==========
+  let relatedStocksData: any = {
     sectorTop: null,
     industryHigh: null,
     randomSector: null,
@@ -239,7 +239,7 @@ export default async function Page({ params }: PageProps) {
         mutualFunds={mutualFunds}
         similarStocks={similarStocks}
         author={author}
-        relatedStocksData={relatedStocksData}    // 🆕 Pass related stocks
+        relatedStocksData={relatedStocksData}
       />
     </>
   );
