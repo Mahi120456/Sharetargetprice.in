@@ -11,7 +11,7 @@ import {
   getTopMutualFunds,
   getSimilarStocks
 } from "@/lib/fmp";
-import { getAuthorBySlug } from "@/data/authors";   // ✅ Import from JSON
+import { getAuthorBySlug } from "@/data/authors";
 
 interface PageProps {
   params: { slug: string };
@@ -91,7 +91,7 @@ export default async function Page({ params }: PageProps) {
 
   const basePrice = stock.current_price || 100;
 
-  // ✅ Fetch all FMP data in parallel
+  // Fetch all FMP data in parallel
   const [
     technicalData,
     shareholding,
@@ -108,10 +108,93 @@ export default async function Page({ params }: PageProps) {
     getSimilarStocks(stock.symbol)
   ]);
 
-  // ✅ Fetch author from JSON file (no Supabase)
-  // For now, all stocks show the same author (mahendra-maurya)
-  // In future, if you have author_slug in stock table, you can use it
+  // Fetch author from JSON
   const author = getAuthorBySlug('mahendra-maurya');
+
+  // ========== 🆕 FETCH 5 RELATED STOCKS FOR INTERLINKING ==========
+  let relatedStocksData = {
+    sectorTop: null,
+    industryHigh: null,
+    randomSector: null,
+    similarPe: null,
+    sectorLeaderAlt: null,
+  };
+
+  // 1. Same sector top stock (highest market cap)
+  if (stock.sector) {
+    const { data: sectorTop } = await supabase
+      .from('stocks')
+      .select('slug, name, symbol, current_price')
+      .eq('sector', stock.sector)
+      .neq('slug', stock.slug)
+      .order('market_cap', { ascending: false })
+      .limit(1);
+    relatedStocksData.sectorTop = sectorTop?.[0] || null;
+  }
+
+  // 2. Same industry high market cap (if industry exists)
+  if (stock.industry) {
+    const { data: industryHigh } = await supabase
+      .from('stocks')
+      .select('slug, name, symbol, current_price')
+      .eq('industry', stock.industry)
+      .neq('slug', stock.slug)
+      .order('market_cap', { ascending: false })
+      .limit(1);
+    relatedStocksData.industryHigh = industryHigh?.[0] || null;
+  }
+
+  // 3. Random stock from same sector (different from sectorTop)
+  if (stock.sector && relatedStocksData.sectorTop) {
+    const { data: randomSector } = await supabase
+      .from('stocks')
+      .select('slug, name, symbol, current_price')
+      .eq('sector', stock.sector)
+      .neq('slug', stock.slug)
+      .neq('slug', relatedStocksData.sectorTop.slug)
+      .order('market_cap', { ascending: false })
+      .limit(1);
+    relatedStocksData.randomSector = randomSector?.[0] || null;
+  } else if (stock.sector) {
+    const { data: anyStock } = await supabase
+      .from('stocks')
+      .select('slug, name, symbol, current_price')
+      .eq('sector', stock.sector)
+      .neq('slug', stock.slug)
+      .limit(1);
+    relatedStocksData.randomSector = anyStock?.[0] || null;
+  }
+
+  // 4. Similar P/E ratio stock (within 20% range)
+  if (stock.pe_ratio && typeof stock.pe_ratio === 'number') {
+    const minPe = stock.pe_ratio * 0.8;
+    const maxPe = stock.pe_ratio * 1.2;
+    const { data: similarPe } = await supabase
+      .from('stocks')
+      .select('slug, name, symbol, current_price')
+      .gte('pe_ratio', minPe)
+      .lte('pe_ratio', maxPe)
+      .neq('slug', stock.slug)
+      .limit(1);
+    relatedStocksData.similarPe = similarPe?.[0] || null;
+  }
+
+  // 5. Another sector leader (second highest market cap)
+  if (stock.sector) {
+    const { data: sectorLeaders } = await supabase
+      .from('stocks')
+      .select('slug, name, symbol, current_price')
+      .eq('sector', stock.sector)
+      .neq('slug', stock.slug)
+      .order('market_cap', { ascending: false })
+      .limit(2);
+    if (sectorLeaders && sectorLeaders.length > 1) {
+      relatedStocksData.sectorLeaderAlt = sectorLeaders[1];
+    } else if (sectorLeaders && sectorLeaders.length === 1 && sectorLeaders[0].slug !== relatedStocksData.sectorTop?.slug) {
+      relatedStocksData.sectorLeaderAlt = sectorLeaders[0];
+    }
+  }
+  // ========== END RELATED STOCKS ==========
 
   const getTarget = (year: number, multiplier: number) => {
     if (stock[`target_${year}`]) return stock[`target_${year}`];
@@ -155,7 +238,8 @@ export default async function Page({ params }: PageProps) {
         events={events}
         mutualFunds={mutualFunds}
         similarStocks={similarStocks}
-        author={author}   // ✅ Pass author from JSON
+        author={author}
+        relatedStocksData={relatedStocksData}    // 🆕 Pass related stocks
       />
     </>
   );
