@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import FundPageClient from "./FundPageClient";
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: { slug: string };
 }
@@ -14,6 +16,11 @@ async function getFund(slug: string) {
     .eq('slug', slug)
     .single();
   return error || !data ? null : data;
+}
+
+export async function generateStaticParams() {
+  const { data } = await supabase.from('mutual_funds').select('slug');
+  return data?.map(fund => ({ slug: fund.slug })) || [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
