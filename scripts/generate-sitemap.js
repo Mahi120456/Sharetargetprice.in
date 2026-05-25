@@ -1,7 +1,7 @@
-// scripts/generate-sitemap.js
-const { createClient } = require('@supabase/supabase-js');
-const fs = require('fs');
-require('dotenv').config();
+import { createClient } from '@supabase/supabase-js';
+import fs from 'fs';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -48,7 +48,7 @@ async function generateSitemap() {
     .select('slug')
     .eq('category', 'Calculator');
 
-  // ✅ Fetch authors
+  // Fetch authors
   const { data: authors } = await supabase
     .from('authors')
     .select('slug, updated_at');
@@ -99,7 +99,7 @@ async function generateSitemap() {
   </url>`);
   });
 
-  // ✅ Author pages
+  // Author pages
   (authors || []).forEach(author => {
     urls.push(`
   <url>
