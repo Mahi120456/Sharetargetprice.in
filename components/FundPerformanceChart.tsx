@@ -47,7 +47,17 @@ export default function FundPerformanceChart({ historicalData, fundName }: FundP
 
   // Render chart when data or period changes
   useEffect(() => {
-    if (!chartContainerRef.current || !historicalData.length) return;
+    if (!chartContainerRef.current) return;
+
+    // If no data, show a message
+    if (!historicalData || historicalData.length === 0) {
+      if (chartRef.current) {
+        chartRef.current.remove();
+        chartRef.current = null;
+        seriesRef.current = null;
+      }
+      return;
+    }
 
     // Filter data by selected period
     let filtered = [...historicalData].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -87,6 +97,39 @@ export default function FundPerformanceChart({ historicalData, fundName }: FundP
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [historicalData, activePeriod]);
+
+  // If no data, display a placeholder
+  if (!historicalData || historicalData.length === 0) {
+    return (
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 mb-6">
+        <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
+          <h2 className="text-xl font-bold text-gray-900">Performance Chart</h2>
+          <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
+            {periods.map(p => (
+              <button
+                key={p.label}
+                disabled
+                className="px-3 py-1 text-sm rounded-md text-gray-400"
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="h-[300px] flex items-center justify-center bg-gray-50 rounded-lg text-gray-500">
+          No historical data available for this fund.
+        </div>
+        <div className="flex flex-wrap justify-around gap-3 mt-4 text-sm">
+          {periods.map(p => (
+            <div key={p.label} className="text-center">
+              <div className="text-gray-500">{p.label}</div>
+              <div className="font-bold text-gray-400">N/A</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 mb-6">
