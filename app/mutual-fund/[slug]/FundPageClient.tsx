@@ -9,6 +9,7 @@ import HoldingsTable from '@/components/HoldingsTable';
 import FundReturnsTable from '@/components/FundReturnsTable';
 import FundDetailsCard from '@/components/FundDetailsCard';
 import RelatedFunds from '@/components/RelatedFunds';
+import FundPerformanceChart from '@/components/FundPerformanceChart'; // ✅ new import
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -21,7 +22,6 @@ export default function FundPageClient({ fund }: { fund: any }) {
   const [relatedFunds, setRelatedFunds] = useState<any[]>([]);
   const [holdings, setHoldings] = useState<any[]>([]);
 
-  // ✅ Match component expected types: categoryAvg = null, rank = undefined
   const returnsData = [
     { period: '1Y', fundReturn: fund.returns_1y, categoryAvg: null, rank: undefined },
     { period: '3Y', fundReturn: fund.returns_3y, categoryAvg: null, rank: undefined },
@@ -59,6 +59,13 @@ export default function FundPageClient({ fund }: { fund: any }) {
 
       <FundHero fund={fund} navData={navData} />
       <ReturnCalculator fundName={fund.scheme_name} nav={navData?.nav} />
+
+      {/* ✅ Performance Chart Section */}
+      <FundPerformanceChart
+        historicalData={navData?.historical || []}
+        fundName={fund.scheme_name}
+      />
+
       <HoldingsTable holdings={holdings} fundName={fund.scheme_name} />
       <FundReturnsTable returns={returnsData} fundName={fund.scheme_name} />
       <FundDetailsCard
