@@ -1,8 +1,11 @@
-import { supabase } from '@/lib/supabase';   // ✅ correct import
+import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import fs from 'fs';
+import path from 'path';
+import csv from 'csv-parser';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';   // har request pe fresh data (NAV/returns update)
 
 export const metadata: Metadata = {
   title: 'All Mutual Funds in India – Complete List 2026 | NAV, Returns, AUM',
@@ -15,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Categories from your data (based on CSV)
+// Categories based on CSV data
 const fundCategories = [
   { name: 'Large Cap', slug: 'large-cap', icon: '🏦', keywords: ['large cap', 'bluechip'] },
   { name: 'Mid Cap', slug: 'mid-cap', icon: '📊', keywords: ['mid cap'] },
@@ -31,49 +34,62 @@ const fundCategories = [
   { name: 'Sectoral', slug: 'sectoral', icon: '🏭', keywords: ['banking', 'pharma', 'auto', 'infrastructure'] },
 ];
 
-async function getAllMutualFunds() {
+// 🧠 1. CSV se all funds (slug + scheme_name) padho – taaki 500 entries guarantee ho
+async function readFundsFromCSV(): Promise<{ slug: string; scheme_name: string; fund_house: string; category: string }[]> {
+  const funds: any[] = [];
+  const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
+
+  await new Promise((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on('data', (row) => {
+        let slug = row.scheme_name
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+        if (slug) {
+          funds.push({
+            slug,
+            scheme_name: row.scheme_name,
+            fund_house: row.fund_house,
+            category: row.category,
+          });
+        }
+      })
+      .on('end', resolve)
+      .on('error', reject);
+  });
+  return funds;
+}
+
+// 🧠 2. Supabase se latest NAV, returns, AUM fetch karo (agar fail ho to fallback CSV values)
+async function getLatestData(slugs: string[]) {
+  if (slugs.length === 0) return {};
   const { data, error } = await supabase
     .from('mutual_funds')
-    .select('scheme_name, slug, fund_house, category, nav, aum, returns_1y, returns_3y, returns_5y, expense_ratio, riskometer')
-    .not('slug', 'is', null)
-    .order('aum', { ascending: false });
+    .select('slug, nav, aum, returns_1y, returns_3y, returns_5y, expense_ratio, riskometer')
+    .in('slug', slugs);
 
-  if (error) {
-    console.error('Error fetching mutual funds:', error);
-    return [];
+  if (error || !data) {
+    console.error('Supabase fetch failed for listing page:', error?.message);
+    return {};
   }
-  return data || [];
+  const map: Record<string, any> = {};
+  data.forEach((item) => { map[item.slug] = item; });
+  return map;
 }
 
-function categorizeFunds(funds: any[]) {
-  const categorized: Record<string, any[]> = {};
-  fundCategories.forEach(cat => { categorized[cat.name] = []; });
-  categorized['Others'] = [];
-
-  for (const fund of funds) {
-    const category = fund.category || '';
-    let placed = false;
-    for (const cat of fundCategories) {
-      if (cat.keywords.some(kw => category.toLowerCase().includes(kw))) {
-        categorized[cat.name].push(fund);
-        placed = true;
-        break;
-      }
-    }
-    if (!placed) categorized['Others'].push(fund);
-  }
-  return categorized;
-}
-
+// Helper functions
 function formatCrore(val: number) {
   if (!val) return 'N/A';
   if (val >= 10000) return `${(val / 10000).toFixed(2)} Lac Cr`;
   return `${val.toFixed(2)} Cr`;
 }
 
-function FundCard({ fund }: { fund: any }) {
+function FundCard({ fund, liveData }: { fund: any; liveData: any }) {
+  const data = liveData || fund;    // liveData has priority (NAV, returns etc.)
   const returnColor = (ret: number) => {
-    if (!ret) return 'text-gray-500';
+    if (!ret && ret !== 0) return 'text-gray-500';
     return ret >= 0 ? 'text-green-600' : 'text-red-600';
   };
 
@@ -92,28 +108,28 @@ function FundCard({ fund }: { fund: any }) {
       </div>
       <div className="text-xs text-gray-500 mb-3">{fund.fund_house}</div>
       <div className="grid grid-cols-2 gap-1 text-xs mb-2">
-        <div>NAV: <span className="font-medium">₹{fund.nav?.toFixed(2) || 'N/A'}</span></div>
-        <div>AUM: <span className="font-medium">{formatCrore(fund.aum)}</span></div>
-        <div>Expense: <span className="font-medium">{fund.expense_ratio ?? 'N/A'}%</span></div>
-        <div>Risk: <span className="font-medium">{fund.riskometer || 'N/A'}</span></div>
+        <div>NAV: <span className="font-medium">₹{data.nav?.toFixed(2) || 'N/A'}</span></div>
+        <div>AUM: <span className="font-medium">{formatCrore(data.aum)}</span></div>
+        <div>Expense: <span className="font-medium">{data.expense_ratio ?? 'N/A'}%</span></div>
+        <div>Risk: <span className="font-medium">{data.riskometer || 'N/A'}</span></div>
       </div>
       <div className="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
         <div>
           <div className="text-[10px] text-gray-400">1Y Return</div>
-          <div className={`text-sm font-bold ${returnColor(fund.returns_1y)}`}>
-            {fund.returns_1y != null ? `${fund.returns_1y}%` : 'N/A'}
+          <div className={`text-sm font-bold ${returnColor(data.returns_1y)}`}>
+            {data.returns_1y != null ? `${data.returns_1y}%` : 'N/A'}
           </div>
         </div>
         <div className="text-right">
           <div className="text-[10px] text-gray-400">3Y Return</div>
-          <div className={`text-sm font-bold ${returnColor(fund.returns_3y)}`}>
-            {fund.returns_3y != null ? `${fund.returns_3y}%` : 'N/A'}
+          <div className={`text-sm font-bold ${returnColor(data.returns_3y)}`}>
+            {data.returns_3y != null ? `${data.returns_3y}%` : 'N/A'}
           </div>
         </div>
         <div className="text-right">
           <div className="text-[10px] text-gray-400">5Y Return</div>
-          <div className={`text-sm font-bold ${returnColor(fund.returns_5y)}`}>
-            {fund.returns_5y != null ? `${fund.returns_5y}%` : 'N/A'}
+          <div className={`text-sm font-bold ${returnColor(data.returns_5y)}`}>
+            {data.returns_5y != null ? `${data.returns_5y}%` : 'N/A'}
           </div>
         </div>
       </div>
@@ -122,9 +138,43 @@ function FundCard({ fund }: { fund: any }) {
 }
 
 export default async function MutualFundsIndexPage() {
-  const funds = await getAllMutualFunds();
-  const categorizedFunds = categorizeFunds(funds);
-  const featuredFunds = funds.slice(0, 6);
+  // Step 1: CSV se all 500 funds (guaranteed)
+  const csvFunds = await readFundsFromCSV();
+  const slugs = csvFunds.map(f => f.slug);
+
+  // Step 2: Supabase se latest data fetch karo
+  const liveDataMap = await getLatestData(slugs);
+
+  // Step 3: Merge – CSV se scheme_name, fund_house, category + live data for numbers
+  const mergedFunds = csvFunds.map(fund => ({
+    ...fund,
+    ...liveDataMap[fund.slug],
+  }));
+
+  // Step 4: Categorize
+  function categorizeFunds(funds: any[]) {
+    const categorized: Record<string, any[]> = {};
+    fundCategories.forEach(cat => { categorized[cat.name] = []; });
+    categorized['Others'] = [];
+
+    for (const fund of funds) {
+      const category = fund.category || '';
+      let placed = false;
+      for (const cat of fundCategories) {
+        if (cat.keywords.some(kw => category.toLowerCase().includes(kw))) {
+          categorized[cat.name].push(fund);
+          placed = true;
+          break;
+        }
+      }
+      if (!placed) categorized['Others'].push(fund);
+    }
+    return categorized;
+  }
+
+  const categorizedFunds = categorizeFunds(mergedFunds);
+  const featuredFunds = mergedFunds.slice(0, 6); // top 6 by AUM (already sorted by CSV order? we'll sort)
+  featuredFunds.sort((a,b) => (b.aum || 0) - (a.aum || 0));
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -157,7 +207,7 @@ export default async function MutualFundsIndexPage() {
       {/* Stats Bar */}
       <div className="bg-white border-b border-gray-100 py-6">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-          <div><div className="text-2xl font-black text-orange-500">{funds.length}+</div><div className="text-xs text-gray-500">MUTUAL FUNDS</div></div>
+          <div><div className="text-2xl font-black text-orange-500">{mergedFunds.length}+</div><div className="text-xs text-gray-500">MUTUAL FUNDS</div></div>
           <div><div className="text-2xl font-black text-orange-500">12+</div><div className="text-xs text-gray-500">CATEGORIES</div></div>
           <div><div className="text-2xl font-black text-orange-500">₹50L+ Cr</div><div className="text-xs text-gray-500">TOTAL AUM</div></div>
           <div><div className="text-2xl font-black text-orange-500">Free</div><div className="text-xs text-gray-500">ACCESS</div></div>
@@ -202,7 +252,7 @@ export default async function MutualFundsIndexPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {featuredFunds.map((fund) => (
-            <FundCard key={fund.slug} fund={fund} />
+            <FundCard key={fund.slug} fund={fund} liveData={liveDataMap[fund.slug]} />
           ))}
         </div>
       </div>
@@ -223,7 +273,7 @@ export default async function MutualFundsIndexPage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {fundsList.slice(0, 8).map((fund) => (
-                  <FundCard key={fund.slug} fund={fund} />
+                  <FundCard key={fund.slug} fund={fund} liveData={liveDataMap[fund.slug]} />
                 ))}
               </div>
               {fundsList.length > 8 && (
@@ -249,7 +299,7 @@ export default async function MutualFundsIndexPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {categorizedFunds['Others'].slice(0, 8).map((fund) => (
-                <FundCard key={fund.slug} fund={fund} />
+                <FundCard key={fund.slug} fund={fund} liveData={liveDataMap[fund.slug]} />
               ))}
             </div>
           </section>
