@@ -14,95 +14,44 @@ import FAQSection from '@/components/mutual-fund/FAQSection';
 import RelatedFunds from '@/components/mutual-fund/RelatedFunds';
 import ComparisonLinks from '@/components/mutual-fund/ComparisonLinks';
 
-// ISR: revalidate every 24 hours
 export const revalidate = 86400;
 
-// Generate all 500 fund slugs at build time
 export async function generateStaticParams() {
   const supabase = createClient();
-  const { data: funds } = await supabase
-    .from('mutual_funds')
-    .select('slug')
-    .not('slug', 'is', null);
-  
-  return funds?.map((fund) => ({ slug: fund.slug })) || [];
+  const { data } = await supabase.from('mutual_funds').select('slug');
+  return data?.map((f) => ({ slug: f.slug })) || [];
 }
 
-async function getFundData(slug: string) {
+async function getFund(slug: string) {
   const supabase = createClient();
-  const { data: fund, error } = await supabase
-    .from('mutual_funds')
-    .select('*')
-    .eq('slug', slug)
-    .single();
-  
-  if (error || !fund) return null;
-  return fund;
+  const { data } = await supabase.from('mutual_funds').select('*').eq('slug', slug).single();
+  return data;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const fund = await getFundData(params.slug);
+  const fund = await getFund(params.slug);
   if (!fund) return { title: 'Not Found' };
-  
-  return {
-    title: fund.seo_title || `${fund.scheme_name} - Review, Returns, NAV, AUM`,
-    description: fund.seo_description,
-    keywords: fund.keywords,
-    openGraph: {
-      title: fund.seo_title,
-      description: fund.seo_description,
-      type: 'website',
-    },
-    alternates: {
-      canonical: `https://sharetargetprice.in/mutual-fund/${fund.slug}`,
-    },
-  };
+  return { title: fund.seo_title, description: fund.seo_description, keywords: fund.keywords, alternates: { canonical: `https://sharetargetprice.in/mutual-fund/${fund.slug}` } };
 }
 
 export default async function MutualFundPage({ params }: { params: { slug: string } }) {
-  const fund = await getFundData(params.slug);
+  const fund = await getFund(params.slug);
   if (!fund) notFound();
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Hero Section */}
       <FundHero fund={fund} />
-      
-      {/* Fund Snapshot (AUM, NAV, Expense Ratio etc.) */}
       <FundSnapshot fund={fund} />
-      
-      {/* Returns Table (1Y,3Y,5Y, since launch + benchmark) */}
       <ReturnsTable fund={fund} />
-      
-      {/* SIP Calculator (custom component) */}
       <SIPCalculator fund={fund} />
-      
-      {/* Top Holdings (10 stocks with %) */}
       <TopHoldings holdings={fund.top_holdings} date={fund.holdings_date} />
-      
-      {/* Riskometer + Volatility */}
       <Riskometer fund={fund} />
-      
-      {/* AI Generated Sections (if content present, else fallback) */}
       <AIOverview content={fund.overview} fundName={fund.scheme_name} />
       <AIAnalysis content={fund.analysis} />
-      
-      {/* Who Should Invest / Future Outlook */}
-      <section className="my-8">
-        <h2 className="text-2xl font-bold mb-4">Who Should Invest?</h2>
-        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: fund.future_outlook || '' }} />
-      </section>
-      
-      {/* Pros & Cons */}
+      <div className="my-8"><h2 className="text-2xl font-bold mb-4">Who Should Invest?</h2><div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: fund.future_outlook || '' }} /></div>
       <ProsCons content={fund.pros_cons} />
-      
-      {/* FAQs with Schema */}
       <FAQSection content={fund.faq} />
-      
-      {/* Related Funds (same category, same AMC) */}
       <RelatedFunds fund={fund} />
-      
-      {/* Comparison Links (top 3 competitors) */}
       <ComparisonLinks fund={fund} />
     </div>
   );
