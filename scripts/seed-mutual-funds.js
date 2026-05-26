@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import WebSocket from 'ws'
 import fs from 'fs'
 import csv from 'csv-parser'
 import dotenv from 'dotenv'
@@ -7,7 +8,12 @@ dotenv.config()
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
+  {
+    realtime: {
+      transport: WebSocket,
+    },
+  }
 )
 
 function slugify(text) {
@@ -68,11 +74,9 @@ fs.createReadStream(csvPath)
       seo_title: row.seo_title || null,
       seo_description: row.seo_description || null,
       keywords: row.keywords || null,
-      // New columns (added via ALTER TABLE)
       investment_objective: row.investment_objective || null,
       holdings_date: row.holdings_date || null,
       fund_house_rank: parseIntSafe(row.fund_house_rank),
-      // AI content columns (will remain null for now)
       overview: null,
       analysis: null,
       future_outlook: null,
