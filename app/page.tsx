@@ -150,19 +150,13 @@ function MutualFundCard({ fund }: { fund: any }) {
 }
 
 export default async function Home() {
+  // For non-mutual-fund categories, we fetch posts (but skip calculators and mutual funds)
+  const categoriesWithoutPosts = featuredCategories.filter(cat => cat.name !== "Calculators" && cat.name !== "Mutual Funds");
   const categoriesWithPosts = await Promise.all(
-    featuredCategories.map(async (cat) => {
-      if (cat.name === "Calculators") {
-        return { ...cat, posts: [] };
-      }
-      if (cat.name === "Mutual Funds") {
-        return { ...cat, posts: [] };
-      }
-      return {
-        ...cat,
-        posts: await getPostsByCategory(cat.name, 4),
-      };
-    })
+    categoriesWithoutPosts.map(async (cat) => ({
+      ...cat,
+      posts: await getPostsByCategory(cat.name, 4),
+    }))
   );
 
   const calculatorsForHome = await getCalculatorsForHome(4);
@@ -206,7 +200,6 @@ export default async function Home() {
               <p className="text-gray-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
                 Data-driven share price targets for 3000+ NSE & BSE stocks. Expert analysis, long-term forecasts, and financial tools for Indian investors.
               </p>
-              {/* 🔥 ADDITIONAL CTAs – Stocks, Mutual Funds, SIP, IPO, Calculators */}
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link href="/all-stocks" className="group bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
                   <span>🔍</span> Explore 3000+ Stocks
@@ -291,61 +284,93 @@ export default async function Home() {
           </section>
         )}
 
-        {/* Category Sections */}
+        {/* Category Sections (excluding mutual funds and calculators) */}
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-16">
-          {categoriesWithPosts.map(({ name, slug, icon, desc, color, posts }) => {
-            let displayPosts = posts;
-            let viewAllLink = `/category/${slug}`;
-            let isMutualFunds = false;
-            
-            if (name === "Calculators") {
-              displayPosts = calculatorsForHome;
-              viewAllLink = "/calculator";
-            }
-            if (name === "Mutual Funds") {
-              isMutualFunds = true;
-              displayPosts = mutualFundsForCategory;
-              viewAllLink = "/mutual-funds";
-            }
-            
-            return (
-              <section key={slug} className="scroll-mt-20">
-                <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white text-xl shadow-md`}>
-                      {icon}
-                    </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-gray-900">{name}</h2>
-                      <p className="text-sm text-gray-500">{desc}</p>
-                    </div>
+          {categoriesWithPosts.map(({ name, slug, icon, desc, color, posts }) => (
+            <section key={slug} className="scroll-mt-20">
+              <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white text-xl shadow-md`}>
+                    {icon}
                   </div>
-                  <Link href={viewAllLink} className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
-                    View All →
-                  </Link>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">{name}</h2>
+                    <p className="text-sm text-gray-500">{desc}</p>
+                  </div>
                 </div>
-                {displayPosts.length === 0 ? (
-                  <div className="bg-white rounded-2xl p-12 text-center text-gray-400 border border-dashed border-gray-200">
-                    <div className="text-4xl mb-2">📭</div>
-                    <p>No content in {name} yet.</p>
-                  </div>
-                ) : isMutualFunds ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {displayPosts.map((fund) => (
-                      <MutualFundCard key={fund.slug} fund={fund} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {displayPosts.map((post) => (
-                      <PostCard key={post.id} post={post} />
-                    ))}
-                  </div>
-                )}
-              </section>
-            );
-          })}
+                <Link href={`/category/${slug}`} className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
+                  View All →
+                </Link>
+              </div>
+              {posts.length === 0 ? (
+                <div className="bg-white rounded-2xl p-12 text-center text-gray-400 border border-dashed border-gray-200">
+                  <div className="text-4xl mb-2">📭</div>
+                  <p>No posts in {name} yet.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {posts.map((post) => (
+                    <PostCard key={post.id} post={post} />
+                  ))}
+                </div>
+              )}
+            </section>
+          ))}
         </div>
+
+        {/* Mutual Funds Category Section (separate rendering) */}
+        {mutualFundsForCategory.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <section className="scroll-mt-20">
+              <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white text-xl shadow-md">
+                    💼
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Mutual Funds</h2>
+                    <p className="text-sm text-gray-500">Fund analysis</p>
+                  </div>
+                </div>
+                <Link href="/mutual-funds" className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
+                  View All →
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {mutualFundsForCategory.map((fund) => (
+                  <MutualFundCard key={fund.slug} fund={fund} />
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
+        {/* Calculators Category Section (separate rendering) */}
+        {calculatorsForHome.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <section className="scroll-mt-20">
+              <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-xl shadow-md">
+                    🧮
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Calculators</h2>
+                    <p className="text-sm text-gray-500">Financial tools</p>
+                  </div>
+                </div>
+                <Link href="/calculator" className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
+                  View All →
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {calculatorsForHome.map((calc) => (
+                  <PostCard key={calc.id} post={calc} />
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
 
         {/* Calculators Showcase */}
         {latestCalculators.length > 0 && (
