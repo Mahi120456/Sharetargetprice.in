@@ -7,7 +7,7 @@ const categories = [
   { name: "Share Price Target", slug: "/category/share-price-target" },
   { name: "Stock Analysis", slug: "/category/stock-analysis" },
   { name: "IPO", slug: "/category/ipo" },
-  { name: "Mutual Funds", slug: "/mutual-fund" }, // ✅ fixed: points to mutual funds listing page
+  { name: "Mutual Funds", slug: "/mutual-funds" }, // ✅ plural – correct listing page
   { name: "SIP", slug: "/category/sip" },
   { name: "Calculators", slug: "/calculator" },
   { name: "About Us", slug: "/about-us" },
