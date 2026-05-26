@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'All Mutual Funds in India – Complete List 2026 | NAV, Returns, AUM',
-  description: 'Complete list of 500+ mutual funds in India.',
+  description: 'Complete list of 500+ mutual funds in India. NAV, returns, AUM, expense ratio, riskometer.',
 };
 
 const fundCategories = [
@@ -32,7 +32,7 @@ async function readFundsFromCSV() {
   const funds: any[] = [];
   const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     fs.createReadStream(filePath)
       .pipe(csv())
       .on('data', (row) => {
@@ -56,8 +56,8 @@ async function readFundsFromCSV() {
           });
         }
       })
-      .on('end', resolve)
-      .on('error', (err) => { console.error('CSV read error:', err); resolve(); });
+      .on('end', () => resolve())
+      .on('error', (err) => reject(err));
   });
   return funds;
 }
@@ -90,7 +90,7 @@ function FundCard({ fund, liveData }: { fund: any; liveData: any }) {
 
   return (
     <Link
-      href={`/mutual-funds/${fund.slug}`}   // 🔥 FIX 1: plural link
+      href={`/mutual-funds/${fund.slug}`}   // 🔥 plural link
       className="group bg-white rounded-2xl border border-gray-100 p-4 hover:shadow-lg hover:border-orange-200 transition-all block"
     >
       <div className="flex justify-between items-start gap-2 mb-2">
@@ -165,7 +165,7 @@ export default async function MutualFundsIndexPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section – same as before, skipping for brevity */}
+      {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-orange-800 text-white py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <div className="inline-block bg-white/10 backdrop-blur-sm rounded-full px-4 py-1 text-sm mb-6">📊 500+ Mutual Funds</div>
@@ -249,7 +249,7 @@ export default async function MutualFundsIndexPage() {
         </div>
       </div>
 
-      {/* 🔥 FIX 2: search script selector updated to plural */}
+      {/* 🔥 search script selector updated to plural */}
       <script dangerouslySetInnerHTML={{ __html: `
         document.getElementById('fund-search')?.addEventListener('keyup', function(e) {
           const term = e.target.value.toLowerCase();
