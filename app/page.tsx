@@ -84,10 +84,83 @@ async function getTopMutualFunds(limit = 6) {
   return data || [];
 }
 
+// ✅ NEW: Fetch mutual funds for the "Mutual Funds" category section (limit 4)
+async function getMutualFundsForCategory(limit = 4) {
+  const { data, error } = await supabase
+    .from('mutual_funds')
+    .select('scheme_name, slug, fund_house, category, nav, aum, expense_ratio, returns_1y, returns_3y, returns_5y, riskometer')
+    .order('aum', { ascending: false })
+    .limit(limit);
+  if (error) return [];
+  return data || [];
+}
+
+// Helper: format AUM in Crores
+function formatCrore(val: number) {
+  if (!val) return 'N/A';
+  if (val >= 10000) return `${(val / 10000).toFixed(2)} Lac Cr`;
+  return `${val.toFixed(2)} Cr`;
+}
+
+// Mutual Fund Card Component (reused from listing page)
+function MutualFundCard({ fund }: { fund: any }) {
+  const returnColor = (ret: number) => {
+    if (!ret && ret !== 0) return 'text-gray-500';
+    return ret >= 0 ? 'text-green-600' : 'text-red-600';
+  };
+
+  return (
+    <Link
+      href={`/mutual-funds/${fund.slug}`}
+      className="group bg-white rounded-2xl border border-gray-100 p-4 hover:shadow-lg hover:border-orange-200 transition-all block"
+    >
+      <div className="flex justify-between items-start gap-2 mb-2">
+        <h3 className="font-bold text-gray-800 group-hover:text-orange-600 line-clamp-2 text-sm md:text-base">
+          {fund.scheme_name}
+        </h3>
+        <div className="text-xs bg-gray-100 px-2 py-0.5 rounded-full shrink-0">
+          {fund.category?.split(' ')[0] || 'Fund'}
+        </div>
+      </div>
+      <div className="text-xs text-gray-500 mb-3">{fund.fund_house}</div>
+      <div className="grid grid-cols-2 gap-1 text-xs mb-2">
+        <div>NAV: <span className="font-medium">₹{fund.nav?.toFixed(2) || 'N/A'}</span></div>
+        <div>AUM: <span className="font-medium">{formatCrore(fund.aum)}</span></div>
+        <div>Expense: <span className="font-medium">{fund.expense_ratio ?? 'N/A'}%</span></div>
+        <div>Risk: <span className="font-medium">{fund.riskometer || 'N/A'}</span></div>
+      </div>
+      <div className="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
+        <div>
+          <div className="text-[10px] text-gray-400">1Y Return</div>
+          <div className={`text-sm font-bold ${returnColor(fund.returns_1y)}`}>
+            {fund.returns_1y != null ? `${fund.returns_1y}%` : 'N/A'}
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="text-[10px] text-gray-400">3Y Return</div>
+          <div className={`text-sm font-bold ${returnColor(fund.returns_3y)}`}>
+            {fund.returns_3y != null ? `${fund.returns_3y}%` : 'N/A'}
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="text-[10px] text-gray-400">5Y Return</div>
+          <div className={`text-sm font-bold ${returnColor(fund.returns_5y)}`}>
+            {fund.returns_5y != null ? `${fund.returns_5y}%` : 'N/A'}
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default async function Home() {
   const categoriesWithPosts = await Promise.all(
     featuredCategories.map(async (cat) => {
       if (cat.name === "Calculators") {
+        return { ...cat, posts: [] };
+      }
+      // For Mutual Funds, we don't fetch posts, we'll handle separately
+      if (cat.name === "Mutual Funds") {
         return { ...cat, posts: [] };
       }
       return {
@@ -100,6 +173,7 @@ export default async function Home() {
   const calculatorsForHome = await getCalculatorsForHome(4);
   const latestCalculators = await getLatestCalculators(6);
   const topMutualFunds = await getTopMutualFunds(6);
+  const mutualFundsForCategory = await getMutualFundsForCategory(4); // for the category section
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -183,7 +257,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ✅ CORRECTED: Top Mutual Funds Section */}
+        {/* ✅ Top Mutual Funds by AUM (separate section) – keep it as is */}
         {topMutualFunds.length > 0 && (
           <section className="py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4">
@@ -217,14 +291,18 @@ export default async function Home() {
           {categoriesWithPosts.map(({ name, slug, icon, desc, color, posts }) => {
             let displayPosts = posts;
             let viewAllLink = `/category/${slug}`;
+            let isMutualFunds = false;
+            
             if (name === "Calculators") {
               displayPosts = calculatorsForHome;
               viewAllLink = "/calculator";
             }
-            // ✅ Override for Mutual Funds – use custom listing page
             if (name === "Mutual Funds") {
+              isMutualFunds = true;
+              displayPosts = mutualFundsForCategory; // this is array of mutual fund objects
               viewAllLink = "/mutual-funds";
             }
+            
             return (
               <section key={slug} className="scroll-mt-20">
                 <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
@@ -244,7 +322,13 @@ export default async function Home() {
                 {displayPosts.length === 0 ? (
                   <div className="bg-white rounded-2xl p-12 text-center text-gray-400 border border-dashed border-gray-200">
                     <div className="text-4xl mb-2">📭</div>
-                    <p>No posts in {name} yet.</p>
+                    <p>No content in {name} yet.</p>
+                  </div>
+                ) : isMutualFunds ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {displayPosts.map((fund) => (
+                      <MutualFundCard key={fund.slug} fund={fund} />
+                    ))}
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
