@@ -1,6 +1,9 @@
-import { createClient } from '@/utils/supabase/server';
+import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import fs from 'fs';
+import path from 'path';
+import csv from 'csv-parser';
 import FundHero from '@/components/mutual-fund/FundHero';
 import FundSnapshot from '@/components/mutual-fund/FundSnapshot';
 import ReturnsTable from '@/components/mutual-fund/ReturnsTable';
@@ -15,23 +18,110 @@ import RelatedFunds from '@/components/mutual-fund/RelatedFunds';
 import ComparisonLinks from '@/components/mutual-fund/ComparisonLinks';
 
 export const revalidate = 86400;
+export const dynamicParams = true; // be safe
 
+// ========== 1. Generate ALL 500 slugs from CSV (guaranteed) ==========
 export async function generateStaticParams() {
-  const supabase = createClient();
-  const { data } = await supabase.from('mutual_funds').select('slug');
-  return data?.map((f) => ({ slug: f.slug })) || [];
+  const slugs: { slug: string }[] = [];
+  const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
+
+  await new Promise((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on('data', (row) => {
+        let slug = row.scheme_name
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+        if (slug) slugs.push({ slug });
+      })
+      .on('end', resolve)
+      .on('error', reject);
+  });
+
+  console.log(`✅ generateStaticParams: ${slugs.length} slugs generated from CSV`);
+  return slugs;
 }
 
+// ========== 2. Fetch fund data – CSV fallback + Supabase override ==========
 async function getFund(slug: string) {
-  const supabase = createClient();
-  const { data } = await supabase.from('mutual_funds').select('*').eq('slug', slug).single();
-  return data;
+  // First, read from CSV as fallback (guaranteed data)
+  let fundData: any = null;
+  const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
+
+  await new Promise((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on('data', (row) => {
+        let rowSlug = row.scheme_name
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+        if (rowSlug === slug) {
+          fundData = {
+            scheme_name: row.scheme_name,
+            fund_house: row.fund_house,
+            category: row.category,
+            sub_category: row.sub_category,
+            nav: parseFloat(row.nav) || null,
+            aum: parseFloat(row.aum) || null,
+            expense_ratio: parseFloat(row.expense_ratio) || null,
+            returns_1y: parseFloat(row.returns_1y) || null,
+            returns_3y: parseFloat(row.returns_3y) || null,
+            returns_5y: parseFloat(row.returns_5y) || null,
+            returns_since_launch: parseFloat(row.returns_since_launch) || null,
+            benchmark: row.benchmark,
+            riskometer: row.riskometer,
+            fund_manager: row.fund_manager,
+            fund_manager_tenure: row.fund_manager_tenure,
+            asset_allocation: row.asset_allocation,
+            top_holdings: row.top_holdings,
+            min_sip_amount: parseInt(row.min_sip_amount) || null,
+            min_lumpsum: parseInt(row.min_lumpsum) || null,
+            launch_date: row.launch_date,
+            exit_load: row.exit_load,
+            seo_title: row.seo_title,
+            seo_description: row.seo_description,
+            keywords: row.keywords,
+            investment_objective: row.investment_objective,
+            holdings_date: row.holdings_date,
+            slug: rowSlug,
+          };
+        }
+      })
+      .on('end', resolve)
+      .on('error', reject);
+  });
+
+  if (!fundData) return null;
+
+  // Then, try to override with live data from Supabase (if available)
+  try {
+    const { data: live, error } = await supabase
+      .from('mutual_funds')
+      .select('*')
+      .eq('slug', slug)
+      .single();
+
+    if (!error && live) {
+      fundData = { ...fundData, ...live };
+    }
+  } catch (err) {
+    console.error(`Supabase fetch failed for ${slug}, using CSV fallback`);
+  }
+
+  return fundData;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const fund = await getFund(params.slug);
   if (!fund) return { title: 'Not Found' };
-  return { title: fund.seo_title, description: fund.seo_description, keywords: fund.keywords, alternates: { canonical: `https://sharetargetprice.in/mutual-fund/${fund.slug}` } };
+  return {
+    title: fund.seo_title,
+    description: fund.seo_description,
+    keywords: fund.keywords,
+    alternates: { canonical: `https://sharetargetprice.in/mutual-funds/${fund.slug}` }, // use plural
+  };
 }
 
 export default async function MutualFundPage({ params }: { params: { slug: string } }) {
