@@ -33,7 +33,8 @@
     "dotenv": "^16.4.5",
     "lightweight-charts": "^4.1.0",
     "yahoo-finance2": "^2.11.3",
-    "ws": "^8.17.1"
+    "ws": "^8.17.1",
+    "csv-parser": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
