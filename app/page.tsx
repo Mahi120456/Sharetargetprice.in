@@ -73,7 +73,6 @@ async function getLatestCalculators(limit = 6) {
   return data || [];
 }
 
-// ✅ Fetch top mutual funds for homepage – corrected link
 async function getTopMutualFunds(limit = 6) {
   const { data, error } = await supabase
     .from('mutual_funds')
@@ -84,7 +83,6 @@ async function getTopMutualFunds(limit = 6) {
   return data || [];
 }
 
-// ✅ NEW: Fetch mutual funds for the "Mutual Funds" category section (limit 4)
 async function getMutualFundsForCategory(limit = 4) {
   const { data, error } = await supabase
     .from('mutual_funds')
@@ -95,14 +93,12 @@ async function getMutualFundsForCategory(limit = 4) {
   return data || [];
 }
 
-// Helper: format AUM in Crores
 function formatCrore(val: number) {
   if (!val) return 'N/A';
   if (val >= 10000) return `${(val / 10000).toFixed(2)} Lac Cr`;
   return `${val.toFixed(2)} Cr`;
 }
 
-// Mutual Fund Card Component (reused from listing page)
 function MutualFundCard({ fund }: { fund: any }) {
   const returnColor = (ret: number) => {
     if (!ret && ret !== 0) return 'text-gray-500';
@@ -159,7 +155,6 @@ export default async function Home() {
       if (cat.name === "Calculators") {
         return { ...cat, posts: [] };
       }
-      // For Mutual Funds, we don't fetch posts, we'll handle separately
       if (cat.name === "Mutual Funds") {
         return { ...cat, posts: [] };
       }
@@ -173,7 +168,7 @@ export default async function Home() {
   const calculatorsForHome = await getCalculatorsForHome(4);
   const latestCalculators = await getLatestCalculators(6);
   const topMutualFunds = await getTopMutualFunds(6);
-  const mutualFundsForCategory = await getMutualFundsForCategory(4); // for the category section
+  const mutualFundsForCategory = await getMutualFundsForCategory(4);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -211,12 +206,22 @@ export default async function Home() {
               <p className="text-gray-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
                 Data-driven share price targets for 3000+ NSE & BSE stocks. Expert analysis, long-term forecasts, and financial tools for Indian investors.
               </p>
+              {/* 🔥 ADDITIONAL CTAs – Stocks, Mutual Funds, SIP, IPO, Calculators */}
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link href="/all-stocks" className="group bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
                   <span>🔍</span> Explore 3000+ Stocks
                   <span className="group-hover:translate-x-1 transition">→</span>
                 </Link>
-                <Link href="/calculator" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-xl transition-all border border-white/20 flex items-center gap-2">
+                <Link href="/mutual-funds" className="group bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
+                  <span>💼</span> Mutual Funds
+                </Link>
+                <Link href="/category/sip" className="group bg-amber-600 hover:bg-amber-700 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
+                  <span>💰</span> SIP Calculator
+                </Link>
+                <Link href="/category/ipo" className="group bg-purple-600 hover:bg-purple-700 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
+                  <span>🚀</span> IPO Analysis
+                </Link>
+                <Link href="/calculator" className="group bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
                   <span>🧮</span> Financial Calculators
                 </Link>
               </div>
@@ -257,7 +262,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ✅ Top Mutual Funds by AUM (separate section) – keep it as is */}
+        {/* Top Mutual Funds by AUM */}
         {topMutualFunds.length > 0 && (
           <section className="py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4">
@@ -299,7 +304,7 @@ export default async function Home() {
             }
             if (name === "Mutual Funds") {
               isMutualFunds = true;
-              displayPosts = mutualFundsForCategory; // this is array of mutual fund objects
+              displayPosts = mutualFundsForCategory;
               viewAllLink = "/mutual-funds";
             }
             
@@ -381,14 +386,22 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* CTA Section */}
         <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Start Your Investment Journey Today</h2>
             <p className="text-orange-100 mb-8 text-lg">Get expert share price targets, analysis, and financial tools – completely free.</p>
-            <Link href="/all-stocks" className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
-              🔍 Explore All Stocks <span>→</span>
-            </Link>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link href="/all-stocks" className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                📈 Explore All Stocks →
+              </Link>
+              <Link href="/mutual-funds" className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-white/30 transition-all">
+                💼 Mutual Funds
+              </Link>
+              <Link href="/category/ipo" className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-white/30 transition-all">
+                🚀 IPOs
+              </Link>
+            </div>
           </div>
         </section>
       </div>
