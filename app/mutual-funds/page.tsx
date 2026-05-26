@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';   // ✅ correct import
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -32,12 +32,11 @@ const fundCategories = [
 ];
 
 async function getAllMutualFunds() {
-  const supabase = createClient();
   const { data, error } = await supabase
     .from('mutual_funds')
     .select('scheme_name, slug, fund_house, category, nav, aum, returns_1y, returns_3y, returns_5y, expense_ratio, riskometer')
     .not('slug', 'is', null)
-    .order('aum', { ascending: false });  // Top AUM first
+    .order('aum', { ascending: false });
 
   if (error) {
     console.error('Error fetching mutual funds:', error);
@@ -125,13 +124,10 @@ function FundCard({ fund }: { fund: any }) {
 export default async function MutualFundsIndexPage() {
   const funds = await getAllMutualFunds();
   const categorizedFunds = categorizeFunds(funds);
-
-  // Featured: Top 6 by AUM
   const featuredFunds = funds.slice(0, 6);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-orange-800 text-white py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
@@ -186,9 +182,6 @@ export default async function MutualFundsIndexPage() {
                 placeholder="e.g., SBI Blue Chip, HDFC Mid Cap..."
                 className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:border-orange-300 focus:ring-1 focus:ring-orange-200 text-sm"
               />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <span className="text-gray-400 text-sm">⌘K</span>
-              </div>
             </div>
           </div>
         </div>
