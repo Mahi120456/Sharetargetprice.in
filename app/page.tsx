@@ -73,7 +73,7 @@ async function getLatestCalculators(limit = 6) {
   return data || [];
 }
 
-// ✅ NEW: Fetch top mutual funds for homepage
+// ✅ Fetch top mutual funds for homepage – corrected link
 async function getTopMutualFunds(limit = 6) {
   const { data, error } = await supabase
     .from('mutual_funds')
@@ -183,19 +183,19 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ✅ NEW: Top Mutual Funds Section */}
+        {/* ✅ CORRECTED: Top Mutual Funds Section */}
         {topMutualFunds.length > 0 && (
           <section className="py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4">
               <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900">💰 Top Mutual Funds by AUM</h2>
-                <Link href="/mutual-fund" className="text-orange-500 hover:underline text-sm font-semibold">View All →</Link>
+                <Link href="/mutual-funds" className="text-orange-500 hover:underline text-sm font-semibold">View All →</Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {topMutualFunds.map(fund => (
                   <Link
                     key={fund.slug}
-                    href={`/mutual-fund/${fund.slug}`}
+                    href={`/mutual-funds/${fund.slug}`}
                     className="bg-gray-50 rounded-xl p-4 border hover:border-orange-200 hover:shadow transition group"
                   >
                     <div className="font-semibold text-gray-800 group-hover:text-orange-600 text-sm line-clamp-2">
@@ -220,6 +220,10 @@ export default async function Home() {
             if (name === "Calculators") {
               displayPosts = calculatorsForHome;
               viewAllLink = "/calculator";
+            }
+            // ✅ Override for Mutual Funds – use custom listing page
+            if (name === "Mutual Funds") {
+              viewAllLink = "/mutual-funds";
             }
             return (
               <section key={slug} className="scroll-mt-20">
