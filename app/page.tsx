@@ -3,6 +3,9 @@ import PostCard from "@/components/PostCard";
 import Link from "next/link";
 import type { Metadata } from "next";
 import MarketMovers from "@/components/MarketMovers";
+import fs from 'fs';
+import path from 'path';
+import csv from 'csv-parser';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,13 +33,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://sharetargetprice.in" },
 };
 
-const featuredCategories = [
+const categoriesFromPosts = [
   { name: "Share Price Target", slug: "share-price-target", icon: "📈", desc: "Stock price analysis", color: "from-orange-500 to-red-500" },
   { name: "Stock Analysis", slug: "stock-analysis", icon: "🔍", desc: "Deep dive research", color: "from-blue-500 to-cyan-500" },
   { name: "IPO", slug: "ipo", icon: "🚀", desc: "New listings review", color: "from-purple-500 to-pink-500" },
-  { name: "Mutual Funds", slug: "mutual-funds", icon: "💼", desc: "Fund analysis", color: "from-emerald-500 to-teal-500" },
   { name: "SIP", slug: "sip", icon: "💰", desc: "SIP planning tools", color: "from-yellow-500 to-amber-500" },
-  { name: "Calculators", slug: "calculator", icon: "🧮", desc: "Financial tools", color: "from-indigo-500 to-purple-500" },
 ];
 
 async function getPostsByCategory(categoryName: string, limit = 4) {
@@ -73,24 +74,40 @@ async function getLatestCalculators(limit = 6) {
   return data || [];
 }
 
-async function getTopMutualFunds(limit = 6) {
-  const { data, error } = await supabase
-    .from('mutual_funds')
-    .select('scheme_name, slug, category, nav, returns_3y, aum')
-    .order('aum', { ascending: false })
-    .limit(limit);
-  if (error) return [];
-  return data || [];
-}
-
-async function getMutualFundsForCategory(limit = 4) {
-  const { data, error } = await supabase
-    .from('mutual_funds')
-    .select('scheme_name, slug, fund_house, category, nav, aum, expense_ratio, returns_1y, returns_3y, returns_5y, riskometer')
-    .order('aum', { ascending: false })
-    .limit(limit);
-  if (error) return [];
-  return data || [];
+// ✅ Mutual Funds data directly from CSV (guaranteed)
+async function getMutualFundsFromCSV(limit = 4) {
+  const funds: any[] = [];
+  const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
+  
+  await new Promise<void>((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on('data', (row) => {
+        if (funds.length >= limit) return;
+        let slug = row.scheme_name
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+        if (slug) {
+          funds.push({
+            slug,
+            scheme_name: row.scheme_name,
+            fund_house: row.fund_house,
+            category: row.category,
+            nav: parseFloat(row.nav) || null,
+            aum: parseFloat(row.aum) || null,
+            expense_ratio: parseFloat(row.expense_ratio) || null,
+            returns_1y: parseFloat(row.returns_1y) || null,
+            returns_3y: parseFloat(row.returns_3y) || null,
+            returns_5y: parseFloat(row.returns_5y) || null,
+            riskometer: row.riskometer || null,
+          });
+        }
+      })
+      .on('end', () => resolve())
+      .on('error', (err) => reject(err));
+  });
+  return funds;
 }
 
 function formatCrore(val: number) {
@@ -150,19 +167,17 @@ function MutualFundCard({ fund }: { fund: any }) {
 }
 
 export default async function Home() {
-  // For non-mutual-fund categories, we fetch posts (but skip calculators and mutual funds)
-  const categoriesWithoutPosts = featuredCategories.filter(cat => cat.name !== "Calculators" && cat.name !== "Mutual Funds");
-  const categoriesWithPosts = await Promise.all(
-    categoriesWithoutPosts.map(async (cat) => ({
+  // Fetch data from posts table for other categories
+  const categoriesData = await Promise.all(
+    categoriesFromPosts.map(async (cat) => ({
       ...cat,
       posts: await getPostsByCategory(cat.name, 4),
     }))
   );
-
   const calculatorsForHome = await getCalculatorsForHome(4);
   const latestCalculators = await getLatestCalculators(6);
-  const topMutualFunds = await getTopMutualFunds(6);
-  const mutualFundsForCategory = await getMutualFundsForCategory(4);
+  // ✅ Mutual funds fetched directly from CSV – guaranteed 4 funds
+  const mutualFundsForCategory = await getMutualFundsFromCSV(4);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -203,7 +218,6 @@ export default async function Home() {
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link href="/all-stocks" className="group bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
                   <span>🔍</span> Explore 3000+ Stocks
-                  <span className="group-hover:translate-x-1 transition">→</span>
                 </Link>
                 <Link href="/mutual-funds" className="group bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
                   <span>💼</span> Mutual Funds
@@ -255,38 +269,12 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Top Mutual Funds by AUM */}
-        {topMutualFunds.length > 0 && (
-          <section className="py-12 bg-white">
-            <div className="max-w-7xl mx-auto px-4">
-              <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">💰 Top Mutual Funds by AUM</h2>
-                <Link href="/mutual-funds" className="text-orange-500 hover:underline text-sm font-semibold">View All →</Link>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {topMutualFunds.map(fund => (
-                  <Link
-                    key={fund.slug}
-                    href={`/mutual-funds/${fund.slug}`}
-                    className="bg-gray-50 rounded-xl p-4 border hover:border-orange-200 hover:shadow transition group"
-                  >
-                    <div className="font-semibold text-gray-800 group-hover:text-orange-600 text-sm line-clamp-2">
-                      {fund.scheme_name}
-                    </div>
-                    <div className="text-xs text-gray-500 mt-1">{fund.category || 'Others'}</div>
-                    <div className="mt-2 text-sm font-medium text-green-600">
-                      3Y: {fund.returns_3y?.toFixed(1)}%
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        {/* Top Mutual Funds by AUM (optional, but we keep for extra visibility) - we can keep this from CSV too if needed, but skipping to avoid duplication. We'll just show the category section below. */}
+        {/* Actually let's show both? No, but we'll show category section which is cleaner. */}
 
-        {/* Category Sections (excluding mutual funds and calculators) */}
+        {/* Category Sections (Share Price Target, Stock Analysis, IPO, SIP) */}
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-16">
-          {categoriesWithPosts.map(({ name, slug, icon, desc, color, posts }) => (
+          {categoriesData.map(({ name, slug, icon, desc, color, posts }) => (
             <section key={slug} className="scroll-mt-20">
               <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
                 <div className="flex items-center gap-3">
@@ -298,7 +286,7 @@ export default async function Home() {
                     <p className="text-sm text-gray-500">{desc}</p>
                   </div>
                 </div>
-                <Link href={`/category/${slug}`} className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
+                <Link href={name === "SIP" ? "/calculator" : `/category/${slug}`} className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
                   View All →
                 </Link>
               </div>
@@ -309,43 +297,46 @@ export default async function Home() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {posts.map((post) => (
-                    <PostCard key={post.id} post={post} />
-                  ))}
+                  {posts.map((post) => <PostCard key={post.id} post={post} />)}
                 </div>
               )}
             </section>
           ))}
         </div>
 
-        {/* Mutual Funds Category Section (separate rendering) */}
-        {mutualFundsForCategory.length > 0 && (
-          <div className="max-w-7xl mx-auto px-4 py-12">
-            <section className="scroll-mt-20">
-              <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white text-xl shadow-md">
-                    💼
-                  </div>
-                  <div>
-                    <h2 className="text-2xl font-bold text-gray-900">Mutual Funds</h2>
-                    <p className="text-sm text-gray-500">Fund analysis</p>
-                  </div>
+        {/* ========== MUTUAL FUNDS SECTION (CSV guaranteed) ========== */}
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <section className="scroll-mt-20">
+            <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white text-xl shadow-md">
+                  💼
                 </div>
-                <Link href="/mutual-funds" className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
-                  View All →
-                </Link>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">Mutual Funds</h2>
+                  <p className="text-sm text-gray-500">Fund analysis & performance</p>
+                </div>
               </div>
+              <Link href="/mutual-funds" className="text-orange-500 text-sm font-semibold hover:text-orange-600 transition flex items-center gap-1 bg-orange-50 px-3 py-1.5 rounded-full hover:bg-orange-100">
+                View All →
+              </Link>
+            </div>
+            {mutualFundsForCategory.length === 0 ? (
+              <div className="bg-white rounded-2xl p-12 text-center text-gray-400 border border-dashed border-gray-200">
+                <div className="text-4xl mb-2">📭</div>
+                <p>No mutual funds data available. Please check back later.</p>
+              </div>
+            ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {mutualFundsForCategory.map((fund) => (
                   <MutualFundCard key={fund.slug} fund={fund} />
                 ))}
               </div>
-            </section>
-          </div>
-        )}
+            )}
+          </section>
+        </div>
 
-        {/* Calculators Category Section (separate rendering) */}
+        {/* Calculators Category Section */}
         {calculatorsForHome.length > 0 && (
           <div className="max-w-7xl mx-auto px-4 py-12">
             <section className="scroll-mt-20">
@@ -364,35 +355,29 @@ export default async function Home() {
                 </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {calculatorsForHome.map((calc) => (
-                  <PostCard key={calc.id} post={calc} />
-                ))}
+                {calculatorsForHome.map((calc) => <PostCard key={calc.id} post={calc} />)}
               </div>
             </section>
           </div>
         )}
 
-        {/* Calculators Showcase */}
+        {/* Free Calculators Showcase */}
         {latestCalculators.length > 0 && (
           <section className="bg-gradient-to-r from-slate-900 to-slate-800 text-white py-16">
-            <div className="max-w-7xl mx-auto px-4">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3">Free Financial Calculators</h2>
-                <p className="text-gray-300 max-w-2xl mx-auto">Plan your investments with our easy-to-use financial tools</p>
-              </div>
+            <div className="max-w-7xl mx-auto px-4 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">Free Financial Calculators</h2>
+              <p className="text-gray-300 max-w-2xl mx-auto mb-10">Plan your investments with our easy-to-use financial tools</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-                {latestCalculators.slice(0, 6).map((calc) => (
+                {latestCalculators.slice(0,6).map((calc) => (
                   <Link key={calc.id} href={`/calculator/${calc.slug}`} className="group">
                     <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all hover:scale-105">
                       <div className="text-3xl mb-2">🧮</div>
-                      <div className="font-semibold text-sm line-clamp-2 group-hover:text-orange-300 transition">
-                        {calc.title}
-                      </div>
+                      <div className="font-semibold text-sm line-clamp-2 group-hover:text-orange-300">{calc.title}</div>
                     </div>
                   </Link>
                 ))}
               </div>
-              <div className="text-center mt-8">
+              <div className="mt-8">
                 <Link href="/calculator" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition-all">
                   View All 50+ Calculators →
                 </Link>
@@ -404,14 +389,14 @@ export default async function Home() {
         {/* Stats Bar */}
         <section className="py-12 bg-white border-t border-gray-100">
           <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div><div className="text-4xl font-black text-orange-500">3000+</div><div className="text-gray-600 text-sm mt-1">Stock Targets</div></div>
-            <div><div className="text-4xl font-black text-orange-500">50+</div><div className="text-gray-600 text-sm mt-1">Calculators</div></div>
-            <div><div className="text-4xl font-black text-orange-500">10L+</div><div className="text-gray-600 text-sm mt-1">Monthly Readers</div></div>
-            <div><div className="text-4xl font-black text-orange-500">FREE</div><div className="text-gray-600 text-sm mt-1">Always Access</div></div>
+            <div><div className="text-4xl font-black text-orange-500">3000+</div><div className="text-gray-600 text-sm">Stock Targets</div></div>
+            <div><div className="text-4xl font-black text-orange-500">50+</div><div className="text-gray-600 text-sm">Calculators</div></div>
+            <div><div className="text-4xl font-black text-orange-500">10L+</div><div className="text-gray-600 text-sm">Monthly Readers</div></div>
+            <div><div className="text-4xl font-black text-orange-500">FREE</div><div className="text-gray-600 text-sm">Always Access</div></div>
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Final CTA */}
         <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Start Your Investment Journey Today</h2>
