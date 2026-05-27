@@ -4,8 +4,6 @@ import type { Metadata } from 'next';
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
-import Image from 'next/image';
-import Link from 'next/link';
 import {
   TrendingUp,
   PieChart,
@@ -13,9 +11,7 @@ import {
   Calendar,
   Clock,
   ShieldAlert,
-  ArrowRight,
   Activity,
-  BarChart3,
   Wallet,
   Briefcase,
 } from 'lucide-react';
@@ -151,12 +147,8 @@ export default async function MutualFundPage({ params }: { params: { slug: strin
           </div>
         </div>
 
-        {/* Fund Details Card */}
+        {/* Fund Details Card – No heading */}
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 mb-12 transition-all hover:shadow-2xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
-            <Briefcase className="w-6 h-6 text-blue-600" />
-            Fund Snapshot
-          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: DollarSign, label: 'AUM', value: formatAUM(fund.aum), color: 'blue' },
@@ -189,13 +181,10 @@ export default async function MutualFundPage({ params }: { params: { slug: strin
           <TopHoldings holdings={fund.top_holdings} date={fund.holdings_date} />
         </div>
 
-        {/* Main content – AI sections with improved typography */}
+        {/* AI Content Sections – No hardcoded headings */}
         <div className="space-y-12">
-          {[
-            { title: 'Overview', content: fund.overview, component: AIOverview },
-            { title: 'Performance Analysis', content: fund.analysis, component: AIAnalysis },
-          ].map((section, idx) => (
-            <div key={idx} className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 transition-all">
+          {fund.overview && (
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 transition-all">
               <div className="prose prose-lg prose-slate max-w-none
                 prose-headings:font-bold prose-headings:text-slate-800
                 prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4
@@ -207,58 +196,58 @@ export default async function MutualFundPage({ params }: { params: { slug: strin
                 prose-th:bg-gray-100 prose-th:p-3
                 prose-td:p-3
               ">
-                {section.component === AIOverview ? (
-                  <AIOverview content={section.content} fundName={fund.scheme_name} />
-                ) : (
-                  <AIAnalysis content={section.content} />
-                )}
+                <AIOverview content={fund.overview} fundName={fund.scheme_name} />
               </div>
             </div>
-          ))}
+          )}
 
-          {/* Who Should Invest */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-              <Activity className="w-6 h-6 text-emerald-600" />
-              Who Should Invest?
-            </h2>
-            <div className="prose prose-lg prose-slate max-w-none prose-p:text-gray-700 prose-p:leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: fund.future_outlook || '' }}
-            />
-          </div>
+          {fund.analysis && (
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 transition-all">
+              <div className="prose prose-lg prose-slate max-w-none ...">
+                <AIAnalysis content={fund.analysis} />
+              </div>
+            </div>
+          )}
 
-          {/* Pros & Cons */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8">
-            <ProsCons content={fund.pros_cons} />
-          </div>
+          {fund.future_outlook && (
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8">
+              <div className="prose prose-lg prose-slate max-w-none prose-p:text-gray-700 prose-p:leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: fund.future_outlook }}
+              />
+            </div>
+          )}
+
+          {fund.pros_cons && (
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8">
+              <ProsCons content={fund.pros_cons} />
+            </div>
+          )}
         </div>
 
-        {/* Returns Table */}
+        {/* Returns Table – No heading */}
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 mt-12 mb-12 overflow-x-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">Returns Analysis</h2>
           <ReturnsTable fund={fund} />
         </div>
 
-        {/* SIP Calculator */}
+        {/* SIP Calculator – No heading */}
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 mb-12">
           <SIPCalculator fund={fund} />
         </div>
 
-        {/* FAQ */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h2>
-          <FAQSection content={fund.faq} />
-        </div>
+        {/* FAQ – No heading */}
+        {fund.faq && (
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 mb-12">
+            <FAQSection content={fund.faq} />
+          </div>
+        )}
 
-        {/* Related Funds */}
+        {/* Related Funds – No heading */}
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">Similar Funds</h2>
           <RelatedFunds fund={fund} />
         </div>
 
-        {/* Comparison Links */}
+        {/* Comparison Links – No heading */}
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/40 p-6 md:p-8 mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">Compare with Peers</h2>
           <ComparisonLinks fund={fund} />
         </div>
 
