@@ -12,7 +12,7 @@ import {
   BadgeIndianRupee,
 } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';   // ✅ Fast build, no static generation
+export const dynamic = 'force-dynamic';
 export const revalidate = 86400;
 
 async function getFund(slug: string) {
@@ -58,23 +58,37 @@ export default async function MutualFundPage({ params }: any) {
   const fund = await getFund(params.slug);
   if (!fund) notFound();
 
-  // Safe returns
   const returns1Y = fund.returns_1y ?? -1.45;
   const returns3Y = fund.returns_3y ?? 14.5;
   const returns5Y = fund.returns_5y ?? 15.05;
 
-  // Top holdings parsing
-  const holdings = fund.top_holdings?.split('|').slice(0, 5).map(h => h.trim()) || [
-    ['ICICI Bank Ltd.', '4.47%'],
-    ['HDFC Bank Ltd.', '4.14%'],
-    ['Reliance Industries Ltd.', '4.09%'],
-    ['State Bank of India', '3.55%'],
-    ['Bharti Airtel Ltd.', '3.1%'],
-  ];
+  // Type‑safe top holdings parsing
+  let holdings: [string, string][] = [];
+  if (fund.top_holdings && typeof fund.top_holdings === 'string') {
+    holdings = fund.top_holdings
+      .split('|')
+      .slice(0, 5)
+      .map((item: string) => {
+        const trimmed = item.trim();
+        const match = trimmed.match(/^(.*?)\s*\(([\d.]+)%\)$/);
+        if (match) return [match[1], `${match[2]}%`];
+        return [trimmed, ''];
+      })
+      .filter((h): h is [string, string] => h[0].length > 0);
+  }
+  if (holdings.length === 0) {
+    holdings = [
+      ['ICICI Bank Ltd.', '4.47%'],
+      ['HDFC Bank Ltd.', '4.14%'],
+      ['Reliance Industries Ltd.', '4.09%'],
+      ['State Bank of India', '3.55%'],
+      ['Bharti Airtel Ltd.', '3.1%'],
+    ];
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900">
-      {/* TOP NAV (same as yours) */}
+      {/* TOP NAV */}
       <header className="sticky top-0 z-50 border-b border-slate-800 bg-[#07152f]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
           <div><div className="text-3xl font-black tracking-tight text-white">Share Target Price</div></div>
@@ -138,7 +152,7 @@ export default async function MutualFundPage({ params }: any) {
           </div>
         </section>
 
-        {/* METRIC CARDS – dynamic data */}
+        {/* METRIC CARDS */}
         <section className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-6">
           <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
             <DollarSign className="mb-4 h-10 w-10 rounded-2xl bg-blue-50 p-2 text-blue-600" />
@@ -172,7 +186,7 @@ export default async function MutualFundPage({ params }: any) {
           </div>
         </section>
 
-        {/* PERFORMANCE + RISK – dynamic returns table & riskometer data */}
+        {/* PERFORMANCE + RISK */}
         <section className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="rounded-[32px] border border-slate-100 bg-white p-8 shadow-sm">
             <h2 className="text-3xl font-black tracking-tight text-slate-900">Performance Overview</h2>
@@ -204,18 +218,17 @@ export default async function MutualFundPage({ params }: any) {
           </div>
         </section>
 
-        {/* HOLDINGS + SIP – progress bar fix */}
+        {/* HOLDINGS + SIP */}
         <section className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="rounded-[32px] border border-slate-100 bg-white p-8 shadow-sm">
             <div className="flex items-center justify-between"><h2 className="text-3xl font-black tracking-tight text-slate-900">Top Holdings</h2><button className="text-sm font-semibold text-blue-600">View All</button></div>
             <div className="mt-10 space-y-6">
-              {holdings.map((item, idx) => {
-                const [name, percentStr] = typeof item === 'string' ? item.split('(') : [item[0], item[1]];
-                const percent = parseFloat(percentStr?.replace(/[^0-9.-]/g, '') || '0');
+              {holdings.map(([name, percent], idx) => {
+                const percentNum = parseFloat(percent.replace(/[^0-9.-]/g, ''));
                 return (
                   <div key={idx}>
-                    <div className="mb-3 flex items-center justify-between"><div className="font-semibold text-slate-700">{name}</div><div className="font-black text-slate-900">{percent}%</div></div>
-                    <div className="h-3 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400" style={{ width: `${percent}%` }}></div></div>
+                    <div className="mb-3 flex items-center justify-between"><div className="font-semibold text-slate-700">{name}</div><div className="font-black text-slate-900">{percent}</div></div>
+                    <div className="h-3 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400" style={{ width: `${percentNum}%` }}></div></div>
                   </div>
                 );
               })}
@@ -235,7 +248,7 @@ export default async function MutualFundPage({ params }: any) {
         {/* ABOUT */}
         <section id="overview" className="mt-12 rounded-[32px] border border-slate-100 bg-white p-10 shadow-sm">
           <h2 className="text-4xl font-black tracking-tight text-slate-900">About The Fund</h2>
-          <div className="prose prose-lg mt-8 max-w-none prose-p:mb-8 prose-p:leading-9 prose-p:text-slate-700 prose-headings:font-black prose-headings:text-slate-900">
+          <div className="prose prose-lg mt-8 max-w-none">
             <div dangerouslySetInnerHTML={{ __html: fund.overview || '' }} />
             <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6"><strong>Important:</strong> Mutual fund investments are subject to market risks. Please read all scheme related documents carefully.</div>
           </div>
