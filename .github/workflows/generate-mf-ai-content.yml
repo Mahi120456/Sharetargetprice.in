@@ -6,7 +6,7 @@ on:
       batch_size:
         description: 'Number of funds to process'
         required: false
-        default: '10'
+        default: '5'
       start_from:
         description: 'Start index (0‑based)'
         required: false
@@ -23,13 +23,13 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: npm install @supabase/supabase-js @google/generative-ai groq-sdk dotenv sanitize-html ws
+        run: npm install @supabase/supabase-js openai groq-sdk dotenv sanitize-html ws
       - name: Run AI generation
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          BATCH_SIZE: ${{ github.event.inputs.batch_size || '10' }}
+          BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
           START_FROM: ${{ github.event.inputs.start_from || '0' }}
         run: node scripts/generate-mutual-fund-ai-content.js
