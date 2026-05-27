@@ -34,7 +34,9 @@
     "lightweight-charts": "^4.1.0",
     "yahoo-finance2": "^2.11.3",
     "ws": "^8.17.1",
-    "csv-parser": "^3.0.0"
+    "csv-parser": "^3.0.0",
+    "groq-sdk": "^0.3.0",
+    "sanitize-html": "^2.13.0"
   },
   "devDependencies": {
     "@types/node": "^20",
