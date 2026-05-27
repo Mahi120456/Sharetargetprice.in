@@ -36,7 +36,8 @@
     "ws": "^8.17.1",
     "csv-parser": "^3.0.0",
     "groq-sdk": "^0.3.0",
-    "sanitize-html": "^2.13.0"
+    "sanitize-html": "^2.13.0",
+    "openai": "^4.80.0"
   },
   "devDependencies": {
     "@types/node": "^20",
