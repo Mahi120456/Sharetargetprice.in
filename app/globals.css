@@ -340,52 +340,71 @@
     color: #111827;
   }
 
-  /* ===== FIXES FOR MUTUAL FUND AI CONTENT ===== */
-  /* Ensure paragraphs have consistent spacing */
-  .prose p {
-    margin-bottom: 1.25em !important;
+  /* For the orange accent variant */
+  .prose-orange {
+    --tw-prose-links: #f97316;
+    --tw-prose-invert-links: #f97316;
   }
-  .prose p:last-child {
-    margin-bottom: 0 !important;
+}
+
+/* ========== ULTIMATE FIXES FOR MUTUAL FUND AI CONTENT ========== */
+@layer components {
+  /* Convert double newlines into paragraph spacing (works for plain text) */
+  .prose {
+    white-space: pre-wrap; /* respect line breaks but collapse spaces */
   }
-  
-  /* Reduce heading sizes for better readability */
+  .prose br {
+    display: none; /* hide single <br> */
+  }
+  /* Add margin between blocks that are not already spaced */
+  .prose > * + * {
+    margin-top: 1.25em !important;
+  }
+  /* Force all headings to be smaller */
   .prose h1 {
-    font-size: 1.875rem !important;
+    font-size: 1.6rem !important;
     font-weight: 700 !important;
-    margin-top: 1.5em !important;
-    margin-bottom: 0.75em !important;
+    margin-top: 1.2em !important;
+    margin-bottom: 0.6em !important;
     border-left: none !important;
     padding-left: 0 !important;
   }
   .prose h2 {
-    font-size: 1.625rem !important;
-    margin-top: 1.5em !important;
-    margin-bottom: 0.75em !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    margin-top: 1.2em !important;
+    margin-bottom: 0.5em !important;
+    border-left: none !important;
+    padding-left: 0 !important;
   }
   .prose h3 {
-    font-size: 1.375rem !important;
-    margin-top: 1.25em !important;
-    margin-bottom: 0.5em !important;
-  }
-  .prose h4 {
-    font-size: 1.125rem !important;
+    font-size: 1.2rem !important;
     font-weight: 600 !important;
     margin-top: 1em !important;
-    margin-bottom: 0.5em !important;
+    margin-bottom: 0.4em !important;
+    color: #ea580c !important;
   }
-  
-  /* List spacing */
-  .prose ul, .prose ol {
-    margin-top: 0.5em !important;
-    margin-bottom: 0.75em !important;
+  .prose h4 {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    margin-top: 0.8em !important;
+    margin-bottom: 0.3em !important;
   }
-  .prose li {
-    margin-top: 0.2em !important;
-    margin-bottom: 0.2em !important;
+  /* Ensure paragraphs and divs get margin */
+  .prose p, .prose div:not(:first-child) {
+    margin-bottom: 1em !important;
   }
-  
-  /* FAQ details/summary styling */
+  .prose p:last-child, .prose div:last-child {
+    margin-bottom: 0 !important;
+  }
+  /* Mobile container padding reduction */
+  @media (max-width: 768px) {
+    .prose {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+  /* FAQ details/summary styling (if used) */
   details {
     margin-bottom: 1rem;
   }
@@ -400,12 +419,6 @@
   }
   details[open] summary {
     margin-bottom: 0.75rem;
-  }
-
-  /* For the orange accent variant */
-  .prose-orange {
-    --tw-prose-links: #f97316;
-    --tw-prose-invert-links: #f97316;
   }
 }
 
