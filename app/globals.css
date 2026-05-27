@@ -340,6 +340,68 @@
     color: #111827;
   }
 
+  /* ===== FIXES FOR MUTUAL FUND AI CONTENT ===== */
+  /* Ensure paragraphs have consistent spacing */
+  .prose p {
+    margin-bottom: 1.25em !important;
+  }
+  .prose p:last-child {
+    margin-bottom: 0 !important;
+  }
+  
+  /* Reduce heading sizes for better readability */
+  .prose h1 {
+    font-size: 1.875rem !important;
+    font-weight: 700 !important;
+    margin-top: 1.5em !important;
+    margin-bottom: 0.75em !important;
+    border-left: none !important;
+    padding-left: 0 !important;
+  }
+  .prose h2 {
+    font-size: 1.625rem !important;
+    margin-top: 1.5em !important;
+    margin-bottom: 0.75em !important;
+  }
+  .prose h3 {
+    font-size: 1.375rem !important;
+    margin-top: 1.25em !important;
+    margin-bottom: 0.5em !important;
+  }
+  .prose h4 {
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    margin-top: 1em !important;
+    margin-bottom: 0.5em !important;
+  }
+  
+  /* List spacing */
+  .prose ul, .prose ol {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.75em !important;
+  }
+  .prose li {
+    margin-top: 0.2em !important;
+    margin-bottom: 0.2em !important;
+  }
+  
+  /* FAQ details/summary styling */
+  details {
+    margin-bottom: 1rem;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #1e293b;
+    list-style: none;
+  }
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] summary {
+    margin-bottom: 0.75rem;
+  }
+
   /* For the orange accent variant */
   .prose-orange {
     --tw-prose-links: #f97316;
