@@ -20,7 +20,7 @@ import ComparisonLinks from '@/components/mutual-fund/ComparisonLinks';
 export const revalidate = 86400;
 export const dynamicParams = true;
 
-// ========== 1. Generate ALL 500 slugs from CSV (guaranteed) ==========
+// Generate slugs from CSV (fast, build-time)
 export async function generateStaticParams() {
   const slugs: { slug: string }[] = [];
   const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
@@ -38,82 +38,23 @@ export async function generateStaticParams() {
       .on('end', () => resolve())
       .on('error', reject);
   });
-
-  console.log(`✅ generateStaticParams: ${slugs.length} slugs from CSV`);
+  console.log(`✅ generateStaticParams: ${slugs.length} slugs`);
   return slugs;
 }
 
-// ========== 2. Fetch fund data – CSV fallback + Supabase override (anon key) ==========
+// Fetch fund directly from Supabase
 async function getFund(slug: string) {
-  // CSV fallback (always available)
-  let fundData: any = null;
-  const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
+  const { data, error } = await supabase
+    .from('mutual_funds')
+    .select('*')
+    .eq('slug', slug)
+    .single();
 
-  await new Promise<void>((resolve, reject) => {
-    fs.createReadStream(filePath)
-      .pipe(csv())
-      .on('data', (row) => {
-        let rowSlug = row.scheme_name
-          ?.toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/(^-|-$)/g, '');
-        if (rowSlug === slug) {
-          fundData = {
-            scheme_name: row.scheme_name,
-            fund_house: row.fund_house,
-            category: row.category,
-            sub_category: row.sub_category,
-            nav: parseFloat(row.nav) || null,
-            aum: parseFloat(row.aum) || null,
-            expense_ratio: parseFloat(row.expense_ratio) || null,
-            returns_1y: parseFloat(row.returns_1y) || null,
-            returns_3y: parseFloat(row.returns_3y) || null,
-            returns_5y: parseFloat(row.returns_5y) || null,
-            returns_since_launch: parseFloat(row.returns_since_launch) || null,
-            benchmark: row.benchmark,
-            riskometer: row.riskometer,
-            fund_manager: row.fund_manager,
-            fund_manager_tenure: row.fund_manager_tenure,
-            asset_allocation: row.asset_allocation,
-            top_holdings: row.top_holdings,
-            min_sip_amount: parseInt(row.min_sip_amount) || null,
-            min_lumpsum: parseInt(row.min_lumpsum) || null,
-            launch_date: row.launch_date,
-            exit_load: row.exit_load,
-            seo_title: row.seo_title,
-            seo_description: row.seo_description,
-            keywords: row.keywords,
-            investment_objective: row.investment_objective,
-            holdings_date: row.holdings_date,
-            slug: rowSlug,
-          };
-        }
-      })
-      .on('end', () => resolve())
-      .on('error', reject);
-  });
-
-  if (!fundData) return null;
-
-  // ✅ Try to fetch live data from Supabase (anon key – works if RLS allows)
-  try {
-    const { data: live, error } = await supabase
-      .from('mutual_funds')
-      .select('*')
-      .eq('slug', slug)
-      .single();
-
-    if (!error && live) {
-      // Merge live data (includes AI columns) into CSV data
-      fundData = { ...fundData, ...live };
-    } else if (error) {
-      console.error(`Supabase fetch error for ${slug}:`, error.message);
-    }
-  } catch (err) {
-    console.error(`Supabase exception for ${slug}:`, err);
+  if (error) {
+    console.error(`Supabase error for ${slug}:`, error.message);
+    return null;
   }
-
-  return fundData;
+  return data;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -130,6 +71,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function MutualFundPage({ params }: { params: { slug: string } }) {
   const fund = await getFund(params.slug);
   if (!fund) notFound();
+
+  // Debug: log to Vercel logs
+  console.log(`Rendering fund: ${fund.scheme_name}, overview exists: ${!!fund.overview}`);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
