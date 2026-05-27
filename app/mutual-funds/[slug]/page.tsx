@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js'; // direct import
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import fs from 'fs';
@@ -17,10 +17,16 @@ import FAQSection from '@/components/mutual-fund/FAQSection';
 import RelatedFunds from '@/components/mutual-fund/RelatedFunds';
 import ComparisonLinks from '@/components/mutual-fund/ComparisonLinks';
 
-export const revalidate = 86400;
-export const dynamicParams = true; // be safe
+// ✅ Use service role key for guaranteed read access
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_KEY!   // service role key
+);
 
-// ========== 1. Generate ALL 500 slugs from CSV (guaranteed) ==========
+export const revalidate = 86400;
+export const dynamicParams = true;
+
+// ========== 1. Generate ALL 500 slugs from CSV ==========
 export async function generateStaticParams() {
   const slugs: { slug: string }[] = [];
   const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
@@ -39,13 +45,13 @@ export async function generateStaticParams() {
       .on('error', reject);
   });
 
-  console.log(`✅ generateStaticParams: ${slugs.length} slugs generated from CSV`);
+  console.log(`✅ generateStaticParams: ${slugs.length} slugs`);
   return slugs;
 }
 
-// ========== 2. Fetch fund data – CSV fallback + Supabase override ==========
+// ========== 2. Fetch fund data – CSV fallback + Supabase (service role) ==========
 async function getFund(slug: string) {
-  // First, read from CSV as fallback (guaranteed data)
+  // CSV fallback
   let fundData: any = null;
   const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
 
@@ -95,19 +101,22 @@ async function getFund(slug: string) {
 
   if (!fundData) return null;
 
-  // Then, try to override with live data from Supabase (if available)
+  // ✅ Supabase override with service role (guaranteed access)
   try {
-    const { data: live, error } = await supabase
+    const { data: live, error } = await supabaseAdmin
       .from('mutual_funds')
       .select('*')
       .eq('slug', slug)
       .single();
 
     if (!error && live) {
+      // Override CSV data with live DB data (including AI columns)
       fundData = { ...fundData, ...live };
+    } else if (error) {
+      console.error(`Supabase fetch error for ${slug}:`, error.message);
     }
   } catch (err) {
-    console.error(`Supabase fetch failed for ${slug}, using CSV fallback`);
+    console.error(`Supabase fetch exception for ${slug}:`, err);
   }
 
   return fundData;
@@ -120,7 +129,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: fund.seo_title,
     description: fund.seo_description,
     keywords: fund.keywords,
-    alternates: { canonical: `https://sharetargetprice.in/mutual-funds/${fund.slug}` }, // use plural
+    alternates: { canonical: `https://sharetargetprice.in/mutual-funds/${fund.slug}` },
   };
 }
 
