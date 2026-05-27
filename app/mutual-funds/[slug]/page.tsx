@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'; // direct import
+import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import fs from 'fs';
@@ -17,21 +17,15 @@ import FAQSection from '@/components/mutual-fund/FAQSection';
 import RelatedFunds from '@/components/mutual-fund/RelatedFunds';
 import ComparisonLinks from '@/components/mutual-fund/ComparisonLinks';
 
-// ✅ Use service role key for guaranteed read access
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!   // service role key
-);
-
 export const revalidate = 86400;
 export const dynamicParams = true;
 
-// ========== 1. Generate ALL 500 slugs from CSV ==========
+// ========== 1. Generate ALL 500 slugs from CSV (guaranteed) ==========
 export async function generateStaticParams() {
   const slugs: { slug: string }[] = [];
   const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     fs.createReadStream(filePath)
       .pipe(csv())
       .on('data', (row) => {
@@ -41,21 +35,21 @@ export async function generateStaticParams() {
           .replace(/(^-|-$)/g, '');
         if (slug) slugs.push({ slug });
       })
-      .on('end', resolve)
+      .on('end', () => resolve())
       .on('error', reject);
   });
 
-  console.log(`✅ generateStaticParams: ${slugs.length} slugs`);
+  console.log(`✅ generateStaticParams: ${slugs.length} slugs from CSV`);
   return slugs;
 }
 
-// ========== 2. Fetch fund data – CSV fallback + Supabase (service role) ==========
+// ========== 2. Fetch fund data – CSV fallback + Supabase override (anon key) ==========
 async function getFund(slug: string) {
-  // CSV fallback
+  // CSV fallback (always available)
   let fundData: any = null;
   const filePath = path.join(process.cwd(), 'data', '500_mutual_funds_PHASE6_INSTITUTIONAL.csv');
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     fs.createReadStream(filePath)
       .pipe(csv())
       .on('data', (row) => {
@@ -95,28 +89,28 @@ async function getFund(slug: string) {
           };
         }
       })
-      .on('end', resolve)
+      .on('end', () => resolve())
       .on('error', reject);
   });
 
   if (!fundData) return null;
 
-  // ✅ Supabase override with service role (guaranteed access)
+  // ✅ Try to fetch live data from Supabase (anon key – works if RLS allows)
   try {
-    const { data: live, error } = await supabaseAdmin
+    const { data: live, error } = await supabase
       .from('mutual_funds')
       .select('*')
       .eq('slug', slug)
       .single();
 
     if (!error && live) {
-      // Override CSV data with live DB data (including AI columns)
+      // Merge live data (includes AI columns) into CSV data
       fundData = { ...fundData, ...live };
     } else if (error) {
       console.error(`Supabase fetch error for ${slug}:`, error.message);
     }
   } catch (err) {
-    console.error(`Supabase fetch exception for ${slug}:`, err);
+    console.error(`Supabase exception for ${slug}:`, err);
   }
 
   return fundData;
