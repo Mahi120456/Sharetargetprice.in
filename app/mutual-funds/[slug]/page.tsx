@@ -74,7 +74,7 @@ export default async function MutualFundPage({ params }: any) {
         if (match) return [match[1], `${match[2]}%`];
         return [trimmed, ''];
       })
-      .filter((h): h is [string, string] => h[0].length > 0);
+      .filter((h: [string, string]): h is [string, string] => h[0].length > 0);
   }
   if (holdings.length === 0) {
     holdings = [
