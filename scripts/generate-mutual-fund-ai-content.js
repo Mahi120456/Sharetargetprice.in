@@ -169,59 +169,69 @@ Bas itna. Output sirf HTML do, uske baad ---METADATA--- aur metadata.`;
 }
 
 // ======================================================
-// PARSE RESPONSE (same as before)
+// SAFE PARSE RESPONSE – no undefined errors
 // ======================================================
 function parseResponse(fullText) {
   const parts = fullText.split(/---METADATA---/i);
-  const articleHtml = parts[0].trim();
+  const articleHtml = parts[0]?.trim() || '';
   let metadataRaw = parts[1] ? parts[1].trim() : '';
   
-  const getSection = (headingKeyword) => {
+  // Safe section extractor: returns default if not found
+  const getSection = (headingKeyword, defaultValue = '') => {
     const regex = new RegExp(`<h2[^>]*>.*?${headingKeyword}.*?</h2>([\\s\\S]*?)(?=<h2|$)`, 'i');
     const match = articleHtml.match(regex);
-    return match ? match[1].trim() : '';
+    if (match && match[1]) {
+      return match[1].trim();
+    }
+    return defaultValue;
   };
   
-  const overview = getSection('पूरा परिचय|parichay|strategy');
-  const performance = getSection('रिटर्न|returns|aankde');
-  const portfolio = getSection('होल्डिंग्स|portfolio');
-  const risk = getSection('रिस्क|risk level');
-  const outlook = getSection('आगे क्या|outlook');
-  const proscons = getSection('फायदे और नुकसान|fayde aur nuksan');
-  const faq = getSection('अक्सर पूछे|FAQs|sawaal');
-  const conclusion = getSection('आखिरी राय|conclusion');
+  const overview = getSection('पूरा परिचय|parichay|strategy', '<p>Overview not available.</p>');
+  const performance = getSection('रिटर्न|returns|aankde', '<p>Performance data not available.</p>');
+  const portfolio = getSection('होल्डिंग्स|portfolio', '<p>Portfolio details not available.</p>');
+  const risk = getSection('रिस्क|risk level', '<p>Risk analysis not available.</p>');
+  const outlook = getSection('आगे क्या|outlook', '<p>Outlook not available.</p>');
+  const proscons = getSection('फायदे और नुकसान|fayde aur nuksan', '<p>Pros and cons not available.</p>');
+  const faq = getSection('अक्सर पूछे|FAQs|sawaal', '<div itemscope itemtype="https://schema.org/FAQPage"><p>FAQs coming soon.</p></div>');
+  const conclusion = getSection('आखिरी राय|conclusion', '<p>Conclusion not available.</p>');
   
-  const fallback = (section, defaultMsg) => section || `<p>${defaultMsg}</p>`;
+  // Fallback for any empty sections
+  const fallback = (section) => section && section.length > 0 ? section : '<p>Content coming soon.</p>';
   
-  const getMeta = (label) => {
+  // Metadata extraction – safer regex
+  const extractMeta = (label) => {
     const regex = new RegExp(`${label}:?\\s*([^\\n]+)`, 'i');
     const match = metadataRaw.match(regex);
     return match ? match[1].trim() : '';
   };
   
+  // Extract titles
   const altTitles = [];
   const titleMatch = metadataRaw.match(/SEO TITLES:?([\s\S]*?)(?=META DESCRIPTION|$)/i);
   if (titleMatch) {
-    const lines = titleMatch[1].split('\n').filter(l => l.trim() && !l.includes('SEO TITLE'));
+    const lines = titleMatch[1].split('\n').filter(l => l.trim() && !l.includes('SEO TITLE') && !l.includes('---'));
     altTitles.push(...lines.slice(0,3).map(l => l.replace(/^-\s*/, '').trim()));
   }
+  if (altTitles.length === 0) {
+    altTitles.push(`${fund.scheme_name} Review ${CURRENT_YEAR} – Full Analysis`);
+  }
   
-  const metaDescription = getMeta('META DESCRIPTION');
-  const thumbnailPrompt = getMeta('THUMBNAIL PROMPT');
-  const ogImagePrompt = getMeta('OG IMAGE PROMPT');
-  const socialCaption = getMeta('SOCIAL CAPTION');
+  const metaDescription = extractMeta('META DESCRIPTION');
+  const thumbnailPrompt = extractMeta('THUMBNAIL PROMPT');
+  const ogImagePrompt = extractMeta('OG IMAGE PROMPT');
+  const socialCaption = extractMeta('SOCIAL CAPTION');
   
   return {
-    overview: fallback(overview, 'Overview coming soon.'),
-    performance: fallback(performance, 'Performance data coming soon.'),
-    portfolio: fallback(portfolio, 'Portfolio details coming soon.'),
-    risk: fallback(risk, 'Risk analysis coming soon.'),
-    outlook: fallback(outlook, 'Outlook coming soon.'),
-    pros_cons: fallback(proscons, 'Pros and cons coming soon.'),
-    faq: fallback(faq, 'FAQs coming soon.'),
-    conclusion: fallback(conclusion, 'Conclusion coming soon.'),
-    analysis: `${performance}\n\n${portfolio}\n\n${risk}`.trim(),
-    full_article: articleHtml,
+    overview: fallback(overview),
+    performance: fallback(performance),
+    portfolio: fallback(portfolio),
+    risk: fallback(risk),
+    outlook: fallback(outlook),
+    pros_cons: fallback(proscons),
+    faq: fallback(faq),
+    conclusion: fallback(conclusion),
+    analysis: `${fallback(performance)}\n\n${fallback(portfolio)}\n\n${fallback(risk)}`.trim(),
+    full_article: articleHtml || '<p>Article content coming soon.</p>',
     altTitles,
     metaDescription,
     thumbnailPrompt,
@@ -231,8 +241,24 @@ function parseResponse(fullText) {
 }
 
 // ======================================================
-// OPENAI GENERATION
+// OPENAI GENERATION WITH RETRY
 // ======================================================
+async function retryApiCall(fn, retries = MAX_RETRIES, delay = 2000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (error.status === 429 && i < retries - 1) {
+        const wait = delay * Math.pow(2, i);
+        console.log(`Rate limited. Retrying after ${wait}ms...`);
+        await new Promise(r => setTimeout(r, wait));
+        continue;
+      }
+      throw error;
+    }
+  }
+}
+
 async function generateWithOpenAI(prompt) {
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
@@ -257,7 +283,7 @@ async function generateContentForFund(fund) {
   const prompt = buildPrompt(fund);
   let raw;
   try {
-    raw = await generateWithOpenAI(prompt);
+    raw = await retryApiCall(() => generateWithOpenAI(prompt));
   } catch (err) {
     console.error(`Generation failed: ${err.message}`);
     return false;
@@ -266,7 +292,7 @@ async function generateContentForFund(fund) {
   const parsed = parseResponse(raw);
   const fullArticle = parsed.full_article;
   if (fullArticle.length < MIN_CONTENT_LENGTH) {
-    console.log(`⚠️ Too short (${fullArticle.length}) – skipping`);
+    console.log(`⚠️ Content too short (${fullArticle.length} chars), skipping ${fund.scheme_name}`);
     return false;
   }
   
@@ -292,10 +318,10 @@ async function generateContentForFund(fund) {
     .update(updateData)
     .eq('scheme_code', fund.scheme_code);
   if (error) {
-    console.error(`DB error: ${error.message}`);
+    console.error(`DB error for ${fund.scheme_name}: ${error.message}`);
     return false;
   }
-  console.log(`✅ Done: ${fund.scheme_name}`);
+  console.log(`✅ Completed ${fund.scheme_name}`);
   return true;
 }
 
@@ -316,16 +342,34 @@ async function main() {
     if (error) throw error;
     funds = data;
   }
-  if (!funds || funds.length === 0) { console.log('No funds left.'); return; }
+  if (!funds || funds.length === 0) {
+    console.log('No funds need AI content. Exiting.');
+    return;
+  }
   
-  console.log(`Batch of ${funds.length} funds`);
+  console.log(`Processing batch of ${funds.length} funds (batch size ${batchSize})`);
   let success = 0, fail = 0;
-  for (let i = 0; i < funds.length; i++) {
+  const lastCheckpoint = loadCheckpoint();
+  let startIdx = 0;
+  if (lastCheckpoint) {
+    const idx = funds.findIndex(f => f.scheme_code === lastCheckpoint);
+    if (idx !== -1) startIdx = idx + 1;
+  }
+  
+  for (let i = startIdx; i < funds.length; i++) {
     const ok = await generateContentForFund(funds[i]);
-    if (ok) success++; else fail++;
+    if (ok) {
+      success++;
+      saveCheckpoint(funds[i].scheme_code);
+    } else {
+      fail++;
+    }
     await new Promise(r => setTimeout(r, REQUEST_DELAY_MS));
   }
-  console.log(`✅ ${success} | ❌ ${fail}`);
+  console.log(`\n========== BATCH COMPLETE ==========`);
+  console.log(`✅ Success: ${success}`);
+  console.log(`❌ Failed: ${fail}`);
+  console.log(`====================================`);
 }
 
 main().catch(console.error);
