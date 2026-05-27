@@ -1,27 +1,33 @@
 import { createClient } from '@supabase/supabase-js';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import OpenAI from 'openai';
 import Groq from 'groq-sdk';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import crypto from 'crypto';
 import sanitizeHtml from 'sanitize-html';
-import WebSocket from 'ws';   // ✅ ADDED – fixes WebSocket error
+import WebSocket from 'ws';
 
 dotenv.config();
 
 // ======================================================
-// SUPABASE + AI CLIENTS (WebSocket fix applied)
+// SUPABASE + AI CLIENTS
 // ======================================================
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY,
   {
-    realtime: { transport: WebSocket }   // ✅ ADDED – prevents Node.js WebSocket error
+    realtime: { transport: WebSocket }
   }
 );
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+// Initialize OpenAI (primary generator)
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || process.env.OPENA_API_KEY,
+});
+
+// Optional Groq for polishing (set USE_GROQ_POLISH = false to disable)
+const groq = process.env.GROQ_API_KEY ? new Groq({ apiKey: process.env.GROQ_API_KEY }) : null;
+const USE_GROQ_POLISH = true;   // Set to false to save tokens/requests
 
 // ======================================================
 // CONFIG
@@ -50,7 +56,7 @@ function saveCheckpoint(code) {
 }
 
 // ======================================================
-// RANDOMIZATION HELPERS
+// RANDOMIZATION HELPERS (same as before – no change)
 // ======================================================
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -218,7 +224,7 @@ function getRandomHeading(variationsArray) {
 }
 
 // ======================================================
-// PROMPT BUILDER (all improvements)
+// PROMPT BUILDER (same as before – unchanged)
 // ======================================================
 function buildPrompt(fund, intro, cta, order, randomCalcLink, randomCatLink, includeTable, disclaimer, faqCount, ctaPosition) {
   const headingVars = getHeadingVariations(fund);
@@ -430,16 +436,26 @@ async function retryApiCall(fn, retries = MAX_RETRIES, delay = 2000) {
   }
 }
 
-async function generateWithGemini(prompt) {
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-  const result = await model.generateContent(prompt);
-  const text = await result.response.text();
+// ======================================================
+// OPENAI GENERATION (replaces Gemini)
+// ======================================================
+async function generateWithOpenAI(prompt) {
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: 'You are a senior financial content writer for Indian mutual funds.' },
+      { role: 'user', content: prompt }
+    ],
+    temperature: 0.7,
+    max_tokens: 4000,
+  });
+  const text = response.choices[0]?.message?.content;
   if (!text || text.length < 800) throw new Error('Generated content too short');
   return text;
 }
 
 async function polishSectionWithGroq(sectionHtml, sectionName) {
-  if (!sectionHtml || sectionHtml.length < 50) return sectionHtml;
+  if (!USE_GROQ_POLISH || !groq || !sectionHtml || sectionHtml.length < 50) return sectionHtml;
   const polishPrompt = `
 Rewrite this HTML section naturally like a human finance blogger.
 
@@ -516,9 +532,9 @@ async function generateContentForFund(fund) {
 
   let rawHtml;
   try {
-    rawHtml = await retryApiCall(() => generateWithGemini(prompt));
+    rawHtml = await retryApiCall(() => generateWithOpenAI(prompt));
   } catch (err) {
-    console.error(`Gemini failed: ${err.message}`);
+    console.error(`OpenAI generation failed: ${err.message}`);
     return false;
   }
 
@@ -531,14 +547,17 @@ async function generateContentForFund(fund) {
   let faq = extractSection(rawHtml, 'faq');
   let conclusion = extractSection(rawHtml, 'conclusion');
 
-  overview = await retryApiCall(() => polishSectionWithGroq(overview, 'overview'));
-  performance = await retryApiCall(() => polishSectionWithGroq(performance, 'performance'));
-  portfolio = await retryApiCall(() => polishSectionWithGroq(portfolio, 'portfolio'));
-  risk = await retryApiCall(() => polishSectionWithGroq(risk, 'risk'));
-  outlook = await retryApiCall(() => polishSectionWithGroq(outlook, 'outlook'));
-  proscons = await retryApiCall(() => polishSectionWithGroq(proscons, 'proscons'));
-  faq = await retryApiCall(() => polishSectionWithGroq(faq, 'faq'));
-  conclusion = await retryApiCall(() => polishSectionWithGroq(conclusion, 'conclusion'));
+  // Optional Groq polishing
+  if (USE_GROQ_POLISH && groq) {
+    overview = await retryApiCall(() => polishSectionWithGroq(overview, 'overview'));
+    performance = await retryApiCall(() => polishSectionWithGroq(performance, 'performance'));
+    portfolio = await retryApiCall(() => polishSectionWithGroq(portfolio, 'portfolio'));
+    risk = await retryApiCall(() => polishSectionWithGroq(risk, 'risk'));
+    outlook = await retryApiCall(() => polishSectionWithGroq(outlook, 'outlook'));
+    proscons = await retryApiCall(() => polishSectionWithGroq(proscons, 'proscons'));
+    faq = await retryApiCall(() => polishSectionWithGroq(faq, 'faq'));
+    conclusion = await retryApiCall(() => polishSectionWithGroq(conclusion, 'conclusion'));
+  }
 
   const performance_analysis = performance;
   const portfolio_analysis = portfolio;
