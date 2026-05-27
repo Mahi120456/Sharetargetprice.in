@@ -4,37 +4,25 @@ on:
   workflow_dispatch:
     inputs:
       batch_size:
-        description: 'Number of funds to process in this run'
+        description: 'Number of funds to process'
         required: false
         default: '10'
-        type: choice
-        options:
-          - '5'
-          - '10'
-          - '20'
-          - '50'
       start_from:
-        description: 'Start from index (0‑based) – useful for resuming'
+        description: 'Start index (0‑based)'
         required: false
         default: '0'
   schedule:
-    # Runs daily at 2:00 AM UTC (7:30 AM IST)
     - cron: '0 2 * * *'
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 300  # 5 hours max for large batches
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm install @supabase/supabase-js @google/generative-ai groq-sdk dotenv sanitize-html
