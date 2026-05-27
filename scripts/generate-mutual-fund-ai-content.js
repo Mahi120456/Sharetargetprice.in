@@ -5,15 +5,19 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import crypto from 'crypto';
 import sanitizeHtml from 'sanitize-html';
+import WebSocket from 'ws';   // ✅ ADDED – fixes WebSocket error
 
 dotenv.config();
 
 // ======================================================
-// SUPABASE + AI CLIENTS
+// SUPABASE + AI CLIENTS (WebSocket fix applied)
 // ======================================================
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.SUPABASE_SERVICE_KEY,
+  {
+    realtime: { transport: WebSocket }   // ✅ ADDED – prevents Node.js WebSocket error
+  }
 );
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -26,7 +30,7 @@ const REQUEST_DELAY_MS = 2500;
 const MAX_RETRIES = 3;
 const CHECKPOINT_FILE = 'mf_checkpoint.json';
 const CURRENT_YEAR = new Date().getFullYear();
-const MIN_CONTENT_LENGTH = 5000; // characters (~1000 words min)
+const MIN_CONTENT_LENGTH = 5000;
 
 // ======================================================
 // CHECKPOINT
@@ -46,7 +50,7 @@ function saveCheckpoint(code) {
 }
 
 // ======================================================
-// RANDOMIZATION HELPERS (avoid repetition)
+// RANDOMIZATION HELPERS
 // ======================================================
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -153,7 +157,7 @@ function getSectionOrder() {
 }
 
 // ======================================================
-// HEADING VARIATIONS (Long-tail SEO)
+// HEADING VARIATIONS
 // ======================================================
 function getHeadingVariations(fund) {
   const name = fund.scheme_name;
@@ -214,7 +218,7 @@ function getRandomHeading(variationsArray) {
 }
 
 // ======================================================
-// PROMPT BUILDER (all improvements integrated)
+// PROMPT BUILDER (all improvements)
 // ======================================================
 function buildPrompt(fund, intro, cta, order, randomCalcLink, randomCatLink, includeTable, disclaimer, faqCount, ctaPosition) {
   const headingVars = getHeadingVariations(fund);
@@ -246,7 +250,6 @@ function buildPrompt(fund, intro, cta, order, randomCalcLink, randomCatLink, inc
     sectionsInstruction += `${i+1}. ${sectionMap[key]}\n`;
   }
 
-  // CTA placement
   let ctaPlacement = '';
   if (ctaPosition === 'before_faq') {
     ctaPlacement = `Place the CTA "${cta}" just before the FAQ section.`;
@@ -394,7 +397,7 @@ Generate SEO optimized image alt text (3-4 variations) for the fund's thumbnail/
 }
 
 // ======================================================
-// HELPER FUNCTIONS (sanitization, retry, extraction)
+// HELPER FUNCTIONS
 // ======================================================
 function sanitizeHTML(html) {
   return sanitizeHtml(html, {
@@ -502,7 +505,7 @@ async function generateContentForFund(fund) {
   const intro = getRandomIntro(fund.scheme_name);
   const cta = getRandomCTA(fund.scheme_name);
   const order = getSectionOrder();
-  const randomCalcLink = getRandomCalculatorLink();       // ✅ fixed variable name
+  const randomCalcLink = getRandomCalculatorLink();
   const randomCatLink = getRandomCategoryLink(fund.category);
   const includeTable = shouldIncludeTable();
   const disclaimer = getRandomDisclaimer();
@@ -519,7 +522,6 @@ async function generateContentForFund(fund) {
     return false;
   }
 
-  // Extract sections
   let overview = extractSection(rawHtml, 'overview');
   let performance = extractSection(rawHtml, 'performance');
   let portfolio = extractSection(rawHtml, 'portfolio');
@@ -529,7 +531,6 @@ async function generateContentForFund(fund) {
   let faq = extractSection(rawHtml, 'faq');
   let conclusion = extractSection(rawHtml, 'conclusion');
 
-  // Polish sections with retry
   overview = await retryApiCall(() => polishSectionWithGroq(overview, 'overview'));
   performance = await retryApiCall(() => polishSectionWithGroq(performance, 'performance'));
   portfolio = await retryApiCall(() => polishSectionWithGroq(portfolio, 'portfolio'));
@@ -539,13 +540,11 @@ async function generateContentForFund(fund) {
   faq = await retryApiCall(() => polishSectionWithGroq(faq, 'faq'));
   conclusion = await retryApiCall(() => polishSectionWithGroq(conclusion, 'conclusion'));
 
-  // Combine analysis
   const performance_analysis = performance;
   const portfolio_analysis = portfolio;
   const risk_analysis = risk;
   const analysis = `${performance_analysis}\n\n${portfolio_analysis}\n\n${risk_analysis}`.trim();
 
-  // Extract extra data
   const alternativeTitlesRaw = extractExtra(rawHtml, '<!--META_TITLES_START-->', '<!--META_TITLES_END-->');
   let altTitles = alternativeTitlesRaw.split('\n').filter(t => t.trim().length > 0).slice(0, 3);
   const metaDescription = extractExtra(rawHtml, '<!--META_DESCRIPTION_START-->', '<!--META_DESCRIPTION_END-->');
@@ -556,7 +555,6 @@ async function generateContentForFund(fund) {
   const imageAltRaw = extractExtra(rawHtml, '<!--IMAGE_ALT_START-->', '<!--IMAGE_ALT_END-->');
   const imageAlt = imageAltRaw.substring(0, 300);
 
-  // Build full article (no extra headings)
   let fullArticle = `
 ${overview || ''}
 ${performance || ''}
@@ -568,13 +566,11 @@ ${faq || ''}
 ${conclusion || ''}
 `.trim();
 
-  // Clean up article (extra spaces and line breaks)
   fullArticle = fullArticle
     .replace(/\n{3,}/g, '\n\n')
     .replace(/\s+/g, ' ')
     .trim();
 
-  // Content length validation
   if (fullArticle.length < MIN_CONTENT_LENGTH) {
     console.log(`⚠️ Content too short (${fullArticle.length} chars), skipping ${fund.scheme_name}`);
     return false;
@@ -582,7 +578,6 @@ ${conclusion || ''}
 
   const contentHash = computeHash(fullArticle);
 
-  // Duplicate check
   const { data: existing } = await supabase
     .from('mutual_funds')
     .select('scheme_code')
@@ -593,12 +588,10 @@ ${conclusion || ''}
     return true;
   }
 
-  // Improve first title with fund house
   if (altTitles.length && altTitles[0]) {
     altTitles[0] = `${altTitles[0]} | ${fund.fund_house}`;
   }
 
-  // Build update data
   const updateData = {
     overview: overview || null,
     analysis: analysis || null,
