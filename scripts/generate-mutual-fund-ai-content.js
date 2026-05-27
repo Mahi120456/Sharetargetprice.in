@@ -169,9 +169,9 @@ Bas itna. Output sirf HTML do, uske baad ---METADATA--- aur metadata.`;
 }
 
 // ======================================================
-// SAFE PARSE RESPONSE – no undefined errors
+// SAFE PARSE RESPONSE – now accepts fund parameter
 // ======================================================
-function parseResponse(fullText) {
+function parseResponse(fullText, fund) {
   const parts = fullText.split(/---METADATA---/i);
   const articleHtml = parts[0]?.trim() || '';
   let metadataRaw = parts[1] ? parts[1].trim() : '';
@@ -289,7 +289,8 @@ async function generateContentForFund(fund) {
     return false;
   }
   
-  const parsed = parseResponse(raw);
+  // Pass fund to parseResponse
+  const parsed = parseResponse(raw, fund);
   const fullArticle = parsed.full_article;
   if (fullArticle.length < MIN_CONTENT_LENGTH) {
     console.log(`⚠️ Content too short (${fullArticle.length} chars), skipping ${fund.scheme_name}`);
