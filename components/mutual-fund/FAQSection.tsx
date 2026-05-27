@@ -27,10 +27,13 @@ export default function FAQSection({ content }: { content: string }) {
         let answer = '';
         let next = heading.nextElementSibling;
         while (next && !['H3', 'H4', 'STRONG'].includes(next.tagName)) {
-          if (next.tagName === 'P') answer += next.innerText + ' ';
+          if (next.tagName === 'P') {
+            // Use textContent instead of innerText
+            answer += (next.textContent || '') + ' ';
+          }
           next = next.nextElementSibling;
         }
-        const question = heading.innerText.trim();
+        const question = (heading.textContent || '').trim();
         const answerText = answer.trim();
         if (question && answerText) {
           items.push({ question, answer: answerText });
