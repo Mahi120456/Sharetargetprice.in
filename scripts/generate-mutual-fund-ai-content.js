@@ -704,6 +704,3 @@ async function main() {
 }
 
 main().catch(console.error);
-
-
-I think ye old script this jisse sab generate ho raha tha
