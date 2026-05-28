@@ -17,6 +17,8 @@ async function generateSitemap() {
     { url: '', priority: 1.0, freq: 'daily' },
     { url: '/all-stocks', priority: 0.9, freq: 'daily' },
     { url: '/calculators', priority: 0.9, freq: 'daily' },
+    { url: '/mutual-funds', priority: 0.9, freq: 'daily' },
+    { url: '/mutual-funds/top-performing-funds', priority: 0.8, freq: 'weekly' },
     { url: '/category/share-price-target', priority: 0.8, freq: 'daily' },
     { url: '/category/stock-analysis', priority: 0.8, freq: 'daily' },
     { url: '/category/ipo', priority: 0.7, freq: 'daily' },
@@ -53,9 +55,43 @@ async function generateSitemap() {
     .from('authors')
     .select('slug, updated_at');
 
+  // ========== MUTUAL FUNDS ==========
+  // 1. Individual fund pages
+  const { data: funds } = await supabase
+    .from('mutual_funds')
+    .select('slug, updated_at')
+    .order('scheme_name');
+
+  // 2. Unique categories
+  const { data: categoriesData } = await supabase
+    .from('mutual_funds')
+    .select('category')
+    .not('category', 'is', null);
+  const uniqueCategories = [...new Set(categoriesData?.map(c => c.category) || [])];
+  const categorySlugs = uniqueCategories.map(cat => 
+    cat.toLowerCase().replace(/ /g, '-')
+  );
+
+  // 3. Unique AMCs
+  const { data: amcsData } = await supabase
+    .from('mutual_funds')
+    .select('fund_house')
+    .not('fund_house', 'is', null);
+  const uniqueAMCs = [...new Set(amcsData?.map(a => a.fund_house) || [])];
+  const amcSlugs = uniqueAMCs.map(amc => 
+    amc.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+  );
+
+  // 4. Best funds categories (predefined)
+  const bestCategories = [
+    'large-cap', 'mid-cap', 'small-cap', 'elss', 'hybrid',
+    'multi-cap', 'flexi-cap', 'focused-fund', 'value-fund', 'contra-fund', 'dividend-yield'
+  ];
+  const bestFundsSlugs = bestCategories.map(cat => `/mutual-funds/best/${cat}`);
+
   let urls = [];
 
-  // Static pages
+  // Add static pages
   staticPages.forEach(page => {
     urls.push(`
   <url>
@@ -99,7 +135,7 @@ async function generateSitemap() {
   </url>`);
   });
 
-  // Author pages
+  // Authors
   (authors || []).forEach(author => {
     urls.push(`
   <url>
@@ -107,6 +143,50 @@ async function generateSitemap() {
     <lastmod>${author.updated_at || now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>`);
+  });
+
+  // Mutual Fund Individual Pages
+  (funds || []).forEach(fund => {
+    urls.push(`
+  <url>
+    <loc>${baseUrl}/mutual-funds/${fund.slug}</loc>
+    <lastmod>${fund.updated_at || now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`);
+  });
+
+  // Category Pages
+  categorySlugs.forEach(slug => {
+    urls.push(`
+  <url>
+    <loc>${baseUrl}/mutual-funds/category/${slug}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>`);
+  });
+
+  // AMC Pages
+  amcSlugs.forEach(slug => {
+    urls.push(`
+  <url>
+    <loc>${baseUrl}/mutual-funds/amc/${slug}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>`);
+  });
+
+  // Best Funds Pages
+  bestFundsSlugs.forEach(url => {
+    urls.push(`
+  <url>
+    <loc>${baseUrl}${url}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>`);
   });
 
