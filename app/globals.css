@@ -536,9 +536,7 @@
   margin: 0 0 0.25rem 0 !important;
 }
 
-/* ========== HIDE DUPLICATE HEADINGS INSIDE MUTUAL FUND CONTENT ========== */
-/* Hide first h2 inside each mutual fund content block (prevents double heading) */
-.mutual-fund-content > :first-child > h2:first-child,
-.mutual-fund-content > h2:first-child {
+/* Hide the outer section heading (from Section component) – keep inner AI heading */
+.bg-white.rounded-xl.border.border-gray-100.p-5 > h2.border-l-4.border-orange-500 {
   display: none;
 }
