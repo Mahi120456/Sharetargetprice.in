@@ -27,6 +27,7 @@ import ProsCons from '@/components/mutual-fund/ProsCons';
 import FAQSection from '@/components/mutual-fund/FAQSection';
 import RelatedFunds from '@/components/mutual-fund/RelatedFunds';
 import ComparisonLinks from '@/components/mutual-fund/ComparisonLinks';
+import FundExtraStats from '@/components/mutual-fund/FundExtraStats';   // ✅ New component
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 86400;
@@ -135,25 +136,20 @@ export default async function MutualFundPage({ params }: { params: { slug: strin
           <StatCard icon={<Clock className="w-5 h-5" />} label="Exit Load" value={fund.exit_load || 'Nil'} />
         </div>
 
-        {/* Riskometer & Holdings row (side by side on desktop) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-orange-500" />
-              Riskometer
-            </h2>
-            <Riskometer fund={fund} />
-          </div>
-          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-              <PieChart className="w-5 h-5 text-orange-500" />
-              Top Holdings
-            </h2>
-            <TopHoldings holdings={fund.top_holdings} date={fund.holdings_date} />
-          </div>
+        {/* Riskometer */}
+        <div className="mb-8">
+          <Riskometer fund={fund} />
         </div>
 
-        {/* AI Content Sections (with improved prose styling) */}
+        {/* ✅ Extra stats – Fund Manager, Volatility, Sharpe Ratio, Asset Allocation, Investment Objective, etc. */}
+        <FundExtraStats fund={fund} />
+
+        {/* Top Holdings */}
+        <div className="mb-8">
+          <TopHoldings holdings={fund.top_holdings} date={fund.holdings_date} />
+        </div>
+
+        {/* AI Content Sections */}
         <div className="space-y-10">
           {fund.overview && (
             <Section title="Overview">
@@ -237,7 +233,6 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-5 md:p-6 shadow-sm">
       <h2 className="text-xl font-bold text-gray-800 mb-4 border-l-4 border-orange-500 pl-3">{title}</h2>
-      {/* mutual-fund-content class added for spacing control */}
       <div className="mutual-fund-content">
         {children}
       </div>
