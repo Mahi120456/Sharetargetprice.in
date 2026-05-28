@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, TrendingUp, PieChart, DollarSign, Calendar, Clock, Building2, BarChart3 } from 'lucide-react';
+import pairs from '../../../../comparison-pairs.json';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 86400;
@@ -32,30 +33,39 @@ interface Fund {
   benchmark?: string;
 }
 
-async function getFundsFromSlugs(slug1: string, slug2: string): Promise<[Fund | null, Fund | null]> {
-  const { data: fund1 } = await supabase
-    .from('mutual_funds')
-    .select('*')
-    .eq('slug', slug1)
-    .single();
-  const { data: fund2 } = await supabase
-    .from('mutual_funds')
-    .select('*')
-    .eq('slug', slug2)
-    .single();
-  return [fund1, fund2];
+// Pre‑generate all short slug pages (top 100 funds pairs)
+export async function generateStaticParams() {
+  if (!pairs || !Array.isArray(pairs)) return [];
+  return pairs.map(p => ({ slug: p.shortSlug }));
 }
 
-function parseCompareSlug(compareSlug: string): { slug1: string; slug2: string } | null {
+// Helper to get original slugs from short slug (using JSON) or fallback to direct parsing
+function getOriginalSlugs(compareSlug: string): { slug1: string; slug2: string } | null {
+  // First try short slug mapping
+  if (pairs && Array.isArray(pairs)) {
+    const pair = pairs.find(p => p.shortSlug === compareSlug);
+    if (pair) return { slug1: pair.slug1, slug2: pair.slug2 };
+  }
+  // Fallback to legacy format: slug1-vs-slug2
   const parts = compareSlug.split('-vs-');
-  if (parts.length !== 2) return null;
-  return { slug1: parts[0], slug2: parts[1] };
+  if (parts.length === 2) return { slug1: parts[0], slug2: parts[1] };
+  return null;
+}
+
+async function getFund(slug: string): Promise<Fund | null> {
+  const { data, error } = await supabase
+    .from('mutual_funds')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+  if (error) return null;
+  return data as Fund;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const parsed = parseCompareSlug(params.slug);
-  if (!parsed) return { title: 'Invalid Comparison' };
-  const [fund1, fund2] = await getFundsFromSlugs(parsed.slug1, parsed.slug2);
+  const slugs = getOriginalSlugs(params.slug);
+  if (!slugs) return { title: 'Invalid Comparison' };
+  const [fund1, fund2] = await Promise.all([getFund(slugs.slug1), getFund(slugs.slug2)]);
   if (!fund1 || !fund2) return { title: 'Fund Not Found' };
   return {
     title: `${fund1.scheme_name} vs ${fund2.scheme_name} - Compare Mutual Funds | ShareTargetPrice`,
@@ -97,10 +107,10 @@ function formatPercentage(value: number | null | undefined) {
 }
 
 export default async function ComparePage({ params }: { params: { slug: string } }) {
-  const parsed = parseCompareSlug(params.slug);
-  if (!parsed) notFound();
+  const slugs = getOriginalSlugs(params.slug);
+  if (!slugs) notFound();
 
-  const [fund1, fund2] = await getFundsFromSlugs(parsed.slug1, parsed.slug2);
+  const [fund1, fund2] = await Promise.all([getFund(slugs.slug1), getFund(slugs.slug2)]);
   if (!fund1 || !fund2) notFound();
 
   // Helper to compare values and highlight better one
@@ -128,7 +138,6 @@ export default async function ComparePage({ params }: { params: { slug: string }
     return '';
   };
 
-  // Parse top holdings for tooltip (optional)
   const getTopHoldingsPreview = (holdings: string | undefined) => {
     if (!holdings) return 'N/A';
     const items = holdings.split('|').slice(0, 3).map(h => h.trim());
@@ -278,7 +287,7 @@ export default async function ComparePage({ params }: { params: { slug: string }
                 </tr>
 
                 {/* Top Holdings Preview */}
-                <tr>
+                <tr className="border-b">
                   <td className="px-4 py-3 font-medium text-gray-700">Top 3 Holdings</td>
                   <td className="px-4 py-3 text-xs">{getTopHoldingsPreview(fund1.top_holdings)}</td>
                   <td className="px-4 py-3 text-xs">{getTopHoldingsPreview(fund2.top_holdings)}</td>
