@@ -580,35 +580,51 @@
   }
 }
 
-/* ========== MUTUAL FUND CONTENT SPACING FIX ========== */
-/* Reduce spacing between headings and paragraphs specifically for .mutual-fund-content */
-.mutual-fund-content h2,
-.mutual-fund-content h3 {
-  margin-top: 0.75rem !important;
-  margin-bottom: 0.5rem !important;
+/* ========== EXTREME TIGHT SPACING FOR MUTUAL FUND CONTENT ========== */
+.mutual-fund-content {
+  line-height: 1.5;
 }
 
-.mutual-fund-content p {
-  margin-top: 0.25rem !important;
-  margin-bottom: 0.75rem !important;
+.mutual-fund-content h2 {
+  margin: 0.5rem 0 0.25rem 0 !important;
+  font-size: 1.4rem !important;
+}
+
+.mutual-fund-content h3 {
+  margin: 0.4rem 0 0.2rem 0 !important;
+  font-size: 1.2rem !important;
+}
+
+.mutual-fund-content p,
+.mutual-fund-content div:not(.table-of-contents):not(.author-note) {
+  margin: 0 0 0.5rem 0 !important;
 }
 
 .mutual-fund-content ul,
 .mutual-fund-content ol {
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.75rem !important;
+  margin: 0.25rem 0 0.5rem 1.2rem !important;
 }
 
 .mutual-fund-content li {
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.2rem !important;
+  margin: 0.1rem 0 !important;
 }
 
-.mutual-fund-content .table-of-contents {
-  margin-bottom: 1rem !important;
+/* Target plain text nodes that are direct children */
+.mutual-fund-content > :not(h2):not(h3):not(ul):not(ol):not(div) {
+  margin: 0 0 0.5rem 0 !important;
+  display: block;
 }
 
-.mutual-fund-content .author-note {
-  margin-top: 0.5rem !important;
-  margin-bottom: 1rem !important;
+/* Remove extra space from first and last child */
+.mutual-fund-content > :first-child {
+  margin-top: 0 !important;
+}
+.mutual-fund-content > :last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Specifically for disclaimer box */
+.mutual-fund-content .bg-amber-50 {
+  margin: 0.75rem 0 !important;
+  padding: 0.75rem !important;
 }
