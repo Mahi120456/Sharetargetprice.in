@@ -579,3 +579,36 @@
     background-color: #111827;
   }
 }
+
+/* ========== MUTUAL FUND CONTENT SPACING FIX ========== */
+/* Reduce spacing between headings and paragraphs specifically for .mutual-fund-content */
+.mutual-fund-content h2,
+.mutual-fund-content h3 {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.mutual-fund-content p {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.mutual-fund-content ul,
+.mutual-fund-content ol {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.mutual-fund-content li {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.mutual-fund-content .table-of-contents {
+  margin-bottom: 1rem !important;
+}
+
+.mutual-fund-content .author-note {
+  margin-top: 0.5rem !important;
+  margin-bottom: 1rem !important;
+}
