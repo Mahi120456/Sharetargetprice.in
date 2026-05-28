@@ -2,20 +2,19 @@ import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, TrendingUp, PieChart, DollarSign, BarChart3 } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
-// Revalidate every 24 hours
 export const revalidate = 86400;
 export const dynamicParams = true;
 
-// Generate static paths for all categories
 export async function generateStaticParams() {
   const { data } = await supabase
     .from('mutual_funds')
     .select('category')
     .not('category', 'is', null);
   
-  const uniqueCategories = [...new Set(data?.map(item => item.category) || [])];
+  // Fixed: Array.from instead of spread operator
+  const uniqueCategories = Array.from(new Set(data?.map(item => item.category) || []));
   
   return uniqueCategories.map(category => ({
     category: encodeURIComponent(category.toLowerCase().replace(/ /g, '-'))
@@ -23,7 +22,6 @@ export async function generateStaticParams() {
 }
 
 async function getCategoryFunds(categorySlug: string) {
-  // Convert slug back to category name (e.g., "large-cap" -> "Large Cap")
   const categoryName = categorySlug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -77,13 +75,11 @@ export default async function CategoryPage({ params }: { params: { category: str
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-6xl">
         
-        {/* Back link */}
         <Link href="/mutual-funds" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-600 transition-colors mb-6 group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           Back to all funds
         </Link>
 
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
             {categoryName} Mutual Funds
@@ -97,7 +93,6 @@ export default async function CategoryPage({ params }: { params: { category: str
           </div>
         </div>
 
-        {/* Fund Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {funds.map((fund) => (
             <Link
@@ -160,7 +155,6 @@ export default async function CategoryPage({ params }: { params: { category: str
           ))}
         </div>
 
-        {/* Disclaimer */}
         <div className="mt-10 bg-amber-50/70 border border-amber-100 rounded-xl p-4 text-sm text-amber-800">
           <strong>Disclaimer:</strong> Mutual fund investments are subject to market risks. Past performance does not guarantee future returns. Please read scheme documents carefully.
         </div>
