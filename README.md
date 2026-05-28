@@ -139,4 +139,4 @@ sharetargetprice/
 
 Koi bhi problem aaye toh Claude se poochho! 😊
 
-error 
+error transfer to pro
