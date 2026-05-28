@@ -2,12 +2,17 @@ import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import Groq from 'groq-sdk';
 import fs from 'fs';
+import WebSocket from 'ws';  // ✅ Add this import
 
 dotenv.config();
 
+// ✅ Add transport option to supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.SUPABASE_SERVICE_KEY,
+  {
+    realtime: { transport: WebSocket }  // ✅ Fix WebSocket error
+  }
 );
 
 // ---------- Load Balancer for 4 Groq API Keys ----------
