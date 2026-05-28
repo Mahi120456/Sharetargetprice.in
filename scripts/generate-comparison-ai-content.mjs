@@ -2,16 +2,15 @@ import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import Groq from 'groq-sdk';
 import fs from 'fs';
-import WebSocket from 'ws';  // ✅ Add this import
+import WebSocket from 'ws';
 
 dotenv.config();
 
-// ✅ Add transport option to supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY,
   {
-    realtime: { transport: WebSocket }  // ✅ Fix WebSocket error
+    realtime: { transport: WebSocket }
   }
 );
 
@@ -30,7 +29,7 @@ function getNextGroqClient() {
   return new Groq({ apiKey: key });
 }
 
-// ---------- Short Slug Generator (matches lib/shortSlug.ts) ----------
+// ---------- Short Slug Generator ----------
 function getShortSlug(name) {
   let slug = name
     .toLowerCase()
@@ -43,14 +42,12 @@ function getShortSlug(name) {
   return slug;
 }
 
-// ---------- Build Prompt (Strictly Database-Only, Natural Hinglish) ----------
+// ---------- Build Prompt ----------
 function buildPrompt(f1, f2) {
-  // Helper to format top holdings
   const topHoldingsStr = (holdings) => {
     if (!holdings) return 'N/A';
     return holdings.split('|').slice(0, 3).map(h => h.trim()).join(', ');
   };
-
   return `You are a senior SEBI-registered financial advisor writing for Indian investors.
 You MUST use ONLY the data given below. NEVER invent any number, fact, or external knowledge.
 If a data point is missing, write "N/A". Write in natural Hinglish (Hindi words in English script) – friendly, conversational, and expert.
@@ -124,17 +121,9 @@ Now write these 6 sections. Use the exact heading tags. Do not add extra comment
 `;
 }
 
-// ---------- Parse the AI Response into Sections ----------
+// ---------- Parse AI Response ----------
 function parseSections(rawHtml, slug) {
-  const sections = {
-    slug,
-    intro: '',
-    verdict: '',
-    sip_suitability: '',
-    risk_cost: '',
-    portfolio_insight: '',
-    faq: '',
-  };
+  const sections = { slug, intro: '', verdict: '', sip_suitability: '', risk_cost: '', portfolio_insight: '', faq: '' };
   const introMatch = rawHtml.match(/<h2>📝 Introduction<\/h2>([\s\S]*?)(?=<h2>🤖 Our Verdict|$)/i);
   if (introMatch) sections.intro = introMatch[1].trim();
   const verdictMatch = rawHtml.match(/<h2>🤖 Our Verdict – Which Fund is Better\?<\/h2>([\s\S]*?)(?=<h2>📈 SIP Suitability|$)/i);
@@ -150,7 +139,7 @@ function parseSections(rawHtml, slug) {
   return sections;
 }
 
-// ---------- Generate Content for One Comparison Pair ----------
+// ---------- Generate For One Pair ----------
 async function generateForPair(fund1, fund2, shortSlug) {
   const prompt = buildPrompt(fund1, fund2);
   const groq = getNextGroqClient();
@@ -160,7 +149,7 @@ async function generateForPair(fund1, fund2, shortSlug) {
         { role: 'system', content: 'You are an AI that strictly uses only the provided data. Never invent numbers, facts, or external knowledge. If data missing, say "N/A".' },
         { role: 'user', content: prompt }
       ],
-      model: 'llama3-70b-8192',
+      model: 'llama-3.3-70b-versatile',   // ✅ changed from deprecated model
       temperature: 0.7,
       max_tokens: 2000,
     });
@@ -186,27 +175,17 @@ async function generateForPair(fund1, fund2, shortSlug) {
   }
 }
 
-// ---------- Main: Fetch Top 100 Funds, Generate All Pairs, Process in Batches ----------
+// ---------- Main ----------
 async function main() {
-  // 1. Fetch top 100 funds by AUM
   const { data: funds } = await supabase
     .from('mutual_funds')
     .select('slug, scheme_name, aum, category, returns_1y, returns_3y, returns_5y, riskometer, volatility, sharpe_ratio, expense_ratio, asset_allocation, top_holdings')
     .not('aum', 'is', null)
     .order('aum', { ascending: false })
     .limit(100);
-  if (!funds || funds.length === 0) {
-    console.log('No funds found');
-    return;
-  }
+  if (!funds || funds.length === 0) return;
 
-  // 2. Attach short slug
-  const fundsWithShort = funds.map(f => ({
-    ...f,
-    shortSlug: getShortSlug(f.scheme_name),
-  }));
-
-  // 3. Generate all unique pairs
+  const fundsWithShort = funds.map(f => ({ ...f, shortSlug: getShortSlug(f.scheme_name) }));
   const pairs = [];
   for (let i = 0; i < fundsWithShort.length; i++) {
     for (let j = i+1; j < fundsWithShort.length; j++) {
@@ -219,7 +198,6 @@ async function main() {
   }
   console.log(`Total pairs: ${pairs.length}`);
 
-  // 4. Checkpoint – resume from last processed
   const checkpointFile = 'comparison-ai-checkpoint.json';
   let processed = new Set();
   if (fs.existsSync(checkpointFile)) {
@@ -227,7 +205,6 @@ async function main() {
     processed = new Set(data.processed || []);
   }
 
-  const BATCH_SIZE = 10;
   let successCount = 0;
   for (let i = 0; i < pairs.length; i++) {
     const pair = pairs[i];
@@ -240,14 +217,12 @@ async function main() {
       processed.add(pair.shortSlug);
       successCount++;
     }
-    // Save checkpoint every 5 pairs
     if ((i+1) % 5 === 0) {
       fs.writeFileSync(checkpointFile, JSON.stringify({ processed: Array.from(processed) }, null, 2));
     }
-    // Delay to avoid rate limits
     await new Promise(r => setTimeout(r, 1000));
   }
-  console.log(`\n🎉 Done. Successfully generated ${successCount} out of ${pairs.length} comparison pages.`);
+  console.log(`🎉 Done. Successfully generated ${successCount} out of ${pairs.length}`);
 }
 
 main().catch(console.error);
