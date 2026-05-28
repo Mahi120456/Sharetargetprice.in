@@ -167,7 +167,7 @@ export default async function MutualFundPage({ params }: { params: { slug: strin
           )}
           {fund.future_outlook && (
             <Section title="Who Should Invest?">
-              <div className="prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: fund.future_outlook }} />
+              <div dangerouslySetInnerHTML={{ __html: fund.future_outlook }} />
             </Section>
           )}
           {fund.pros_cons && (
@@ -237,7 +237,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-5 md:p-6 shadow-sm">
       <h2 className="text-xl font-bold text-gray-800 mb-4 border-l-4 border-orange-500 pl-3">{title}</h2>
-      <div className="prose prose-slate max-w-none">{children}</div>
+      {/* Added mutual-fund-content class for spacing control */}
+      <div className="prose prose-slate max-w-none mutual-fund-content">
+        {children}
+      </div>
     </div>
   );
 }
