@@ -171,7 +171,6 @@
     font-weight: 600;
   }
 
-  /* Card hover etc */
   .card-hover {
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
   }
@@ -225,7 +224,6 @@
     white-space: nowrap;
   }
 
-  /* Prose overrides */
   .prose {
     max-width: none;
     color: #374151;
@@ -419,32 +417,103 @@
   }
 }
 
-/* ========== EXTREME TIGHT SPACING FOR MUTUAL FUND CONTENT ========== */
+/* ========== IMPROVED TYPOGRAPHY FOR MUTUAL FUND CONTENT ========== */
 .mutual-fund-content {
-  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.65;
+  font-size: 1rem;
+  color: #1e293b;
+  max-width: 75ch;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+/* Headings */
 .mutual-fund-content h2 {
-  margin: 0.5rem 0 0.25rem 0 !important;
-  font-size: 1.4rem !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  margin: 1.2rem 0 0.5rem 0 !important;
+  border-left: 4px solid #f97316;
+  padding-left: 0.75rem;
+  color: #0f172a;
 }
 .mutual-fund-content h3 {
-  margin: 0.4rem 0 0.2rem 0 !important;
-  font-size: 1.2rem !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin: 1rem 0 0.4rem 0 !important;
+  color: #ea580c;
+  letter-spacing: -0.3px;
 }
-.mutual-fund-content p,
-.mutual-fund-content div:not(.table-of-contents):not(.author-note) {
-  margin: 0 0 0.5rem 0 !important;
+.mutual-fund-content h4 {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin: 0.75rem 0 0.25rem 0 !important;
+  color: #334155;
 }
+
+/* Paragraphs */
+.mutual-fund-content p {
+  margin-bottom: 1rem !important;
+  line-height: 1.65;
+  font-size: 1rem;
+}
+
+/* Lists */
 .mutual-fund-content ul,
 .mutual-fund-content ol {
-  margin: 0.25rem 0 0.5rem 1.2rem !important;
+  margin: 0.5rem 0 1rem 1.5rem !important;
+  padding-left: 0.5rem;
 }
 .mutual-fund-content li {
-  margin: 0.1rem 0 !important;
+  margin: 0.3rem 0 !important;
+  line-height: 1.5;
 }
-.mutual-fund-content > :not(h2):not(h3):not(ul):not(ol):not(div) {
-  margin: 0 0 0.5rem 0 !important;
-  display: block;
+.mutual-fund-content strong {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Blockquotes / disclaimer boxes */
+.mutual-fund-content .bg-amber-50 {
+  margin: 0.75rem 0 !important;
+  padding: 0.75rem !important;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-radius: 0.75rem;
+}
+
+/* Table of Contents (if present) */
+.mutual-fund-content .table-of-contents {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.mutual-fund-content .author-note {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+/* Responsive font sizes */
+@media (min-width: 768px) {
+  .mutual-fund-content {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .mutual-fund-content p {
+    font-size: 1.05rem;
+  }
+  .mutual-fund-content h2 {
+    font-size: 1.75rem !important;
+  }
+  .mutual-fund-content h3 {
+    font-size: 1.35rem !important;
+  }
+}
+
+/* Spacing overrides for compactness (optional, keeps readability) */
+.mutual-fund-content > * + * {
+  margin-top: 0.25rem;
 }
 .mutual-fund-content > :first-child {
   margin-top: 0 !important;
@@ -452,18 +521,8 @@
 .mutual-fund-content > :last-child {
   margin-bottom: 0 !important;
 }
-.mutual-fund-content .bg-amber-50 {
-  margin: 0.75rem 0 !important;
-  padding: 0.75rem !important;
-}
 
-/* ========== PROS & CONS + FAQ FINAL SPACING FIX ========== */
-.mutual-fund-content ul:has(li strong) {
-  margin: 0.25rem 0 0.5rem 1rem !important;
-}
-.mutual-fund-content ul ul {
-  margin: 0.1rem 0 0.2rem 1.2rem !important;
-}
+/* Fix for FAQ schema spacing */
 .mutual-fund-content [itemscope] {
   margin: 0.5rem 0 !important;
 }
