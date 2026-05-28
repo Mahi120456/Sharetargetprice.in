@@ -535,3 +535,10 @@
 .mutual-fund-content [itemprop="acceptedAnswer"] span {
   margin: 0 0 0.25rem 0 !important;
 }
+
+/* ========== HIDE DUPLICATE HEADINGS INSIDE MUTUAL FUND CONTENT ========== */
+/* Hide first h2 inside each mutual fund content block (prevents double heading) */
+.mutual-fund-content > :first-child > h2:first-child,
+.mutual-fund-content > h2:first-child {
+  display: none;
+}
