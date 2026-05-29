@@ -3,24 +3,37 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Use service role key for full access (optional but recommended)
+// Use service role key for full access
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+// Helper to generate short slug (must match the one used in comparison pages)
+function getShortSlugFromName(name) {
+  let slug = name
+    .toLowerCase()
+    .replace(/ - direct plan( - growth)?/gi, '')
+    .replace(/ - growth option/gi, '')
+    .replace(/ fund/gi, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+  if (slug.length > 35) slug = slug.substring(0, 35).replace(/-$/, '');
+  return slug;
+}
+
 async function generateSitemap() {
   const baseUrl = 'https://sharetargetprice.in';
   const now = new Date().toISOString();
 
-  // Static pages (including new comparison listing)
+  // Static pages (including comparison listing)
   const staticPages = [
     { url: '', priority: 1.0, freq: 'daily' },
     { url: '/all-stocks', priority: 0.9, freq: 'daily' },
     { url: '/calculators', priority: 0.9, freq: 'daily' },
     { url: '/mutual-funds', priority: 0.9, freq: 'daily' },
     { url: '/mutual-funds/top-performing-funds', priority: 0.8, freq: 'weekly' },
-    { url: '/mutual-funds/comparisons', priority: 0.8, freq: 'weekly' },   // ✅ New
+    { url: '/mutual-funds/comparisons', priority: 0.8, freq: 'weekly' },
     { url: '/category/share-price-target', priority: 0.8, freq: 'daily' },
     { url: '/category/stock-analysis', priority: 0.8, freq: 'daily' },
     { url: '/category/ipo', priority: 0.7, freq: 'daily' },
@@ -58,45 +71,58 @@ async function generateSitemap() {
     .select('slug, updated_at');
 
   // ========== MUTUAL FUNDS ==========
-  // 1. Individual fund pages
+  // Individual fund pages
   const { data: funds } = await supabase
     .from('mutual_funds')
     .select('slug, updated_at')
     .order('scheme_name');
 
-  // 2. Unique categories
+  // Unique categories
   const { data: categoriesData } = await supabase
     .from('mutual_funds')
     .select('category')
     .not('category', 'is', null);
   const uniqueCategories = [...new Set(categoriesData?.map(c => c.category) || [])];
-  const categorySlugs = uniqueCategories.map(cat => 
-    cat.toLowerCase().replace(/ /g, '-')
-  );
+  const categorySlugs = uniqueCategories.map(cat => cat.toLowerCase().replace(/ /g, '-'));
 
-  // 3. Unique AMCs
+  // Unique AMCs
   const { data: amcsData } = await supabase
     .from('mutual_funds')
     .select('fund_house')
     .not('fund_house', 'is', null);
   const uniqueAMCs = [...new Set(amcsData?.map(a => a.fund_house) || [])];
-  const amcSlugs = uniqueAMCs.map(amc => 
+  const amcSlugs = uniqueAMCs.map(amc =>
     amc.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
   );
 
-  // 4. Best funds categories (predefined)
+  // Best funds categories (predefined)
   const bestCategories = [
     'large-cap', 'mid-cap', 'small-cap', 'elss', 'hybrid',
     'multi-cap', 'flexi-cap', 'focused-fund', 'value-fund', 'contra-fund', 'dividend-yield'
   ];
   const bestFundsSlugs = bestCategories.map(cat => `/mutual-funds/best/${cat}`);
 
-  // ========== NEW: Comparison Pages ==========
-  // Fetch all short slugs from the comparison_ai_content table
-  const { data: comparisonPages } = await supabase
-    .from('comparison_ai_content')
-    .select('slug, updated_at')
-    .order('slug', { ascending: true });
+  // ========== GENERATE ALL COMPARISON PAGES (4950) ==========
+  // Fetch top 100 funds by AUM (needed for static generation)
+  const { data: topFunds } = await supabase
+    .from('mutual_funds')
+    .select('scheme_name')
+    .not('aum', 'is', null)
+    .order('aum', { ascending: false })
+    .limit(100);
+
+  let comparisonSlugs = [];
+  if (topFunds && topFunds.length) {
+    const shortSlugs = topFunds.map(f => getShortSlugFromName(f.scheme_name));
+    for (let i = 0; i < shortSlugs.length; i++) {
+      for (let j = i + 1; j < shortSlugs.length; j++) {
+        comparisonSlugs.push(`${shortSlugs[i]}-vs-${shortSlugs[j]}`);
+      }
+    }
+    console.log(`Generated ${comparisonSlugs.length} comparison page slugs (4950 expected)`);
+  } else {
+    console.warn('Could not fetch top 100 funds, comparison pages will be missing from sitemap');
+  }
 
   let urls = [];
 
@@ -189,22 +215,22 @@ async function generateSitemap() {
   });
 
   // Best Funds Pages
-  bestFundsSlugs.forEach(url => {
+  bestFundsSlugs.forEach(urlPath => {
     urls.push(`
   <url>
-    <loc>${baseUrl}${url}</loc>
+    <loc>${baseUrl}${urlPath}</loc>
     <lastmod>${now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`);
   });
 
-  // ✅ Comparison Pages (5000+)
-  (comparisonPages || []).forEach(page => {
+  // ✅ Add all generated comparison pages (4950+)
+  comparisonSlugs.forEach(slug => {
     urls.push(`
   <url>
-    <loc>${baseUrl}/mutual-funds/compare/${page.slug}</loc>
-    <lastmod>${page.updated_at || now}</lastmod>
+    <loc>${baseUrl}/mutual-funds/compare/${slug}</loc>
+    <lastmod>${now}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>`);
@@ -215,7 +241,7 @@ async function generateSitemap() {
 </urlset>`;
 
   fs.writeFileSync('./public/sitemap.xml', sitemap);
-  console.log(`✅ Sitemap generated with ${urls.length} URLs (including ${comparisonPages?.length || 0} comparison pages)`);
+  console.log(`✅ Sitemap generated with ${urls.length} URLs (including ${comparisonSlugs.length} comparison pages)`);
 }
 
 generateSitemap().catch(console.error);
