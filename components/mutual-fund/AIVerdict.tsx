@@ -10,9 +10,9 @@ export default async function AIVerdict({ slug }: { slug: string }) {
   if (error || !data?.verdict) return null;
 
   return (
-    <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl border border-orange-100 p-5 shadow-sm my-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">🤖 AI Verdict – Which is Better?</h2>
-      <p className="text-gray-700 leading-relaxed">{data.verdict}</p>
+    <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl border border-orange-100 p-5 my-6">
+      <h2 className="text-xl font-bold mb-2 flex items-center gap-2">🤖 AI Verdict – Which is Better?</h2>
+      <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: data.verdict }} />
     </div>
   );
 }
