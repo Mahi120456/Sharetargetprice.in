@@ -3,22 +3,24 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 dotenv.config();
 
+// Use service role key for full access (optional but recommended)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  process.env.SUPABASE_SERVICE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 async function generateSitemap() {
   const baseUrl = 'https://sharetargetprice.in';
   const now = new Date().toISOString();
 
-  // Static pages
+  // Static pages (including new comparison listing)
   const staticPages = [
     { url: '', priority: 1.0, freq: 'daily' },
     { url: '/all-stocks', priority: 0.9, freq: 'daily' },
     { url: '/calculators', priority: 0.9, freq: 'daily' },
     { url: '/mutual-funds', priority: 0.9, freq: 'daily' },
     { url: '/mutual-funds/top-performing-funds', priority: 0.8, freq: 'weekly' },
+    { url: '/mutual-funds/comparisons', priority: 0.8, freq: 'weekly' },   // ✅ New
     { url: '/category/share-price-target', priority: 0.8, freq: 'daily' },
     { url: '/category/stock-analysis', priority: 0.8, freq: 'daily' },
     { url: '/category/ipo', priority: 0.7, freq: 'daily' },
@@ -88,6 +90,13 @@ async function generateSitemap() {
     'multi-cap', 'flexi-cap', 'focused-fund', 'value-fund', 'contra-fund', 'dividend-yield'
   ];
   const bestFundsSlugs = bestCategories.map(cat => `/mutual-funds/best/${cat}`);
+
+  // ========== NEW: Comparison Pages ==========
+  // Fetch all short slugs from the comparison_ai_content table
+  const { data: comparisonPages } = await supabase
+    .from('comparison_ai_content')
+    .select('slug, updated_at')
+    .order('slug', { ascending: true });
 
   let urls = [];
 
@@ -190,12 +199,23 @@ async function generateSitemap() {
   </url>`);
   });
 
+  // ✅ Comparison Pages (5000+)
+  (comparisonPages || []).forEach(page => {
+    urls.push(`
+  <url>
+    <loc>${baseUrl}/mutual-funds/compare/${page.slug}</loc>
+    <lastmod>${page.updated_at || now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`);
+  });
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.join('')}
 </urlset>`;
 
   fs.writeFileSync('./public/sitemap.xml', sitemap);
-  console.log(`✅ Sitemap generated with ${urls.length} URLs`);
+  console.log(`✅ Sitemap generated with ${urls.length} URLs (including ${comparisonPages?.length || 0} comparison pages)`);
 }
 
 generateSitemap().catch(console.error);
