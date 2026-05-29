@@ -17,7 +17,6 @@ function getShortSlugFromName(name: string): string {
 }
 
 async function getAllComparisons() {
-  // Fetch all funds to build map
   const { data: funds } = await supabase.from('mutual_funds').select('*');
   const fundMap = new Map();
   funds?.forEach(f => {
@@ -25,7 +24,6 @@ async function getAllComparisons() {
     fundMap.set(short, f);
   });
 
-  // Fetch all comparison slugs
   const { data: comparisons, error } = await supabase
     .from('comparison_ai_content')
     .select('slug')
@@ -33,7 +31,6 @@ async function getAllComparisons() {
 
   if (error || !comparisons) return [];
 
-  // Enrich with fund details
   const enriched = comparisons
     .map(c => {
       const [slug1, slug2] = c.slug.split('-vs-');
