@@ -2,8 +2,7 @@ import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowLeft, TrendingUp, Shield, PieChart, DollarSign, Calendar, Clock, Building2, BarChart3, Activity, Award, Zap } from 'lucide-react';
+import { ArrowLeft, TrendingUp, Shield, PieChart, DollarSign, Calendar, Clock, Building2, BarChart3, Activity, Award, Zap, Star } from 'lucide-react';
 import { getShortSlugFromName } from '@/lib/shortSlug';
 import AIIntro from '@/components/mutual-fund/AIIntro';
 import AIVerdict from '@/components/mutual-fund/AIVerdict';
@@ -20,7 +19,7 @@ export const dynamicParams = true;
 
 // ---------- STATIC PATH GENERATION (TOP 100 FUNDS) ----------
 export async function generateStaticParams() {
-  console.log('Generating static comparison paths...');
+  console.log('🔄 Generating static comparison paths...');
   const { data: funds } = await supabase
     .from('mutual_funds')
     .select('slug, scheme_name, aum')
@@ -43,7 +42,7 @@ export async function generateStaticParams() {
   return pairs;
 }
 
-// ---------- HELPERS ----------
+// ---------- MAP SHORT SLUG TO FULL FUND DATA ----------
 let cachedFundsMap: Map<string, any> | null = null;
 
 async function getFundsMap() {
@@ -70,8 +69,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const [fund1, fund2] = await Promise.all([getFundByShortSlug(short1), getFundByShortSlug(short2)]);
   if (!fund1 || !fund2) return { title: 'Fund Not Found' };
   return {
-    title: `${fund1.scheme_name.split(' - ')[0]} vs ${fund2.scheme_name.split(' - ')[0]} – Detailed Comparison | ShareTargetPrice`,
-    description: `Compare ${fund1.scheme_name} and ${fund2.scheme_name} side by side. See 1Y/3Y/5Y returns, NAV, AUM, expense ratio, risk level, holdings, and AI verdict. Decide which fund is better for your portfolio.`,
+    title: `${fund1.scheme_name?.split(' - ')[0] || fund1.scheme_name} vs ${fund2.scheme_name?.split(' - ')[0] || fund2.scheme_name} – Detailed Comparison | ShareTargetPrice`,
+    description: `Compare ${fund1.scheme_name} and ${fund2.scheme_name} side by side. See 1Y/3Y/5Y returns, NAV, AUM, expense ratio, risk level, holdings, and expert AI verdict.`,
   };
 }
 
@@ -110,8 +109,6 @@ export default async function ComparePage({ params }: { params: { slug: string }
   const [fund1, fund2] = await Promise.all([getFundByShortSlug(short1), getFundByShortSlug(short2)]);
   if (!fund1 || !fund2) notFound();
 
-  const author = getAuthorBySlug('mahendra-maurya');
-
   // Helper functions for table highlighting
   const betterReturn = (ret1: number | null | undefined, ret2: number | null | undefined) => {
     if (ret1 == null || ret2 == null) return '';
@@ -130,6 +127,12 @@ export default async function ComparePage({ params }: { params: { slug: string }
     return holdings.split('|').slice(0, 3).map(h => h.trim()).join(', ');
   };
 
+  const author = getAuthorBySlug('mahendra-maurya');
+
+  // Safe fund display names
+  const name1 = fund1.scheme_name?.split(' - ')[0] || fund1.scheme_name;
+  const name2 = fund2.scheme_name?.split(' - ')[0] || fund2.scheme_name;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-6xl">
@@ -147,11 +150,11 @@ export default async function ComparePage({ params }: { params: { slug: string }
             <div className="flex-1 text-center md:text-left">
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3">
                 <span className="bg-white/80 backdrop-blur-sm text-gray-700 text-xs px-3 py-1 rounded-full shadow-sm">{fund1.category}</span>
-                <span className="text-gray-400">vs</span>
+                <span className="text-gray-400 text-sm font-medium">VS</span>
                 <span className="bg-white/80 backdrop-blur-sm text-gray-700 text-xs px-3 py-1 rounded-full shadow-sm">{fund2.category}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                {fund1.sche_name.split(' - ')[0]} vs {fund2.sche_name.split(' - ')[0]}
+                {name1} vs {name2}
               </h1>
               <p className="text-gray-600 max-w-2xl mx-auto md:mx-0">
                 Side-by-side comparison of returns, risk, expenses, holdings and performance. AI-powered insights included.
@@ -163,7 +166,7 @@ export default async function ComparePage({ params }: { params: { slug: string }
                   <TrendingUp className="w-8 h-8 text-orange-600" />
                 </div>
                 <p className="text-xs text-gray-500">3Y Return</p>
-                <p className={`font-bold ${(fund1.returns_3y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <p className={`font-bold text-lg ${(fund1.returns_3y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                   {formatReturn(fund1.returns_3y)}
                 </p>
               </div>
@@ -173,7 +176,7 @@ export default async function ComparePage({ params }: { params: { slug: string }
                   <TrendingUp className="w-8 h-8 text-orange-600" />
                 </div>
                 <p className="text-xs text-gray-500">3Y Return</p>
-                <p className={`font-bold ${(fund2.returns_3y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <p className={`font-bold text-lg ${(fund2.returns_3y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                   {formatReturn(fund2.returns_3y)}
                 </p>
               </div>
@@ -184,7 +187,7 @@ export default async function ComparePage({ params }: { params: { slug: string }
         {/* AI Intro */}
         <AIIntro slug={params.slug} />
 
-        {/* Comparison Table - Enhanced Styling */}
+        {/* Comparison Table - Enhanced */}
         <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden mb-8">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -193,13 +196,13 @@ export default async function ComparePage({ params }: { params: { slug: string }
                   <th className="px-4 py-4 text-left font-semibold text-gray-700 w-1/3">Parameter</th>
                   <th className="px-4 py-4 text-left font-semibold text-gray-700 w-1/3">
                     <Link href={`/mutual-funds/${fund1.slug}`} className="hover:text-orange-600 transition-colors flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-xs">A</span>
+                      <span className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-xs font-bold">A</span>
                       {fund1.scheme_name}
                     </Link>
                   </th>
                   <th className="px-4 py-4 text-left font-semibold text-gray-700 w-1/3">
                     <Link href={`/mutual-funds/${fund2.slug}`} className="hover:text-orange-600 transition-colors flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-xs">B</span>
+                      <span className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-xs font-bold">B</span>
                       {fund2.scheme_name}
                     </Link>
                   </th>
@@ -215,10 +218,9 @@ export default async function ComparePage({ params }: { params: { slug: string }
                 <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">Riskometer</td><td><span className={`inline-block px-2 py-1 rounded-full text-xs ${getRiskBadge(fund1.riskometer)}`}>{fund1.riskometer}</span></td><td><span className={`inline-block px-2 py-1 rounded-full text-xs ${getRiskBadge(fund2.riskometer)}`}>{fund2.riskometer}</span></td></tr>
                 <tr><td className="px-4 py-3 font-medium">Volatility</td><td>{fund1.volatility ?? 'N/A'}</td><td>{fund2.volatility ?? 'N/A'}</td></tr>
                 <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">Sharpe Ratio</td><td>{fund1.sharpe_ratio ?? 'N/A'}</td><td>{fund2.sharpe_ratio ?? 'N/A'}</td></tr>
-                {/* Returns */}
-                <tr className="bg-white"><td className="px-4 py-3 font-medium">1 Year Return (%)</td><td className={`${betterReturn(fund1.returns_1y, fund2.returns_1y)} ${(fund1.returns_1y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund1.returns_1y)}</td><td className={`${betterReturn(fund2.returns_1y, fund1.returns_1y)} ${(fund2.returns_1y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund2.returns_1y)}</td></tr>
+                <tr><td className="px-4 py-3 font-medium">1 Year Return (%)</td><td className={`${betterReturn(fund1.returns_1y, fund2.returns_1y)} ${(fund1.returns_1y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund1.returns_1y)}</td><td className={`${betterReturn(fund2.returns_1y, fund1.returns_1y)} ${(fund2.returns_1y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund2.returns_1y)}</td></tr>
                 <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">3 Year Return (%)</td><td className={`${betterReturn(fund1.returns_3y, fund2.returns_3y)} ${(fund1.returns_3y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund1.returns_3y)}</td><td className={`${betterReturn(fund2.returns_3y, fund1.returns_3y)} ${(fund2.returns_3y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund2.returns_3y)}</td></tr>
-                <tr className="bg-white"><td className="px-4 py-3 font-medium">5 Year Return (%)</td><td className={`${betterReturn(fund1.returns_5y, fund2.returns_5y)} ${(fund1.returns_5y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund1.returns_5y)}</td><td className={`${betterReturn(fund2.returns_5y, fund1.returns_5y)} ${(fund2.returns_5y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund2.returns_5y)}</td></tr>
+                <tr><td className="px-4 py-3 font-medium">5 Year Return (%)</td><td className={`${betterReturn(fund1.returns_5y, fund2.returns_5y)} ${(fund1.returns_5y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund1.returns_5y)}</td><td className={`${betterReturn(fund2.returns_5y, fund1.returns_5y)} ${(fund2.returns_5y || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>{formatReturn(fund2.returns_5y)}</td></tr>
                 <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">Since Launch (%)</td><td>{formatReturn(fund1.returns_since_launch)}</td><td>{formatReturn(fund2.returns_since_launch)}</td></tr>
                 <tr><td className="px-4 py-3 font-medium">Min SIP (₹)</td><td>{fund1.min_sip_amount ?? 'N/A'}</td><td>{fund2.min_sip_amount ?? 'N/A'}</td></tr>
                 <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">Min Lumpsum (₹)</td><td>{fund1.min_lumpsum ?? 'N/A'}</td><td>{fund2.min_lumpsum ?? 'N/A'}</td></tr>
@@ -226,12 +228,12 @@ export default async function ComparePage({ params }: { params: { slug: string }
                 <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">Exit Load</td><td>{fund1.exit_load || 'Nil'}</td><td>{fund2.exit_load || 'Nil'}</td></tr>
                 <tr><td className="px-4 py-3 font-medium">Fund Manager</td><td>{fund1.fund_manager ?? 'N/A'} {fund1.fund_manager_tenure ? `(${fund1.fund_manager_tenure} yrs)` : ''}</td><td>{fund2.fund_manager ?? 'N/A'} {fund2.fund_manager_tenure ? `(${fund2.fund_manager_tenure} yrs)` : ''}</td></tr>
                 <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">Benchmark</td><td>{fund1.benchmark ?? 'N/A'}</td><td>{fund2.benchmark ?? 'N/A'}</td></tr>
-                <tr className="bg-white"><td className="px-4 py-3 font-medium">Top 3 Holdings</td><td className="text-xs">{getTopHoldingsPreview(fund1.top_holdings)}</td><td className="text-xs">{getTopHoldingsPreview(fund2.top_holdings)}</td></tr>
+                <tr><td className="px-4 py-3 font-medium">Top 3 Holdings</td><td className="text-xs">{getTopHoldingsPreview(fund1.top_holdings)}</td><td className="text-xs">{getTopHoldingsPreview(fund2.top_holdings)}</td></tr>
                 {fund1.asset_allocation && fund2.asset_allocation && (
                   <tr className="bg-gray-50/50"><td className="px-4 py-3 font-medium">Asset Allocation</td><td className="text-xs">{fund1.asset_allocation}</td><td className="text-xs">{fund2.asset_allocation}</td></tr>
                 )}
                 {fund1.portfolio_turnover && fund2.portfolio_turnover && (
-                  <tr className="bg-white"><td className="px-4 py-3 font-medium">Portfolio Turnover</td><td>{fund1.portfolio_turnover}%</td><td>{fund2.portfolio_turnover}%</td></tr>
+                  <tr><td className="px-4 py-3 font-medium">Portfolio Turnover</td><td>{fund1.portfolio_turnover}%</td><td>{fund2.portfolio_turnover}%</td></tr>
                 )}
               </tbody>
             </table>
@@ -241,10 +243,10 @@ export default async function ComparePage({ params }: { params: { slug: string }
         {/* AI Verdict */}
         <AIVerdict slug={params.slug} />
 
-        {/* Why Consider Cards (Enhanced) */}
+        {/* Why Consider Cards - Enhanced */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-            <h3 className="font-bold text-lg mb-2 text-orange-600 flex items-center gap-2"><Zap className="w-5 h-5" /> Why consider {fund1.scheme_name.split(' ').slice(0,2).join(' ')}?</h3>
+          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group">
+            <h3 className="font-bold text-lg mb-2 text-orange-600 flex items-center gap-2"><Zap className="w-5 h-5" /> Why consider {name1}?</h3>
             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
               <li>Expense ratio: {fund1.expense_ratio ?? 'N/A'}%</li>
               <li>3Y return: {fund1.returns_3y ?? 'N/A'}%</li>
@@ -252,8 +254,8 @@ export default async function ComparePage({ params }: { params: { slug: string }
               {fund1.sharpe_ratio && <li>Sharpe Ratio: {fund1.sharpe_ratio}</li>}
             </ul>
           </div>
-          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-            <h3 className="font-bold text-lg mb-2 text-orange-600 flex items-center gap-2"><Award className="w-5 h-5" /> Why consider {fund2.scheme_name.split(' ').slice(0,2).join(' ')}?</h3>
+          <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 group">
+            <h3 className="font-bold text-lg mb-2 text-orange-600 flex items-center gap-2"><Award className="w-5 h-5" /> Why consider {name2}?</h3>
             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
               <li>Expense ratio: {fund2.expense_ratio ?? 'N/A'}%</li>
               <li>3Y return: {fund2.returns_3y ?? 'N/A'}%</li>
@@ -277,9 +279,9 @@ export default async function ComparePage({ params }: { params: { slug: string }
         {/* Author Card */}
         {author && <AuthorCard author={author} />}
 
-        {/* Internal Linking */}
+        {/* More Comparisons */}
         <div className="mt-10 bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-          <h3 className="font-bold text-lg mb-3 text-gray-800 flex items-center gap-2"><Activity className="w-5 h-5" /> More Comparisons</h3>
+          <h3 className="font-bold text-lg mb-3 text-gray-800 flex items-center gap-2"><Activity className="w-5 h-5" /> Explore More Comparisons</h3>
           <div className="flex flex-wrap gap-3">
             {[fund1, fund2].map(f => (
               <Link key={f.slug} href={`/mutual-funds/category/${f.category.toLowerCase().replace(/ /g, '-')}`} className="text-sm bg-gray-100 px-3 py-1 rounded-full hover:bg-orange-100 transition-colors">
