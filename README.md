@@ -140,3 +140,4 @@ sharetargetprice/
 Koi bhi problem aaye toh Claude se poochho! 😊
 
 error transfer to pro
+new file created for imp pages
