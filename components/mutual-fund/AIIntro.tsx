@@ -11,7 +11,7 @@ export default async function AIIntro({ slug }: { slug: string }) {
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm mb-6">
-      <p className="text-gray-700 leading-relaxed">{data.intro}</p>
+      <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: data.intro }} />
     </div>
   );
 }
