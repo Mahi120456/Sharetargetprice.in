@@ -11,12 +11,12 @@ export default function ComparisonsClient({ initialComparisons }: { initialCompa
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 24;
 
-  // Extract unique categories and AMCs
+  // Extract unique categories and AMCs (safe)
   const allCategories = useMemo(() => {
     const cats = new Set<string>();
     initialComparisons.forEach(c => {
-      if (c.fund1?.category) cats.add(c.fund1.category);
-      if (c.fund2?.category) cats.add(c.fund2.category);
+      if (c?.fund1?.category) cats.add(c.fund1.category);
+      if (c?.fund2?.category) cats.add(c.fund2.category);
     });
     return Array.from(cats).sort();
   }, [initialComparisons]);
@@ -24,27 +24,27 @@ export default function ComparisonsClient({ initialComparisons }: { initialCompa
   const allAmcs = useMemo(() => {
     const amcs = new Set<string>();
     initialComparisons.forEach(c => {
-      if (c.fund1?.fund_house) amcs.add(c.fund1.fund_house);
-      if (c.fund2?.fund_house) amcs.add(c.fund2.fund_house);
+      if (c?.fund1?.fund_house) amcs.add(c.fund1.fund_house);
+      if (c?.fund2?.fund_house) amcs.add(c.fund2.fund_house);
     });
     return Array.from(amcs).sort();
   }, [initialComparisons]);
 
-  // Filter data
+  // Filter data (safe)
   const filtered = useMemo(() => {
     return initialComparisons.filter(item => {
       const searchLower = search.toLowerCase();
       const searchMatch = !search ||
-        item.fund1.scheme_name.toLowerCase().includes(searchLower) ||
-        item.fund2.scheme_name.toLowerCase().includes(searchLower) ||
-        item.slug.includes(searchLower);
+        (item.fund1?.scheme_name?.toLowerCase().includes(searchLower)) ||
+        (item.fund2?.scheme_name?.toLowerCase().includes(searchLower)) ||
+        item.slug?.includes(searchLower);
       const categoryMatch = !category ||
-        item.fund1.category === category ||
-        item.fund2.category === category;
+        item.fund1?.category === category ||
+        item.fund2?.category === category;
       const amcMatch = !amc ||
-        item.fund1.fund_house === amc ||
-        item.fund2.fund_house === amc;
-      return searchMatch && categoryMatch && amcMatch;
+        item.fund1?.fund_house === amc ||
+        item.fund2?.fund_house === amc;
+      return searchMatch && categoryMatch && amcMatch && item.slug; // ensure slug exists
     });
   }, [initialComparisons, search, category, amc]);
 
@@ -112,19 +112,19 @@ export default function ComparisonsClient({ initialComparisons }: { initialCompa
               className="group bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
               <div className="flex justify-between items-start mb-2">
                 <h2 className="font-semibold text-gray-800 group-hover:text-orange-600 line-clamp-2">
-                  {item.fund1.scheme_name.split(' - ')[0]} <span className="text-gray-400">vs</span> {item.fund2.scheme_name.split(' - ')[0]}
+                  {item.fund1?.scheme_name?.split(' - ')[0] || 'Fund A'} <span className="text-gray-400">vs</span> {item.fund2?.scheme_name?.split(' - ')[0] || 'Fund B'}
                 </h2>
               </div>
               <div className="flex flex-wrap gap-2 mt-2 text-xs">
-                <span className="bg-gray-100 px-2 py-0.5 rounded-full">{item.fund1.category}</span>
-                <span className="bg-gray-100 px-2 py-0.5 rounded-full">{item.fund2.category}</span>
+                <span className="bg-gray-100 px-2 py-0.5 rounded-full">{item.fund1?.category || 'N/A'}</span>
+                <span className="bg-gray-100 px-2 py-0.5 rounded-full">{item.fund2?.category || 'N/A'}</span>
               </div>
               <div className="mt-3 flex items-center gap-3 text-sm">
-                <div className="flex items-center gap-1"><TrendingUp className="w-3.5 h-3.5 text-green-600" /><span>3Y: {item.fund1.returns_3y ?? 'N/A'}%</span></div>
+                <div className="flex items-center gap-1"><TrendingUp className="w-3.5 h-3.5 text-green-600" /><span>3Y: {item.fund1?.returns_3y ?? 'N/A'}%</span></div>
                 <span className="text-gray-300">|</span>
-                <div className="flex items-center gap-1"><TrendingUp className="w-3.5 h-3.5 text-green-600" /><span>{item.fund2.returns_3y ?? 'N/A'}%</span></div>
+                <div className="flex items-center gap-1"><TrendingUp className="w-3.5 h-3.5 text-green-600" /><span>{item.fund2?.returns_3y ?? 'N/A'}%</span></div>
               </div>
-              <div className="mt-3 text-xs text-gray-500 truncate">{item.fund1.fund_house} vs {item.fund2.fund_house}</div>
+              <div className="mt-3 text-xs text-gray-500 truncate">{item.fund1?.fund_house || 'N/A'} vs {item.fund2?.fund_house || 'N/A'}</div>
             </Link>
           ))}
         </div>
