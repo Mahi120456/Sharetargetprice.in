@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function CategoriesListPage() {
-  // Fetch all unique categories from the database
   const { data: categoriesData, error } = await supabase
     .from('mutual_funds')
     .select('category')
@@ -21,26 +20,20 @@ export default async function CategoriesListPage() {
     return <div className="text-center py-20">Error loading categories. Please try again later.</div>;
   }
 
-  // Remove duplicates and sort
-  const uniqueCategories = [...new Set(categoriesData.map(item => item.category))];
+  // ✅ Fix: use Array.from instead of spread
+  const uniqueCategories = Array.from(new Set(categoriesData.map(item => item.category)));
   const sortedCategories = uniqueCategories.sort();
 
-  // Helper to generate slug from category name
-  const getSlug = (category: string) => {
-    return category.toLowerCase().replace(/ /g, '-');
-  };
+  const getSlug = (category: string) => category.toLowerCase().replace(/ /g, '-');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-6xl">
-        
-        {/* Back link */}
         <Link href="/mutual-funds" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-600 transition-colors mb-6 group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           Back to all funds
         </Link>
 
-        {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm mb-4">
             <Tag className="w-4 h-4" />
@@ -57,7 +50,6 @@ export default async function CategoriesListPage() {
           </div>
         </div>
 
-        {/* Category Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {sortedCategories.map((category) => (
             <Link
@@ -73,7 +65,6 @@ export default async function CategoriesListPage() {
           ))}
         </div>
 
-        {/* Disclaimer */}
         <div className="mt-10 bg-amber-50/70 border border-amber-100 rounded-xl p-4 text-sm text-amber-800">
           <strong>Disclaimer:</strong> Mutual fund investments are subject to market risks. Past performance does not guarantee future returns. Please read scheme documents carefully.
         </div>
