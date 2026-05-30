@@ -57,9 +57,20 @@ async function getFundsMap() {
   return map;
 }
 
+// ✅ IMPROVED: tries short slug first, then falls back to original slug search
 async function getFundByShortSlug(shortSlug: string) {
   const map = await getFundsMap();
-  return map.get(shortSlug) || null;
+  let fund = map.get(shortSlug);
+  if (fund) return fund;
+
+  // Fallback: try to find fund whose original slug contains the short slug (remove hyphens)
+  const searchTerm = shortSlug.replace(/-/g, '');
+  const { data } = await supabase
+    .from('mutual_funds')
+    .select('*')
+    .or(`slug.ilike.%${searchTerm}%,scheme_name.ilike.%${searchTerm}%`)
+    .limit(1);
+  return data?.[0] || null;
 }
 
 // ---------- METADATA ----------
