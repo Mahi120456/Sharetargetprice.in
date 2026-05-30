@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function AMCListPage() {
-  // Fetch unique fund houses from the database
   const { data: amcsData, error } = await supabase
     .from('mutual_funds')
     .select('fund_house')
@@ -21,11 +20,10 @@ export default async function AMCListPage() {
     return <div className="text-center py-20">Error loading AMCs. Please try again later.</div>;
   }
 
-  // Remove duplicates and sort alphabetically
-  const uniqueAMCs = [...new Set(amcsData.map(item => item.fund_house))];
+  // ✅ Fix: use Array.from instead of spread operator
+  const uniqueAMCs = Array.from(new Set(amcsData.map(item => item.fund_house)));
   const sortedAMCs = uniqueAMCs.sort();
 
-  // Helper to generate slug from fund house name
   const getSlug = (name: string) => {
     return name
       .toLowerCase()
@@ -36,14 +34,11 @@ export default async function AMCListPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-6xl">
-        
-        {/* Back link */}
         <Link href="/mutual-funds" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-600 transition-colors mb-6 group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           Back to all funds
         </Link>
 
-        {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm mb-4">
             <Building2 className="w-4 h-4" />
@@ -60,7 +55,6 @@ export default async function AMCListPage() {
           </div>
         </div>
 
-        {/* AMC Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {sortedAMCs.map((amc) => (
             <Link
@@ -76,7 +70,6 @@ export default async function AMCListPage() {
           ))}
         </div>
 
-        {/* Disclaimer */}
         <div className="mt-10 bg-amber-50/70 border border-amber-100 rounded-xl p-4 text-sm text-amber-800">
           <strong>Disclaimer:</strong> Mutual fund investments are subject to market risks. Past performance does not guarantee future returns. Please read scheme documents carefully.
         </div>
