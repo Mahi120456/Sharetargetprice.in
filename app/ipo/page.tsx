@@ -31,23 +31,23 @@ export default async function IPODashboard() {
       <h1 className="text-3xl font-bold mb-2">IPO Dashboard</h1>
       <p className="text-gray-600 mb-8">Upcoming, current & recently listed IPOs – GMP, subscription, listing gain</p>
 
-      {/* Upcoming IPOs */}
       <section className="mb-12">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><Calendar className="w-5 h-5"/> Upcoming IPOs</h2>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-xl shadow">
-            <thead className="bg-gray-50"><tr>
-              <th className="p-3 text-left">Company</th>
-              <th>Open Date</th>
-              <th>Close Date</th>
-              <th>Price Band</th>
-              <th>Lot Size</th>
-              <th>GMP</th>
-              <th>Rating</th>
-            </tr>
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="p-3 text-left">Company</th>
+                <th>Open Date</th>
+                <th>Close Date</th>
+                <th>Price Band</th>
+                <th>Lot Size</th>
+                <th>GMP</th>
+                <th>Rating</th>
+              </tr>
             </thead>
             <tbody>
-              {upcoming?.map(ipo => (
+              {upcoming?.map((ipo) => (
                 <tr key={ipo.id} className="border-t">
                   <td className="p-3"><Link href={`/ipo/${ipo.slug}`} className="font-medium hover:text-orange-600">{ipo.company_name}</Link></td>
                   <td>{ipo.open_date ? new Date(ipo.open_date).toLocaleDateString() : '-'}</td>
@@ -63,11 +63,10 @@ export default async function IPODashboard() {
         </div>
       </section>
 
-      {/* Current IPOs */}
       <section className="mb-12">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><TrendingUp className="w-5 h-5"/> Current IPOs (Open)</h2>
         <div className="grid md:grid-cols-2 gap-4">
-          {current?.map(ipo => (
+          {current?.map((ipo) => (
             <Link key={ipo.id} href={`/ipo/${ipo.slug}`} className="bg-white rounded-xl p-4 shadow hover:shadow-md">
               <h3 className="font-bold text-lg">{ipo.company_name}</h3>
               <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
@@ -81,22 +80,22 @@ export default async function IPODashboard() {
         </div>
       </section>
 
-      {/* Recently Listed */}
       <section>
         <h2 className="text-xl font-bold mb-4">Recently Listed IPOs</h2>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-xl shadow">
-            <thead className="bg-gray-50"><tr>
-              <th className="p-3">Company</th>
-              <th>Listing Date</th>
-              <th>IPO Price</th>
-              <th>Listing Price</th>
-              <th>Current Price</th>
-              <th>Return</th>
-            </tr>
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="p-3">Company</th>
+                <th>Listing Date</th>
+                <th>IPO Price</th>
+                <th>Listing Price</th>
+                <th>Current Price</th>
+                <th>Return</th>
+              </tr>
             </thead>
             <tbody>
-              {recent?.map(ipo => {
+              {recent?.map((ipo) => {
                 const ipoPrice = ipo.price_band ? parseInt(ipo.price_band.split('-')[1]) : null;
                 const listingPrice = ipo.listing_price;
                 const currentPrice = ipo.current_price;
