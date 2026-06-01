@@ -6,7 +6,7 @@ import { ArrowLeft, Shield } from 'lucide-react';
 
 export async function generateStaticParams() {
   const { data } = await supabase.from('ipos').select('slug');
-  return data?.map(ipo => ({ slug: ipo.slug })) || [];
+  return data?.map((ipo) => ({ slug: ipo.slug })) || [];
 }
 
 async function getIPO(slug: string) {
@@ -39,7 +39,6 @@ export default async function IPOPage({ params }: { params: { slug: string } }) 
       <h1 className="text-3xl font-bold mb-2">{ipo.company_name} IPO</h1>
 
       <div className="grid md:grid-cols-2 gap-6 mt-6">
-        {/* IPO Details */}
         <div className="bg-white rounded-xl p-6 shadow-sm border">
           <h2 className="text-xl font-semibold mb-3">IPO Details</h2>
           <dl className="space-y-2">
@@ -52,7 +51,6 @@ export default async function IPOPage({ params }: { params: { slug: string } }) 
           </dl>
         </div>
 
-        {/* GMP & Subscription */}
         <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-6 shadow-sm border">
           <h2 className="text-xl font-semibold mb-3">GMP & Subscription</h2>
           <div>GMP: <span className="font-bold text-green-600">₹{ipo.gmp || '-'}</span></div>
