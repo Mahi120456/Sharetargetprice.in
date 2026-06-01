@@ -28,7 +28,7 @@ const categories = [
   },
   {
     name: "IPO",
-    slug: "/category/ipo",
+    slug: "/ipo",
   },
   {
     name: "Calculators",
