@@ -16,17 +16,18 @@ export default async function IPOHistoryPage() {
       <p className="text-gray-600 mb-6">Search past IPOs – listing gains, current returns, and performance.</p>
       <div className="overflow-x-auto">
         <table className="w-full bg-white rounded-xl shadow">
-          <thead className="bg-gray-50"><tr>
-            <th className="p-3 text-left">Company</th>
-            <th>Year</th>
-            <th>IPO Price (₹)</th>
-            <th>Listing Price (₹)</th>
-            <th>Current Price (₹)</th>
-            <th>Return Since Listing</th>
-          </tr>
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="p-3 text-left">Company</th>
+              <th>Year</th>
+              <th>IPO Price (₹)</th>
+              <th>Listing Price (₹)</th>
+              <th>Current Price (₹)</th>
+              <th>Return Since Listing</th>
+            </tr>
           </thead>
           <tbody>
-            {ipos?.map(ipo => {
+            {ipos?.map((ipo) => {
               const ipoPrice = ipo.price_band ? parseInt(ipo.price_band.split('-')[1]) : null;
               const listingPrice = ipo.listing_price;
               const currentPrice = ipo.current_price;
@@ -36,7 +37,11 @@ export default async function IPOHistoryPage() {
               }
               return (
                 <tr key={ipo.id} className="border-t">
-                  <td className="p-3"><Link href={`/ipo/${ipo.slug}`} className="hover:text-orange-600">{ipo.company_name}</Link></td>
+                  <td className="p-3">
+                    <Link href={`/ipo/${ipo.slug}`} className="hover:text-orange-600">
+                      {ipo.company_name}
+                    </Link>
+                  </td>
                   <td>{ipo.listing_date ? new Date(ipo.listing_date).getFullYear() : '-'}</td>
                   <td>{ipoPrice !== null ? `₹${ipoPrice}` : '-'}</td>
                   <td>{listingPrice !== null ? `₹${listingPrice}` : '-'}</td>
@@ -44,7 +49,7 @@ export default async function IPOHistoryPage() {
                   <td className={returnPct !== null && returnPct >= 0 ? 'text-green-600' : returnPct !== null && returnPct < 0 ? 'text-red-600' : ''}>
                     {returnPct !== null ? `${returnPct.toFixed(2)}%` : '-'}
                   </td>
-                </td>
+                </tr>
               );
             })}
           </tbody>
