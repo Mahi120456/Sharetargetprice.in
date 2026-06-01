@@ -12,54 +12,38 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-// ✅ Global SEO metadata (homepage and fallback)
 export const metadata: Metadata = {
   title: {
-    default: "Share Target Price | India's #1 Stock Price Forecast Platform",
+    default: "Share Target Price – India's Smart Stock Research Platform",
     template: "%s | Share Target Price",
   },
   description:
-    "Accurate share price targets, in-depth analysis & long-term forecasts for 500+ NSE/BSE stocks. Trusted by Indian retail investors.",
+    "Analyze stocks, IPOs, mutual funds & financial calculators in one place. Share price targets, market movers, IPO GMP, SIP tools – all free.",
   keywords:
-    "share target price, stock price target, nse target price, bse target price, stock analysis, indian stock market",
+    "share price target, stock analysis, IPO GMP, mutual funds, SIP calculator, nse bse, equity research",
   authors: [{ name: "Share Target Price Team" }],
   openGraph: {
-    title: "Share Target Price – India's #1 Stock Price Forecast Platform",
+    title: "Share Target Price – India's Smart Stock Research Platform",
     description:
-      "Get accurate share price targets for 500+ Indian stocks. Long-term forecasts, charts, and fundamental analysis.",
+      "Stock analysis, IPO tracker, mutual fund research, financial calculators – all in one place.",
     url: "https://sharetargetprice.in",
     siteName: "Share Target Price",
-    images: [
-      {
-        url: "https://sharetargetprice.in/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Share Target Price – India's #1 Stock Price Forecast Platform",
-      },
-    ],
+    images: [{ url: "https://sharetargetprice.in/og-image.jpg", width: 1200, height: 630, alt: "Share Target Price" }],
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Share Target Price – Stock Price Forecasts",
-    description: "Accurate share price targets for Indian stocks.",
+    title: "Share Target Price – Stock Research Platform",
+    description: "Stock targets, IPO GMP, mutual funds, calculators.",
     images: ["https://sharetargetprice.in/og-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
   },
-  alternates: {
-    canonical: "https://sharetargetprice.in",
-  },
+  alternates: { canonical: "https://sharetargetprice.in" },
 };
 
 export default function RootLayout({
@@ -70,16 +54,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <head>
-        {/* ✅ Favicon - Add this line */}
         <link rel="icon" type="image/png" href="/favicon.png" />
-
-        {/* Google Search Console Verification */}
-        <meta
-          name="google-site-verification"
-          content="hafalse8HQrL6F1jcch_jCMJKRaE7JrUCFezXd3eG1o"
-        />
-
-        {/* PWA Manifest */}
+        <meta name="google-site-verification" content="hafalse8HQrL6F1jcch_jCMJKRaE7JrUCFezXd3eG1o" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -87,7 +63,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Share Target Price" />
         <meta name="mobile-web-app-capable" content="yes" />
 
-        {/* Google AdSense */}
         {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
           <Script
             async
@@ -96,9 +71,48 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         )}
+
+        {/* ✅ WebSite Schema – for Google Site Name */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Share Target Price",
+              "url": "https://sharetargetprice.in",
+              "description": "India's smart stock research platform – stock targets, IPO GMP, mutual funds, calculators.",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://sharetargetprice.in/all-stocks?search={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+
+        {/* ✅ Organization Schema – for brand identity */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Share Target Price",
+              "url": "https://sharetargetprice.in",
+              "logo": "https://sharetargetprice.in/og-image.jpg",
+              "sameAs": [
+                "https://twitter.com/sharetargetprice",
+                "https://facebook.com/sharetargetprice"
+              ]
+            })
+          }}
+        />
       </head>
       <body className="font-sans antialiased bg-gray-50">
-        {/* Service Worker Registration for Push Notifications */}
         <Script
           id="register-sw"
           strategy="afterInteractive"
@@ -112,12 +126,9 @@ export default function RootLayout({
             `,
           }}
         />
-
         <PushSetup />
         <Header />
-
         <main className="min-h-screen">{children}</main>
-
         <Footer />
       </body>
     </html>
