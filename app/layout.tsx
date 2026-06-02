@@ -63,6 +63,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Share Target Price" />
         <meta name="mobile-web-app-capable" content="yes" />
 
+        {/* Google AdSense */}
         {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
           <Script
             async
@@ -72,10 +73,10 @@ export default function RootLayout({
           />
         )}
 
-        {/* ✅ Google Analytics (gtag.js) */}
+        {/* ✅ Google Analytics (gtag.js) - New Tag G-R2H0T83KS7 */}
         <Script
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-F9TG7CDJP2"
+          src="https://www.googletagmanager.com/gtag/js?id=G-R2H0T83KS7"
         />
         <Script
           id="ga-init"
@@ -85,8 +86,9 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-F9TG7CDJP2', {
+              gtag('config', 'G-R2H0T83KS7', {
                 page_path: window.location.pathname,
+                send_page_view: true,
               });
             `,
           }}
