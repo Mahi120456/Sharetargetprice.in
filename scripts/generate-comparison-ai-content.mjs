@@ -1,7 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import Groq from 'groq-sdk';
-import fs from 'fs';
 import WebSocket from 'ws';
 
 dotenv.config();
@@ -9,9 +8,7 @@ dotenv.config();
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY,
-  {
-    realtime: { transport: WebSocket }
-  }
+  { realtime: { transport: WebSocket } }
 );
 
 // ---------- Load Balancer for 4 Groq API Keys ----------
@@ -38,6 +35,7 @@ function getShortSlug(name) {
     .replace(/ fund/gi, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
+  slug = slug.replace(/-regular$/, '');
   if (slug.length > 35) slug = slug.substring(0, 35).replace(/-$/, '');
   return slug;
 }
@@ -149,9 +147,9 @@ async function generateForPair(fund1, fund2, shortSlug) {
         { role: 'system', content: 'You are an AI that strictly uses only the provided data. Never invent numbers, facts, or external knowledge. If data missing, say "N/A".' },
         { role: 'user', content: prompt }
       ],
-      model: 'llama-3.3-70b-versatile',   // ✅ changed from deprecated model
+      model: 'llama-3.1-8b-instant',
       temperature: 0.7,
-      max_tokens: 2000,
+      max_tokens: 1500,
     });
     const raw = response.choices[0]?.message?.content || '';
     if (!raw || raw.length < 200) throw new Error('Empty or too short response');
@@ -167,9 +165,15 @@ async function generateForPair(fund1, fund2, shortSlug) {
       updated_at: new Date().toISOString(),
     }, { onConflict: 'slug' });
     if (error) throw error;
+    await supabase.from('comparison_ai_checkpoint').upsert({ slug: shortSlug }, { onConflict: 'slug' });
     console.log(`✅ ${shortSlug}`);
     return true;
   } catch (err) {
+    // Check for rate limit error (429)
+    if (err.status === 429 || (err.message && err.message.includes('rate_limit'))) {
+      console.error(`⚠️ Rate limit hit! Stopping script. Resume tomorrow.`);
+      process.exit(0); // graceful exit, checkpoint already saved
+    }
     console.error(`❌ Failed ${shortSlug}:`, err.message);
     return false;
   }
@@ -198,31 +202,25 @@ async function main() {
   }
   console.log(`Total pairs: ${pairs.length}`);
 
-  const checkpointFile = 'comparison-ai-checkpoint.json';
-  let processed = new Set();
-  if (fs.existsSync(checkpointFile)) {
-    const data = JSON.parse(fs.readFileSync(checkpointFile, 'utf8'));
-    processed = new Set(data.processed || []);
-  }
+  // Get already processed slugs from checkpoint table
+  const { data: processedData } = await supabase.from('comparison_ai_checkpoint').select('slug');
+  const processedSet = new Set(processedData?.map(p => p.slug) || []);
+  console.log(`Already processed: ${processedSet.size}`);
 
   let successCount = 0;
-  for (let i = 0; i < pairs.length; i++) {
-    const pair = pairs[i];
-    if (processed.has(pair.shortSlug)) {
+  for (const pair of pairs) {
+    if (processedSet.has(pair.shortSlug)) {
       console.log(`⏩ Skipping already processed: ${pair.shortSlug}`);
       continue;
     }
     const ok = await generateForPair(pair.fund1, pair.fund2, pair.shortSlug);
     if (ok) {
-      processed.add(pair.shortSlug);
+      processedSet.add(pair.shortSlug);
       successCount++;
-    }
-    if ((i+1) % 5 === 0) {
-      fs.writeFileSync(checkpointFile, JSON.stringify({ processed: Array.from(processed) }, null, 2));
     }
     await new Promise(r => setTimeout(r, 1000));
   }
-  console.log(`🎉 Done. Successfully generated ${successCount} out of ${pairs.length}`);
+  console.log(`🎉 Done. Successfully generated ${successCount} new pairs. Total now: ${processedSet.size}`);
 }
 
 main().catch(console.error);
