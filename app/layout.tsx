@@ -72,7 +72,27 @@ export default function RootLayout({
           />
         )}
 
-        {/* ✅ WebSite Schema – for Google Site Name */}
+        {/* ✅ Google Analytics (gtag.js) */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-F9TG7CDJP2"
+        />
+        <Script
+          id="ga-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-F9TG7CDJP2', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+
+        {/* WebSite Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -94,7 +114,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* ✅ Organization Schema – for brand identity */}
+        {/* Organization Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
