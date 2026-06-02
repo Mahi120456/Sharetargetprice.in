@@ -29,7 +29,6 @@ export default async function IPODashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Header with history link */}
         <div className="flex flex-wrap justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">IPO Dashboard</h1>
@@ -58,7 +57,7 @@ export default async function IPODashboard() {
                     <td className="text-gray-600">{ipo.close_date ? new Date(ipo.close_date).toLocaleDateString() : '-'}</td>
                     <td className="font-mono">{ipo.price_band || '-'}</td>
                     <td>{ipo.lot_size || '-'}</td>
-                    <td className="font-semibold text-green-600">{ipo.gmp ? `₹${ipo.gmp}` : '-'}</td>
+                    <td className="font-semibord text-green-600">{ipo.gmp ? `₹${ipo.gmp}` : '-'}</td>
                     <td><span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${ipo.analyst_rating === 'Apply' ? 'bg-green-100 text-green-800' : ipo.analyst_rating === 'Avoid' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'}`}>{ipo.analyst_rating || '-'}</span></td>
                   </tr>
                 )) : <tr><td colSpan={7} className="text-center py-8 text-gray-400">No upcoming IPOs</td></tr>}
@@ -67,7 +66,7 @@ export default async function IPODashboard() {
           </div>
         </section>
 
-        {/* Current IPOs - Cards */}
+        {/* Current IPOs */}
         <section className="mb-12">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><TrendingUp className="w-5 h-5 text-orange-600" /> Current IPOs (Open for Subscription)</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -98,8 +97,8 @@ export default async function IPODashboard() {
                   const ipoPrice = ipo.price_band ? parseInt(ipo.price_band.split('-')[1]) : null;
                   const listingPrice = ipo.listing_price;
                   const currentPrice = ipo.current_price;
-                  let returnPct = null;
-                  if (listingPrice && currentPrice) returnPct = ((currentPrice - listingPrice) / listingPrice * 100).toFixed(2);
+                  let returnPct: number | null = null;
+                  if (listingPrice && currentPrice) returnPct = ((currentPrice - listingPrice) / listingPrice) * 100;
                   return (
                     <tr key={ipo.id} className="border-t hover:bg-gray-50">
                       <td className="p-3 font-medium"><Link href={`/ipo/${ipo.slug}`} className="hover:text-orange-600">{ipo.company_name}</Link></td>
@@ -107,7 +106,9 @@ export default async function IPODashboard() {
                       <td>{ipoPrice ? `₹${ipoPrice}` : '-'}</td>
                       <td>{listingPrice ? `₹${listingPrice}` : '-'}</td>
                       <td>{currentPrice ? `₹${currentPrice}` : '-'}</td>
-                      <td className={returnPct && returnPct >= 0 ? 'text-green-600 font-semibold' : returnPct && returnPct < 0 ? 'text-red-600' : ''}>{returnPct ? `${returnPct}%` : '-'}</td>
+                      <td className={returnPct !== null && returnPct >= 0 ? 'text-green-600 font-semibold' : returnPct !== null && returnPct < 0 ? 'text-red-600' : ''}>
+                        {returnPct !== null ? `${returnPct.toFixed(2)}%` : '-'}
+                      </td>
                     </tr>
                   );
                 }) : <tr><td colSpan={6} className="text-center py-8 text-gray-400">No recent IPOs</td></tr>}
