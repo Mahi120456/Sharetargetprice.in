@@ -1,11 +1,9 @@
 name: Seed Calculators from CSV
-
 on:
   push:
     paths:
       - 'data/calculators_enhanced.csv'
   workflow_dispatch:
-
 jobs:
   seed:
     runs-on: ubuntu-latest
