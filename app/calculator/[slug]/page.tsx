@@ -37,9 +37,48 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-// Helper components (FAQ, RichText) same as before
-function FAQSection({ faqJson }: { faqJson?: string }) { /* same as your existing code */ }
-function RichTextBlock({ html, title, icon }: any) { /* same as your existing code */ }
+// Helper Component: FAQ Section with Schema.org markup
+function FAQSection({ faqJson }: { faqJson?: string }) {
+  if (!faqJson) return null;
+  let faqItems;
+  try {
+    faqItems = JSON.parse(faqJson);
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(faqItems) || faqItems.length === 0) return null;
+  return (
+    <div className="mt-8 bg-white rounded-xl p-6 shadow-sm border">
+      <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+      <div itemScope itemType="https://schema.org/FAQPage">
+        {faqItems.map((item: any, idx: number) => (
+          <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="mb-4 border-b pb-3 last:border-0">
+            <h3 itemProp="name" className="font-semibold text-gray-800">{item.q}</h3>
+            <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+              <div itemProp="text" className="text-gray-600 mt-1">{item.a}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Helper Component: Rich Text Block with optional icon
+function RichTextBlock({ html, title, icon }: { html?: string; title?: string; icon?: React.ReactNode }) {
+  if (!html) return null;
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm border mt-6">
+      {title && (
+        <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+          {icon && <span>{icon}</span>}
+          {title}
+        </h2>
+      )}
+      <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
+    </div>
+  );
+}
 
 export default async function CalculatorPage({ params }: { params: { slug: string } }) {
   const calc = await getCalculator(params.slug);
@@ -48,10 +87,12 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
   const author = getAuthorBySlug('mahendra-maurya');
 
   // Parse JSON fields
-  let inputFields = [], chartConfig = null, validationRules = null;
-  try { inputFields = JSON.parse(calc.input_fields || '[]'); } catch(e) {}
-  try { chartConfig = JSON.parse(calc.chart_config || 'null'); } catch(e) {}
-  try { validationRules = JSON.parse(calc.validation_rules || '{}'); } catch(e) {}
+  let inputFields: any[] = [];
+  let chartConfig = null;
+  let validationRules = null;
+  try { inputFields = JSON.parse(calc.input_fields || '[]'); } catch(e) { console.error('Failed to parse input_fields', e); }
+  try { chartConfig = JSON.parse(calc.chart_config || 'null'); } catch(e) { console.error('Failed to parse chart_config', e); }
+  try { validationRules = JSON.parse(calc.validation_rules || '{}'); } catch(e) { console.error('Failed to parse validation_rules', e); }
 
   const webAppSchema = {
     "@context": "https://schema.org",
@@ -73,13 +114,13 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
             <ArrowLeft className="w-4 h-4" /> All Calculators
           </Link>
 
-          {/* Hero */}
+          {/* Hero Section */}
           <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-6 md:p-8 mb-6">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{calc.title}</h1>
             {calc.intro_paragraph && <p className="text-gray-700 mt-3 text-lg">{calc.intro_paragraph}</p>}
           </div>
 
-          {/* Interactive Calculator Component */}
+          {/* Interactive Calculator */}
           <CalculatorInteractive
             inputFields={inputFields}
             calculatorEngine={calc.calculator_engine}
