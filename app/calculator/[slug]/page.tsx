@@ -1,6 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-import csv from 'csv-parser';
+import { createClient } from '@/utils/supabase/server';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -8,37 +6,23 @@ import { ArrowLeft, CheckCircle, Lightbulb, ThumbsUp } from 'lucide-react';
 import AuthorCard from '@/components/AuthorCard';
 import { getAuthorBySlug } from '@/data/authors';
 
-// ---------- Helper: CSV to JSON ----------
-interface CalculatorData {
-  [key: string]: string;
-}
-
-let cachedCalculators: CalculatorData[] | null = null;
-
-async function getAllCalculatorsData(): Promise<CalculatorData[]> {
-  if (cachedCalculators) return cachedCalculators;
-  const results: CalculatorData[] = [];
-  const filePath = path.join(process.cwd(), 'data', 'calculators_enhanced.csv');
-  await new Promise<void>((resolve, reject) => {
-    fs.createReadStream(filePath)
-      .pipe(csv({ separator: '\t' }))
-      .on('data', (row) => results.push(row))
-      .on('end', () => resolve())
-      .on('error', reject);
-  });
-  cachedCalculators = results;
-  return results;
-}
-
-// Generate static paths for all calculators
+// Generate static paths from database
 export async function generateStaticParams() {
-  const calculators = await getAllCalculatorsData();
-  return calculators.map((calc) => ({ slug: calc.slug }));
+  const supabase = createClient();
+  const { data } = await supabase.from('calculators').select('slug');
+  if (!data) return [];
+  return data.map((calc) => ({ slug: calc.slug }));
 }
 
-async function getCalculator(slug: string): Promise<CalculatorData | null> {
-  const calculators = await getAllCalculatorsData();
-  return calculators.find(c => c.slug === slug) || null;
+async function getCalculator(slug: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from('calculators')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+  if (error) return null;
+  return data;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -52,17 +36,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-// Helper: parse JSON fields from CSV strings
-function parseJsonField(value: string): any {
-  if (!value) return null;
-  try {
-    return JSON.parse(value);
-  } catch {
-    return value;
-  }
-}
-
-// Render FAQ from JSON string
 function FAQSection({ faqJson }: { faqJson?: string }) {
   if (!faqJson) return null;
   let faqItems;
@@ -89,7 +62,6 @@ function FAQSection({ faqJson }: { faqJson?: string }) {
   );
 }
 
-// Rich text block (assumes HTML content)
 function RichTextBlock({ html, title, icon }: { html?: string; title?: string; icon?: React.ReactNode }) {
   if (!html) return null;
   return (
@@ -106,7 +78,6 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
 
   const author = getAuthorBySlug('mahendra-maurya');
 
-  // Schema: WebApplication
   const webAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -128,13 +99,11 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
             <ArrowLeft className="w-4 h-4" /> All Calculators
           </Link>
 
-          {/* Hero */}
           <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-6 md:p-8 mb-6">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{calc.title}</h1>
             {calc.intro_paragraph && <p className="text-gray-700 mt-3 text-lg">{calc.intro_paragraph}</p>}
           </div>
 
-          {/* What is */}
           {calc.what_is && (
             <div className="bg-white rounded-xl p-6 shadow-sm border">
               <h2 className="text-2xl font-bold mb-2">What is {calc.title}?</h2>
@@ -142,32 +111,21 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
             </div>
           )}
 
-          {/* How to use */}
           {calc.how_to_use && <RichTextBlock html={calc.how_to_use} title="How to Use" icon={<CheckCircle className="w-5 h-5 text-green-600" />} />}
-
-          {/* Formula explanation */}
           {calc.formula_explanation && <RichTextBlock html={calc.formula_explanation} title="Formula & Calculation" icon={<Lightbulb className="w-5 h-5 text-yellow-600" />} />}
-
-          {/* Example calculation */}
           {calc.example_calculation && <RichTextBlock html={calc.example_calculation} title="Example Calculation" icon={<Lightbulb className="w-5 h-5 text-blue-600" />} />}
-
-          {/* Benefits */}
           {calc.benefits && <RichTextBlock html={calc.benefits} title="Key Benefits" icon={<ThumbsUp className="w-5 h-5 text-green-600" />} />}
-
-          {/* Important notes */}
+          
           {calc.important_notes && (
             <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl mt-6">
               <p className="text-amber-800 text-sm">{calc.important_notes}</p>
             </div>
           )}
-
-          {/* Pro tips */}
+          
           {calc.pro_tips && <RichTextBlock html={calc.pro_tips} title="Pro Tips for Better Results" icon={<Lightbulb className="w-5 h-5 text-orange-600" />} />}
-
-          {/* FAQ */}
+          
           <FAQSection faqJson={calc.faq} />
 
-          {/* Related calculators */}
           {calc.related_calculators && (
             <div className="mt-10 bg-white rounded-xl p-6 shadow-sm border">
               <h3 className="text-xl font-bold mb-3">Related Calculators</h3>
@@ -181,10 +139,8 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
             </div>
           )}
 
-          {/* Author card */}
           {author && <AuthorCard author={author} />}
 
-          {/* Last updated & scores */}
           <div className="flex flex-wrap justify-between items-center text-xs text-gray-400 text-center mt-8 border-t pt-4">
             <span>Last updated: {calc.last_updated ? new Date(calc.last_updated).toLocaleDateString('en-IN') : new Date().toLocaleDateString('en-IN')}</span>
             {calc.seo_score && <span>SEO Score: {calc.seo_score}</span>}
