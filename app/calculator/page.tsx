@@ -1,62 +1,44 @@
-import fs from 'fs';
-import path from 'path';
-import csv from 'csv-parser';
+import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
 import { Metadata } from 'next';
-
-export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Financial Calculators | SIP, Lumpsum, EMI, Tax, Retirement | Share Target Price',
   description: 'Free online calculators for SIP, lumpsum, EMI, tax, retirement, NRI, and more. Plan your finances with India-specific tools.',
 };
 
-interface Calculator {
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  type: string;
-}
-
-async function getCalculators(): Promise<Calculator[]> {
-  const calculators: Calculator[] = [];
-  const filePath = path.join(process.cwd(), 'data', 'calculators_enhanced.csv');
-  await new Promise<void>((resolve, reject) => {
-    fs.createReadStream(filePath)
-      .pipe(csv({ separator: '\t' }))   // tab-separated
-      .on('data', (row) => {
-        if (row.slug) {
-          calculators.push({
-            slug: row.slug,
-            title: row.title,
-            description: row.description || row.meta_description || '',
-            category: row.category,
-            type: row.type,
-          });
-        }
-      })
-      .on('end', () => resolve())
-      .on('error', reject);
-  });
-  return calculators;
-}
-
-// Group calculators by category
-function groupByCategory(calculators: Calculator[]) {
-  const groups: Record<string, Calculator[]> = {};
-  for (const calc of calculators) {
-    const cat = calc.category || 'Other';
-    if (!groups[cat]) groups[cat] = [];
-    groups[cat].push(calc);
+async function getCalculators() {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from('calculators')
+    .select('slug, title, description, category, type')
+    .order('title', { ascending: true });
+  if (error) {
+    console.error(error);
+    return [];
   }
-  // sort groups alphabetically
-  return Object.fromEntries(Object.entries(groups).sort());
+  return data;
 }
 
 export default async function CalculatorsPage() {
   const calculators = await getCalculators();
-  const grouped = groupByCategory(calculators);
+  
+  if (!calculators || calculators.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-10 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-3">Financial Calculators</h1>
+        <p className="text-gray-600 text-lg">No calculators found. Please check back later.</p>
+      </div>
+    );
+  }
+
+  // Group by category
+  const grouped = calculators.reduce((acc, calc) => {
+    const cat = calc.category || 'Other';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(calc);
+    return acc;
+  }, {} as Record<string, any[]>);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
