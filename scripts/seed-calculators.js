@@ -3,19 +3,29 @@ import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
 import dotenv from 'dotenv';
-import ws from 'ws'; // ✅ WebSocket import for Node.js 20
+import ws from 'ws';
 
 dotenv.config();
 
-// Create Supabase client with WebSocket transport (fixes realtime error)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY,
   {
     realtime: { transport: ws },
-    auth: { persistSession: false } // no need to persist session for seed scripts
+    auth: { persistSession: false }
   }
 );
+
+// Helper to clean BOM and trim column names
+function cleanKeys(obj) {
+  const cleaned = {};
+  for (let key in obj) {
+    // Remove BOM (U+FEFF) and trim whitespace
+    const cleanKey = key.replace(/^\uFEFF/, '').trim();
+    cleaned[cleanKey] = obj[key];
+  }
+  return cleaned;
+}
 
 async function seedCalculators() {
   const results = [];
@@ -23,11 +33,14 @@ async function seedCalculators() {
 
   console.log(`📂 Reading CSV from: ${filePath}`);
 
-  // ✅ CSV delimiter is comma (,), not tab
   await new Promise((resolve, reject) => {
     fs.createReadStream(filePath)
       .pipe(csv({ separator: ',' }))
-      .on('data', (row) => results.push(row))
+      .on('data', (row) => {
+        // Clean BOM from keys
+        const cleanedRow = cleanKeys(row);
+        results.push(cleanedRow);
+      })
       .on('end', resolve)
       .on('error', reject);
   });
@@ -35,23 +48,21 @@ async function seedCalculators() {
   console.log(`📄 Read ${results.length} calculators`);
 
   for (const row of results) {
+    // Now row.slug will be properly accessible
     if (!row.slug) {
-      console.warn(`⚠️ Skipping row without slug: ${JSON.stringify(row)}`);
+      console.warn(`⚠️ Skipping row without slug:`, row);
       continue;
     }
 
-    // Helper to safely parse JSON
     const safeParse = (str) => {
       if (!str || str === '') return null;
       try {
         return JSON.parse(str);
       } catch (e) {
-        console.warn(`⚠️ Failed to parse JSON for ${row.slug}, field: ${e.message}`);
         return null;
       }
     };
 
-    // For arrays that are comma-separated strings (e.g., secondary_keywords)
     const splitArray = (str) => {
       if (!str || str === '') return null;
       return str.split(',').map(s => s.trim()).filter(s => s);
@@ -68,7 +79,6 @@ async function seedCalculators() {
       breadcrumb_label: row.breadcrumb_label,
       canonical_url: row.canonical_url,
       last_updated: row.last_updated,
-      // new columns
       formula_verified: row.formula_verified,
       formula_source: row.formula_source,
       formula_source_url: row.formula_source_url,
@@ -116,7 +126,6 @@ async function seedCalculators() {
       updated_at: new Date().toISOString(),
     };
 
-    // Remove undefined/null values to avoid Supabase errors (optional)
     Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
 
     const { error } = await supabase
