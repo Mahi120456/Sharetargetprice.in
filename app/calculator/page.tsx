@@ -32,8 +32,9 @@ export default async function CalculatorsPage() {
     );
   }
 
-  const groups = [...new Set(calculators.map(c => c.calculator_group).filter(Boolean))];
-  const categories = [...new Set(calculators.map(c => c.category).filter(Boolean))];
+  // ✅ FIX: Use Array.from instead of spread operator
+  const groups = Array.from(new Set(calculators.map(c => c.calculator_group).filter(Boolean)));
+  const categories = Array.from(new Set(calculators.map(c => c.category).filter(Boolean)));
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
@@ -43,7 +44,6 @@ export default async function CalculatorsPage() {
           Free online calculators for SIP, lumpsum, EMI, tax, retirement & more – tailored for Indian investors.
         </p>
 
-        {/* Client component for interactive filters */}
         <CalculatorListClient calculators={calculators} groups={groups} categories={categories} />
       </div>
     </div>
