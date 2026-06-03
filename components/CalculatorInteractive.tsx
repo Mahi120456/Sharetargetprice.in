@@ -1,9 +1,13 @@
+// components/CalculatorInteractive.tsx
 'use client';
-import { useState, useEffect } from 'react';
-import { Line, Bar, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, BarElement, ArcElement } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, BarElement, ArcElement);
+import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import chart components (only on client)
+const LineChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Line), { ssr: false });
+const BarChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Bar), { ssr: false });
+const PieChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Pie), { ssr: false });
 
 export default function CalculatorInteractive({ inputFields, calculatorEngine, chartConfig, validationRules, title }: any) {
   const [inputs, setInputs] = useState<Record<string, any>>({});
@@ -11,7 +15,6 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
   const [chartData, setChartData] = useState<any>(null);
   const [error, setError] = useState('');
 
-  // Initialize default values
   useEffect(() => {
     const defaults: any = {};
     inputFields.forEach((field: any) => {
@@ -34,12 +37,9 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
         setResult({ message: 'Calculation engine not available' });
         return;
       }
-      // Safe evaluation of the calculator_engine string
       const engineFn = new Function('inputs', calculatorEngine);
       const output = engineFn(values);
       setResult(output);
-
-      // Generate chart if chartConfig exists
       if (chartConfig && output?.chartPoints) {
         generateChart(output.chartPoints);
       }
@@ -49,7 +49,6 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
   };
 
   const generateChart = (points: number[]) => {
-    // Example: assume points is array of values over time
     const labels = Array.from({ length: points.length }, (_, i) => i + 1);
     setChartData({
       labels,
@@ -63,7 +62,6 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
     });
   };
 
-  // Render form fields
   const renderField = (field: any) => {
     const value = inputs[field.name] ?? '';
     const rules = validationRules?.[field.name] || {};
@@ -124,9 +122,11 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
           </div>
         )}
 
-        {chartData && (
+        {chartData && chartConfig && (
           <div className="mt-6 p-4 bg-gray-50 rounded-xl">
-            <Line data={chartData} options={{ responsive: true }} />
+            {chartConfig.type === 'line' && <LineChart data={chartData} options={{ responsive: true }} />}
+            {chartConfig.type === 'bar' && <BarChart data={chartData} options={{ responsive: true }} />}
+            {chartConfig.type === 'pie' && <PieChart data={chartData} options={{ responsive: true }} />}
           </div>
         )}
       </div>
