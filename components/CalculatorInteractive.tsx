@@ -4,20 +4,56 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
-// Dynamically import chart components (only on client)
+// Dynamically import chart components (client-side only)
 const LineChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Line), { ssr: false });
 const BarChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Bar), { ssr: false });
 const PieChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Pie), { ssr: false });
 
-export default function CalculatorInteractive({ inputFields, calculatorEngine, chartConfig, validationRules, title }: any) {
+interface InputField {
+  name: string;
+  label: string;
+  type?: string;
+  min?: number;
+  max?: number;
+  default?: any;
+  required?: boolean;
+  options?: string[];
+  hint?: string;
+  step?: number;
+}
+
+interface ChartConfig {
+  type: 'line' | 'bar' | 'pie';
+  xAxis?: string;
+  yAxis?: string;
+  title?: string;
+}
+
+interface ValidationRules {
+  [key: string]: { min?: number; max?: number; required?: boolean };
+}
+
+export default function CalculatorInteractive({
+  inputFields,
+  calculatorEngine,
+  chartConfig,
+  validationRules,
+  title,
+}: {
+  inputFields: InputField[];
+  calculatorEngine?: string;
+  chartConfig?: ChartConfig | null;
+  validationRules?: ValidationRules;
+  title: string;
+}) {
   const [inputs, setInputs] = useState<Record<string, any>>({});
   const [result, setResult] = useState<any>(null);
   const [chartData, setChartData] = useState<any>(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const defaults: any = {};
-    inputFields.forEach((field: any) => {
+    const defaults: Record<string, any> = {};
+    inputFields.forEach((field) => {
       defaults[field.name] = field.default ?? (field.type === 'number' ? 0 : '');
     });
     setInputs(defaults);
@@ -30,7 +66,7 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
     calculate(newInputs);
   };
 
-  const calculate = (values: any) => {
+  const calculate = (values: Record<string, any>) => {
     setError('');
     try {
       if (!calculatorEngine) {
@@ -52,17 +88,19 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
     const labels = Array.from({ length: points.length }, (_, i) => i + 1);
     setChartData({
       labels,
-      datasets: [{
-        label: title,
-        data: points,
-        borderColor: 'rgb(249, 115, 22)',
-        backgroundColor: 'rgba(249, 115, 22, 0.5)',
-        tension: 0.4,
-      }]
+      datasets: [
+        {
+          label: title,
+          data: points,
+          borderColor: 'rgb(249, 115, 22)',
+          backgroundColor: 'rgba(249, 115, 22, 0.5)',
+          tension: 0.4,
+        },
+      ],
     });
   };
 
-  const renderField = (field: any) => {
+  const renderField = (field: InputField) => {
     const value = inputs[field.name] ?? '';
     const rules = validationRules?.[field.name] || {};
     const min = rules.min ?? field.min;
@@ -77,17 +115,25 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
           required={field.required}
         >
           <option value="">Select...</option>
-          {field.options.map((opt: string) => (
-            <option key={opt} value={opt}>{opt}</option>
+          {field.options.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
           ))}
         </select>
       );
     }
+
     return (
       <input
         type={field.type || 'number'}
         value={value}
-        onChange={(e) => handleChange(field.name, field.type === 'number' ? parseFloat(e.target.value) : e.target.value)}
+        onChange={(e) =>
+          handleChange(
+            field.name,
+            field.type === 'number' ? parseFloat(e.target.value) : e.target.value
+          )
+        }
         className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-orange-400"
         min={min}
         max={max}
@@ -97,14 +143,23 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
     );
   };
 
+  // Helper to safely render value
+  const formatValue = (val: unknown): string => {
+    if (typeof val === 'number') return val.toLocaleString('en-IN');
+    if (val === null || val === undefined) return '';
+    return String(val);
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-md border overflow-hidden mb-8">
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-4">Calculate Now</h2>
         <div className="space-y-4">
-          {inputFields.map((field: any) => (
+          {inputFields.map((field) => (
             <div key={field.name}>
-              <label className="block font-medium mb-1">{field.label} {field.required && <span className="text-red-500">*</span>}</label>
+              <label className="block font-medium mb-1">
+                {field.label} {field.required && <span className="text-red-500">*</span>}
+              </label>
               {renderField(field)}
               {field.hint && <p className="text-xs text-gray-400 mt-1">{field.hint}</p>}
             </div>
@@ -117,7 +172,9 @@ export default function CalculatorInteractive({ inputFields, calculatorEngine, c
           <div className="mt-6 p-5 bg-green-50 rounded-xl">
             <h3 className="font-bold text-lg mb-2">Result</h3>
             {Object.entries(result).map(([key, val]) => (
-              <p key={key} className="text-gray-800"><strong>{key}:</strong> {typeof val === 'number' ? val.toLocaleString('en-IN') : val}</p>
+              <p key={key} className="text-gray-800">
+                <strong>{key}:</strong> {formatValue(val)}
+              </p>
             ))}
           </div>
         )}
