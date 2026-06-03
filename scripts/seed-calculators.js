@@ -3,21 +3,30 @@ import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
 import dotenv from 'dotenv';
+import ws from 'ws'; // ✅ WebSocket import for Node.js 20
 
 dotenv.config();
 
+// Create Supabase client with WebSocket transport (fixes realtime error)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.SUPABASE_SERVICE_KEY,
+  {
+    realtime: { transport: ws },
+    auth: { persistSession: false } // no need to persist session for seed scripts
+  }
 );
 
 async function seedCalculators() {
   const results = [];
   const filePath = path.join(process.cwd(), 'data', 'calculators_enhanced.csv');
 
+  console.log(`📂 Reading CSV from: ${filePath}`);
+
+  // ✅ CSV delimiter is comma (,), not tab
   await new Promise((resolve, reject) => {
     fs.createReadStream(filePath)
-      .pipe(csv({ separator: '\t' }))
+      .pipe(csv({ separator: ',' }))
       .on('data', (row) => results.push(row))
       .on('end', resolve)
       .on('error', reject);
@@ -26,7 +35,27 @@ async function seedCalculators() {
   console.log(`📄 Read ${results.length} calculators`);
 
   for (const row of results) {
-    if (!row.slug) continue;
+    if (!row.slug) {
+      console.warn(`⚠️ Skipping row without slug: ${JSON.stringify(row)}`);
+      continue;
+    }
+
+    // Helper to safely parse JSON
+    const safeParse = (str) => {
+      if (!str || str === '') return null;
+      try {
+        return JSON.parse(str);
+      } catch (e) {
+        console.warn(`⚠️ Failed to parse JSON for ${row.slug}, field: ${e.message}`);
+        return null;
+      }
+    };
+
+    // For arrays that are comma-separated strings (e.g., secondary_keywords)
+    const splitArray = (str) => {
+      if (!str || str === '') return null;
+      return str.split(',').map(s => s.trim()).filter(s => s);
+    };
 
     const data = {
       slug: row.slug,
@@ -39,13 +68,14 @@ async function seedCalculators() {
       breadcrumb_label: row.breadcrumb_label,
       canonical_url: row.canonical_url,
       last_updated: row.last_updated,
+      // new columns
       formula_verified: row.formula_verified,
       formula_source: row.formula_source,
       formula_source_url: row.formula_source_url,
       meta_title: row.meta_title,
       meta_description: row.meta_description,
       focus_keyword: row.focus_keyword,
-      secondary_keywords: row.secondary_keywords,
+      secondary_keywords: splitArray(row.secondary_keywords),
       intro_paragraph: row.intro_paragraph,
       what_is: row.what_is,
       how_to_use: row.how_to_use,
@@ -54,43 +84,50 @@ async function seedCalculators() {
       benefits: row.benefits,
       important_notes: row.important_notes,
       pro_tips: row.pro_tips,
-      faq: row.faq,
+      faq: safeParse(row.faq),
       og_title: row.og_title,
       og_description: row.og_description,
       related_calculators: row.related_calculators,
       related_articles: row.related_articles,
-      input_fields: row.input_fields ? JSON.parse(row.input_fields) : null,
-      output_fields: row.output_fields ? row.output_fields.split(',').map(s => s.trim()) : null,
-      chart_config: row.chart_config ? JSON.parse(row.chart_config) : null,
+      input_fields: safeParse(row.input_fields),
+      output_fields: splitArray(row.output_fields),
+      chart_config: safeParse(row.chart_config),
       result_explanation: row.result_explanation,
-      validation_rules: row.validation_rules ? JSON.parse(row.validation_rules) : null,
+      validation_rules: safeParse(row.validation_rules),
       calculator_engine: row.calculator_engine,
-      category_hierarchy: row.category_hierarchy ? row.category_hierarchy.split(',').map(s => s.trim()) : null,
+      category_hierarchy: splitArray(row.category_hierarchy),
       calculator_group: row.calculator_group,
       topical_cluster: row.topical_cluster,
-      internal_link_targets: row.internal_link_targets ? row.internal_link_targets.split(',').map(s => s.trim()) : null,
+      internal_link_targets: splitArray(row.internal_link_targets),
       search_intent: row.search_intent,
       traffic_priority: row.traffic_priority,
       complexity_level: row.complexity_level,
       schema_recommendation: row.schema_recommendation,
-      long_tail_keywords: row.long_tail_keywords ? row.long_tail_keywords.split(',').map(s => s.trim()) : null,
-      semantic_keywords: row.semantic_keywords ? row.semantic_keywords.split(',').map(s => s.trim()) : null,
-      paa_keywords: row.paa_keywords ? row.paa_keywords.split(',').map(s => s.trim()) : null,
-      voice_search_keywords: row.voice_search_keywords ? row.voice_search_keywords.split(',').map(s => s.trim()) : null,
+      long_tail_keywords: splitArray(row.long_tail_keywords),
+      semantic_keywords: splitArray(row.semantic_keywords),
+      paa_keywords: splitArray(row.paa_keywords),
+      voice_search_keywords: splitArray(row.voice_search_keywords),
       seo_score: row.seo_score ? parseInt(row.seo_score) : null,
       eeat_score: row.eeat_score ? parseInt(row.eeat_score) : null,
       discover_score: row.discover_score ? parseInt(row.discover_score) : null,
       ai_search_score: row.ai_search_score ? parseInt(row.ai_search_score) : null,
       ranking_priority: row.ranking_priority ? parseInt(row.ranking_priority) : null,
-      review_required: row.review_required === 'TRUE',
+      review_required: row.review_required === 'TRUE' || row.review_required === 'true',
       updated_at: new Date().toISOString(),
     };
+
+    // Remove undefined/null values to avoid Supabase errors (optional)
+    Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
 
     const { error } = await supabase
       .from('calculators')
       .upsert(data, { onConflict: 'slug' });
-    if (error) console.error(`❌ Error upserting ${row.slug}:`, error.message);
-    else console.log(`✅ ${row.slug}`);
+
+    if (error) {
+      console.error(`❌ Error upserting ${row.slug}:`, error.message);
+    } else {
+      console.log(`✅ ${row.slug}`);
+    }
   }
   console.log('🎉 Seed completed.');
 }
