@@ -1,0 +1,98 @@
+import { createClient } from '@supabase/supabase-js';
+import fs from 'fs';
+import path from 'path';
+import csv from 'csv-parser';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+);
+
+async function seedCalculators() {
+  const results = [];
+  const filePath = path.join(process.cwd(), 'data', 'calculators_enhanced.csv');
+
+  await new Promise((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csv({ separator: '\t' }))
+      .on('data', (row) => results.push(row))
+      .on('end', resolve)
+      .on('error', reject);
+  });
+
+  console.log(`📄 Read ${results.length} calculators`);
+
+  for (const row of results) {
+    if (!row.slug) continue;
+
+    const data = {
+      slug: row.slug,
+      title: row.title,
+      category: row.category,
+      type: row.type,
+      description: row.description,
+      formula_template: row.formula_template,
+      schema_type: row.schema_type,
+      breadcrumb_label: row.breadcrumb_label,
+      canonical_url: row.canonical_url,
+      last_updated: row.last_updated,
+      formula_verified: row.formula_verified,
+      formula_source: row.formula_source,
+      formula_source_url: row.formula_source_url,
+      meta_title: row.meta_title,
+      meta_description: row.meta_description,
+      focus_keyword: row.focus_keyword,
+      secondary_keywords: row.secondary_keywords,
+      intro_paragraph: row.intro_paragraph,
+      what_is: row.what_is,
+      how_to_use: row.how_to_use,
+      formula_explanation: row.formula_explanation,
+      example_calculation: row.example_calculation,
+      benefits: row.benefits,
+      important_notes: row.important_notes,
+      pro_tips: row.pro_tips,
+      faq: row.faq,
+      og_title: row.og_title,
+      og_description: row.og_description,
+      related_calculators: row.related_calculators,
+      related_articles: row.related_articles,
+      input_fields: row.input_fields ? JSON.parse(row.input_fields) : null,
+      output_fields: row.output_fields ? row.output_fields.split(',').map(s => s.trim()) : null,
+      chart_config: row.chart_config ? JSON.parse(row.chart_config) : null,
+      result_explanation: row.result_explanation,
+      validation_rules: row.validation_rules ? JSON.parse(row.validation_rules) : null,
+      calculator_engine: row.calculator_engine,
+      category_hierarchy: row.category_hierarchy ? row.category_hierarchy.split(',').map(s => s.trim()) : null,
+      calculator_group: row.calculator_group,
+      topical_cluster: row.topical_cluster,
+      internal_link_targets: row.internal_link_targets ? row.internal_link_targets.split(',').map(s => s.trim()) : null,
+      search_intent: row.search_intent,
+      traffic_priority: row.traffic_priority,
+      complexity_level: row.complexity_level,
+      schema_recommendation: row.schema_recommendation,
+      long_tail_keywords: row.long_tail_keywords ? row.long_tail_keywords.split(',').map(s => s.trim()) : null,
+      semantic_keywords: row.semantic_keywords ? row.semantic_keywords.split(',').map(s => s.trim()) : null,
+      paa_keywords: row.paa_keywords ? row.paa_keywords.split(',').map(s => s.trim()) : null,
+      voice_search_keywords: row.voice_search_keywords ? row.voice_search_keywords.split(',').map(s => s.trim()) : null,
+      seo_score: row.seo_score ? parseInt(row.seo_score) : null,
+      eeat_score: row.eeat_score ? parseInt(row.eeat_score) : null,
+      discover_score: row.discover_score ? parseInt(row.discover_score) : null,
+      ai_search_score: row.ai_search_score ? parseInt(row.ai_search_score) : null,
+      ranking_priority: row.ranking_priority ? parseInt(row.ranking_priority) : null,
+      review_required: row.review_required === 'TRUE',
+      updated_at: new Date().toISOString(),
+    };
+
+    const { error } = await supabase
+      .from('calculators')
+      .upsert(data, { onConflict: 'slug' });
+    if (error) console.error(`❌ Error upserting ${row.slug}:`, error.message);
+    else console.log(`✅ ${row.slug}`);
+  }
+  console.log('🎉 Seed completed.');
+}
+
+seedCalculators().catch(console.error);
