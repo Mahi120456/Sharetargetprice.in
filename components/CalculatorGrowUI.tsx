@@ -3,16 +3,23 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { 
-  Calculator, TrendingUp, Info, Lightbulb, CheckCircle, 
-  ThumbsUp, AlertCircle, ChevronDown, ChevronUp, HelpCircle 
+import {
+  Calculator,
+  TrendingUp,
+  Info,
+  Lightbulb,
+  CheckCircle,
+  ThumbsUp,
+  AlertCircle,
+  ChevronDown,
+  ChevronUp,
+  HelpCircle,
 } from 'lucide-react';
 
 const LineChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Line), { ssr: false });
 const BarChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Bar), { ssr: false });
 const PieChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Pie), { ssr: false });
 
-// Type definitions
 interface InputField {
   name: string;
   label: string;
@@ -52,36 +59,52 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
   const [chartData, setChartData] = useState<any>(null);
   const [openSections, setOpenSections] = useState<string[]>([]);
 
-  // Parse input_fields safely
+  // Parse input_fields
   const inputFields: InputField[] = (() => {
     const f = calculator.input_fields;
     if (!f) return [];
     if (Array.isArray(f)) return f;
-    try { return JSON.parse(f as string); } catch { return []; }
+    try {
+      return JSON.parse(f as string);
+    } catch {
+      return [];
+    }
   })();
 
   const validationRules: Record<string, any> = (() => {
     const v = calculator.validation_rules;
     if (!v) return {};
     if (typeof v === 'object') return v;
-    try { return JSON.parse(v); } catch { return {}; }
+    try {
+      return JSON.parse(v);
+    } catch {
+      return {};
+    }
   })();
 
   const chartConfig = (() => {
     const c = calculator.chart_config;
     if (!c) return null;
     if (typeof c === 'object') return c;
-    try { return JSON.parse(c); } catch { return null; }
+    try {
+      return JSON.parse(c);
+    } catch {
+      return null;
+    }
   })();
 
   const faqItems: Array<{ q: string; a: string }> = (() => {
     const f = calculator.faq;
     if (!f) return [];
     if (Array.isArray(f)) return f;
-    try { return JSON.parse(f); } catch { return []; }
+    try {
+      return JSON.parse(f);
+    } catch {
+      return [];
+    }
   })();
 
-  // Set default values
+  // Default values
   useEffect(() => {
     const defaults: Record<string, any> = {};
     inputFields.forEach((field: InputField) => {
@@ -90,6 +113,10 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
     setInputs(defaults);
   }, [inputFields]);
 
+  // ============================================
+  // SMART ENGINE WRAPPER
+  // Handles both old-style (multiple params) and new-style (inputs object)
+  // ============================================
   const calculate = useCallback(() => {
     if (!calculator.calculator_engine) {
       setResult({ message: 'Engine not available' });
@@ -98,31 +125,90 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
     setError('');
     setIsCalculating(true);
     try {
-      const engineFn = new Function('inputs', calculator.calculator_engine);
-      const output = engineFn(inputs);
+      const engineStr = calculator.calculator_engine.trim();
+      let output: any;
+
+      // Check if engine expects an 'inputs' object
+      const expectsInputsObject = /function\s*\(\s*inputs\s*\)/.test(engineStr);
+
+      if (expectsInputsObject) {
+        // New style: function(inputs) { ... }
+        const engineFn = new Function('inputs', engineStr);
+        output = engineFn(inputs);
+      } else {
+        // Old style: function(param1, param2, ...) { ... }
+        // Extract parameter names (e.g., "P, annualRate, years")
+        const paramMatch = engineStr.match(/function\s*\(\s*([^)]*)\s*\)/);
+        if (!paramMatch) throw new Error('Cannot parse engine function signature');
+
+        const params = paramMatch[1].split(',').map(p => p.trim()).filter(p => p);
+        if (params.length === 0) throw new Error('No parameters found in engine');
+
+        // Build mapping from parameter name to input field name
+        const mapping = params.map(param => {
+          const lower = param.toLowerCase();
+          // Common aliases mapping (extend as needed)
+          if (lower === 'p') return 'monthlyInvestment';
+          if (lower === 'annualrate' || lower === 'rate' || lower === 'returnrate') return 'annualReturn';
+          if (lower === 'years' || lower === 'n' || lower === 'tenure' || lower === 'duration') return 'years';
+          if (lower === 'principal') return 'monthlyInvestment'; // for lumpsum
+          if (lower === 'time') return 'years';
+          // Fallback: try to match directly with input field names
+          if (inputs.hasOwnProperty(param)) return param;
+          // If not found, return param as is (might be undefined later)
+          return param;
+        });
+
+        // Build a wrapper that destructures inputs and calls original function
+        // Example: const { monthlyInvestment: P, annualReturn: annualRate, years } = inputs; return (function sip(P,annualRate,years){...})(P, annualRate, years);
+        const destructureParts = params.map((param, idx) => {
+          const mappedKey = mapping[idx];
+          if (mappedKey === param) return param;
+          return `${mappedKey}: ${param}`;
+        });
+        const destructure = `{ ${destructureParts.join(', ')} }`;
+
+        // Wrap original function in parentheses and call it with the extracted params
+        // Use eval? No, we build a new function body
+        const wrappedBody = `
+          const ${destructure} = inputs;
+          return (${engineStr})(${params.join(', ')});
+        `;
+        const wrappedFn = new Function('inputs', wrappedBody);
+        output = wrappedFn(inputs);
+      }
+
+      // Validate output
       if (output && typeof output === 'object') {
         setResult(output);
+        // Handle chart data if present
         if (chartConfig && (output.chartPoints || output.yearlyData)) {
           const points = output.chartPoints || output.yearlyData;
           const labels = Array.from({ length: points.length }, (_, i) => i + 1);
           setChartData({
             labels,
-            datasets: [{
-              label: calculator.title,
-              data: points,
-              borderColor: '#f97316',
-              backgroundColor: 'rgba(249,115,22,0.1)',
-              fill: true,
-              tension: 0.3
-            }]
+            datasets: [
+              {
+                label: calculator.title,
+                data: points,
+                borderColor: '#f97316',
+                backgroundColor: 'rgba(249,115,22,0.1)',
+                fill: true,
+                tension: 0.3,
+              },
+            ],
           });
+        } else {
+          // No chart data, clear if exists
+          setChartData(null);
         }
       } else {
         setResult(null);
         setError('Invalid result from engine');
       }
     } catch (err: any) {
-      setError(err.message);
+      console.error('Engine calculation error:', err);
+      setError(err.message || 'Calculation failed');
       setResult(null);
     } finally {
       setIsCalculating(false);
@@ -158,11 +244,15 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
       return (
         <select
           value={value}
-          onChange={(e) => handleInputChange(field.name, e.target.value)}
+          onChange={e => handleInputChange(field.name, e.target.value)}
           className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 bg-white"
         >
           <option value="">Select...</option>
-          {field.options.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
+          {field.options.map(opt => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
         </select>
       );
     }
@@ -173,7 +263,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
           <input
             type="range"
             value={value}
-            onChange={(e) => handleInputChange(field.name, parseFloat(e.target.value))}
+            onChange={e => handleInputChange(field.name, parseFloat(e.target.value))}
             min={min}
             max={max}
             step={field.step || 1}
@@ -192,7 +282,12 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
       <input
         type={field.type || 'number'}
         value={value}
-        onChange={(e) => handleInputChange(field.name, field.type === 'number' ? parseFloat(e.target.value) : e.target.value)}
+        onChange={e =>
+          handleInputChange(
+            field.name,
+            field.type === 'number' ? parseFloat(e.target.value) : e.target.value
+          )
+        }
         className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500"
         min={min}
         max={max}
@@ -201,7 +296,17 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
     );
   };
 
-  const Section = ({ id, title, icon: Icon, content }: { id: string; title: string; icon: any; content?: string }) => {
+  const Section = ({
+    id,
+    title,
+    icon: Icon,
+    content,
+  }: {
+    id: string;
+    title: string;
+    icon: any;
+    content?: string;
+  }) => {
     if (!content) return null;
     const isOpen = openSections.includes(id);
     return (
@@ -210,11 +315,17 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
           onClick={() => toggleSection(id)}
           className="w-full flex justify-between items-center p-5 text-left font-semibold text-gray-800 hover:bg-gray-50"
         >
-          <span className="flex items-center gap-2"><Icon className="w-5 h-5 text-orange-500" />{title}</span>
+          <span className="flex items-center gap-2">
+            <Icon className="w-5 h-5 text-orange-500" />
+            {title}
+          </span>
           {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </button>
         {isOpen && (
-          <div className="p-5 pt-0 border-t border-gray-100 prose max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
+          <div
+            className="p-5 pt-0 border-t border-gray-100 prose max-w-none"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         )}
       </div>
     );
@@ -256,22 +367,34 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
               Your Result
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {Object.entries(result).map(([key, val]) => (
-                <div key={key} className="bg-white rounded-xl p-4 shadow-sm border">
-                  <p className="text-sm text-gray-500 capitalize">{key.replace(/([A-Z])/g, ' $1')}</p>
-                  <p className="text-2xl font-bold text-gray-800 mt-1">{formatValue(val)}</p>
-                </div>
-              ))}
+              {Object.entries(result).map(([key, val]) => {
+                let displayKey = key;
+                if (key === 'invested') displayKey = 'Total Invested Amount';
+                else if (key === 'returns') displayKey = 'Estimated Returns';
+                else if (key === 'maturity') displayKey = 'Maturity Value';
+                else displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                return (
+                  <div key={key} className="bg-white rounded-xl p-4 shadow-sm border">
+                    <p className="text-sm text-gray-500 capitalize">{displayKey}</p>
+                    <p className="text-2xl font-bold text-gray-800 mt-1">{formatValue(val)}</p>
+                  </div>
+                );
+              })}
             </div>
             {calculator.result_explanation && (
-              <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">{calculator.result_explanation}</p>
+              <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">
+                {calculator.result_explanation}
+              </p>
             )}
           </div>
         )}
 
         {error && (
           <div className="border-t p-6 bg-red-50">
-            <div className="flex items-center gap-2 text-red-700"><AlertCircle className="w-5 h-5" />{error}</div>
+            <div className="flex items-center gap-2 text-red-700">
+              <AlertCircle className="w-5 h-5" />
+              {error}
+            </div>
           </div>
         )}
 
@@ -279,21 +402,30 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
           <div className="border-t p-6 bg-gray-50">
             <h4 className="font-semibold mb-3">{chartConfig.title || 'Growth Over Time'}</h4>
             <div className="h-64">
-              {chartConfig.type === 'line' && <LineChart data={chartData} options={{ maintainAspectRatio: false }} />}
-              
-              {chartConfig.type === 'bar' && <BarChart data={chartData} options={{ maintainAspectRatio: false }} />}
-              
-              {chartConfig.type === 'pie' && <PieChart data={chartData} options={{ maintainAspectRatio: false }} />}
+              {chartConfig.type === 'line' && (
+                <LineChart data={chartData} options={{ maintainAspectRatio: false }} />
+              )}
+              {chartConfig.type === 'bar' && (
+                <BarChart data={chartData} options={{ maintainAspectRatio: false }} />
+              )}
+              {chartConfig.type === 'pie' && (
+                <PieChart data={chartData} options={{ maintainAspectRatio: false }} />
+              )}
             </div>
           </div>
         )}
       </div>
 
-      {/* Educational Sections Accordion */}
+      {/* Educational Sections */}
       <div className="space-y-3">
         <Section id="what" title="What is this calculator?" icon={Info} content={calculator.what_is} />
         <Section id="how" title="How to use" icon={Lightbulb} content={calculator.how_to_use} />
-        <Section id="formula" title="Formula & Calculation" icon={Calculator} content={calculator.formula_explanation} />
+        <Section
+          id="formula"
+          title="Formula & Calculation"
+          icon={Calculator}
+          content={calculator.formula_explanation}
+        />
         <Section id="benefits" title="Key Benefits" icon={CheckCircle} content={calculator.benefits} />
         <Section id="protips" title="Pro Tips" icon={ThumbsUp} content={calculator.pro_tips} />
         {calculator.important_notes && (
@@ -303,16 +435,29 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
         )}
       </div>
 
-      {/* FAQ Section with Schema */}
+      {/* FAQ with Schema */}
       {faqItems.length > 0 && (
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><HelpCircle className="w-5 h-5 text-orange-500" />Frequently Asked Questions</h3>
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <HelpCircle className="w-5 h-5 text-orange-500" />
+            Frequently Asked Questions
+          </h3>
           <div itemScope itemType="https://schema.org/FAQPage" className="space-y-4">
-            {faqItems.map((item: { q: string; a: string }, idx: number) => (
-              <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="border-b pb-3 last:border-0">
-                <h4 itemProp="name" className="font-semibold text-gray-800">{item.q}</h4>
+            {faqItems.map((item, idx) => (
+              <div
+                key={idx}
+                itemScope
+                itemProp="mainEntity"
+                itemType="https://schema.org/Question"
+                className="border-b pb-3 last:border-0"
+              >
+                <h4 itemProp="name" className="font-semibold text-gray-800">
+                  {item.q}
+                </h4>
                 <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <div itemProp="text" className="text-gray-600 mt-1">{item.a}</div>
+                  <div itemProp="text" className="text-gray-600 mt-1">
+                    {item.a}
+                  </div>
                 </div>
               </div>
             ))}
