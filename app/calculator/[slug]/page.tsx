@@ -31,6 +31,7 @@ function flattenCalculator(raw: any) {
     chart_config: getNested(raw, '_calculator.chart_config') || null,
     validation_rules: getNested(raw, '_calculator.validation_rules') || {},
     related_calculators: getNested(raw, '_links.related_calculators') || [],
+    calculator_engine: getNested(raw, '_calculator.calculator_engine') || '',  // ← ADD THIS
   };
 }
 
@@ -65,8 +66,7 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{calculator.title}</h1>
           {calculator.intro_paragraph && <p className="text-gray-700 mt-3 text-lg">{calculator.intro_paragraph}</p>}
         </div>
-        {/* PASS ONLY SLUG, NOT THE FUNCTION */}
-        <CalculatorPro calculator={calculator} slug={params.slug} />
+        <CalculatorPro calculator={calculator} />
       </div>
     </div>
   );
