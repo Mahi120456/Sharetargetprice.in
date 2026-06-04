@@ -1,45 +1,40 @@
 // scripts/build-calculators.js
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const DATA_DIR = './data/calculators';
-const OUTPUT_FILE = './lib/calculatorEngines.ts';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DATA_DIR = path.join(process.cwd(), 'data/calculators');
+const OUTPUT_FILE = path.join(process.cwd(), 'lib/calculatorEngines.ts');
 
-// Helper to read nested properties like _calculator.calculator_engine
 function getNested(obj, pathStr) {
   return pathStr.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
 }
 
-// Convert old-style function(param1, param2) to (inputs) => { ... }
 function convertToArrow(oldEngine, inputFields) {
-  // Match function name(param1, param2, ...)
   const match = oldEngine.match(/function\s+\w*\s*\(\s*([^)]*)\s*\)/);
   if (!match) return null;
   const params = match[1].split(',').map(p => p.trim()).filter(p => p);
-  if (params.length === 0) return null;
+  if (!params.length) return null;
 
-  // Map each parameter to an input field name (using aliases or exact match)
-  const mapping = params.map(param => {
-    const lower = param.toLowerCase();
-    const aliasMap = {
+  const mapping = params.map(p => {
+    const lower = p.toLowerCase();
+    const alias = {
       'p': 'monthlyInvestment', 'principal': 'monthlyInvestment',
       'annualrate': 'annualReturn', 'rate': 'annualReturn', 'returnrate': 'annualReturn',
       'years': 'years', 'n': 'years', 'tenure': 'years', 'duration': 'years', 'time': 'years',
       'cashflows': 'cashFlows', 'dates': 'dates',
       'amount': 'amount', 'r': 'rate', 't': 'time',
     };
-    if (aliasMap[lower]) return aliasMap[lower];
-    // Try exact match in input_fields names
-    const matched = inputFields.find(f => f.name.toLowerCase() === lower);
-    return matched ? matched.name : param;
+    if (alias[lower]) return alias[lower];
+    const matched = inputFields.find(f => f.name?.toLowerCase() === lower);
+    return matched ? matched.name : p;
   });
 
-  // Build destructuring: { monthlyInvestment: P, annualReturn: rate, years }
   const destructure = params.map((p, idx) =>
     mapping[idx] === p ? p : `${mapping[idx]}: ${p}`
   ).join(', ');
 
-  // Extract function body (everything between first { and last })
   const bodyMatch = oldEngine.match(/\{([\s\S]*)\}/);
   if (!bodyMatch) return null;
   let body = bodyMatch[1].trim();
@@ -50,22 +45,16 @@ function convertToArrow(oldEngine, inputFields) {
 }`;
 }
 
-// Get all calculators from either _all_calculators.json or individual files
 function loadAllCalculators() {
   const allCalcPath = path.join(DATA_DIR, '_all_calculators.json');
   if (fs.existsSync(allCalcPath)) {
     const data = JSON.parse(fs.readFileSync(allCalcPath, 'utf8'));
-    // Structure may be { calculators: [...] } or direct array
-    if (data.calculators) return data.calculators;
-    if (Array.isArray(data)) return data;
-    return [data];
+    return data.calculators || data;
   }
-  // Fallback: read each .json file (except _index.json)
   const files = fs.readdirSync(DATA_DIR).filter(f => f.endsWith('.json') && f !== '_index.json');
   const calculators = [];
   for (const file of files) {
-    const filePath = path.join(DATA_DIR, file);
-    const calc = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const calc = JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), 'utf8'));
     calculators.push(calc);
   }
   return calculators;
@@ -73,20 +62,16 @@ function loadAllCalculators() {
 
 function main() {
   const calculators = loadAllCalculators();
-  if (calculators.length === 0) {
-    console.error('❌ No calculator data found in', DATA_DIR);
+  if (!calculators.length) {
+    console.error('❌ No calculators found');
     process.exit(1);
   }
   console.log(`📂 Found ${calculators.length} calculators`);
 
   const enginesMap = {};
-
   for (const calc of calculators) {
     const slug = calc.slug;
-    if (!slug) {
-      console.warn('⚠️ Skipping calculator without slug');
-      continue;
-    }
+    if (!slug) continue;
     const engineRaw = getNested(calc, '_calculator.calculator_engine') || calc.calculator_engine;
     const inputFields = getNested(calc, '_calculator.input_fields') || calc.input_fields || [];
     if (!engineRaw) {
@@ -94,7 +79,6 @@ function main() {
       continue;
     }
     let engineArrow = engineRaw.trim();
-    // If already an arrow or function(inputs) style, keep as is
     if (!engineArrow.startsWith('(inputs)') && !engineArrow.includes('function(inputs)')) {
       const converted = convertToArrow(engineRaw, inputFields);
       if (!converted) {
@@ -107,15 +91,13 @@ function main() {
     console.log(`✅ ${slug}`);
   }
 
-  // Ensure lib directory exists
   const libDir = path.dirname(OUTPUT_FILE);
   if (!fs.existsSync(libDir)) fs.mkdirSync(libDir, { recursive: true });
 
-  // Write TypeScript file
-  let output = `// Auto-generated by scripts/build-calculators.js\n// Do not edit manually\n\nexport const calculatorEngines: Record<string, (inputs: any) => any> = {\n`;
+  let output = `// Auto-generated by scripts/build-calculators.js\n\n`;
+  output += `export const calculatorEngines: Record<string, (inputs: any) => any> = {\n`;
   for (const [slug, fn] of Object.entries(enginesMap)) {
-    const safeFn = fn.replace(/`/g, '\\`');
-    output += `  '${slug}': ${safeFn},\n`;
+    output += `  '${slug}': ${fn},\n`;
   }
   output += `};\n`;
   fs.writeFileSync(OUTPUT_FILE, output);
