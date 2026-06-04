@@ -4,54 +4,115 @@
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import {
-  Calculator,
-  TrendingUp,
-  Info,
-  Lightbulb,
-  CheckCircle,
-  ThumbsUp,
-  AlertCircle,
-  ChevronDown,
-  ChevronUp,
-  HelpCircle,
+  Calculator, TrendingUp, Info, Lightbulb, CheckCircle,
+  ThumbsUp, AlertCircle, ChevronDown, ChevronUp, HelpCircle,
 } from 'lucide-react';
 
 const LineChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Line), { ssr: false });
 const BarChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Bar), { ssr: false });
 const PieChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Pie), { ssr: false });
 
-interface InputField {
-  name: string;
-  label: string;
-  type?: string;
-  min?: number;
-  max?: number;
-  default?: any;
-  required?: boolean;
-  options?: string[];
-  hint?: string;
-  step?: number;
+// ==========================================
+// 1. Helper: parse JSON fields safely
+// ==========================================
+function safeJsonParse(value: any, fallback: any = null) {
+  if (!value) return fallback;
+  if (typeof value === 'object') return value;
+  try { return JSON.parse(value); } catch { return fallback; }
 }
 
-interface CalculatorData {
-  id?: number;
-  slug: string;
-  title: string;
-  input_fields: InputField[] | string;
-  calculator_engine?: string;
-  chart_config?: any;
-  validation_rules?: Record<string, any>;
-  result_explanation?: string;
-  what_is?: string;
-  how_to_use?: string;
-  formula_explanation?: string;
-  benefits?: string;
-  pro_tips?: string;
-  important_notes?: string;
-  faq?: any;
+// ==========================================
+// 2. Pre-process inputs before sending to engine
+// ==========================================
+function preprocessInputs(inputs: Record<string, any>, inputFields: any[]) {
+  const processed = { ...inputs };
+  for (const field of inputFields) {
+    const value = processed[field.name];
+    if (value === undefined || value === null) continue;
+
+    // Textarea → split into array
+    if (field.type === 'textarea' && typeof value === 'string') {
+      const lines = value.split(/\r?\n/).filter(l => l.trim() !== '');
+      if (field.name === 'cashFlows' || field.name === 'cashflows') {
+        processed[field.name] = lines.map(l => parseFloat(l.trim())).filter(v => !isNaN(v));
+      } else if (field.name === 'dates') {
+        processed[field.name] = lines.map(l => {
+          // Support DD/MM/YYYY and ISO
+          const parts = l.trim().split('/');
+          if (parts.length === 3) {
+            return new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0])).getTime();
+          }
+          return new Date(l.trim()).getTime();
+        });
+      } else {
+        processed[field.name] = lines; // generic string array
+      }
+    }
+    // Number field → ensure number
+    else if (field.type === 'number' && typeof value === 'string') {
+      processed[field.name] = parseFloat(value) || 0;
+    }
+  }
+  return processed;
 }
 
-export default function CalculatorGrowUI({ calculator }: { calculator: CalculatorData }) {
+// ==========================================
+// 3. Wrap old-style engine (multi-param) to new-style (single inputs object)
+// ==========================================
+function wrapOldEngine(engineStr: string, inputFields: any[]): string | null {
+  // Extract parameter names: function name(param1, param2, ...)
+  const match = engineStr.match(/function\s+\w*\s*\(\s*([^)]*)\s*\)/);
+  if (!match) return null;
+  const params = match[1].split(',').map(p => p.trim()).filter(p => p);
+  if (params.length === 0) return null;
+
+  // Build mapping: param -> input field name
+  const mapping: string[] = [];
+  for (const param of params) {
+    const lower = param.toLowerCase();
+    const aliasMap: Record<string, string> = {
+      'p': 'monthlyInvestment',
+      'principal': 'monthlyInvestment',
+      'annualrate': 'annualReturn',
+      'rate': 'annualReturn',
+      'returnrate': 'annualReturn',
+      'years': 'years',
+      'n': 'years',
+      'tenure': 'years',
+      'duration': 'years',
+      'time': 'years',
+      'cashflows': 'cashFlows',
+      'dates': 'dates',
+    };
+    if (aliasMap[lower]) {
+      mapping.push(aliasMap[lower]);
+      continue;
+    }
+    // Try exact match with input field names
+    const matchedField = inputFields.find(f => f.name.toLowerCase() === lower);
+    mapping.push(matchedField ? matchedField.name : param);
+  }
+
+  // Build destructuring: { monthlyInvestment: P, annualReturn: annualRate, years }
+  const destructure = params.map((p, idx) =>
+    mapping[idx] === p ? p : `${mapping[idx]}: ${p}`
+  ).join(', ');
+
+  // Extract function body (everything after first { and before last })
+  const bodyMatch = engineStr.match(/\{([\s\S]*)\}/);
+  if (!bodyMatch) return null;
+  let body = bodyMatch[1];
+  // Remove trailing return? No, keep as is.
+  return `function(inputs) {
+  const { ${destructure} } = inputs;
+  ${body}
+}`;
+}
+
+// ==========================================
+// 4. Main Component
+// ==========================================
+export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
   const [inputs, setInputs] = useState<Record<string, any>>({});
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState('');
@@ -59,123 +120,49 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
   const [chartData, setChartData] = useState<any>(null);
   const [openSections, setOpenSections] = useState<string[]>([]);
 
-  // Parse input_fields
-  const inputFields: InputField[] = (() => {
-    const f = calculator.input_fields;
-    if (!f) return [];
-    if (Array.isArray(f)) return f;
-    try {
-      return JSON.parse(f as string);
-    } catch {
-      return [];
-    }
-  })();
+  const inputFields = safeJsonParse(calculator.input_fields, []);
+  const validationRules = safeJsonParse(calculator.validation_rules, {});
+  const chartConfig = safeJsonParse(calculator.chart_config, null);
+  const faqItems = safeJsonParse(calculator.faq, []);
 
-  const validationRules: Record<string, any> = (() => {
-    const v = calculator.validation_rules;
-    if (!v) return {};
-    if (typeof v === 'object') return v;
-    try {
-      return JSON.parse(v);
-    } catch {
-      return {};
-    }
-  })();
-
-  const chartConfig = (() => {
-    const c = calculator.chart_config;
-    if (!c) return null;
-    if (typeof c === 'object') return c;
-    try {
-      return JSON.parse(c);
-    } catch {
-      return null;
-    }
-  })();
-
-  const faqItems: Array<{ q: string; a: string }> = (() => {
-    const f = calculator.faq;
-    if (!f) return [];
-    if (Array.isArray(f)) return f;
-    try {
-      return JSON.parse(f);
-    } catch {
-      return [];
-    }
-  })();
-
-  // Default values
+  // Set default values
   useEffect(() => {
     const defaults: Record<string, any> = {};
-    inputFields.forEach((field: InputField) => {
+    for (const field of inputFields) {
       defaults[field.name] = field.default ?? (field.type === 'number' ? 0 : '');
-    });
+    }
     setInputs(defaults);
   }, [inputFields]);
 
   const calculate = useCallback(() => {
     if (!calculator.calculator_engine) {
-      setResult({ message: 'Engine not available' });
+      setError('Calculation engine not available');
       return;
     }
     setError('');
     setIsCalculating(true);
     try {
-      const engineStr = calculator.calculator_engine.trim();
-      console.log('Engine string:', engineStr); // Debug
+      // Step 1: preprocess inputs (textarea → array, numbers)
+      const processed = preprocessInputs(inputs, inputFields);
 
-      let output: any;
-      // Check if engine expects an 'inputs' object
-      const expectsInputsObject = /function\s*\(\s*inputs\s*\)/.test(engineStr);
-
-      if (expectsInputsObject) {
-        const engineFn = new Function('inputs', engineStr);
-        output = engineFn(inputs);
-      } else {
-        // Robust regex to extract parameter names (handles line breaks, spaces, default values etc)
-        const paramMatch = engineStr.match(/function\s+[a-zA-Z0-9_]*\s*\(\s*([\s\S]*?)\s*\)/);
-        if (!paramMatch) {
-          throw new Error('Cannot parse engine function signature. Expected format: function name(param1, param2, ...) { ... }');
-        }
-        let paramsStr = paramMatch[1];
-        // Remove any default values (e.g., param = 0)
-        paramsStr = paramsStr.replace(/\s*=\s*[^,]+/g, '');
-        const params = paramsStr.split(',').map(p => p.trim()).filter(p => p);
-        if (params.length === 0) throw new Error('No parameters found in engine');
-
-        // Build mapping from parameter name to input field name (using common aliases)
-        const mapping = params.map(param => {
-          const lower = param.toLowerCase();
-          if (lower === 'p' || lower === 'principal') return 'monthlyInvestment';
-          if (lower === 'annualrate' || lower === 'rate' || lower === 'returnrate') return 'annualReturn';
-          if (lower === 'years' || lower === 'n' || lower === 'tenure' || lower === 'duration') return 'years';
-          if (lower === 'time') return 'years';
-          // fallback: same name
-          return param;
-        });
-
-        // Build destructuring assignment
-        const destructureParts = params.map((param, idx) => {
-          const mappedKey = mapping[idx];
-          if (mappedKey === param) return param;
-          return `${mappedKey}: ${param}`;
-        });
-        const destructure = `{ ${destructureParts.join(', ')} }`;
-
-        // Create wrapper that extracts inputs and calls original function
-        const wrappedBody = `
-          const ${destructure} = inputs;
-          return (${engineStr})(${params.join(', ')});
-        `;
-        console.log('Wrapped body:', wrappedBody); // Debug
-        const wrappedFn = new Function('inputs', wrappedBody);
-        output = wrappedFn(inputs);
+      // Step 2: get engine string, wrap if old-style
+      let engine = calculator.calculator_engine.trim();
+      const isNewStyle = /function\s*\(\s*inputs\s*\)/.test(engine);
+      if (!isNewStyle) {
+        const wrapped = wrapOldEngine(engine, inputFields);
+        if (wrapped) engine = wrapped;
+        else throw new Error('Cannot parse engine – unsupported format');
       }
+
+      // Step 3: execute engine
+      const engineFn = new Function('inputs', engine);
+      const output = engineFn(processed);
 
       if (output && typeof output === 'object') {
         setResult(output);
-        if (chartConfig && (output.chartPoints || output.yearlyData)) {
-          const points = output.chartPoints || output.yearlyData;
+        // handle chart data if provided by engine
+        const points = output.chartPoints || output.yearlyData;
+        if (chartConfig && points && Array.isArray(points)) {
           const labels = Array.from({ length: points.length }, (_, i) => i + 1);
           setChartData({
             labels,
@@ -185,24 +172,24 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
               borderColor: '#f97316',
               backgroundColor: 'rgba(249,115,22,0.1)',
               fill: true,
-              tension: 0.3
-            }]
+              tension: 0.3,
+            }],
           });
         } else {
           setChartData(null);
         }
       } else {
         setResult(null);
-        setError('Invalid result from engine');
+        setError('Engine returned invalid result (expected an object)');
       }
     } catch (err: any) {
-      console.error('Engine calculation error:', err);
+      console.error('Calculation error:', err);
       setError(err.message || 'Calculation failed');
       setResult(null);
     } finally {
       setIsCalculating(false);
     }
-  }, [calculator.calculator_engine, inputs, chartConfig, calculator.title]);
+  }, [calculator, inputs, inputFields, chartConfig]);
 
   const handleInputChange = (name: string, value: any) => {
     setInputs(prev => ({ ...prev, [name]: value }));
@@ -220,10 +207,11 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
       if (val >= 1e5) return `₹${(val / 1e5).toFixed(2)} L`;
       return `₹${val.toLocaleString('en-IN')}`;
     }
+    if (val && typeof val === 'object') return JSON.stringify(val);
     return val ?? '';
   };
 
-  const renderField = (field: InputField) => {
+  const renderField = (field: any) => {
     const value = inputs[field.name] ?? '';
     const rules = validationRules[field.name] || {};
     const min = rules.min ?? field.min;
@@ -237,10 +225,22 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
           className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 bg-white"
         >
           <option value="">Select...</option>
-          {field.options.map(opt => (
+          {field.options.map((opt: string) => (
             <option key={opt} value={opt}>{opt}</option>
           ))}
         </select>
+      );
+    }
+
+    if (field.type === 'textarea') {
+      return (
+        <textarea
+          value={value}
+          onChange={e => handleInputChange(field.name, e.target.value)}
+          rows={4}
+          className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 font-mono text-sm"
+          placeholder={field.hint || 'Enter one value per line'}
+        />
       );
     }
 
@@ -269,12 +269,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
       <input
         type={field.type || 'number'}
         value={value}
-        onChange={e =>
-          handleInputChange(
-            field.name,
-            field.type === 'number' ? parseFloat(e.target.value) : e.target.value
-          )
-        }
+        onChange={e => handleInputChange(field.name, field.type === 'number' ? parseFloat(e.target.value) : e.target.value)}
         className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500"
         min={min}
         max={max}
@@ -312,7 +307,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
             Calculate Now
           </h2>
           <div className="space-y-5">
-            {inputFields.map(field => (
+            {inputFields.map((field: any) => (
               <div key={field.name}>
                 <label className="block font-medium text-gray-700 mb-1">
                   {field.label} {field.required && <span className="text-red-500">*</span>}
@@ -343,24 +338,29 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
                 if (key === 'invested') displayKey = 'Total Invested Amount';
                 else if (key === 'returns') displayKey = 'Estimated Returns';
                 else if (key === 'maturity') displayKey = 'Maturity Value';
+                else if (key === 'xirr') displayKey = 'XIRR (%)';
                 else displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
                 return (
                   <div key={key} className="bg-white rounded-xl p-4 shadow-sm border">
-                    <p className="text-sm text-gray-500 capitalize">{displayKey}</p>
+                    <p className="text-sm text-gray-500">{displayKey}</p>
                     <p className="text-2xl font-bold text-gray-800 mt-1">{formatValue(val)}</p>
                   </div>
                 );
               })}
             </div>
             {calculator.result_explanation && (
-              <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">{calculator.result_explanation}</p>
+              <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">
+                {calculator.result_explanation}
+              </p>
             )}
           </div>
         )}
 
         {error && (
           <div className="border-t p-6 bg-red-50">
-            <div className="flex items-center gap-2 text-red-700"><AlertCircle className="w-5 h-5" />{error}</div>
+            <div className="flex items-center gap-2 text-red-700">
+              <AlertCircle className="w-5 h-5" /> {error}
+            </div>
           </div>
         )}
 
@@ -390,12 +390,15 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
         )}
       </div>
 
-      {/* FAQ with Schema */}
+      {/* FAQ */}
       {faqItems.length > 0 && (
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><HelpCircle className="w-5 h-5 text-orange-500" />Frequently Asked Questions</h3>
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <HelpCircle className="w-5 h-5 text-orange-500" />
+            Frequently Asked Questions
+          </h3>
           <div itemScope itemType="https://schema.org/FAQPage" className="space-y-4">
-            {faqItems.map((item, idx) => (
+            {faqItems.map((item: any, idx: number) => (
               <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="border-b pb-3 last:border-0">
                 <h4 itemProp="name" className="font-semibold text-gray-800">{item.q}</h4>
                 <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
