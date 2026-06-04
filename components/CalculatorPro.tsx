@@ -1,3 +1,4 @@
+// components/CalculatorPro.tsx
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -7,6 +8,7 @@ import {
   ThumbsUp, AlertCircle, ChevronDown, ChevronUp, HelpCircle,
   Share2, Check,
 } from 'lucide-react';
+import { calculatorEngines } from '@/lib/calculatorEngines';
 
 const LineChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Line), { ssr: false });
 const BarChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Bar), { ssr: false });
@@ -29,7 +31,7 @@ function formatValue(key: string, val: any): string {
   return formatCurrency(val);
 }
 
-export default function CalculatorPro({ calculator, engine }: { calculator: any; engine: (inputs: any) => any }) {
+export default function CalculatorPro({ calculator, slug }: { calculator: any; slug: string }) {
   const [inputs, setInputs] = useState<Record<string, any>>({});
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState('');
@@ -43,6 +45,10 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
   const chartConfig = calculator.chart_config || null;
   const faqItems = calculator.faq || [];
 
+  // Get engine from pre-built map
+  const engine = calculatorEngines[slug];
+
+  // Set default values
   useEffect(() => {
     const defaults: Record<string, any> = {};
     for (const field of inputFields) {
@@ -110,6 +116,7 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
         setError('Engine returned invalid result');
       }
     } catch (err: any) {
+      console.error('Calculation error:', err);
       setError(err.message);
       setResult(null);
     } finally {
@@ -200,7 +207,10 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
     const isOpen = openSections.includes(id);
     return (
       <div className="border border-gray-200 rounded-xl bg-white overflow-hidden">
-        <button onClick={() => toggleSection(id)} className="w-full flex justify-between items-center p-5 text-left font-semibold text-gray-800 hover:bg-gray-50">
+        <button
+          onClick={() => toggleSection(id)}
+          className="w-full flex justify-between items-center p-5 text-left font-semibold text-gray-800 hover:bg-gray-50"
+        >
           <span className="flex items-center gap-2"><Icon className="w-5 h-5 text-orange-500" />{title}</span>
           {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </button>
@@ -213,6 +223,7 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
 
   return (
     <div className="space-y-6">
+      {/* Main Calculator Card */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-6 md:p-8">
           <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2 mb-6">
@@ -230,7 +241,11 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
               </div>
             ))}
           </div>
-          <button onClick={calculate} disabled={isCalculating} className="mt-8 w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 px-4 rounded-xl transition disabled:opacity-50 shadow-md">
+          <button
+            onClick={calculate}
+            disabled={isCalculating}
+            className="mt-8 w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 px-4 rounded-xl transition disabled:opacity-50 shadow-md"
+          >
             {isCalculating ? 'Calculating...' : 'Calculate Now →'}
           </button>
         </div>
@@ -238,8 +253,14 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
         {result && (
           <div className="border-t border-gray-100 bg-gradient-to-br from-green-50 to-emerald-50 p-6 md:p-8">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2"><TrendingUp className="w-5 h-5 text-green-600" />Your Result</h3>
-              <button onClick={shareResult} className="text-sm text-orange-600 hover:text-orange-700 flex items-center gap-1">
+              <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-green-600" />
+                Your Result
+              </h3>
+              <button
+                onClick={shareResult}
+                className="text-sm text-orange-600 hover:text-orange-700 flex items-center gap-1"
+              >
                 {copied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
                 {copied ? 'Copied!' : 'Share'}
               </button>
@@ -263,7 +284,9 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
                 );
               })}
             </div>
-            {calculator.result_explanation && <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">{calculator.result_explanation}</p>}
+            {calculator.result_explanation && (
+              <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">{calculator.result_explanation}</p>
+            )}
           </div>
         )}
 
@@ -285,6 +308,7 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
         )}
       </div>
 
+      {/* Educational Sections */}
       <div className="space-y-3">
         <Section id="what" title="What is this calculator?" icon={Info} content={calculator.what_is} />
         <Section id="how" title="How to use" icon={Lightbulb} content={calculator.how_to_use} />
@@ -298,6 +322,7 @@ export default function CalculatorPro({ calculator, engine }: { calculator: any;
         )}
       </div>
 
+      {/* FAQ */}
       {faqItems.length > 0 && (
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><HelpCircle className="w-5 h-5 text-orange-500" />Frequently Asked Questions</h3>
