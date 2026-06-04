@@ -1,0 +1,431 @@
+{
+  "slug": "brokerage-zerodha-calculator",
+  "title": "Brokerage Calculator (Zerodha)",
+  "category": "individual",
+  "type": "trading",
+  "description": "Equity/ F&O brokerage calculation",
+  "formula_template": "zerodhaBrokerageFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Brokerage Calculator (Zerodha)",
+  "canonical_url": "https://yoursite.com/calculators/brokerage-zerodha-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Zerodha: Equity Delivery=0%; Equity Intraday/F&O=min(0.03%,₹20 per order); STT: 0.1% buy+sell (delivery), 0.025% sell (intraday); Exchange txn charges, GST @18%, SEBI charges 0.0001%",
+  "formula_source": "Zerodha / NSE/BSE official fee schedule",
+  "formula_source_url": "https://zerodha.com/charges",
+  "meta_title": "Brokerage Calculator (Zerodha) – Online Calculator India",
+  "meta_description": "Use our free brokerage calculator (zerodha) to equity/ f&o brokerage calculation. Get instant results with Indian context – ₹, lakhs, crores. Plan your finan...",
+  "focus_keyword": "Brokerage Calculator (Zerodha)",
+  "secondary_keywords": [
+    "brokerage calculator (zerodha) online",
+    "brokerage calculator (zerodha) india",
+    "brokerage calculator (zerodha) calculator",
+    "brokerage calculator (zerodha) formula",
+    "brokerage calculator (zerodha) example",
+    "brokerage calculator (zerodha) calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Brokerage Calculator (Zerodha) helps you equity/ f&o brokerage calculation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Brokerage Calculator (Zerodha) is a digital tool that allows you to equity/ f&o brokerage calculation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Brokerage Calculator (Zerodha) on this page. Step 2: Enter your Buy Price (₹) (e.g., ₹500). Step 3: Enter your Sell Price (₹) (e.g., ₹510). Step 4: Enter your Quantity (shares) (e.g., ₹100). Step 5: Enter your Trade Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Brokerage Calculator (Zerodha) uses the following mathematical formula: Zerodha: Equity Delivery=0%; Equity Intraday/F&O=min(0.03%,₹20 per order); STT: 0.1% buy+sell (delivery), 0.025% sell (intraday); Exchange txn charges, GST @18%, SEBI charges 0.0001%. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Buy 100 shares at ₹500; Sell at ₹520 → Gross profit ₹2,000; After brokerage & charges ≈ ₹1,720 net profit.",
+  "benefits": "<ul><li>Instant, accurate Brokerage Calculator (Zerodha) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading in securities involves significant risk. Charges shown are approximate and may vary. Verify with your broker for exact brokerage. Not investment advice.",
+  "pro_tips": "1. Always calculate total cost including brokerage before trading. 2. Use limit orders to control entry/exit price. 3. Keep a trading journal to track performance. 4. Never risk more than 2% of capital on a single trade.",
+  "faq": [
+    {
+      "q": "What is a Brokerage Calculator (Zerodha)?",
+      "a": "A Brokerage Calculator (Zerodha) is an online tool that helps you equity/ f&o brokerage calculation quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Brokerage Calculator (Zerodha) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this Brokerage Calculator (Zerodha)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this Brokerage Calculator (Zerodha) on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    }
+  ],
+  "og_title": "Free Brokerage Calculator (Zerodha) – India's Best Online Ca",
+  "og_description": "Calculate equity/ f&o brokerage calculation instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "intraday-profit-calculator",
+    "fo-brokerage-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "futures-margin-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "buyPrice",
+      "label": "Buy Price (₹)",
+      "type": "number",
+      "min": 0.05,
+      "max": 1000000,
+      "default": 500,
+      "required": true
+    },
+    {
+      "name": "sellPrice",
+      "label": "Sell Price (₹)",
+      "type": "number",
+      "min": 0.05,
+      "max": 1000000,
+      "default": 510,
+      "required": true
+    },
+    {
+      "name": "quantity",
+      "label": "Quantity (shares)",
+      "type": "number",
+      "min": 1,
+      "max": 1000000,
+      "default": 100,
+      "required": true
+    },
+    {
+      "name": "tradeType",
+      "label": "Trade Type",
+      "type": "select",
+      "options": [
+        "Equity Delivery",
+        "Equity Intraday",
+        "Equity Futures",
+        "Equity Options"
+      ],
+      "default": "Equity Intraday",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Brokerage",
+    "STT",
+    "Exchange Charges",
+    "GST",
+    "SEBI Charges",
+    "Stamp Duty",
+    "Total Charges",
+    "Net Profit/Loss"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Charge Type",
+    "yAxis": "Amount (₹)",
+    "title": "Brokerage Cost Breakdown"
+  },
+  "result_explanation": "The Brokerage Calculator (Zerodha) returns Brokerage, STT, Exchange Charges. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "buyPrice": {
+      "required": true,
+      "min": 0.05,
+      "max": 1000000
+    },
+    "sellPrice": {
+      "required": true,
+      "min": 0.05,
+      "max": 1000000
+    },
+    "quantity": {
+      "required": true,
+      "min": 1,
+      "max": 1000000
+    },
+    "tradeType": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function zerodha(buy,sell,qty,type){const turnover=(buy+sell)*qty;let brokerage=type==='Equity Delivery'?0:Math.min((buy*qty+sell*qty)*0.0003/2,20)*2;const stt=type==='Equity Delivery'?(buy+sell)*qty*0.001:sell*qty*0.00025;const exchCharges=turnover*(type.includes('Futures')?0.0002:0.0035)/100;const gst=(brokerage+exchCharges)*0.18;const sebi=turnover*0.0000001;const total=brokerage+stt+exchCharges+gst+sebi;return{brokerage,stt,exchCharges,gst,sebi,total,netPL:(sell-buy)*qty-total};}",
+  "category_hierarchy": [
+    "trading",
+    "brokerage",
+    "equity",
+    "charges"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "intraday-profit-calculator",
+    "fo-brokerage-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "zerodha brokerage calculator india",
+    "zerodha charges calculator",
+    "zerodha intraday brokerage calculator",
+    "zerodha delivery brokerage calculator",
+    "zerodha stt calculator",
+    "zerodha options brokerage calculator",
+    "zerodha futures brokerage",
+    "zerodha total charges calculator"
+  ],
+  "semantic_keywords": [
+    "Zerodha",
+    "brokerage",
+    "STT",
+    "exchange charges",
+    "GST on brokerage",
+    "SEBI charges",
+    "stamp duty",
+    "intraday",
+    "delivery",
+    "Kite"
+  ],
+  "paa_keywords": [
+    "What are Zerodha charges for intraday?",
+    "Is Zerodha delivery really free?",
+    "How is brokerage calculated on Zerodha?",
+    "What is STT in Zerodha?",
+    "How much does Zerodha charge per trade?"
+  ],
+  "voice_search_keywords": [
+    "zerodha brokerage calculator",
+    "how much does zerodha charge per trade",
+    "zerodha intraday charges",
+    "is zerodha delivery free"
+  ],
+  "seo_score": 87,
+  "eeat_score": 85,
+  "discover_score": 80,
+  "ai_search_score": 86,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Brokerage Calculator (Zerodha) – Online Calculator India",
+    "meta_description": "Use our free brokerage calculator (zerodha) to equity/ f&o brokerage calculation. Get instant results with Indian context – ₹, lakhs, crores. Plan your finan...",
+    "focus_keyword": "Brokerage Calculator (Zerodha)",
+    "secondary_keywords": [
+      "brokerage calculator (zerodha) online",
+      "brokerage calculator (zerodha) india",
+      "brokerage calculator (zerodha) calculator",
+      "brokerage calculator (zerodha) formula",
+      "brokerage calculator (zerodha) example",
+      "brokerage calculator (zerodha) calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free Brokerage Calculator (Zerodha) – India's Best Online Ca",
+    "og_description": "Calculate equity/ f&o brokerage calculation instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/brokerage-zerodha-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "zerodha brokerage calculator india",
+      "zerodha charges calculator",
+      "zerodha intraday brokerage calculator",
+      "zerodha delivery brokerage calculator",
+      "zerodha stt calculator",
+      "zerodha options brokerage calculator",
+      "zerodha futures brokerage",
+      "zerodha total charges calculator"
+    ],
+    "semantic_keywords": [
+      "Zerodha",
+      "brokerage",
+      "STT",
+      "exchange charges",
+      "GST on brokerage",
+      "SEBI charges",
+      "stamp duty",
+      "intraday",
+      "delivery",
+      "Kite"
+    ],
+    "paa_keywords": [
+      "What are Zerodha charges for intraday?",
+      "Is Zerodha delivery really free?",
+      "How is brokerage calculated on Zerodha?",
+      "What is STT in Zerodha?",
+      "How much does Zerodha charge per trade?"
+    ],
+    "voice_search_keywords": [
+      "zerodha brokerage calculator",
+      "how much does zerodha charge per trade",
+      "zerodha intraday charges",
+      "is zerodha delivery free"
+    ]
+  },
+  "_scores": {
+    "seo_score": 87,
+    "eeat_score": 85,
+    "discover_score": 80,
+    "ai_search_score": 86,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Zerodha: Equity Delivery=0%; Equity Intraday/F&O=min(0.03%,₹20 per order); STT: 0.1% buy+sell (delivery), 0.025% sell (intraday); Exchange txn charges, GST @18%, SEBI charges 0.0001%",
+    "formula_template": "zerodhaBrokerageFormula",
+    "formula_source": "Zerodha / NSE/BSE official fee schedule",
+    "formula_source_url": "https://zerodha.com/charges",
+    "formula_explanation": "The Brokerage Calculator (Zerodha) uses the following mathematical formula: Zerodha: Equity Delivery=0%; Equity Intraday/F&O=min(0.03%,₹20 per order); STT: 0.1% buy+sell (delivery), 0.025% sell (intraday); Exchange txn charges, GST @18%, SEBI charges 0.0001%. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Buy 100 shares at ₹500; Sell at ₹520 → Gross profit ₹2,000; After brokerage & charges ≈ ₹1,720 net profit.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Brokerage Calculator (Zerodha) helps you equity/ f&o brokerage calculation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Brokerage Calculator (Zerodha) is a digital tool that allows you to equity/ f&o brokerage calculation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Brokerage Calculator (Zerodha) on this page. Step 2: Enter your Buy Price (₹) (e.g., ₹500). Step 3: Enter your Sell Price (₹) (e.g., ₹510). Step 4: Enter your Quantity (shares) (e.g., ₹100). Step 5: Enter your Trade Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Brokerage Calculator (Zerodha) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading in securities involves significant risk. Charges shown are approximate and may vary. Verify with your broker for exact brokerage. Not investment advice.",
+    "pro_tips": "1. Always calculate total cost including brokerage before trading. 2. Use limit orders to control entry/exit price. 3. Keep a trading journal to track performance. 4. Never risk more than 2% of capital on a single trade.",
+    "result_explanation": "The Brokerage Calculator (Zerodha) returns Brokerage, STT, Exchange Charges. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a Brokerage Calculator (Zerodha)?",
+        "a": "A Brokerage Calculator (Zerodha) is an online tool that helps you equity/ f&o brokerage calculation quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Brokerage Calculator (Zerodha) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this Brokerage Calculator (Zerodha)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this Brokerage Calculator (Zerodha) on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "buyPrice",
+        "label": "Buy Price (₹)",
+        "type": "number",
+        "min": 0.05,
+        "max": 1000000,
+        "default": 500,
+        "required": true
+      },
+      {
+        "name": "sellPrice",
+        "label": "Sell Price (₹)",
+        "type": "number",
+        "min": 0.05,
+        "max": 1000000,
+        "default": 510,
+        "required": true
+      },
+      {
+        "name": "quantity",
+        "label": "Quantity (shares)",
+        "type": "number",
+        "min": 1,
+        "max": 1000000,
+        "default": 100,
+        "required": true
+      },
+      {
+        "name": "tradeType",
+        "label": "Trade Type",
+        "type": "select",
+        "options": [
+          "Equity Delivery",
+          "Equity Intraday",
+          "Equity Futures",
+          "Equity Options"
+        ],
+        "default": "Equity Intraday",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Brokerage",
+      "STT",
+      "Exchange Charges",
+      "GST",
+      "SEBI Charges",
+      "Stamp Duty",
+      "Total Charges",
+      "Net Profit/Loss"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Charge Type",
+      "yAxis": "Amount (₹)",
+      "title": "Brokerage Cost Breakdown"
+    },
+    "validation_rules": {
+      "buyPrice": {
+        "required": true,
+        "min": 0.05,
+        "max": 1000000
+      },
+      "sellPrice": {
+        "required": true,
+        "min": 0.05,
+        "max": 1000000
+      },
+      "quantity": {
+        "required": true,
+        "min": 1,
+        "max": 1000000
+      },
+      "tradeType": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function zerodha(buy,sell,qty,type){const turnover=(buy+sell)*qty;let brokerage=type==='Equity Delivery'?0:Math.min((buy*qty+sell*qty)*0.0003/2,20)*2;const stt=type==='Equity Delivery'?(buy+sell)*qty*0.001:sell*qty*0.00025;const exchCharges=turnover*(type.includes('Futures')?0.0002:0.0035)/100;const gst=(brokerage+exchCharges)*0.18;const sebi=turnover*0.0000001;const total=brokerage+stt+exchCharges+gst+sebi;return{brokerage,stt,exchCharges,gst,sebi,total,netPL:(sell-buy)*qty-total};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "brokerage",
+      "equity",
+      "charges"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "Brokerage Calculator (Zerodha)"
+  },
+  "_links": {
+    "related_calculators": [
+      "intraday-profit-calculator",
+      "fo-brokerage-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "futures-margin-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "intraday-profit-calculator",
+      "fo-brokerage-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

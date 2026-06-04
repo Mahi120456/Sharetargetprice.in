@@ -1,0 +1,387 @@
+{
+  "slug": "cagr-calculator",
+  "title": "CAGR Calculator (MF)",
+  "category": "individual",
+  "type": "returns",
+  "description": "Compound annual growth rate",
+  "formula_template": "cagrFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "CAGR Calculator (MF)",
+  "canonical_url": "https://yoursite.com/calculators/cagr-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "CAGR = (FV/IV)^(1/n) − 1  where FV = final value, IV = initial value, n = number of years",
+  "formula_source": "NSE India / Investopedia",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "CAGR Calculator (MF) | Free Online Calculator India",
+  "meta_description": "Use our free cagr calculator (mf) to compound annual growth rate. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter today.",
+  "focus_keyword": "CAGR Calculator (MF)",
+  "secondary_keywords": [
+    "cagr calculator (mf) online",
+    "cagr calculator (mf) india",
+    "cagr calculator (mf) calculator",
+    "cagr calculator (mf) formula",
+    "cagr calculator (mf) example",
+    "cagr calculator (mf) calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our CAGR Calculator (MF) helps you compound annual growth rate accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A CAGR Calculator (MF) is a digital tool that allows you to compound annual growth rate without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the CAGR Calculator (MF) on this page. Step 2: Enter your Initial Investment (₹) (e.g., ₹100,000). Step 3: Enter your Final Value (₹) (e.g., ₹200,000). Step 4: Enter your Number of Years (e.g., ₹5). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The CAGR Calculator (MF) uses the following mathematical formula: CAGR = (FV/IV)^(1/n) − 1  where FV = final value, IV = initial value, n = number of years. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Initial investment ₹1 lakh; Final value ₹2 lakh after 5 years → CAGR = 14.87%.",
+  "benefits": "<ul><li>Instant, accurate CAGR Calculator (MF) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals before making any financial decisions. Individual circumstances may vary.",
+  "pro_tips": "1. Use this calculator to compare multiple scenarios. 2. Keep results handy for financial planning discussions. 3. Revisit calculations annually as rates change. 4. Consult a certified financial advisor for personalized advice.",
+  "faq": [
+    {
+      "q": "What is a CAGR Calculator (MF)?",
+      "a": "A CAGR Calculator (MF) is an online tool that helps you compound annual growth rate quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this CAGR Calculator (MF) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this CAGR Calculator (MF)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this CAGR Calculator (MF) on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    }
+  ],
+  "og_title": "Free CAGR Calculator (MF) – India's Best Online Calculator",
+  "og_description": "Calculate compound annual growth rate instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "xirr-calculator",
+    "roi-calculator",
+    "sip-calculator",
+    "lumpsum-calculator",
+    "inflation-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "initialValue",
+      "label": "Initial Investment (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 100000000,
+      "default": 100000,
+      "required": true
+    },
+    {
+      "name": "finalValue",
+      "label": "Final Value (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 1000000000,
+      "default": 200000,
+      "required": true
+    },
+    {
+      "name": "years",
+      "label": "Number of Years",
+      "type": "number",
+      "min": 1,
+      "max": 50,
+      "default": 5,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "CAGR (%)",
+    "Absolute Returns (%)",
+    "Total Profit/Loss (₹)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Metric",
+    "yAxis": "Value",
+    "title": "Investment Growth Summary"
+  },
+  "result_explanation": "The CAGR Calculator (MF) returns CAGR (%), Absolute Returns (%), Total Profit/Loss (₹). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "initialValue": {
+      "required": true,
+      "min": 1,
+      "max": 100000000
+    },
+    "finalValue": {
+      "required": true,
+      "min": 1,
+      "max": 1000000000
+    },
+    "years": {
+      "required": true,
+      "min": 1,
+      "max": 50
+    }
+  },
+  "calculator_engine": "function cagr(iv,fv,n){const rate=Math.pow(fv/iv,1/n)-1;return{cagr:(rate*100).toFixed(2),absolute:((fv-iv)/iv*100).toFixed(2),profit:fv-iv};}",
+  "category_hierarchy": [
+    "investment",
+    "returns",
+    "cagr"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "returns_cluster",
+  "internal_link_targets": [
+    "xirr-calculator",
+    "roi-calculator",
+    "sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "cagr calculator india online",
+    "compound annual growth rate calculator",
+    "mutual fund cagr calculator",
+    "how to calculate cagr of stock",
+    "cagr vs absolute return",
+    "cagr formula india",
+    "stock cagr calculator nse",
+    "nifty 50 cagr calculator"
+  ],
+  "semantic_keywords": [
+    "compound annual growth rate",
+    "annualized return",
+    "investment performance",
+    "mutual fund returns",
+    "stock returns",
+    "NSE",
+    "BSE",
+    "portfolio growth",
+    "financial metrics",
+    "return on investment"
+  ],
+  "paa_keywords": [
+    "What is a good CAGR for mutual fund?",
+    "How to calculate CAGR?",
+    "What is 10 year CAGR of Nifty 50?",
+    "CAGR vs XIRR which is better?",
+    "What does 15% CAGR mean?"
+  ],
+  "voice_search_keywords": [
+    "how to calculate cagr",
+    "what is cagr of nifty 50",
+    "calculate compound annual growth rate",
+    "how much is 15 percent cagr in 10 years"
+  ],
+  "seo_score": 88,
+  "eeat_score": 85,
+  "discover_score": 80,
+  "ai_search_score": 87,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "CAGR Calculator (MF) | Free Online Calculator India",
+    "meta_description": "Use our free cagr calculator (mf) to compound annual growth rate. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter today.",
+    "focus_keyword": "CAGR Calculator (MF)",
+    "secondary_keywords": [
+      "cagr calculator (mf) online",
+      "cagr calculator (mf) india",
+      "cagr calculator (mf) calculator",
+      "cagr calculator (mf) formula",
+      "cagr calculator (mf) example",
+      "cagr calculator (mf) calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free CAGR Calculator (MF) – India's Best Online Calculator",
+    "og_description": "Calculate compound annual growth rate instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/cagr-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "cagr calculator india online",
+      "compound annual growth rate calculator",
+      "mutual fund cagr calculator",
+      "how to calculate cagr of stock",
+      "cagr vs absolute return",
+      "cagr formula india",
+      "stock cagr calculator nse",
+      "nifty 50 cagr calculator"
+    ],
+    "semantic_keywords": [
+      "compound annual growth rate",
+      "annualized return",
+      "investment performance",
+      "mutual fund returns",
+      "stock returns",
+      "NSE",
+      "BSE",
+      "portfolio growth",
+      "financial metrics",
+      "return on investment"
+    ],
+    "paa_keywords": [
+      "What is a good CAGR for mutual fund?",
+      "How to calculate CAGR?",
+      "What is 10 year CAGR of Nifty 50?",
+      "CAGR vs XIRR which is better?",
+      "What does 15% CAGR mean?"
+    ],
+    "voice_search_keywords": [
+      "how to calculate cagr",
+      "what is cagr of nifty 50",
+      "calculate compound annual growth rate",
+      "how much is 15 percent cagr in 10 years"
+    ]
+  },
+  "_scores": {
+    "seo_score": 88,
+    "eeat_score": 85,
+    "discover_score": 80,
+    "ai_search_score": 87,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "informational",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "CAGR = (FV/IV)^(1/n) − 1  where FV = final value, IV = initial value, n = number of years",
+    "formula_template": "cagrFormula",
+    "formula_source": "NSE India / Investopedia",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The CAGR Calculator (MF) uses the following mathematical formula: CAGR = (FV/IV)^(1/n) − 1  where FV = final value, IV = initial value, n = number of years. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Initial investment ₹1 lakh; Final value ₹2 lakh after 5 years → CAGR = 14.87%.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our CAGR Calculator (MF) helps you compound annual growth rate accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A CAGR Calculator (MF) is a digital tool that allows you to compound annual growth rate without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the CAGR Calculator (MF) on this page. Step 2: Enter your Initial Investment (₹) (e.g., ₹100,000). Step 3: Enter your Final Value (₹) (e.g., ₹200,000). Step 4: Enter your Number of Years (e.g., ₹5). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate CAGR Calculator (MF) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals before making any financial decisions. Individual circumstances may vary.",
+    "pro_tips": "1. Use this calculator to compare multiple scenarios. 2. Keep results handy for financial planning discussions. 3. Revisit calculations annually as rates change. 4. Consult a certified financial advisor for personalized advice.",
+    "result_explanation": "The CAGR Calculator (MF) returns CAGR (%), Absolute Returns (%), Total Profit/Loss (₹). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a CAGR Calculator (MF)?",
+        "a": "A CAGR Calculator (MF) is an online tool that helps you compound annual growth rate quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this CAGR Calculator (MF) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this CAGR Calculator (MF)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this CAGR Calculator (MF) on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "initialValue",
+        "label": "Initial Investment (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 100000000,
+        "default": 100000,
+        "required": true
+      },
+      {
+        "name": "finalValue",
+        "label": "Final Value (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 1000000000,
+        "default": 200000,
+        "required": true
+      },
+      {
+        "name": "years",
+        "label": "Number of Years",
+        "type": "number",
+        "min": 1,
+        "max": 50,
+        "default": 5,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "CAGR (%)",
+      "Absolute Returns (%)",
+      "Total Profit/Loss (₹)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Metric",
+      "yAxis": "Value",
+      "title": "Investment Growth Summary"
+    },
+    "validation_rules": {
+      "initialValue": {
+        "required": true,
+        "min": 1,
+        "max": 100000000
+      },
+      "finalValue": {
+        "required": true,
+        "min": 1,
+        "max": 1000000000
+      },
+      "years": {
+        "required": true,
+        "min": 1,
+        "max": 50
+      }
+    },
+    "calculator_engine": "function cagr(iv,fv,n){const rate=Math.pow(fv/iv,1/n)-1;return{cagr:(rate*100).toFixed(2),absolute:((fv-iv)/iv*100).toFixed(2),profit:fv-iv};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "returns",
+    "category_hierarchy": [
+      "investment",
+      "returns",
+      "cagr"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "returns_cluster",
+    "breadcrumb_label": "CAGR Calculator (MF)"
+  },
+  "_links": {
+    "related_calculators": [
+      "xirr-calculator",
+      "roi-calculator",
+      "sip-calculator",
+      "lumpsum-calculator",
+      "inflation-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "xirr-calculator",
+      "roi-calculator",
+      "sip-calculator",
+      "lumpsum-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

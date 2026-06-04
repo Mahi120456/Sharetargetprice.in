@@ -1,0 +1,415 @@
+{
+  "slug": "advance-tax-calculator",
+  "title": "Advance Tax Calculator",
+  "category": "individual",
+  "type": "tax",
+  "description": "Quarterly advance tax liability",
+  "formula_template": "advanceTaxFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Advance Tax Calculator",
+  "canonical_url": "https://yoursite.com/calculators/advance-tax-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Advance Tax due dates: 15% by June 15, 45% by Sep 15, 75% by Dec 15, 100% by Mar 15. Advance tax required if total tax liability > ₹10,000. Interest u/s 234B (1%/month) on shortfall; 234C for installment delay.",
+  "formula_source": "Income Tax Dept India / Section 207-219",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "Advance Tax Calculator | Free Calculator India",
+  "meta_description": "Use our free advance tax calculator to quarterly advance tax liability. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Advance Tax Calculator",
+  "secondary_keywords": [
+    "advance tax calculator calculator online",
+    "advance tax calculator calculator india",
+    "advance tax calculator formula",
+    "best advance tax calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Advance Tax Calculator helps you quarterly advance tax liability accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Advance Tax Calculator is a digital tool that allows you to quarterly advance tax liability without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Advance Tax Calculator on this page. Step 2: Enter your Estimated Annual Income (₹) (e.g., ₹1,200,000). Step 3: Enter your TDS Already Deducted (₹)). Step 4: Enter your Advance Tax Paid So Far (₹)). Step 5: Enter your Tax Regime). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Advance Tax Calculator uses: Advance Tax due dates: 15% by June 15, 45% by Sep 15, 75% by Dec 15, 100% by Mar 15. Advance tax required if total tax liability > ₹10,000. Interest u/s 234B (1%/month) on shortfall; 234C for installm. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Estimated Annual Income (₹)=1200000, TDS Already Deducted (₹)=0, Advance Tax Paid So Far (₹)=0 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Advance Tax Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a Advance Tax Calculator?",
+      "a": "A Advance Tax Calculator is an online tool that helps you quarterly advance tax liability quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Advance Tax Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Advance Tax Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free Advance Tax Calculator – India's Best Online Calculator",
+  "og_description": "Calculate quarterly advance tax liability instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-old-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "estimatedIncome",
+      "label": "Estimated Annual Income (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 100000000,
+      "default": 1200000,
+      "required": true
+    },
+    {
+      "name": "tdsDeducted",
+      "label": "TDS Already Deducted (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 10000000,
+      "default": 0,
+      "required": false
+    },
+    {
+      "name": "taxPaidSoFar",
+      "label": "Advance Tax Paid So Far (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 10000000,
+      "default": 0,
+      "required": false
+    },
+    {
+      "name": "regime",
+      "label": "Tax Regime",
+      "type": "select",
+      "options": [
+        "New Regime",
+        "Old Regime"
+      ],
+      "default": "New Regime",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Total Tax Liability",
+    "Net Tax Payable (after TDS)",
+    "June Installment (15%)",
+    "September Installment (45%)",
+    "December Installment (75%)",
+    "March Installment (100%)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Installment",
+    "yAxis": "Cumulative % of Tax",
+    "title": "Advance Tax Installment Schedule"
+  },
+  "result_explanation": "The Advance Tax Calculator returns Total Tax Liability, Net Tax Payable (after TDS), June Installment (15%). Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "estimatedIncome": {
+      "required": true,
+      "min": 0,
+      "max": 100000000
+    },
+    "tdsDeducted": {
+      "required": false,
+      "min": 0,
+      "max": 10000000
+    },
+    "taxPaidSoFar": {
+      "required": false,
+      "min": 0,
+      "max": 10000000
+    },
+    "regime": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function advanceTax(income,tds,paid,isNew){const stdDed=isNew?75000:50000;const taxable=income-stdDed;let tax=0;if(isNew){if(taxable>1500000)tax=195000+(taxable-1500000)*0.30;else if(taxable>1200000)tax=135000+(taxable-1200000)*0.20;else if(taxable>1000000)tax=75000+(taxable-1000000)*0.15;else if(taxable>700000)tax=15000+(taxable-700000)*0.10;else if(taxable>300000)tax=(taxable-300000)*0.05;if(taxable<=700000)tax=0;}else{if(taxable>1000000)tax=112500+(taxable-1000000)*0.30;else if(taxable>500000)tax=12500+(taxable-500000)*0.20;else if(taxable>250000)tax=(taxable-250000)*0.05;}const cess=tax*0.04;const total=tax+cess;const net=total-tds;return{total,net,june:net*0.15,sep:net*0.45,dec:net*0.75,mar:net};}",
+  "category_hierarchy": [
+    "tax",
+    "advance_tax",
+    "income_tax",
+    "installment"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "income_tax_cluster",
+  "internal_link_targets": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "advance tax calculator india 2024",
+    "advance tax installment calculator",
+    "section 234b interest calculator",
+    "how to calculate advance tax",
+    "advance tax due dates 2024-25",
+    "quarterly advance tax payment india",
+    "advance tax 15 percent june"
+  ],
+  "semantic_keywords": [
+    "advance tax",
+    "installment",
+    "Section 234B",
+    "234C",
+    "June September December March",
+    "income tax",
+    "self-assessment",
+    "TDS",
+    "CBDT"
+  ],
+  "paa_keywords": [
+    "Who needs to pay advance tax?",
+    "What are advance tax due dates?",
+    "What is penalty for non-payment of advance tax?",
+    "How to calculate advance tax installments?",
+    "What happens if advance tax is not paid?"
+  ],
+  "voice_search_keywords": [
+    "advance tax calculator india",
+    "advance tax due dates",
+    "how to calculate advance tax installments",
+    "penalty for not paying advance tax"
+  ],
+  "seo_score": 82,
+  "eeat_score": 84,
+  "discover_score": 74,
+  "ai_search_score": 81,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Advance Tax Calculator | Free Calculator India",
+    "meta_description": "Use our free advance tax calculator to quarterly advance tax liability. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Advance Tax Calculator",
+    "secondary_keywords": [
+      "advance tax calculator calculator online",
+      "advance tax calculator calculator india",
+      "advance tax calculator formula",
+      "best advance tax calculator calculator 2024"
+    ],
+    "og_title": "Free Advance Tax Calculator – India's Best Online Calculator",
+    "og_description": "Calculate quarterly advance tax liability instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/advance-tax-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "advance tax calculator india 2024",
+      "advance tax installment calculator",
+      "section 234b interest calculator",
+      "how to calculate advance tax",
+      "advance tax due dates 2024-25",
+      "quarterly advance tax payment india",
+      "advance tax 15 percent june"
+    ],
+    "semantic_keywords": [
+      "advance tax",
+      "installment",
+      "Section 234B",
+      "234C",
+      "June September December March",
+      "income tax",
+      "self-assessment",
+      "TDS",
+      "CBDT"
+    ],
+    "paa_keywords": [
+      "Who needs to pay advance tax?",
+      "What are advance tax due dates?",
+      "What is penalty for non-payment of advance tax?",
+      "How to calculate advance tax installments?",
+      "What happens if advance tax is not paid?"
+    ],
+    "voice_search_keywords": [
+      "advance tax calculator india",
+      "advance tax due dates",
+      "how to calculate advance tax installments",
+      "penalty for not paying advance tax"
+    ]
+  },
+  "_scores": {
+    "seo_score": 82,
+    "eeat_score": 84,
+    "discover_score": 74,
+    "ai_search_score": 81,
+    "ranking_priority": 2,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Advance Tax due dates: 15% by June 15, 45% by Sep 15, 75% by Dec 15, 100% by Mar 15. Advance tax required if total tax liability > ₹10,000. Interest u/s 234B (1%/month) on shortfall; 234C for installment delay.",
+    "formula_template": "advanceTaxFormula",
+    "formula_source": "Income Tax Dept India / Section 207-219",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The Advance Tax Calculator uses: Advance Tax due dates: 15% by June 15, 45% by Sep 15, 75% by Dec 15, 100% by Mar 15. Advance tax required if total tax liability > ₹10,000. Interest u/s 234B (1%/month) on shortfall; 234C for installm. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Estimated Annual Income (₹)=1200000, TDS Already Deducted (₹)=0, Advance Tax Paid So Far (₹)=0 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Advance Tax Calculator helps you quarterly advance tax liability accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Advance Tax Calculator is a digital tool that allows you to quarterly advance tax liability without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Advance Tax Calculator on this page. Step 2: Enter your Estimated Annual Income (₹) (e.g., ₹1,200,000). Step 3: Enter your TDS Already Deducted (₹)). Step 4: Enter your Advance Tax Paid So Far (₹)). Step 5: Enter your Tax Regime). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Advance Tax Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The Advance Tax Calculator returns Total Tax Liability, Net Tax Payable (after TDS), June Installment (15%). Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Advance Tax Calculator?",
+        "a": "A Advance Tax Calculator is an online tool that helps you quarterly advance tax liability quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Advance Tax Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Advance Tax Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "estimatedIncome",
+        "label": "Estimated Annual Income (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 100000000,
+        "default": 1200000,
+        "required": true
+      },
+      {
+        "name": "tdsDeducted",
+        "label": "TDS Already Deducted (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 10000000,
+        "default": 0,
+        "required": false
+      },
+      {
+        "name": "taxPaidSoFar",
+        "label": "Advance Tax Paid So Far (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 10000000,
+        "default": 0,
+        "required": false
+      },
+      {
+        "name": "regime",
+        "label": "Tax Regime",
+        "type": "select",
+        "options": [
+          "New Regime",
+          "Old Regime"
+        ],
+        "default": "New Regime",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Total Tax Liability",
+      "Net Tax Payable (after TDS)",
+      "June Installment (15%)",
+      "September Installment (45%)",
+      "December Installment (75%)",
+      "March Installment (100%)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Installment",
+      "yAxis": "Cumulative % of Tax",
+      "title": "Advance Tax Installment Schedule"
+    },
+    "validation_rules": {
+      "estimatedIncome": {
+        "required": true,
+        "min": 0,
+        "max": 100000000
+      },
+      "tdsDeducted": {
+        "required": false,
+        "min": 0,
+        "max": 10000000
+      },
+      "taxPaidSoFar": {
+        "required": false,
+        "min": 0,
+        "max": 10000000
+      },
+      "regime": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function advanceTax(income,tds,paid,isNew){const stdDed=isNew?75000:50000;const taxable=income-stdDed;let tax=0;if(isNew){if(taxable>1500000)tax=195000+(taxable-1500000)*0.30;else if(taxable>1200000)tax=135000+(taxable-1200000)*0.20;else if(taxable>1000000)tax=75000+(taxable-1000000)*0.15;else if(taxable>700000)tax=15000+(taxable-700000)*0.10;else if(taxable>300000)tax=(taxable-300000)*0.05;if(taxable<=700000)tax=0;}else{if(taxable>1000000)tax=112500+(taxable-1000000)*0.30;else if(taxable>500000)tax=12500+(taxable-500000)*0.20;else if(taxable>250000)tax=(taxable-250000)*0.05;}const cess=tax*0.04;const total=tax+cess;const net=total-tds;return{total,net,june:net*0.15,sep:net*0.45,dec:net*0.75,mar:net};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "advance_tax",
+      "income_tax",
+      "installment"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "income_tax_cluster",
+    "breadcrumb_label": "Advance Tax Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-old-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

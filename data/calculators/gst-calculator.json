@@ -1,0 +1,439 @@
+{
+  "slug": "gst-calculator",
+  "title": "GST Calculator (Intra/Inter-state)",
+  "category": "individual",
+  "type": "tax",
+  "description": "GST calculation for goods/services",
+  "formula_template": "gstFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "GST Calculator (Intra/Inter-state)",
+  "canonical_url": "https://yoursite.com/calculators/gst-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "GST Inclusive: Base = Amount / (1 + GST%/100); Tax = Amount − Base. GST Exclusive: Tax = Amount × GST%/100; Total = Amount + Tax. IGST for inter-state; CGST+SGST for intra-state",
+  "formula_source": "CBIC India / GST Council",
+  "formula_source_url": "https://www.cbic.gov.in",
+  "meta_title": "GST Calculator (Intra/Inter-state) – Online Calculator India",
+  "meta_description": "Use our free gst calculator (intra/inter-state) to gst calculation for goods/services. Get instant results with Indian context – ₹, lakhs, crores. Plan your ...",
+  "focus_keyword": "GST Calculator (Intra/Inter-state)",
+  "secondary_keywords": [
+    "gst calculator (intra/inter-state) online",
+    "gst calculator (intra/inter-state) india",
+    "gst calculator (intra/inter-state) calculator",
+    "gst calculator (intra/inter-state) formula",
+    "gst calculator (intra/inter-state) example",
+    "gst calculator (intra/inter-state) calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our GST Calculator (Intra/Inter-state) helps you gst calculation for goods/services accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A GST Calculator (Intra/Inter-state) is a digital tool that allows you to gst calculation for goods/services without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the GST Calculator (Intra/Inter-state) on this page. Step 2: Enter your Amount (₹) (e.g., ₹10,000). Step 3: Enter your GST Rate (%) (e.g., ₹18). Step 4: Enter your Calculation Type). Step 5: Enter your Transaction Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The GST Calculator (Intra/Inter-state) uses the following mathematical formula: GST Inclusive: Base = Amount / (1 + GST%/100); Tax = Amount − Base. GST Exclusive: Tax = Amount × GST%/100; Total = Amount + Tax. IGST for inter-state; CGST+SGST for intra-state. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Annual income ₹12 lakh → New Regime tax = ₹0 (with 87A rebate + standard deduction). Old Regime → ~₹1.17 lakh after deductions.",
+  "benefits": "<ul><li>Instant, accurate GST Calculator (Intra/Inter-state) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative only. Tax laws change annually per Union Budget. Consult a CA for tax filing. Surcharge and cess applicable as per slab. This does not constitute tax advice.",
+  "pro_tips": "1. File ITR before due date to avoid penalty under 234F. 2. Compare old vs new regime annually as income changes. 3. Invest in 80C instruments before 31st March. 4. Keep all receipts and proof of investments ready.",
+  "faq": [
+    {
+      "q": "What is a GST Calculator (Intra/Inter-state)?",
+      "a": "A GST Calculator (Intra/Inter-state) is an online tool that helps you gst calculation for goods/services quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this GST Calculator (Intra/Inter-state) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this GST Calculator (Intra/Inter-state)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this GST Calculator (Intra/Inter-state) on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    },
+    {
+      "q": "Should I choose old or new tax regime?",
+      "a": "New regime is better if your total deductions (80C + 80D + HRA etc.) are less than ₹3.75 lakh for FY2024-25. Otherwise, old regime may save more tax."
+    }
+  ],
+  "og_title": "Free GST Calculator (Intra/Inter-state) – India's Best Onlin",
+  "og_description": "Calculate gst calculation for goods/services instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "income-tax-old-calculator",
+    "income-tax-new-calculator",
+    "advance-tax-calculator",
+    "tds-fd-calculator",
+    "freelancer-tax-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "amount",
+      "label": "Amount (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 100000000,
+      "default": 10000,
+      "required": true
+    },
+    {
+      "name": "gstRate",
+      "label": "GST Rate (%)",
+      "type": "select",
+      "options": [
+        0,
+        5,
+        12,
+        18,
+        28
+      ],
+      "default": 18,
+      "required": true
+    },
+    {
+      "name": "calcType",
+      "label": "Calculation Type",
+      "type": "select",
+      "options": [
+        "Add GST (Exclusive)",
+        "Remove GST (Inclusive)"
+      ],
+      "default": "Add GST (Exclusive)",
+      "required": true
+    },
+    {
+      "name": "transactionType",
+      "label": "Transaction Type",
+      "type": "select",
+      "options": [
+        "Intra-state (CGST+SGST)",
+        "Inter-state (IGST)"
+      ],
+      "default": "Intra-state (CGST+SGST)",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Base Amount",
+    "CGST",
+    "SGST",
+    "IGST",
+    "Total GST",
+    "Total Amount"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "GST Breakdown"
+  },
+  "result_explanation": "The GST Calculator (Intra/Inter-state) returns Base Amount, CGST, SGST. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "amount": {
+      "required": true,
+      "min": 1,
+      "max": 100000000
+    },
+    "gstRate": {
+      "required": true
+    },
+    "calcType": {
+      "required": true
+    },
+    "transactionType": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function gst(amount,rate,type,txnType){if(type==='Remove GST (Inclusive)'){const base=amount/(1+rate/100);const tax=amount-base;const half=tax/2;return{base,cgst:txnType.includes('Intra')?half:0,sgst:txnType.includes('Intra')?half:0,igst:txnType.includes('Inter')?tax:0,totalGst:tax,total:amount};}else{const tax=amount*rate/100;const half=tax/2;return{base:amount,cgst:txnType.includes('Intra')?half:0,sgst:txnType.includes('Intra')?half:0,igst:txnType.includes('Inter')?tax:0,totalGst:tax,total:amount+tax};}}",
+  "category_hierarchy": [
+    "tax",
+    "gst",
+    "indirect_tax",
+    "business"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "gst_cluster",
+  "internal_link_targets": [
+    "income-tax-old-calculator",
+    "income-tax-new-calculator",
+    "advance-tax-calculator",
+    "tds-fd-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "gst calculator india 2024",
+    "gst calculator 18 percent",
+    "add gst remove gst calculator",
+    "cgst sgst igst calculator",
+    "gst on 10000 calculator",
+    "gst inclusive exclusive calculator",
+    "gst calculator for business",
+    "online gst calculation india"
+  ],
+  "semantic_keywords": [
+    "GST",
+    "CGST",
+    "SGST",
+    "IGST",
+    "indirect tax",
+    "CBIC",
+    "GST Council",
+    "input tax credit",
+    "B2B",
+    "B2C",
+    "inclusive exclusive"
+  ],
+  "paa_keywords": [
+    "How to calculate GST in India?",
+    "What is the difference between CGST and SGST?",
+    "How to add GST to a price?",
+    "What are the GST slabs in India?",
+    "How to remove GST from a price?"
+  ],
+  "voice_search_keywords": [
+    "how to calculate gst",
+    "gst calculator india",
+    "add gst to 10000",
+    "what is gst on 18 percent"
+  ],
+  "seo_score": 90,
+  "eeat_score": 88,
+  "discover_score": 84,
+  "ai_search_score": 89,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "GST Calculator (Intra/Inter-state) – Online Calculator India",
+    "meta_description": "Use our free gst calculator (intra/inter-state) to gst calculation for goods/services. Get instant results with Indian context – ₹, lakhs, crores. Plan your ...",
+    "focus_keyword": "GST Calculator (Intra/Inter-state)",
+    "secondary_keywords": [
+      "gst calculator (intra/inter-state) online",
+      "gst calculator (intra/inter-state) india",
+      "gst calculator (intra/inter-state) calculator",
+      "gst calculator (intra/inter-state) formula",
+      "gst calculator (intra/inter-state) example",
+      "gst calculator (intra/inter-state) calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free GST Calculator (Intra/Inter-state) – India's Best Onlin",
+    "og_description": "Calculate gst calculation for goods/services instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/gst-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "gst calculator india 2024",
+      "gst calculator 18 percent",
+      "add gst remove gst calculator",
+      "cgst sgst igst calculator",
+      "gst on 10000 calculator",
+      "gst inclusive exclusive calculator",
+      "gst calculator for business",
+      "online gst calculation india"
+    ],
+    "semantic_keywords": [
+      "GST",
+      "CGST",
+      "SGST",
+      "IGST",
+      "indirect tax",
+      "CBIC",
+      "GST Council",
+      "input tax credit",
+      "B2B",
+      "B2C",
+      "inclusive exclusive"
+    ],
+    "paa_keywords": [
+      "How to calculate GST in India?",
+      "What is the difference between CGST and SGST?",
+      "How to add GST to a price?",
+      "What are the GST slabs in India?",
+      "How to remove GST from a price?"
+    ],
+    "voice_search_keywords": [
+      "how to calculate gst",
+      "gst calculator india",
+      "add gst to 10000",
+      "what is gst on 18 percent"
+    ]
+  },
+  "_scores": {
+    "seo_score": 90,
+    "eeat_score": 88,
+    "discover_score": 84,
+    "ai_search_score": 89,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "GST Inclusive: Base = Amount / (1 + GST%/100); Tax = Amount − Base. GST Exclusive: Tax = Amount × GST%/100; Total = Amount + Tax. IGST for inter-state; CGST+SGST for intra-state",
+    "formula_template": "gstFormula",
+    "formula_source": "CBIC India / GST Council",
+    "formula_source_url": "https://www.cbic.gov.in",
+    "formula_explanation": "The GST Calculator (Intra/Inter-state) uses the following mathematical formula: GST Inclusive: Base = Amount / (1 + GST%/100); Tax = Amount − Base. GST Exclusive: Tax = Amount × GST%/100; Total = Amount + Tax. IGST for inter-state; CGST+SGST for intra-state. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Annual income ₹12 lakh → New Regime tax = ₹0 (with 87A rebate + standard deduction). Old Regime → ~₹1.17 lakh after deductions.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our GST Calculator (Intra/Inter-state) helps you gst calculation for goods/services accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A GST Calculator (Intra/Inter-state) is a digital tool that allows you to gst calculation for goods/services without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the GST Calculator (Intra/Inter-state) on this page. Step 2: Enter your Amount (₹) (e.g., ₹10,000). Step 3: Enter your GST Rate (%) (e.g., ₹18). Step 4: Enter your Calculation Type). Step 5: Enter your Transaction Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate GST Calculator (Intra/Inter-state) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative only. Tax laws change annually per Union Budget. Consult a CA for tax filing. Surcharge and cess applicable as per slab. This does not constitute tax advice.",
+    "pro_tips": "1. File ITR before due date to avoid penalty under 234F. 2. Compare old vs new regime annually as income changes. 3. Invest in 80C instruments before 31st March. 4. Keep all receipts and proof of investments ready.",
+    "result_explanation": "The GST Calculator (Intra/Inter-state) returns Base Amount, CGST, SGST. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a GST Calculator (Intra/Inter-state)?",
+        "a": "A GST Calculator (Intra/Inter-state) is an online tool that helps you gst calculation for goods/services quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this GST Calculator (Intra/Inter-state) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this GST Calculator (Intra/Inter-state)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this GST Calculator (Intra/Inter-state) on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      },
+      {
+        "q": "Should I choose old or new tax regime?",
+        "a": "New regime is better if your total deductions (80C + 80D + HRA etc.) are less than ₹3.75 lakh for FY2024-25. Otherwise, old regime may save more tax."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "amount",
+        "label": "Amount (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 100000000,
+        "default": 10000,
+        "required": true
+      },
+      {
+        "name": "gstRate",
+        "label": "GST Rate (%)",
+        "type": "select",
+        "options": [
+          0,
+          5,
+          12,
+          18,
+          28
+        ],
+        "default": 18,
+        "required": true
+      },
+      {
+        "name": "calcType",
+        "label": "Calculation Type",
+        "type": "select",
+        "options": [
+          "Add GST (Exclusive)",
+          "Remove GST (Inclusive)"
+        ],
+        "default": "Add GST (Exclusive)",
+        "required": true
+      },
+      {
+        "name": "transactionType",
+        "label": "Transaction Type",
+        "type": "select",
+        "options": [
+          "Intra-state (CGST+SGST)",
+          "Inter-state (IGST)"
+        ],
+        "default": "Intra-state (CGST+SGST)",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Base Amount",
+      "CGST",
+      "SGST",
+      "IGST",
+      "Total GST",
+      "Total Amount"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "GST Breakdown"
+    },
+    "validation_rules": {
+      "amount": {
+        "required": true,
+        "min": 1,
+        "max": 100000000
+      },
+      "gstRate": {
+        "required": true
+      },
+      "calcType": {
+        "required": true
+      },
+      "transactionType": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function gst(amount,rate,type,txnType){if(type==='Remove GST (Inclusive)'){const base=amount/(1+rate/100);const tax=amount-base;const half=tax/2;return{base,cgst:txnType.includes('Intra')?half:0,sgst:txnType.includes('Intra')?half:0,igst:txnType.includes('Inter')?tax:0,totalGst:tax,total:amount};}else{const tax=amount*rate/100;const half=tax/2;return{base:amount,cgst:txnType.includes('Intra')?half:0,sgst:txnType.includes('Intra')?half:0,igst:txnType.includes('Inter')?tax:0,totalGst:tax,total:amount+tax};}}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "gst",
+      "indirect_tax",
+      "business"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "gst_cluster",
+    "breadcrumb_label": "GST Calculator (Intra/Inter-state)"
+  },
+  "_links": {
+    "related_calculators": [
+      "income-tax-old-calculator",
+      "income-tax-new-calculator",
+      "advance-tax-calculator",
+      "tds-fd-calculator",
+      "freelancer-tax-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "income-tax-old-calculator",
+      "income-tax-new-calculator",
+      "advance-tax-calculator",
+      "tds-fd-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

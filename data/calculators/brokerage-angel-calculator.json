@@ -1,0 +1,409 @@
+{
+  "slug": "brokerage-angel-calculator",
+  "title": "Brokerage Calculator (Angel One)",
+  "category": "individual",
+  "type": "trading",
+  "description": "Angel One brokerage",
+  "formula_template": "angelBrokerageFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Brokerage Calculator (Angel One)",
+  "canonical_url": "https://yoursite.com/calculators/brokerage-angel-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Angel One: Equity Delivery = 0%; Intraday/F&O = min(0.25% or ₹20, whichever lower per executed order side); STT same as NSE/BSE rates; Exchange fees, GST 18%, SEBI 0.0001%.",
+  "formula_source": "Angel One Official Charges Page",
+  "formula_source_url": "https://www.angelone.in/charges",
+  "meta_title": "Brokerage Calculator (Angel One) | Free Calculator India",
+  "meta_description": "Use our free brokerage calculator (angel one) to angel one brokerage. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Brokerage Calculator (Angel One)",
+  "secondary_keywords": [
+    "brokerage calculator (angel one) calculator online",
+    "brokerage calculator (angel one) calculator india",
+    "brokerage calculator (angel one) formula",
+    "best brokerage calculator (angel one) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Brokerage Calculator (Angel One) helps you angel one brokerage accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Brokerage Calculator (Angel One) is a digital tool that allows you to angel one brokerage without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Brokerage Calculator (Angel One) on this page. Step 2: Enter your Buy Price (₹) (e.g., ₹500). Step 3: Enter your Sell Price (₹) (e.g., ₹510). Step 4: Enter your Quantity (e.g., ₹100). Step 5: Enter your Trade Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Brokerage Calculator (Angel One) uses: Angel One: Equity Delivery = 0%; Intraday/F&O = min(0.25% or ₹20, whichever lower per executed order side); STT same as NSE/BSE rates; Exchange fees, GST 18%, SEBI 0.0001%.. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Buy Price (₹)=500, Sell Price (₹)=510, Quantity=100 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Brokerage Calculator (Angel One) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+  "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+  "faq": [
+    {
+      "q": "What is a Brokerage Calculator (Angel One)?",
+      "a": "A Brokerage Calculator (Angel One) is an online tool that helps you angel one brokerage quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Brokerage Calculator (Angel One) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Brokerage Calculator (Angel One)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Brokerage Calculator (Angel One) – India's Best Online",
+  "og_description": "Calculate angel one brokerage instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "buyPrice",
+      "label": "Buy Price (₹)",
+      "type": "number",
+      "min": 0.05,
+      "max": 1000000,
+      "default": 500,
+      "required": true
+    },
+    {
+      "name": "sellPrice",
+      "label": "Sell Price (₹)",
+      "type": "number",
+      "min": 0.05,
+      "max": 1000000,
+      "default": 510,
+      "required": true
+    },
+    {
+      "name": "quantity",
+      "label": "Quantity",
+      "type": "number",
+      "min": 1,
+      "max": 1000000,
+      "default": 100,
+      "required": true
+    },
+    {
+      "name": "tradeType",
+      "label": "Trade Type",
+      "type": "select",
+      "options": [
+        "Equity Delivery",
+        "Equity Intraday",
+        "Equity Futures",
+        "Equity Options"
+      ],
+      "default": "Equity Intraday",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Brokerage",
+    "STT",
+    "Exchange Charges",
+    "GST",
+    "Total Charges",
+    "Net Profit/Loss"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Charge Type",
+    "yAxis": "Amount (₹)",
+    "title": "Angel One Brokerage Breakdown"
+  },
+  "result_explanation": "The Brokerage Calculator (Angel One) returns Brokerage, STT, Exchange Charges. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "buyPrice": {
+      "required": true,
+      "min": 0.05,
+      "max": 1000000
+    },
+    "sellPrice": {
+      "required": true,
+      "min": 0.05,
+      "max": 1000000
+    },
+    "quantity": {
+      "required": true,
+      "min": 1,
+      "max": 1000000
+    },
+    "tradeType": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function angelOne(buy,sell,qty,type){const turnover=(buy+sell)*qty;let brokerage=type==='Equity Delivery'?0:Math.min((buy*qty+sell*qty)*0.0025/2,20)*2;const stt=type==='Equity Delivery'?(buy+sell)*qty*0.001:sell*qty*0.00025;const exchCharges=turnover*0.00325/100;const gst=(brokerage+exchCharges)*0.18;const sebi=turnover*0.0000001;const total=brokerage+stt+exchCharges+gst+sebi;return{brokerage,stt,exchCharges,gst,total,netPL:(sell-buy)*qty-total};}",
+  "category_hierarchy": [
+    "trading",
+    "brokerage",
+    "equity",
+    "charges"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "angel one brokerage calculator",
+    "angel broking charges calculator",
+    "angel one intraday charges",
+    "angel one delivery brokerage",
+    "angel one options charges",
+    "angel one total trading cost"
+  ],
+  "semantic_keywords": [
+    "Angel One",
+    "Angel Broking",
+    "brokerage",
+    "STT",
+    "equity",
+    "intraday",
+    "delivery",
+    "discount broker",
+    "charges"
+  ],
+  "paa_keywords": [
+    "What are Angel One charges?",
+    "Is Angel One delivery free?",
+    "How to calculate Angel One brokerage?",
+    "What is STT on Angel One?",
+    "Angel One vs Zerodha charges?"
+  ],
+  "voice_search_keywords": [
+    "angel one brokerage calculator",
+    "angel one charges per trade",
+    "angel one vs zerodha charges",
+    "angel one intraday brokerage"
+  ],
+  "seo_score": 84,
+  "eeat_score": 82,
+  "discover_score": 77,
+  "ai_search_score": 82,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Brokerage Calculator (Angel One) | Free Calculator India",
+    "meta_description": "Use our free brokerage calculator (angel one) to angel one brokerage. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Brokerage Calculator (Angel One)",
+    "secondary_keywords": [
+      "brokerage calculator (angel one) calculator online",
+      "brokerage calculator (angel one) calculator india",
+      "brokerage calculator (angel one) formula",
+      "best brokerage calculator (angel one) calculator 2024"
+    ],
+    "og_title": "Free Brokerage Calculator (Angel One) – India's Best Online",
+    "og_description": "Calculate angel one brokerage instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/brokerage-angel-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "angel one brokerage calculator",
+      "angel broking charges calculator",
+      "angel one intraday charges",
+      "angel one delivery brokerage",
+      "angel one options charges",
+      "angel one total trading cost"
+    ],
+    "semantic_keywords": [
+      "Angel One",
+      "Angel Broking",
+      "brokerage",
+      "STT",
+      "equity",
+      "intraday",
+      "delivery",
+      "discount broker",
+      "charges"
+    ],
+    "paa_keywords": [
+      "What are Angel One charges?",
+      "Is Angel One delivery free?",
+      "How to calculate Angel One brokerage?",
+      "What is STT on Angel One?",
+      "Angel One vs Zerodha charges?"
+    ],
+    "voice_search_keywords": [
+      "angel one brokerage calculator",
+      "angel one charges per trade",
+      "angel one vs zerodha charges",
+      "angel one intraday brokerage"
+    ]
+  },
+  "_scores": {
+    "seo_score": 84,
+    "eeat_score": 82,
+    "discover_score": 77,
+    "ai_search_score": 82,
+    "ranking_priority": 2,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Angel One: Equity Delivery = 0%; Intraday/F&O = min(0.25% or ₹20, whichever lower per executed order side); STT same as NSE/BSE rates; Exchange fees, GST 18%, SEBI 0.0001%.",
+    "formula_template": "angelBrokerageFormula",
+    "formula_source": "Angel One Official Charges Page",
+    "formula_source_url": "https://www.angelone.in/charges",
+    "formula_explanation": "The Brokerage Calculator (Angel One) uses: Angel One: Equity Delivery = 0%; Intraday/F&O = min(0.25% or ₹20, whichever lower per executed order side); STT same as NSE/BSE rates; Exchange fees, GST 18%, SEBI 0.0001%.. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Buy Price (₹)=500, Sell Price (₹)=510, Quantity=100 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Brokerage Calculator (Angel One) helps you angel one brokerage accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Brokerage Calculator (Angel One) is a digital tool that allows you to angel one brokerage without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Brokerage Calculator (Angel One) on this page. Step 2: Enter your Buy Price (₹) (e.g., ₹500). Step 3: Enter your Sell Price (₹) (e.g., ₹510). Step 4: Enter your Quantity (e.g., ₹100). Step 5: Enter your Trade Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Brokerage Calculator (Angel One) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+    "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+    "result_explanation": "The Brokerage Calculator (Angel One) returns Brokerage, STT, Exchange Charges. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Brokerage Calculator (Angel One)?",
+        "a": "A Brokerage Calculator (Angel One) is an online tool that helps you angel one brokerage quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Brokerage Calculator (Angel One) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Brokerage Calculator (Angel One)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "buyPrice",
+        "label": "Buy Price (₹)",
+        "type": "number",
+        "min": 0.05,
+        "max": 1000000,
+        "default": 500,
+        "required": true
+      },
+      {
+        "name": "sellPrice",
+        "label": "Sell Price (₹)",
+        "type": "number",
+        "min": 0.05,
+        "max": 1000000,
+        "default": 510,
+        "required": true
+      },
+      {
+        "name": "quantity",
+        "label": "Quantity",
+        "type": "number",
+        "min": 1,
+        "max": 1000000,
+        "default": 100,
+        "required": true
+      },
+      {
+        "name": "tradeType",
+        "label": "Trade Type",
+        "type": "select",
+        "options": [
+          "Equity Delivery",
+          "Equity Intraday",
+          "Equity Futures",
+          "Equity Options"
+        ],
+        "default": "Equity Intraday",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Brokerage",
+      "STT",
+      "Exchange Charges",
+      "GST",
+      "Total Charges",
+      "Net Profit/Loss"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Charge Type",
+      "yAxis": "Amount (₹)",
+      "title": "Angel One Brokerage Breakdown"
+    },
+    "validation_rules": {
+      "buyPrice": {
+        "required": true,
+        "min": 0.05,
+        "max": 1000000
+      },
+      "sellPrice": {
+        "required": true,
+        "min": 0.05,
+        "max": 1000000
+      },
+      "quantity": {
+        "required": true,
+        "min": 1,
+        "max": 1000000
+      },
+      "tradeType": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function angelOne(buy,sell,qty,type){const turnover=(buy+sell)*qty;let brokerage=type==='Equity Delivery'?0:Math.min((buy*qty+sell*qty)*0.0025/2,20)*2;const stt=type==='Equity Delivery'?(buy+sell)*qty*0.001:sell*qty*0.00025;const exchCharges=turnover*0.00325/100;const gst=(brokerage+exchCharges)*0.18;const sebi=turnover*0.0000001;const total=brokerage+stt+exchCharges+gst+sebi;return{brokerage,stt,exchCharges,gst,total,netPL:(sell-buy)*qty-total};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "brokerage",
+      "equity",
+      "charges"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "Brokerage Calculator (Angel One)"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "slug": "apy-calculator",
+  "title": "Atal Pension Yojana (APY)",
+  "category": "individual",
+  "type": "retirement",
+  "description": "Monthly pension under APY",
+  "formula_template": "apyFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Atal Pension Yojana (APY)",
+  "canonical_url": "https://yoursite.com/calculators/apy-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Atal Pension Yojana (APY): Government guarantees fixed pension of ₹1000–₹5000/month from age 60. Contribution depends on entry age and desired pension. Contribution tables published by PFRDA. Example: Age 18, ₹1000 pension → ₹42/month; ₹5000 pension → ₹210/month.",
+  "formula_source": "PFRDA India / APY Subscriber Information",
+  "formula_source_url": "https://www.pfrda.org.in",
+  "meta_title": "Atal Pension Yojana (APY) | Free Calculator India",
+  "meta_description": "Use our free atal pension yojana (apy) to monthly pension under apy. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Atal Pension Yojana (APY)",
+  "secondary_keywords": [
+    "atal pension yojana (apy) calculator online",
+    "atal pension yojana (apy) calculator india",
+    "atal pension yojana (apy) formula",
+    "best atal pension yojana (apy) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Atal Pension Yojana (APY) helps you monthly pension under apy accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Atal Pension Yojana (APY) is a digital tool that allows you to monthly pension under apy without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Atal Pension Yojana (APY) on this page. Step 2: Enter your Current Age (18-39) (e.g., ₹25). Step 3: Enter your Desired Monthly Pension (₹) (e.g., ₹5,000). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Atal Pension Yojana (APY) uses: Atal Pension Yojana (APY): Government guarantees fixed pension of ₹1000–₹5000/month from age 60. Contribution depends on entry age and desired pension. Contribution tables published by PFRDA. Example:. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Current Age (18-39)=25, Desired Monthly Pension (₹)=5000 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Atal Pension Yojana (APY) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Projections are estimates. Consult a certified financial planner.",
+  "pro_tips": "1. Start retirement planning in your 20s. 2. Use NPS for extra ₹50K deduction under 80CCD(1B). 3. Maintain 60% equity till age 50. 4. Rebalance every 6 months.",
+  "faq": [
+    {
+      "q": "What is a Atal Pension Yojana (APY)?",
+      "a": "A Atal Pension Yojana (APY) is an online tool that helps you monthly pension under apy quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Atal Pension Yojana (APY) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Atal Pension Yojana (APY)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "How much corpus to retire?",
+      "a": "25-33x annual expenses (3-4% withdrawal rule). ₹60K/month → ₹1.8-2.4Cr."
+    }
+  ],
+  "og_title": "Free Atal Pension Yojana (APY) – India's Best Online Calcula",
+  "og_description": "Calculate monthly pension under apy instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "retirement-corpus-calculator",
+    "retirement-swp-vs-annuity"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "entryAge",
+      "label": "Current Age (18-39)",
+      "type": "number",
+      "min": 18,
+      "max": 39,
+      "default": 25,
+      "required": true
+    },
+    {
+      "name": "desiredPension",
+      "label": "Desired Monthly Pension (₹)",
+      "type": "select",
+      "options": [
+        1000,
+        2000,
+        3000,
+        4000,
+        5000
+      ],
+      "default": 5000,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Monthly Contribution (₹)",
+    "Total Contribution Till 60",
+    "Guaranteed Monthly Pension",
+    "Corpus at Maturity (approx)",
+    "Nominee Gets (on death)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Pension Amount",
+    "yAxis": "Monthly Contribution (₹)",
+    "title": "APY Contribution vs Pension"
+  },
+  "result_explanation": "The Atal Pension Yojana (APY) returns Monthly Contribution (₹), Total Contribution Till 60, Guaranteed Monthly Pension. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "entryAge": {
+      "required": true,
+      "min": 18,
+      "max": 39
+    },
+    "desiredPension": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function apy(age,pension){const table={18:{1000:42,2000:84,3000:126,4000:168,5000:210},20:{1000:50,2000:100,3000:150,4000:198,5000:248},25:{1000:76,2000:151,3000:226,4000:301,5000:376},30:{1000:116,2000:231,3000:347,4000:462,5000:577},35:{1000:181,2000:362,3000:543,4000:722,5000:902},39:{1000:291,2000:582,3000:873,4000:1164,5000:1454}};const ages=[18,20,25,30,35,39];const nearAge=ages.reduce((a,b)=>Math.abs(b-age)<Math.abs(a-age)?b:a);const monthly=table[nearAge]?.[pension]||0;const yearsLeft=60-age;const corpus=pension*200;return{monthly,total:monthly*yearsLeft*12,pension,corpus};}",
+  "category_hierarchy": [
+    "retirement",
+    "apy",
+    "government_scheme",
+    "pension"
+  ],
+  "calculator_group": "retirement",
+  "topical_cluster": "retirement_cluster",
+  "internal_link_targets": [
+    "retirement-corpus-calculator",
+    "retirement-swp-vs-annuity"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "apy calculator india",
+    "atal pension yojana calculator",
+    "how much to invest in apy for 5000 pension",
+    "apy contribution table 2024",
+    "atal pension yojana monthly contribution",
+    "apy scheme pension calculator",
+    "apy benefits calculator",
+    "government pension scheme india"
+  ],
+  "semantic_keywords": [
+    "Atal Pension Yojana",
+    "APY",
+    "PFRDA",
+    "guaranteed pension",
+    "government scheme",
+    "monthly pension",
+    "entry age",
+    "60 years",
+    "social security",
+    "unorganized sector"
+  ],
+  "paa_keywords": [
+    "How is APY contribution calculated?",
+    "What is the pension under APY?",
+    "Is APY better than NPS?",
+    "Who can join APY?",
+    "What is the maximum pension in APY?"
+  ],
+  "voice_search_keywords": [
+    "atal pension yojana calculator",
+    "how much to pay for 5000 pension in apy",
+    "apy contribution chart",
+    "is apy a good scheme"
+  ],
+  "seo_score": 84,
+  "eeat_score": 88,
+  "discover_score": 78,
+  "ai_search_score": 83,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Atal Pension Yojana (APY) | Free Calculator India",
+    "meta_description": "Use our free atal pension yojana (apy) to monthly pension under apy. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Atal Pension Yojana (APY)",
+    "secondary_keywords": [
+      "atal pension yojana (apy) calculator online",
+      "atal pension yojana (apy) calculator india",
+      "atal pension yojana (apy) formula",
+      "best atal pension yojana (apy) calculator 2024"
+    ],
+    "og_title": "Free Atal Pension Yojana (APY) – India's Best Online Calcula",
+    "og_description": "Calculate monthly pension under apy instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/apy-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "apy calculator india",
+      "atal pension yojana calculator",
+      "how much to invest in apy for 5000 pension",
+      "apy contribution table 2024",
+      "atal pension yojana monthly contribution",
+      "apy scheme pension calculator",
+      "apy benefits calculator",
+      "government pension scheme india"
+    ],
+    "semantic_keywords": [
+      "Atal Pension Yojana",
+      "APY",
+      "PFRDA",
+      "guaranteed pension",
+      "government scheme",
+      "monthly pension",
+      "entry age",
+      "60 years",
+      "social security",
+      "unorganized sector"
+    ],
+    "paa_keywords": [
+      "How is APY contribution calculated?",
+      "What is the pension under APY?",
+      "Is APY better than NPS?",
+      "Who can join APY?",
+      "What is the maximum pension in APY?"
+    ],
+    "voice_search_keywords": [
+      "atal pension yojana calculator",
+      "how much to pay for 5000 pension in apy",
+      "apy contribution chart",
+      "is apy a good scheme"
+    ]
+  },
+  "_scores": {
+    "seo_score": 84,
+    "eeat_score": 88,
+    "discover_score": 78,
+    "ai_search_score": 83,
+    "ranking_priority": 2,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "Atal Pension Yojana (APY): Government guarantees fixed pension of ₹1000–₹5000/month from age 60. Contribution depends on entry age and desired pension. Contribution tables published by PFRDA. Example: Age 18, ₹1000 pension → ₹42/month; ₹5000 pension → ₹210/month.",
+    "formula_template": "apyFormula",
+    "formula_source": "PFRDA India / APY Subscriber Information",
+    "formula_source_url": "https://www.pfrda.org.in",
+    "formula_explanation": "The Atal Pension Yojana (APY) uses: Atal Pension Yojana (APY): Government guarantees fixed pension of ₹1000–₹5000/month from age 60. Contribution depends on entry age and desired pension. Contribution tables published by PFRDA. Example:. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Current Age (18-39)=25, Desired Monthly Pension (₹)=5000 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Atal Pension Yojana (APY) helps you monthly pension under apy accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Atal Pension Yojana (APY) is a digital tool that allows you to monthly pension under apy without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Atal Pension Yojana (APY) on this page. Step 2: Enter your Current Age (18-39) (e.g., ₹25). Step 3: Enter your Desired Monthly Pension (₹) (e.g., ₹5,000). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Atal Pension Yojana (APY) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Projections are estimates. Consult a certified financial planner.",
+    "pro_tips": "1. Start retirement planning in your 20s. 2. Use NPS for extra ₹50K deduction under 80CCD(1B). 3. Maintain 60% equity till age 50. 4. Rebalance every 6 months.",
+    "result_explanation": "The Atal Pension Yojana (APY) returns Monthly Contribution (₹), Total Contribution Till 60, Guaranteed Monthly Pension. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Atal Pension Yojana (APY)?",
+        "a": "A Atal Pension Yojana (APY) is an online tool that helps you monthly pension under apy quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Atal Pension Yojana (APY) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Atal Pension Yojana (APY)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "How much corpus to retire?",
+        "a": "25-33x annual expenses (3-4% withdrawal rule). ₹60K/month → ₹1.8-2.4Cr."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "entryAge",
+        "label": "Current Age (18-39)",
+        "type": "number",
+        "min": 18,
+        "max": 39,
+        "default": 25,
+        "required": true
+      },
+      {
+        "name": "desiredPension",
+        "label": "Desired Monthly Pension (₹)",
+        "type": "select",
+        "options": [
+          1000,
+          2000,
+          3000,
+          4000,
+          5000
+        ],
+        "default": 5000,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Monthly Contribution (₹)",
+      "Total Contribution Till 60",
+      "Guaranteed Monthly Pension",
+      "Corpus at Maturity (approx)",
+      "Nominee Gets (on death)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Pension Amount",
+      "yAxis": "Monthly Contribution (₹)",
+      "title": "APY Contribution vs Pension"
+    },
+    "validation_rules": {
+      "entryAge": {
+        "required": true,
+        "min": 18,
+        "max": 39
+      },
+      "desiredPension": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function apy(age,pension){const table={18:{1000:42,2000:84,3000:126,4000:168,5000:210},20:{1000:50,2000:100,3000:150,4000:198,5000:248},25:{1000:76,2000:151,3000:226,4000:301,5000:376},30:{1000:116,2000:231,3000:347,4000:462,5000:577},35:{1000:181,2000:362,3000:543,4000:722,5000:902},39:{1000:291,2000:582,3000:873,4000:1164,5000:1454}};const ages=[18,20,25,30,35,39];const nearAge=ages.reduce((a,b)=>Math.abs(b-age)<Math.abs(a-age)?b:a);const monthly=table[nearAge]?.[pension]||0;const yearsLeft=60-age;const corpus=pension*200;return{monthly,total:monthly*yearsLeft*12,pension,corpus};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "retirement",
+    "category_hierarchy": [
+      "retirement",
+      "apy",
+      "government_scheme",
+      "pension"
+    ],
+    "calculator_group": "retirement",
+    "topical_cluster": "retirement_cluster",
+    "breadcrumb_label": "Atal Pension Yojana (APY)"
+  },
+  "_links": {
+    "related_calculators": [
+      "retirement-corpus-calculator",
+      "retirement-swp-vs-annuity"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "retirement-corpus-calculator",
+      "retirement-swp-vs-annuity"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

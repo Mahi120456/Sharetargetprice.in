@@ -1,0 +1,423 @@
+{
+  "slug": "fd-calculator",
+  "title": "Fixed Deposit Calculator",
+  "category": "individual",
+  "type": "deposit",
+  "description": "Maturity amount for FD",
+  "formula_template": "fdFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Fixed Deposit Calculator",
+  "canonical_url": "https://yoursite.com/calculators/fd-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "FD Maturity: A = P × (1 + r/n)^(nt)  where P = principal, r = annual rate, n = compounding frequency per year, t = years; Simple Interest FD: A = P × (1 + r×t)",
+  "formula_source": "RBI India",
+  "formula_source_url": "https://rbi.org.in",
+  "meta_title": "Fixed Deposit Calculator | Free Online Calculator India",
+  "meta_description": "Use our free fixed deposit calculator to maturity amount for fd. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter today.",
+  "focus_keyword": "Fixed Deposit Calculator",
+  "secondary_keywords": [
+    "fixed deposit calculator online",
+    "fixed deposit calculator india",
+    "fixed deposit calculator calculator",
+    "fixed deposit calculator formula",
+    "fixed deposit calculator example",
+    "fixed deposit calculator calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Fixed Deposit Calculator helps you maturity amount for fd accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Fixed Deposit Calculator is a digital tool that allows you to maturity amount for fd without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Fixed Deposit Calculator on this page. Step 2: Enter your Deposit Amount (₹) (e.g., ₹100,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹7.0). Step 4: Enter your Tenure (Years) (e.g., ₹1). Step 5: Enter your Compounding Frequency). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Fixed Deposit Calculator uses the following mathematical formula: FD Maturity: A = P × (1 + r/n)^(nt)  where P = principal, r = annual rate, n = compounding frequency per year, t = years; Simple Interest FD: A = P × (1 + r×t). Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: FD ₹1 lakh at 7% p.a. for 3 years (quarterly compounding) → Maturity ≈ ₹1,23,145; Interest = ₹23,145.",
+  "benefits": "<ul><li>Instant, accurate Fixed Deposit Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Interest rates shown are indicative. Actual rates change based on RBI policy and bank decisions. TDS applicable if interest exceeds ₹40,000/year (₹50,000 for senior citizens).",
+  "pro_tips": "1. Ladder FDs across multiple tenures for liquidity + higher rates. 2. Consider Senior Citizen FD for 0.5% higher interest if applicable. 3. Compare post-office FD rates with bank FDs. 4. Avoid premature withdrawal – penalty reduces effective yield.",
+  "faq": [
+    {
+      "q": "What is a Fixed Deposit Calculator?",
+      "a": "A Fixed Deposit Calculator is an online tool that helps you maturity amount for fd quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Fixed Deposit Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this Fixed Deposit Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this Fixed Deposit Calculator on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    }
+  ],
+  "og_title": "Free Fixed Deposit Calculator – India's Best Online Calculat",
+  "og_description": "Calculate maturity amount for fd instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "rd-calculator",
+    "compound-interest-calculator",
+    "sip-calculator",
+    "ppf-calculator",
+    "scss-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "principal",
+      "label": "Deposit Amount (₹)",
+      "type": "number",
+      "min": 1000,
+      "max": 100000000,
+      "default": 100000,
+      "required": true
+    },
+    {
+      "name": "annualRate",
+      "label": "Annual Interest Rate (%)",
+      "type": "number",
+      "min": 1,
+      "max": 15,
+      "default": 7.0,
+      "required": true
+    },
+    {
+      "name": "years",
+      "label": "Tenure (Years)",
+      "type": "number",
+      "min": 0.083,
+      "max": 10,
+      "default": 1,
+      "required": true
+    },
+    {
+      "name": "compounding",
+      "label": "Compounding Frequency",
+      "type": "select",
+      "options": [
+        "Monthly",
+        "Quarterly",
+        "Half-Yearly",
+        "Yearly"
+      ],
+      "default": "Quarterly",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Maturity Amount",
+    "Interest Earned",
+    "Effective Annual Yield (%)"
+  ],
+  "chart_config": {
+    "type": "area",
+    "xAxis": "Year",
+    "yAxis": "Balance (₹)",
+    "title": "FD Growth"
+  },
+  "result_explanation": "The Fixed Deposit Calculator returns Maturity Amount, Interest Earned, Effective Annual Yield (%). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "principal": {
+      "required": true,
+      "min": 1000,
+      "max": 100000000
+    },
+    "annualRate": {
+      "required": true,
+      "min": 1,
+      "max": 15
+    },
+    "years": {
+      "required": true,
+      "min": 0.083,
+      "max": 10
+    },
+    "compounding": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function fd(P,r,t,n){const freqMap={Monthly:12,Quarterly:4,'Half-Yearly':2,Yearly:1};const f=freqMap[n]||4;const A=P*Math.pow(1+r/100/f,f*t);return{maturity:A,interest:A-P,yield:(Math.pow(1+r/100/f,f)-1)*100};}",
+  "category_hierarchy": [
+    "deposit",
+    "fixed_deposit",
+    "bank",
+    "savings"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "deposit_cluster",
+  "internal_link_targets": [
+    "rd-calculator",
+    "compound-interest-calculator",
+    "sip-calculator",
+    "ppf-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "fd calculator india 2024",
+    "fixed deposit maturity calculator",
+    "sbi fd calculator",
+    "hdfc fd calculator",
+    "fd returns calculator india",
+    "1 lakh fd for 1 year interest",
+    "post office fd calculator",
+    "best fd rates calculator india"
+  ],
+  "semantic_keywords": [
+    "fixed deposit",
+    "FD",
+    "bank deposit",
+    "TDS",
+    "interest rate",
+    "compounding",
+    "maturity",
+    "RBI",
+    "SBI",
+    "HDFC",
+    "safe investment"
+  ],
+  "paa_keywords": [
+    "What is the interest on 1 lakh FD for 1 year?",
+    "Which bank offers highest FD rate?",
+    "Is FD better than mutual fund?",
+    "How is FD interest calculated?",
+    "What is TDS on FD?"
+  ],
+  "voice_search_keywords": [
+    "what is the interest on 1 lakh fd",
+    "fd calculator india",
+    "how much will i get on 1 lakh fd for 1 year",
+    "best fd rate in india 2024"
+  ],
+  "seo_score": 91,
+  "eeat_score": 89,
+  "discover_score": 84,
+  "ai_search_score": 89,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Fixed Deposit Calculator | Free Online Calculator India",
+    "meta_description": "Use our free fixed deposit calculator to maturity amount for fd. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter today.",
+    "focus_keyword": "Fixed Deposit Calculator",
+    "secondary_keywords": [
+      "fixed deposit calculator online",
+      "fixed deposit calculator india",
+      "fixed deposit calculator calculator",
+      "fixed deposit calculator formula",
+      "fixed deposit calculator example",
+      "fixed deposit calculator calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free Fixed Deposit Calculator – India's Best Online Calculat",
+    "og_description": "Calculate maturity amount for fd instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/fd-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "fd calculator india 2024",
+      "fixed deposit maturity calculator",
+      "sbi fd calculator",
+      "hdfc fd calculator",
+      "fd returns calculator india",
+      "1 lakh fd for 1 year interest",
+      "post office fd calculator",
+      "best fd rates calculator india"
+    ],
+    "semantic_keywords": [
+      "fixed deposit",
+      "FD",
+      "bank deposit",
+      "TDS",
+      "interest rate",
+      "compounding",
+      "maturity",
+      "RBI",
+      "SBI",
+      "HDFC",
+      "safe investment"
+    ],
+    "paa_keywords": [
+      "What is the interest on 1 lakh FD for 1 year?",
+      "Which bank offers highest FD rate?",
+      "Is FD better than mutual fund?",
+      "How is FD interest calculated?",
+      "What is TDS on FD?"
+    ],
+    "voice_search_keywords": [
+      "what is the interest on 1 lakh fd",
+      "fd calculator india",
+      "how much will i get on 1 lakh fd for 1 year",
+      "best fd rate in india 2024"
+    ]
+  },
+  "_scores": {
+    "seo_score": 91,
+    "eeat_score": 89,
+    "discover_score": 84,
+    "ai_search_score": 89,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "FD Maturity: A = P × (1 + r/n)^(nt)  where P = principal, r = annual rate, n = compounding frequency per year, t = years; Simple Interest FD: A = P × (1 + r×t)",
+    "formula_template": "fdFormula",
+    "formula_source": "RBI India",
+    "formula_source_url": "https://rbi.org.in",
+    "formula_explanation": "The Fixed Deposit Calculator uses the following mathematical formula: FD Maturity: A = P × (1 + r/n)^(nt)  where P = principal, r = annual rate, n = compounding frequency per year, t = years; Simple Interest FD: A = P × (1 + r×t). Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: FD ₹1 lakh at 7% p.a. for 3 years (quarterly compounding) → Maturity ≈ ₹1,23,145; Interest = ₹23,145.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Fixed Deposit Calculator helps you maturity amount for fd accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Fixed Deposit Calculator is a digital tool that allows you to maturity amount for fd without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Fixed Deposit Calculator on this page. Step 2: Enter your Deposit Amount (₹) (e.g., ₹100,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹7.0). Step 4: Enter your Tenure (Years) (e.g., ₹1). Step 5: Enter your Compounding Frequency). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Fixed Deposit Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Interest rates shown are indicative. Actual rates change based on RBI policy and bank decisions. TDS applicable if interest exceeds ₹40,000/year (₹50,000 for senior citizens).",
+    "pro_tips": "1. Ladder FDs across multiple tenures for liquidity + higher rates. 2. Consider Senior Citizen FD for 0.5% higher interest if applicable. 3. Compare post-office FD rates with bank FDs. 4. Avoid premature withdrawal – penalty reduces effective yield.",
+    "result_explanation": "The Fixed Deposit Calculator returns Maturity Amount, Interest Earned, Effective Annual Yield (%). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a Fixed Deposit Calculator?",
+        "a": "A Fixed Deposit Calculator is an online tool that helps you maturity amount for fd quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Fixed Deposit Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this Fixed Deposit Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this Fixed Deposit Calculator on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "principal",
+        "label": "Deposit Amount (₹)",
+        "type": "number",
+        "min": 1000,
+        "max": 100000000,
+        "default": 100000,
+        "required": true
+      },
+      {
+        "name": "annualRate",
+        "label": "Annual Interest Rate (%)",
+        "type": "number",
+        "min": 1,
+        "max": 15,
+        "default": 7.0,
+        "required": true
+      },
+      {
+        "name": "years",
+        "label": "Tenure (Years)",
+        "type": "number",
+        "min": 0.083,
+        "max": 10,
+        "default": 1,
+        "required": true
+      },
+      {
+        "name": "compounding",
+        "label": "Compounding Frequency",
+        "type": "select",
+        "options": [
+          "Monthly",
+          "Quarterly",
+          "Half-Yearly",
+          "Yearly"
+        ],
+        "default": "Quarterly",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Maturity Amount",
+      "Interest Earned",
+      "Effective Annual Yield (%)"
+    ],
+    "chart_config": {
+      "type": "area",
+      "xAxis": "Year",
+      "yAxis": "Balance (₹)",
+      "title": "FD Growth"
+    },
+    "validation_rules": {
+      "principal": {
+        "required": true,
+        "min": 1000,
+        "max": 100000000
+      },
+      "annualRate": {
+        "required": true,
+        "min": 1,
+        "max": 15
+      },
+      "years": {
+        "required": true,
+        "min": 0.083,
+        "max": 10
+      },
+      "compounding": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function fd(P,r,t,n){const freqMap={Monthly:12,Quarterly:4,'Half-Yearly':2,Yearly:1};const f=freqMap[n]||4;const A=P*Math.pow(1+r/100/f,f*t);return{maturity:A,interest:A-P,yield:(Math.pow(1+r/100/f,f)-1)*100};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "deposit",
+    "category_hierarchy": [
+      "deposit",
+      "fixed_deposit",
+      "bank",
+      "savings"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "deposit_cluster",
+    "breadcrumb_label": "Fixed Deposit Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "rd-calculator",
+      "compound-interest-calculator",
+      "sip-calculator",
+      "ppf-calculator",
+      "scss-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "rd-calculator",
+      "compound-interest-calculator",
+      "sip-calculator",
+      "ppf-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

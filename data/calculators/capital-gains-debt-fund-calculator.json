@@ -1,0 +1,447 @@
+{
+  "slug": "capital-gains-debt-fund-calculator",
+  "title": "Capital Gains on Debt Funds (Indexation)",
+  "category": "individual",
+  "type": "tax",
+  "description": "Debt fund LTCG with indexation",
+  "formula_template": "cgDebtFundFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Capital Gains on Debt Funds (Indexation)",
+  "canonical_url": "https://yoursite.com/calculators/capital-gains-debt-fund-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Debt MF (post Apr 2023): LTCG/STCG both taxed at slab rate (no indexation benefit as per Finance Act 2023). Holding period no longer matters for tax rate. LTCG = Sale NAV × Units − Cost NAV × Units; Tax = LTCG × marginal slab rate.",
+  "formula_source": "Income Tax Dept India / Finance Act 2023",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "Capital Gains on Debt Funds (Indexation) – Online Calculator",
+  "meta_description": "Use our free capital gains on debt funds (indexation) to debt fund ltcg with indexation. Get instant results with Indian context – ₹, lakhs, crores. Plan you...",
+  "focus_keyword": "Capital Gains on Debt Funds (Indexation)",
+  "secondary_keywords": [
+    "capital gains on debt funds (indexation) calculator online",
+    "capital gains on debt funds (indexation) calculator india",
+    "capital gains on debt funds (indexation) formula",
+    "best capital gains on debt funds (indexation) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Capital Gains on Debt Funds (Indexation) helps you debt fund ltcg with indexation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Capital Gains on Debt Funds (Indexation) is a digital tool that allows you to debt fund ltcg with indexation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Capital Gains on Debt Funds (Indexation) on this page. Step 2: Enter your Purchase NAV (₹) (e.g., ₹30). Step 3: Enter your Redemption NAV (₹) (e.g., ₹40). Step 4: Enter your Units Held (e.g., ₹1,000). Step 5: Enter your Your Tax Slab (%) (e.g., ₹30). Step 6: Enter your Purchase Year (e.g., ₹2,020). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Capital Gains on Debt Funds (Indexation) uses: Debt MF (post Apr 2023): LTCG/STCG both taxed at slab rate (no indexation benefit as per Finance Act 2023). Holding period no longer matters for tax rate. LTCG = Sale NAV × Units − Cost NAV × Units; T. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Purchase NAV (₹)=30, Redemption NAV (₹)=40, Units Held=1000 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Capital Gains on Debt Funds (Indexation) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a Capital Gains on Debt Funds (Indexation)?",
+      "a": "A Capital Gains on Debt Funds (Indexation) is an online tool that helps you debt fund ltcg with indexation quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Capital Gains on Debt Funds (Indexation) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Capital Gains on Debt Funds (Indexation)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free Capital Gains on Debt Funds (Indexation) – India's Best",
+  "og_description": "Calculate debt fund ltcg with indexation instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-old-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "purchaseNav",
+      "label": "Purchase NAV (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 10000,
+      "default": 30,
+      "required": true
+    },
+    {
+      "name": "redemptionNav",
+      "label": "Redemption NAV (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 10000,
+      "default": 40,
+      "required": true
+    },
+    {
+      "name": "units",
+      "label": "Units Held",
+      "type": "number",
+      "min": 1,
+      "max": 10000000,
+      "default": 1000,
+      "required": true
+    },
+    {
+      "name": "taxSlab",
+      "label": "Your Tax Slab (%)",
+      "type": "select",
+      "options": [
+        5,
+        20,
+        30
+      ],
+      "default": 30,
+      "required": true
+    },
+    {
+      "name": "purchaseDate",
+      "label": "Purchase Year",
+      "type": "number",
+      "min": 2010,
+      "max": 2025,
+      "default": 2020,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Investment Amount",
+    "Redemption Amount",
+    "Capital Gain",
+    "Tax Rate",
+    "Tax Payable",
+    "Post-Tax Return (%)"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "Debt Fund Capital Gains Tax"
+  },
+  "result_explanation": "The Capital Gains on Debt Funds (Indexation) returns Investment Amount, Redemption Amount, Capital Gain. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "purchaseNav": {
+      "required": true,
+      "min": 1,
+      "max": 10000
+    },
+    "redemptionNav": {
+      "required": true,
+      "min": 1,
+      "max": 10000
+    },
+    "units": {
+      "required": true,
+      "min": 1,
+      "max": 10000000
+    },
+    "taxSlab": {
+      "required": true
+    },
+    "purchaseDate": {
+      "required": true,
+      "min": 2010,
+      "max": 2025
+    }
+  },
+  "calculator_engine": "function debtFundTax(buyNav,redNav,units,slab,buyYear){const invest=buyNav*units;const redemption=redNav*units;const gain=redemption-invest;const taxRate=slab;const tax=gain>0?gain*taxRate/100:0;const postTaxReturn=((redemption-tax-invest)/invest*100).toFixed(2);return{invest,redemption,gain,taxRate,tax,postTaxReturn};}",
+  "category_hierarchy": [
+    "tax",
+    "capital_gains",
+    "debt_fund",
+    "mutual_fund"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "capital_gains_cluster",
+  "internal_link_targets": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "debt fund capital gains calculator",
+    "debt mutual fund tax 2023",
+    "debt mf slab rate tax",
+    "indexation removed debt fund",
+    "how to calculate debt fund gains",
+    "debt fund vs fd tax",
+    "finance act 2023 debt fund"
+  ],
+  "semantic_keywords": [
+    "debt fund",
+    "capital gains",
+    "slab rate",
+    "Finance Act 2023",
+    "indexation removed",
+    "LTCG",
+    "STCG",
+    "NAV",
+    "redemption",
+    "tax efficiency"
+  ],
+  "paa_keywords": [
+    "Are debt mutual funds still tax-efficient?",
+    "What changed in debt fund taxation in 2023?",
+    "How is debt fund gain taxed now?",
+    "Is FD better than debt fund after 2023 change?",
+    "How to calculate debt fund LTCG?"
+  ],
+  "voice_search_keywords": [
+    "debt fund tax calculator india",
+    "how is debt mutual fund taxed",
+    "finance act 2023 debt fund tax",
+    "debt fund vs fd after tax"
+  ],
+  "seo_score": 78,
+  "eeat_score": 80,
+  "discover_score": 70,
+  "ai_search_score": 77,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Capital Gains on Debt Funds (Indexation) – Online Calculator",
+    "meta_description": "Use our free capital gains on debt funds (indexation) to debt fund ltcg with indexation. Get instant results with Indian context – ₹, lakhs, crores. Plan you...",
+    "focus_keyword": "Capital Gains on Debt Funds (Indexation)",
+    "secondary_keywords": [
+      "capital gains on debt funds (indexation) calculator online",
+      "capital gains on debt funds (indexation) calculator india",
+      "capital gains on debt funds (indexation) formula",
+      "best capital gains on debt funds (indexation) calculator 2024"
+    ],
+    "og_title": "Free Capital Gains on Debt Funds (Indexation) – India's Best",
+    "og_description": "Calculate debt fund ltcg with indexation instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/capital-gains-debt-fund-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "debt fund capital gains calculator",
+      "debt mutual fund tax 2023",
+      "debt mf slab rate tax",
+      "indexation removed debt fund",
+      "how to calculate debt fund gains",
+      "debt fund vs fd tax",
+      "finance act 2023 debt fund"
+    ],
+    "semantic_keywords": [
+      "debt fund",
+      "capital gains",
+      "slab rate",
+      "Finance Act 2023",
+      "indexation removed",
+      "LTCG",
+      "STCG",
+      "NAV",
+      "redemption",
+      "tax efficiency"
+    ],
+    "paa_keywords": [
+      "Are debt mutual funds still tax-efficient?",
+      "What changed in debt fund taxation in 2023?",
+      "How is debt fund gain taxed now?",
+      "Is FD better than debt fund after 2023 change?",
+      "How to calculate debt fund LTCG?"
+    ],
+    "voice_search_keywords": [
+      "debt fund tax calculator india",
+      "how is debt mutual fund taxed",
+      "finance act 2023 debt fund tax",
+      "debt fund vs fd after tax"
+    ]
+  },
+  "_scores": {
+    "seo_score": 78,
+    "eeat_score": 80,
+    "discover_score": 70,
+    "ai_search_score": 77,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Debt MF (post Apr 2023): LTCG/STCG both taxed at slab rate (no indexation benefit as per Finance Act 2023). Holding period no longer matters for tax rate. LTCG = Sale NAV × Units − Cost NAV × Units; Tax = LTCG × marginal slab rate.",
+    "formula_template": "cgDebtFundFormula",
+    "formula_source": "Income Tax Dept India / Finance Act 2023",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The Capital Gains on Debt Funds (Indexation) uses: Debt MF (post Apr 2023): LTCG/STCG both taxed at slab rate (no indexation benefit as per Finance Act 2023). Holding period no longer matters for tax rate. LTCG = Sale NAV × Units − Cost NAV × Units; T. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Purchase NAV (₹)=30, Redemption NAV (₹)=40, Units Held=1000 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Capital Gains on Debt Funds (Indexation) helps you debt fund ltcg with indexation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Capital Gains on Debt Funds (Indexation) is a digital tool that allows you to debt fund ltcg with indexation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Capital Gains on Debt Funds (Indexation) on this page. Step 2: Enter your Purchase NAV (₹) (e.g., ₹30). Step 3: Enter your Redemption NAV (₹) (e.g., ₹40). Step 4: Enter your Units Held (e.g., ₹1,000). Step 5: Enter your Your Tax Slab (%) (e.g., ₹30). Step 6: Enter your Purchase Year (e.g., ₹2,020). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Capital Gains on Debt Funds (Indexation) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The Capital Gains on Debt Funds (Indexation) returns Investment Amount, Redemption Amount, Capital Gain. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Capital Gains on Debt Funds (Indexation)?",
+        "a": "A Capital Gains on Debt Funds (Indexation) is an online tool that helps you debt fund ltcg with indexation quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Capital Gains on Debt Funds (Indexation) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Capital Gains on Debt Funds (Indexation)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "purchaseNav",
+        "label": "Purchase NAV (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 10000,
+        "default": 30,
+        "required": true
+      },
+      {
+        "name": "redemptionNav",
+        "label": "Redemption NAV (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 10000,
+        "default": 40,
+        "required": true
+      },
+      {
+        "name": "units",
+        "label": "Units Held",
+        "type": "number",
+        "min": 1,
+        "max": 10000000,
+        "default": 1000,
+        "required": true
+      },
+      {
+        "name": "taxSlab",
+        "label": "Your Tax Slab (%)",
+        "type": "select",
+        "options": [
+          5,
+          20,
+          30
+        ],
+        "default": 30,
+        "required": true
+      },
+      {
+        "name": "purchaseDate",
+        "label": "Purchase Year",
+        "type": "number",
+        "min": 2010,
+        "max": 2025,
+        "default": 2020,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Investment Amount",
+      "Redemption Amount",
+      "Capital Gain",
+      "Tax Rate",
+      "Tax Payable",
+      "Post-Tax Return (%)"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "Debt Fund Capital Gains Tax"
+    },
+    "validation_rules": {
+      "purchaseNav": {
+        "required": true,
+        "min": 1,
+        "max": 10000
+      },
+      "redemptionNav": {
+        "required": true,
+        "min": 1,
+        "max": 10000
+      },
+      "units": {
+        "required": true,
+        "min": 1,
+        "max": 10000000
+      },
+      "taxSlab": {
+        "required": true
+      },
+      "purchaseDate": {
+        "required": true,
+        "min": 2010,
+        "max": 2025
+      }
+    },
+    "calculator_engine": "function debtFundTax(buyNav,redNav,units,slab,buyYear){const invest=buyNav*units;const redemption=redNav*units;const gain=redemption-invest;const taxRate=slab;const tax=gain>0?gain*taxRate/100:0;const postTaxReturn=((redemption-tax-invest)/invest*100).toFixed(2);return{invest,redemption,gain,taxRate,tax,postTaxReturn};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "capital_gains",
+      "debt_fund",
+      "mutual_fund"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "capital_gains_cluster",
+    "breadcrumb_label": "Capital Gains on Debt Funds (Indexation)"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-old-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

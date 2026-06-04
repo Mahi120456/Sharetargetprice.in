@@ -1,0 +1,483 @@
+{
+  "slug": "iron-condor-calculator",
+  "title": "Iron Condor Calculator",
+  "category": "individual",
+  "type": "options",
+  "description": "Profit/loss for iron condor",
+  "formula_template": "ironCondorFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Iron Condor Calculator",
+  "canonical_url": "https://yoursite.com/calculators/iron-condor-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Iron Condor: Sell OTM call + Buy further OTM call; Sell OTM put + Buy further OTM put. Net credit = (SC−BC) + (SP−BP). Max profit = Net credit. Max loss = Spread width − Net credit (per lot). Breakeven: Upper = short call strike + credit; Lower = short put strike − credit.",
+  "formula_source": "NSE India / Derivatives Education",
+  "formula_source_url": "https://www.nseindia.com/knowledge/learn-about-derivatives",
+  "meta_title": "Iron Condor Calculator | Free Calculator India",
+  "meta_description": "Use our free iron condor calculator to profit/loss for iron condor. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Iron Condor Calculator",
+  "secondary_keywords": [
+    "iron condor calculator calculator online",
+    "iron condor calculator calculator india",
+    "iron condor calculator formula",
+    "best iron condor calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Iron Condor Calculator helps you profit/loss for iron condor accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Iron Condor Calculator is a digital tool that allows you to profit/loss for iron condor without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Iron Condor Calculator on this page. Step 2: Enter your Short Call Strike (e.g., ₹22,500). Step 3: Enter your Long Call Strike (e.g., ₹23,000). Step 4: Enter your Short Put Strike (e.g., ₹21,500). Step 5: Enter your Long Put Strike (e.g., ₹21,000). Step 6: Enter your Net Call Credit (₹) (e.g., ₹100). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Iron Condor Calculator uses: Iron Condor: Sell OTM call + Buy further OTM call; Sell OTM put + Buy further OTM put. Net credit = (SC−BC) + (SP−BP). Max profit = Net credit. Max loss = Spread width − Net credit (per lot). Breakeve. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Short Call Strike=22500, Long Call Strike=23000, Short Put Strike=21500 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Iron Condor Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a Iron Condor Calculator?",
+      "a": "A Iron Condor Calculator is an online tool that helps you profit/loss for iron condor quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Iron Condor Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Iron Condor Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Iron Condor Calculator – India's Best Online Calculator",
+  "og_description": "Calculate profit/loss for iron condor instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "options-greeks-calculator",
+    "options-breakeven-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "shortCallStrike",
+      "label": "Short Call Strike",
+      "type": "number",
+      "min": 1,
+      "max": 100000,
+      "default": 22500,
+      "required": true
+    },
+    {
+      "name": "longCallStrike",
+      "label": "Long Call Strike",
+      "type": "number",
+      "min": 1,
+      "max": 100000,
+      "default": 23000,
+      "required": true
+    },
+    {
+      "name": "shortPutStrike",
+      "label": "Short Put Strike",
+      "type": "number",
+      "min": 1,
+      "max": 100000,
+      "default": 21500,
+      "required": true
+    },
+    {
+      "name": "longPutStrike",
+      "label": "Long Put Strike",
+      "type": "number",
+      "min": 1,
+      "max": 100000,
+      "default": 21000,
+      "required": true
+    },
+    {
+      "name": "callCredit",
+      "label": "Net Call Credit (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 10000,
+      "default": 100,
+      "required": true
+    },
+    {
+      "name": "putCredit",
+      "label": "Net Put Credit (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 10000,
+      "default": 100,
+      "required": true
+    },
+    {
+      "name": "lotSize",
+      "label": "Lot Size",
+      "type": "number",
+      "min": 1,
+      "max": 10000,
+      "default": 50,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Total Net Credit",
+    "Max Profit (₹)",
+    "Max Loss (₹)",
+    "Upper Breakeven",
+    "Lower Breakeven",
+    "Profit Zone Width"
+  ],
+  "chart_config": {
+    "type": "line",
+    "xAxis": "Price at Expiry",
+    "yAxis": "P&L (₹)",
+    "title": "Iron Condor Payoff Diagram"
+  },
+  "result_explanation": "The Iron Condor Calculator returns Total Net Credit, Max Profit (₹), Max Loss (₹). Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "shortCallStrike": {
+      "required": true,
+      "min": 1,
+      "max": 100000
+    },
+    "longCallStrike": {
+      "required": true,
+      "min": 1,
+      "max": 100000
+    },
+    "shortPutStrike": {
+      "required": true,
+      "min": 1,
+      "max": 100000
+    },
+    "longPutStrike": {
+      "required": true,
+      "min": 1,
+      "max": 100000
+    },
+    "callCredit": {
+      "required": true,
+      "min": 0,
+      "max": 10000
+    },
+    "putCredit": {
+      "required": true,
+      "min": 0,
+      "max": 10000
+    },
+    "lotSize": {
+      "required": true,
+      "min": 1,
+      "max": 10000
+    }
+  },
+  "calculator_engine": "function ironCondor(sc,lc,sp,lp,callCred,putCred,lot){const credit=callCred+putCred;const spreadWidth=Math.max(lc-sc,sc-lp);const maxLoss=(spreadWidth-credit)*lot;const maxProfit=credit*lot;const upperBE=sc+credit;const lowerBE=sp-credit;return{credit,maxProfit,maxLoss,upperBE,lowerBE};}",
+  "category_hierarchy": [
+    "trading",
+    "options",
+    "spreads",
+    "iron_condor"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "options_cluster",
+  "internal_link_targets": [
+    "options-greeks-calculator",
+    "options-breakeven-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "iron condor calculator india",
+    "nifty iron condor payoff",
+    "options iron condor profit loss",
+    "how to trade iron condor",
+    "iron condor strategy nifty",
+    "iron condor breakeven calculator",
+    "non-directional options strategy india"
+  ],
+  "semantic_keywords": [
+    "iron condor",
+    "non-directional",
+    "options strategy",
+    "NSE",
+    "Nifty",
+    "credit spread",
+    "max profit",
+    "breakeven",
+    "theta decay",
+    "range-bound"
+  ],
+  "paa_keywords": [
+    "What is iron condor?",
+    "How to calculate iron condor profit?",
+    "When to use iron condor?",
+    "What is max loss in iron condor?",
+    "Is iron condor profitable in India?"
+  ],
+  "voice_search_keywords": [
+    "iron condor calculator india",
+    "nifty iron condor strategy",
+    "how to trade iron condor",
+    "options income strategy india"
+  ],
+  "seo_score": 68,
+  "eeat_score": 70,
+  "discover_score": 60,
+  "ai_search_score": 67,
+  "ranking_priority": 4,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Iron Condor Calculator | Free Calculator India",
+    "meta_description": "Use our free iron condor calculator to profit/loss for iron condor. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Iron Condor Calculator",
+    "secondary_keywords": [
+      "iron condor calculator calculator online",
+      "iron condor calculator calculator india",
+      "iron condor calculator formula",
+      "best iron condor calculator calculator 2024"
+    ],
+    "og_title": "Free Iron Condor Calculator – India's Best Online Calculator",
+    "og_description": "Calculate profit/loss for iron condor instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/iron-condor-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "iron condor calculator india",
+      "nifty iron condor payoff",
+      "options iron condor profit loss",
+      "how to trade iron condor",
+      "iron condor strategy nifty",
+      "iron condor breakeven calculator",
+      "non-directional options strategy india"
+    ],
+    "semantic_keywords": [
+      "iron condor",
+      "non-directional",
+      "options strategy",
+      "NSE",
+      "Nifty",
+      "credit spread",
+      "max profit",
+      "breakeven",
+      "theta decay",
+      "range-bound"
+    ],
+    "paa_keywords": [
+      "What is iron condor?",
+      "How to calculate iron condor profit?",
+      "When to use iron condor?",
+      "What is max loss in iron condor?",
+      "Is iron condor profitable in India?"
+    ],
+    "voice_search_keywords": [
+      "iron condor calculator india",
+      "nifty iron condor strategy",
+      "how to trade iron condor",
+      "options income strategy india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 68,
+    "eeat_score": 70,
+    "discover_score": 60,
+    "ai_search_score": 67,
+    "ranking_priority": 4,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "Iron Condor: Sell OTM call + Buy further OTM call; Sell OTM put + Buy further OTM put. Net credit = (SC−BC) + (SP−BP). Max profit = Net credit. Max loss = Spread width − Net credit (per lot). Breakeven: Upper = short call strike + credit; Lower = short put strike − credit.",
+    "formula_template": "ironCondorFormula",
+    "formula_source": "NSE India / Derivatives Education",
+    "formula_source_url": "https://www.nseindia.com/knowledge/learn-about-derivatives",
+    "formula_explanation": "The Iron Condor Calculator uses: Iron Condor: Sell OTM call + Buy further OTM call; Sell OTM put + Buy further OTM put. Net credit = (SC−BC) + (SP−BP). Max profit = Net credit. Max loss = Spread width − Net credit (per lot). Breakeve. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Short Call Strike=22500, Long Call Strike=23000, Short Put Strike=21500 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Iron Condor Calculator helps you profit/loss for iron condor accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Iron Condor Calculator is a digital tool that allows you to profit/loss for iron condor without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Iron Condor Calculator on this page. Step 2: Enter your Short Call Strike (e.g., ₹22,500). Step 3: Enter your Long Call Strike (e.g., ₹23,000). Step 4: Enter your Short Put Strike (e.g., ₹21,500). Step 5: Enter your Long Put Strike (e.g., ₹21,000). Step 6: Enter your Net Call Credit (₹) (e.g., ₹100). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Iron Condor Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The Iron Condor Calculator returns Total Net Credit, Max Profit (₹), Max Loss (₹). Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Iron Condor Calculator?",
+        "a": "A Iron Condor Calculator is an online tool that helps you profit/loss for iron condor quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Iron Condor Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Iron Condor Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "shortCallStrike",
+        "label": "Short Call Strike",
+        "type": "number",
+        "min": 1,
+        "max": 100000,
+        "default": 22500,
+        "required": true
+      },
+      {
+        "name": "longCallStrike",
+        "label": "Long Call Strike",
+        "type": "number",
+        "min": 1,
+        "max": 100000,
+        "default": 23000,
+        "required": true
+      },
+      {
+        "name": "shortPutStrike",
+        "label": "Short Put Strike",
+        "type": "number",
+        "min": 1,
+        "max": 100000,
+        "default": 21500,
+        "required": true
+      },
+      {
+        "name": "longPutStrike",
+        "label": "Long Put Strike",
+        "type": "number",
+        "min": 1,
+        "max": 100000,
+        "default": 21000,
+        "required": true
+      },
+      {
+        "name": "callCredit",
+        "label": "Net Call Credit (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 10000,
+        "default": 100,
+        "required": true
+      },
+      {
+        "name": "putCredit",
+        "label": "Net Put Credit (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 10000,
+        "default": 100,
+        "required": true
+      },
+      {
+        "name": "lotSize",
+        "label": "Lot Size",
+        "type": "number",
+        "min": 1,
+        "max": 10000,
+        "default": 50,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Total Net Credit",
+      "Max Profit (₹)",
+      "Max Loss (₹)",
+      "Upper Breakeven",
+      "Lower Breakeven",
+      "Profit Zone Width"
+    ],
+    "chart_config": {
+      "type": "line",
+      "xAxis": "Price at Expiry",
+      "yAxis": "P&L (₹)",
+      "title": "Iron Condor Payoff Diagram"
+    },
+    "validation_rules": {
+      "shortCallStrike": {
+        "required": true,
+        "min": 1,
+        "max": 100000
+      },
+      "longCallStrike": {
+        "required": true,
+        "min": 1,
+        "max": 100000
+      },
+      "shortPutStrike": {
+        "required": true,
+        "min": 1,
+        "max": 100000
+      },
+      "longPutStrike": {
+        "required": true,
+        "min": 1,
+        "max": 100000
+      },
+      "callCredit": {
+        "required": true,
+        "min": 0,
+        "max": 10000
+      },
+      "putCredit": {
+        "required": true,
+        "min": 0,
+        "max": 10000
+      },
+      "lotSize": {
+        "required": true,
+        "min": 1,
+        "max": 10000
+      }
+    },
+    "calculator_engine": "function ironCondor(sc,lc,sp,lp,callCred,putCred,lot){const credit=callCred+putCred;const spreadWidth=Math.max(lc-sc,sc-lp);const maxLoss=(spreadWidth-credit)*lot;const maxProfit=credit*lot;const upperBE=sc+credit;const lowerBE=sp-credit;return{credit,maxProfit,maxLoss,upperBE,lowerBE};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "options",
+    "category_hierarchy": [
+      "trading",
+      "options",
+      "spreads",
+      "iron_condor"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "options_cluster",
+    "breadcrumb_label": "Iron Condor Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "options-greeks-calculator",
+      "options-breakeven-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "options-greeks-calculator",
+      "options-breakeven-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

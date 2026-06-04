@@ -1,0 +1,415 @@
+{
+  "slug": "fo-brokerage-calculator",
+  "title": "F&O Brokerage Calculator (Equity)",
+  "category": "individual",
+  "type": "trading",
+  "description": "Futures & Options brokerage",
+  "formula_template": "foBrokerageFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "F&O Brokerage Calculator (Equity)",
+  "canonical_url": "https://yoursite.com/calculators/fo-brokerage-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "F&O Brokerage: Futures = min(0.03%, ₹20) per order each side; Options = ₹20 per order each side; STT: Futures=0.02% on sell, Options=0.0625% on sell premium; Exchange charges: Futures=0.002%, Options=0.053%; GST=18%; SEBI=0.0001%.",
+  "formula_source": "NSE India / Zerodha Charges",
+  "formula_source_url": "https://zerodha.com/charges",
+  "meta_title": "F&O Brokerage Calculator (Equity) | Free Calculator India",
+  "meta_description": "Use our free f&o brokerage calculator (equity) to futures & options brokerage. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances...",
+  "focus_keyword": "F&O Brokerage Calculator (Equity)",
+  "secondary_keywords": [
+    "f&o brokerage calculator (equity) calculator online",
+    "f&o brokerage calculator (equity) calculator india",
+    "f&o brokerage calculator (equity) formula",
+    "best f&o brokerage calculator (equity) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our F&O Brokerage Calculator (Equity) helps you futures & options brokerage accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A F&O Brokerage Calculator (Equity) is a digital tool that allows you to futures & options brokerage without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the F&O Brokerage Calculator (Equity) on this page. Step 2: Enter your Contract/Lot Value (₹) (e.g., ₹200,000). Step 3: Enter your Option Premium (₹, for Options)). Step 4: Enter your Lot Size (e.g., ₹50). Step 5: Enter your Instrument Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The F&O Brokerage Calculator (Equity) uses: F&O Brokerage: Futures = min(0.03%, ₹20) per order each side; Options = ₹20 per order each side; STT: Futures=0.02% on sell, Options=0.0625% on sell premium; Exchange charges: Futures=0.002%, Options=. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Contract/Lot Value (₹)=200000, Option Premium (₹, for Options)=0, Lot Size=50 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate F&O Brokerage Calculator (Equity) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+  "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+  "faq": [
+    {
+      "q": "What is a F&O Brokerage Calculator (Equity)?",
+      "a": "A F&O Brokerage Calculator (Equity) is an online tool that helps you futures & options brokerage quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this F&O Brokerage Calculator (Equity) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this F&O Brokerage Calculator (Equity)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free F&O Brokerage Calculator (Equity) – India's Best Online",
+  "og_description": "Calculate futures & options brokerage instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "contractValue",
+      "label": "Contract/Lot Value (₹)",
+      "type": "number",
+      "min": 1000,
+      "max": 100000000,
+      "default": 200000,
+      "required": true
+    },
+    {
+      "name": "premium",
+      "label": "Option Premium (₹, for Options)",
+      "type": "number",
+      "min": 0,
+      "max": 10000,
+      "default": 0,
+      "required": false
+    },
+    {
+      "name": "lotSize",
+      "label": "Lot Size",
+      "type": "number",
+      "min": 1,
+      "max": 10000,
+      "default": 50,
+      "required": true
+    },
+    {
+      "name": "instrumentType",
+      "label": "Instrument Type",
+      "type": "select",
+      "options": [
+        "Equity Futures",
+        "Index Futures",
+        "Equity Options",
+        "Index Options"
+      ],
+      "default": "Index Options",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Brokerage (per side)",
+    "STT",
+    "Exchange Charges",
+    "GST",
+    "SEBI",
+    "Total Charges",
+    "Charges as % of Contract Value"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Charge Type",
+    "yAxis": "Amount (₹)",
+    "title": "F&O Brokerage Cost Breakdown"
+  },
+  "result_explanation": "The F&O Brokerage Calculator (Equity) returns Brokerage (per side), STT, Exchange Charges. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "contractValue": {
+      "required": true,
+      "min": 1000,
+      "max": 100000000
+    },
+    "premium": {
+      "required": false,
+      "min": 0,
+      "max": 10000
+    },
+    "lotSize": {
+      "required": true,
+      "min": 1,
+      "max": 10000
+    },
+    "instrumentType": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function foBrokerage(cv,premium,lot,type){const isFutures=type.includes('Futures');const turnover=isFutures?cv:premium*lot;const brok=Math.min(cv*0.0003,20)*2;const stt=isFutures?cv*0.0002:premium*lot*0.000625;const exchCharge=isFutures?cv*0.00002:premium*lot*0.00053;const gst=(brok+exchCharge)*0.18;const sebi=cv*0.0000001;const total=brok+stt+exchCharge+gst+sebi;return{brokerage:brok,stt,exchCharge,gst,sebi,total,pct:(total/cv*100).toFixed(4)};}",
+  "category_hierarchy": [
+    "trading",
+    "derivatives",
+    "futures_options",
+    "charges"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "f&o brokerage calculator india",
+    "futures options charges calculator",
+    "nifty options brokerage calculator",
+    "equity futures brokerage",
+    "index options charges india",
+    "fo total cost calculator zerodha"
+  ],
+  "semantic_keywords": [
+    "F&O",
+    "futures",
+    "options",
+    "STT",
+    "exchange charges",
+    "SEBI",
+    "NSE",
+    "BSE",
+    "derivatives",
+    "contract value",
+    "premium"
+  ],
+  "paa_keywords": [
+    "How is F&O brokerage calculated?",
+    "What is STT on options?",
+    "What are exchange charges for futures?",
+    "How much does options trading cost in India?",
+    "What is lot size in F&O?"
+  ],
+  "voice_search_keywords": [
+    "f and o brokerage calculator",
+    "futures options trading charges",
+    "nifty options charges calculator",
+    "how much does options trading cost"
+  ],
+  "seo_score": 78,
+  "eeat_score": 76,
+  "discover_score": 70,
+  "ai_search_score": 76,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "F&O Brokerage Calculator (Equity) | Free Calculator India",
+    "meta_description": "Use our free f&o brokerage calculator (equity) to futures & options brokerage. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances...",
+    "focus_keyword": "F&O Brokerage Calculator (Equity)",
+    "secondary_keywords": [
+      "f&o brokerage calculator (equity) calculator online",
+      "f&o brokerage calculator (equity) calculator india",
+      "f&o brokerage calculator (equity) formula",
+      "best f&o brokerage calculator (equity) calculator 2024"
+    ],
+    "og_title": "Free F&O Brokerage Calculator (Equity) – India's Best Online",
+    "og_description": "Calculate futures & options brokerage instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/fo-brokerage-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "f&o brokerage calculator india",
+      "futures options charges calculator",
+      "nifty options brokerage calculator",
+      "equity futures brokerage",
+      "index options charges india",
+      "fo total cost calculator zerodha"
+    ],
+    "semantic_keywords": [
+      "F&O",
+      "futures",
+      "options",
+      "STT",
+      "exchange charges",
+      "SEBI",
+      "NSE",
+      "BSE",
+      "derivatives",
+      "contract value",
+      "premium"
+    ],
+    "paa_keywords": [
+      "How is F&O brokerage calculated?",
+      "What is STT on options?",
+      "What are exchange charges for futures?",
+      "How much does options trading cost in India?",
+      "What is lot size in F&O?"
+    ],
+    "voice_search_keywords": [
+      "f and o brokerage calculator",
+      "futures options trading charges",
+      "nifty options charges calculator",
+      "how much does options trading cost"
+    ]
+  },
+  "_scores": {
+    "seo_score": 78,
+    "eeat_score": 76,
+    "discover_score": 70,
+    "ai_search_score": 76,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "F&O Brokerage: Futures = min(0.03%, ₹20) per order each side; Options = ₹20 per order each side; STT: Futures=0.02% on sell, Options=0.0625% on sell premium; Exchange charges: Futures=0.002%, Options=0.053%; GST=18%; SEBI=0.0001%.",
+    "formula_template": "foBrokerageFormula",
+    "formula_source": "NSE India / Zerodha Charges",
+    "formula_source_url": "https://zerodha.com/charges",
+    "formula_explanation": "The F&O Brokerage Calculator (Equity) uses: F&O Brokerage: Futures = min(0.03%, ₹20) per order each side; Options = ₹20 per order each side; STT: Futures=0.02% on sell, Options=0.0625% on sell premium; Exchange charges: Futures=0.002%, Options=. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Contract/Lot Value (₹)=200000, Option Premium (₹, for Options)=0, Lot Size=50 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our F&O Brokerage Calculator (Equity) helps you futures & options brokerage accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A F&O Brokerage Calculator (Equity) is a digital tool that allows you to futures & options brokerage without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the F&O Brokerage Calculator (Equity) on this page. Step 2: Enter your Contract/Lot Value (₹) (e.g., ₹200,000). Step 3: Enter your Option Premium (₹, for Options)). Step 4: Enter your Lot Size (e.g., ₹50). Step 5: Enter your Instrument Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate F&O Brokerage Calculator (Equity) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+    "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+    "result_explanation": "The F&O Brokerage Calculator (Equity) returns Brokerage (per side), STT, Exchange Charges. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a F&O Brokerage Calculator (Equity)?",
+        "a": "A F&O Brokerage Calculator (Equity) is an online tool that helps you futures & options brokerage quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this F&O Brokerage Calculator (Equity) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this F&O Brokerage Calculator (Equity)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "contractValue",
+        "label": "Contract/Lot Value (₹)",
+        "type": "number",
+        "min": 1000,
+        "max": 100000000,
+        "default": 200000,
+        "required": true
+      },
+      {
+        "name": "premium",
+        "label": "Option Premium (₹, for Options)",
+        "type": "number",
+        "min": 0,
+        "max": 10000,
+        "default": 0,
+        "required": false
+      },
+      {
+        "name": "lotSize",
+        "label": "Lot Size",
+        "type": "number",
+        "min": 1,
+        "max": 10000,
+        "default": 50,
+        "required": true
+      },
+      {
+        "name": "instrumentType",
+        "label": "Instrument Type",
+        "type": "select",
+        "options": [
+          "Equity Futures",
+          "Index Futures",
+          "Equity Options",
+          "Index Options"
+        ],
+        "default": "Index Options",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Brokerage (per side)",
+      "STT",
+      "Exchange Charges",
+      "GST",
+      "SEBI",
+      "Total Charges",
+      "Charges as % of Contract Value"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Charge Type",
+      "yAxis": "Amount (₹)",
+      "title": "F&O Brokerage Cost Breakdown"
+    },
+    "validation_rules": {
+      "contractValue": {
+        "required": true,
+        "min": 1000,
+        "max": 100000000
+      },
+      "premium": {
+        "required": false,
+        "min": 0,
+        "max": 10000
+      },
+      "lotSize": {
+        "required": true,
+        "min": 1,
+        "max": 10000
+      },
+      "instrumentType": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function foBrokerage(cv,premium,lot,type){const isFutures=type.includes('Futures');const turnover=isFutures?cv:premium*lot;const brok=Math.min(cv*0.0003,20)*2;const stt=isFutures?cv*0.0002:premium*lot*0.000625;const exchCharge=isFutures?cv*0.00002:premium*lot*0.00053;const gst=(brok+exchCharge)*0.18;const sebi=cv*0.0000001;const total=brok+stt+exchCharge+gst+sebi;return{brokerage:brok,stt,exchCharge,gst,sebi,total,pct:(total/cv*100).toFixed(4)};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "derivatives",
+      "futures_options",
+      "charges"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "F&O Brokerage Calculator (Equity)"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

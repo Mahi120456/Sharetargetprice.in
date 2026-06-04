@@ -1,0 +1,441 @@
+{
+  "slug": "foreclosure-loan-calculator",
+  "title": "Foreclosure Loan Calculator",
+  "category": "individual",
+  "type": "loan",
+  "description": "Savings from loan closure",
+  "formula_template": "foreclosureFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Foreclosure Loan Calculator",
+  "canonical_url": "https://yoursite.com/calculators/foreclosure-loan-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Foreclosure (Pre-closure): Pay outstanding principal in full. Foreclosure amount = Outstanding principal + Foreclosure charges (0-5% on outstanding for floating rate loans; RBI mandates no foreclosure charges on floating rate home loans).",
+  "formula_source": "RBI India / NHB Circular",
+  "formula_source_url": "https://rbi.org.in",
+  "meta_title": "Foreclosure Loan Calculator | Free Calculator India",
+  "meta_description": "Use our free foreclosure loan calculator to savings from loan closure. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Foreclosure Loan Calculator",
+  "secondary_keywords": [
+    "foreclosure loan calculator calculator online",
+    "foreclosure loan calculator calculator india",
+    "foreclosure loan calculator formula",
+    "best foreclosure loan calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Foreclosure Loan Calculator helps you savings from loan closure accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Foreclosure Loan Calculator is a digital tool that allows you to savings from loan closure without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Foreclosure Loan Calculator on this page. Step 2: Enter your Original Loan Amount (₹) (e.g., ₹2,000,000). Step 3: Enter your Interest Rate (%) (e.g., ₹9). Step 4: Enter your Original Tenure (Years) (e.g., ₹20). Step 5: Enter your Months Elapsed (e.g., ₹60). Step 6: Enter your Foreclosure Charge (%)). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Foreclosure Loan Calculator uses: Foreclosure (Pre-closure): Pay outstanding principal in full. Foreclosure amount = Outstanding principal + Foreclosure charges (0-5% on outstanding for floating rate loans; RBI mandates no foreclosure. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Original Loan Amount (₹)=2000000, Interest Rate (%)=9, Original Tenure (Years)=20 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Foreclosure Loan Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "EMI is indicative. Actual EMI may vary. Consult your bank for exact terms.",
+  "pro_tips": "1. Maintain CIBIL score above 750. 2. Increase EMI by 5-10% annually. 3. Make prepayments during bonuses. 4. Compare 3+ banks before finalizing.",
+  "faq": [
+    {
+      "q": "What is a Foreclosure Loan Calculator?",
+      "a": "A Foreclosure Loan Calculator is an online tool that helps you savings from loan closure quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Foreclosure Loan Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Foreclosure Loan Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "What is the max loan tenure?",
+      "a": "Home: 30yr; Personal: 7yr; Car: 7yr; Education: 15yr."
+    }
+  ],
+  "og_title": "Free Foreclosure Loan Calculator – India's Best Online Calcu",
+  "og_description": "Calculate savings from loan closure instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "home-loan-emi-calculator",
+    "home-loan-prepayment-calculator",
+    "home-loan-balance-transfer-calculator",
+    "car-loan-emi-calculator",
+    "personal-loan-emi-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "originalLoan",
+      "label": "Original Loan Amount (₹)",
+      "type": "number",
+      "min": 10000,
+      "max": 100000000,
+      "default": 2000000,
+      "required": true
+    },
+    {
+      "name": "annualRate",
+      "label": "Interest Rate (%)",
+      "type": "number",
+      "min": 1,
+      "max": 25,
+      "default": 9,
+      "required": true
+    },
+    {
+      "name": "originalTenure",
+      "label": "Original Tenure (Years)",
+      "type": "number",
+      "min": 1,
+      "max": 30,
+      "default": 20,
+      "required": true
+    },
+    {
+      "name": "monthsElapsed",
+      "label": "Months Elapsed",
+      "type": "number",
+      "min": 1,
+      "max": 360,
+      "default": 60,
+      "required": true
+    },
+    {
+      "name": "foreclosureCharge",
+      "label": "Foreclosure Charge (%)",
+      "type": "number",
+      "min": 0,
+      "max": 5,
+      "default": 0,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "Outstanding Principal",
+    "Foreclosure Charge",
+    "Total Foreclosure Amount",
+    "Interest Saved",
+    "Break-even Analysis"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "Foreclosure vs Continue Paying"
+  },
+  "result_explanation": "The Foreclosure Loan Calculator returns Outstanding Principal, Foreclosure Charge, Total Foreclosure Amount. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "originalLoan": {
+      "required": true,
+      "min": 10000,
+      "max": 100000000
+    },
+    "annualRate": {
+      "required": true,
+      "min": 1,
+      "max": 25
+    },
+    "originalTenure": {
+      "required": true,
+      "min": 1,
+      "max": 30
+    },
+    "monthsElapsed": {
+      "required": true,
+      "min": 1,
+      "max": 360
+    },
+    "foreclosureCharge": {
+      "required": false,
+      "min": 0,
+      "max": 5
+    }
+  },
+  "calculator_engine": "function foreclosure(P,rate,tenureYrs,monthsElapsed,fcCharge){const r=rate/100/12;const n=tenureYrs*12;const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);let outstanding=P;for(let i=0;i<monthsElapsed;i++){outstanding=outstanding*(1+r)-emi;}const charge=outstanding*fcCharge/100;const remaining=n-monthsElapsed;const interestSaved=emi*remaining-outstanding;return{outstanding,charge,total:outstanding+charge,interestSaved};}",
+  "category_hierarchy": [
+    "loan",
+    "foreclosure",
+    "prepayment",
+    "interest_saving"
+  ],
+  "calculator_group": "loan",
+  "topical_cluster": "loan_cluster",
+  "internal_link_targets": [
+    "home-loan-emi-calculator",
+    "home-loan-prepayment-calculator",
+    "home-loan-balance-transfer-calculator",
+    "car-loan-emi-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "loan foreclosure calculator india",
+    "loan pre-closure calculator",
+    "outstanding loan amount calculator",
+    "home loan foreclosure savings",
+    "how much to close loan early",
+    "foreclosure charge calculator",
+    "pay off loan early calculator"
+  ],
+  "semantic_keywords": [
+    "foreclosure",
+    "pre-closure",
+    "outstanding principal",
+    "interest saving",
+    "RBI",
+    "NHB",
+    "home loan",
+    "zero foreclosure charge",
+    "floating rate"
+  ],
+  "paa_keywords": [
+    "What is loan foreclosure?",
+    "How to calculate foreclosure amount?",
+    "Is there foreclosure charge on home loan?",
+    "When is foreclosure beneficial?",
+    "How much interest saved by foreclosure?"
+  ],
+  "voice_search_keywords": [
+    "loan foreclosure calculator",
+    "how to close loan early",
+    "foreclosure amount calculator",
+    "interest saved by prepaying loan"
+  ],
+  "seo_score": 74,
+  "eeat_score": 72,
+  "discover_score": 66,
+  "ai_search_score": 72,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Foreclosure Loan Calculator | Free Calculator India",
+    "meta_description": "Use our free foreclosure loan calculator to savings from loan closure. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Foreclosure Loan Calculator",
+    "secondary_keywords": [
+      "foreclosure loan calculator calculator online",
+      "foreclosure loan calculator calculator india",
+      "foreclosure loan calculator formula",
+      "best foreclosure loan calculator calculator 2024"
+    ],
+    "og_title": "Free Foreclosure Loan Calculator – India's Best Online Calcu",
+    "og_description": "Calculate savings from loan closure instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/foreclosure-loan-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "loan foreclosure calculator india",
+      "loan pre-closure calculator",
+      "outstanding loan amount calculator",
+      "home loan foreclosure savings",
+      "how much to close loan early",
+      "foreclosure charge calculator",
+      "pay off loan early calculator"
+    ],
+    "semantic_keywords": [
+      "foreclosure",
+      "pre-closure",
+      "outstanding principal",
+      "interest saving",
+      "RBI",
+      "NHB",
+      "home loan",
+      "zero foreclosure charge",
+      "floating rate"
+    ],
+    "paa_keywords": [
+      "What is loan foreclosure?",
+      "How to calculate foreclosure amount?",
+      "Is there foreclosure charge on home loan?",
+      "When is foreclosure beneficial?",
+      "How much interest saved by foreclosure?"
+    ],
+    "voice_search_keywords": [
+      "loan foreclosure calculator",
+      "how to close loan early",
+      "foreclosure amount calculator",
+      "interest saved by prepaying loan"
+    ]
+  },
+  "_scores": {
+    "seo_score": 74,
+    "eeat_score": 72,
+    "discover_score": 66,
+    "ai_search_score": 72,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Foreclosure (Pre-closure): Pay outstanding principal in full. Foreclosure amount = Outstanding principal + Foreclosure charges (0-5% on outstanding for floating rate loans; RBI mandates no foreclosure charges on floating rate home loans).",
+    "formula_template": "foreclosureFormula",
+    "formula_source": "RBI India / NHB Circular",
+    "formula_source_url": "https://rbi.org.in",
+    "formula_explanation": "The Foreclosure Loan Calculator uses: Foreclosure (Pre-closure): Pay outstanding principal in full. Foreclosure amount = Outstanding principal + Foreclosure charges (0-5% on outstanding for floating rate loans; RBI mandates no foreclosure. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Original Loan Amount (₹)=2000000, Interest Rate (%)=9, Original Tenure (Years)=20 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Foreclosure Loan Calculator helps you savings from loan closure accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Foreclosure Loan Calculator is a digital tool that allows you to savings from loan closure without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Foreclosure Loan Calculator on this page. Step 2: Enter your Original Loan Amount (₹) (e.g., ₹2,000,000). Step 3: Enter your Interest Rate (%) (e.g., ₹9). Step 4: Enter your Original Tenure (Years) (e.g., ₹20). Step 5: Enter your Months Elapsed (e.g., ₹60). Step 6: Enter your Foreclosure Charge (%)). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Foreclosure Loan Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "EMI is indicative. Actual EMI may vary. Consult your bank for exact terms.",
+    "pro_tips": "1. Maintain CIBIL score above 750. 2. Increase EMI by 5-10% annually. 3. Make prepayments during bonuses. 4. Compare 3+ banks before finalizing.",
+    "result_explanation": "The Foreclosure Loan Calculator returns Outstanding Principal, Foreclosure Charge, Total Foreclosure Amount. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Foreclosure Loan Calculator?",
+        "a": "A Foreclosure Loan Calculator is an online tool that helps you savings from loan closure quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Foreclosure Loan Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Foreclosure Loan Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "What is the max loan tenure?",
+        "a": "Home: 30yr; Personal: 7yr; Car: 7yr; Education: 15yr."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "originalLoan",
+        "label": "Original Loan Amount (₹)",
+        "type": "number",
+        "min": 10000,
+        "max": 100000000,
+        "default": 2000000,
+        "required": true
+      },
+      {
+        "name": "annualRate",
+        "label": "Interest Rate (%)",
+        "type": "number",
+        "min": 1,
+        "max": 25,
+        "default": 9,
+        "required": true
+      },
+      {
+        "name": "originalTenure",
+        "label": "Original Tenure (Years)",
+        "type": "number",
+        "min": 1,
+        "max": 30,
+        "default": 20,
+        "required": true
+      },
+      {
+        "name": "monthsElapsed",
+        "label": "Months Elapsed",
+        "type": "number",
+        "min": 1,
+        "max": 360,
+        "default": 60,
+        "required": true
+      },
+      {
+        "name": "foreclosureCharge",
+        "label": "Foreclosure Charge (%)",
+        "type": "number",
+        "min": 0,
+        "max": 5,
+        "default": 0,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "Outstanding Principal",
+      "Foreclosure Charge",
+      "Total Foreclosure Amount",
+      "Interest Saved",
+      "Break-even Analysis"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "Foreclosure vs Continue Paying"
+    },
+    "validation_rules": {
+      "originalLoan": {
+        "required": true,
+        "min": 10000,
+        "max": 100000000
+      },
+      "annualRate": {
+        "required": true,
+        "min": 1,
+        "max": 25
+      },
+      "originalTenure": {
+        "required": true,
+        "min": 1,
+        "max": 30
+      },
+      "monthsElapsed": {
+        "required": true,
+        "min": 1,
+        "max": 360
+      },
+      "foreclosureCharge": {
+        "required": false,
+        "min": 0,
+        "max": 5
+      }
+    },
+    "calculator_engine": "function foreclosure(P,rate,tenureYrs,monthsElapsed,fcCharge){const r=rate/100/12;const n=tenureYrs*12;const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);let outstanding=P;for(let i=0;i<monthsElapsed;i++){outstanding=outstanding*(1+r)-emi;}const charge=outstanding*fcCharge/100;const remaining=n-monthsElapsed;const interestSaved=emi*remaining-outstanding;return{outstanding,charge,total:outstanding+charge,interestSaved};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "loan",
+    "category_hierarchy": [
+      "loan",
+      "foreclosure",
+      "prepayment",
+      "interest_saving"
+    ],
+    "calculator_group": "loan",
+    "topical_cluster": "loan_cluster",
+    "breadcrumb_label": "Foreclosure Loan Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "home-loan-emi-calculator",
+      "home-loan-prepayment-calculator",
+      "home-loan-balance-transfer-calculator",
+      "car-loan-emi-calculator",
+      "personal-loan-emi-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "home-loan-emi-calculator",
+      "home-loan-prepayment-calculator",
+      "home-loan-balance-transfer-calculator",
+      "car-loan-emi-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

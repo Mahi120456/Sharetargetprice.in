@@ -1,0 +1,399 @@
+{
+  "slug": "gold-etf-vs-physical-calculator",
+  "title": "Gold ETF vs Physical Gold vs SGB",
+  "category": "individual",
+  "type": "investment",
+  "description": "Compare returns and costs",
+  "formula_template": "goldCompareFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Gold ETF vs Physical Gold vs SGB",
+  "canonical_url": "https://yoursite.com/calculators/gold-etf-vs-physical-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Gold ETF: Returns = Gold price CAGR − expense ratio (0.5-1%); No making charges, no storage cost; LTCG @20% with indexation (held >3yr pre-2023, now slab rate). Physical Gold: Making charges 10-25%; Storage cost; No expense ratio; LTCG @20% with indexation (>3yr). SGB: Gold CAGR + 2.5% interest; tax-free at maturity.",
+  "formula_source": "SEBI / AMFI / RBI",
+  "formula_source_url": "https://www.amfiindia.com",
+  "meta_title": "Gold ETF vs Physical Gold vs SGB | Free Calculator India",
+  "meta_description": "Use our free gold etf vs physical gold vs sgb to compare returns and costs. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances to...",
+  "focus_keyword": "Gold ETF vs Physical Gold vs SGB",
+  "secondary_keywords": [
+    "gold etf vs physical gold vs sgb calculator online",
+    "gold etf vs physical gold vs sgb calculator india",
+    "gold etf vs physical gold vs sgb formula",
+    "best gold etf vs physical gold vs sgb calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Gold ETF vs Physical Gold vs SGB helps you compare returns and costs accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Gold ETF vs Physical Gold vs SGB is a digital tool that allows you to compare returns and costs without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Gold ETF vs Physical Gold vs SGB on this page. Step 2: Enter your Investment Amount (₹) (e.g., ₹100,000). Step 3: Enter your Gold CAGR (%) (e.g., ₹10). Step 4: Enter your Investment Period (Years) (e.g., ₹10). Step 5: Enter your Making Charges % (Physical Gold) (e.g., ₹15). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Gold ETF vs Physical Gold vs SGB uses: Gold ETF: Returns = Gold price CAGR − expense ratio (0.5-1%); No making charges, no storage cost; LTCG @20% with indexation (held >3yr pre-2023, now slab rate). Physical Gold: Making charges 10-25%; S. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Investment Amount (₹)=100000, Gold CAGR (%)=10, Investment Period (Years)=10 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Gold ETF vs Physical Gold vs SGB results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+  "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+  "faq": [
+    {
+      "q": "What is a Gold ETF vs Physical Gold vs SGB?",
+      "a": "A Gold ETF vs Physical Gold vs SGB is an online tool that helps you compare returns and costs quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Gold ETF vs Physical Gold vs SGB free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Gold ETF vs Physical Gold vs SGB?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "What is a realistic return for Indian mutual funds?",
+      "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+    }
+  ],
+  "og_title": "Free Gold ETF vs Physical Gold vs SGB – India's Best Online",
+  "og_description": "Calculate compare returns and costs instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-vs-dividend-reinvestment"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "investmentAmount",
+      "label": "Investment Amount (₹)",
+      "type": "number",
+      "min": 5000,
+      "max": 100000000,
+      "default": 100000,
+      "required": true
+    },
+    {
+      "name": "goldCagr",
+      "label": "Gold CAGR (%)",
+      "type": "number",
+      "min": 5,
+      "max": 25,
+      "default": 10,
+      "required": true
+    },
+    {
+      "name": "years",
+      "label": "Investment Period (Years)",
+      "type": "number",
+      "min": 1,
+      "max": 20,
+      "default": 10,
+      "required": true
+    },
+    {
+      "name": "makingCharges",
+      "label": "Making Charges % (Physical Gold)",
+      "type": "number",
+      "min": 0,
+      "max": 30,
+      "default": 15,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Gold ETF Maturity",
+    "Physical Gold Maturity (after charges)",
+    "SGB Maturity (including 2.5% interest)",
+    "Best Option"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Gold Investment Option",
+    "yAxis": "Maturity Value (₹)",
+    "title": "Gold ETF vs Physical vs SGB"
+  },
+  "result_explanation": "The Gold ETF vs Physical Gold vs SGB returns Gold ETF Maturity, Physical Gold Maturity (after charges), SGB Maturity (including 2.5% interest). Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "investmentAmount": {
+      "required": true,
+      "min": 5000,
+      "max": 100000000
+    },
+    "goldCagr": {
+      "required": true,
+      "min": 5,
+      "max": 25
+    },
+    "years": {
+      "required": true,
+      "min": 1,
+      "max": 20
+    },
+    "makingCharges": {
+      "required": true,
+      "min": 0,
+      "max": 30
+    }
+  },
+  "calculator_engine": "function goldComparison(invest,cagr,years,making){const etf=invest*Math.pow(1+(cagr-0.7)/100,years);const physical=(invest*(1-making/100))*Math.pow(1+cagr/100,years);const sgb=invest*Math.pow(1+cagr/100,years)+invest*0.025*years;return{etf,physical,sgb,best:sgb>etf&&sgb>physical?'SGB':etf>physical?'Gold ETF':'Physical Gold'};}",
+  "category_hierarchy": [
+    "investment",
+    "gold",
+    "etf",
+    "comparison"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "gold_cluster",
+  "internal_link_targets": [
+    "swp-vs-dividend-reinvestment"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "gold etf vs physical gold calculator",
+    "sgb vs gold etf returns",
+    "best way to invest in gold india",
+    "gold etf returns calculator",
+    "physical gold making charges impact",
+    "sovereign gold bond vs gold etf",
+    "which gold investment is best india"
+  ],
+  "semantic_keywords": [
+    "gold ETF",
+    "physical gold",
+    "SGB",
+    "making charges",
+    "CAGR",
+    "expense ratio",
+    "LTCG",
+    "SEBI",
+    "AMFI",
+    "gold investment"
+  ],
+  "paa_keywords": [
+    "Gold ETF vs physical gold which is better?",
+    "Is SGB better than Gold ETF?",
+    "What are making charges for gold?",
+    "Is gold ETF taxable?",
+    "How to invest in SGB?"
+  ],
+  "voice_search_keywords": [
+    "gold etf vs physical gold comparison",
+    "best gold investment india",
+    "sgb vs gold etf calculator",
+    "how to invest in gold india"
+  ],
+  "seo_score": 82,
+  "eeat_score": 80,
+  "discover_score": 74,
+  "ai_search_score": 80,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Gold ETF vs Physical Gold vs SGB | Free Calculator India",
+    "meta_description": "Use our free gold etf vs physical gold vs sgb to compare returns and costs. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances to...",
+    "focus_keyword": "Gold ETF vs Physical Gold vs SGB",
+    "secondary_keywords": [
+      "gold etf vs physical gold vs sgb calculator online",
+      "gold etf vs physical gold vs sgb calculator india",
+      "gold etf vs physical gold vs sgb formula",
+      "best gold etf vs physical gold vs sgb calculator 2024"
+    ],
+    "og_title": "Free Gold ETF vs Physical Gold vs SGB – India's Best Online",
+    "og_description": "Calculate compare returns and costs instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/gold-etf-vs-physical-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "gold etf vs physical gold calculator",
+      "sgb vs gold etf returns",
+      "best way to invest in gold india",
+      "gold etf returns calculator",
+      "physical gold making charges impact",
+      "sovereign gold bond vs gold etf",
+      "which gold investment is best india"
+    ],
+    "semantic_keywords": [
+      "gold ETF",
+      "physical gold",
+      "SGB",
+      "making charges",
+      "CAGR",
+      "expense ratio",
+      "LTCG",
+      "SEBI",
+      "AMFI",
+      "gold investment"
+    ],
+    "paa_keywords": [
+      "Gold ETF vs physical gold which is better?",
+      "Is SGB better than Gold ETF?",
+      "What are making charges for gold?",
+      "Is gold ETF taxable?",
+      "How to invest in SGB?"
+    ],
+    "voice_search_keywords": [
+      "gold etf vs physical gold comparison",
+      "best gold investment india",
+      "sgb vs gold etf calculator",
+      "how to invest in gold india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 82,
+    "eeat_score": 80,
+    "discover_score": 74,
+    "ai_search_score": 80,
+    "ranking_priority": 2,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Gold ETF: Returns = Gold price CAGR − expense ratio (0.5-1%); No making charges, no storage cost; LTCG @20% with indexation (held >3yr pre-2023, now slab rate). Physical Gold: Making charges 10-25%; Storage cost; No expense ratio; LTCG @20% with indexation (>3yr). SGB: Gold CAGR + 2.5% interest; tax-free at maturity.",
+    "formula_template": "goldCompareFormula",
+    "formula_source": "SEBI / AMFI / RBI",
+    "formula_source_url": "https://www.amfiindia.com",
+    "formula_explanation": "The Gold ETF vs Physical Gold vs SGB uses: Gold ETF: Returns = Gold price CAGR − expense ratio (0.5-1%); No making charges, no storage cost; LTCG @20% with indexation (held >3yr pre-2023, now slab rate). Physical Gold: Making charges 10-25%; S. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Investment Amount (₹)=100000, Gold CAGR (%)=10, Investment Period (Years)=10 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Gold ETF vs Physical Gold vs SGB helps you compare returns and costs accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Gold ETF vs Physical Gold vs SGB is a digital tool that allows you to compare returns and costs without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Gold ETF vs Physical Gold vs SGB on this page. Step 2: Enter your Investment Amount (₹) (e.g., ₹100,000). Step 3: Enter your Gold CAGR (%) (e.g., ₹10). Step 4: Enter your Investment Period (Years) (e.g., ₹10). Step 5: Enter your Making Charges % (Physical Gold) (e.g., ₹15). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Gold ETF vs Physical Gold vs SGB results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+    "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+    "result_explanation": "The Gold ETF vs Physical Gold vs SGB returns Gold ETF Maturity, Physical Gold Maturity (after charges), SGB Maturity (including 2.5% interest). Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Gold ETF vs Physical Gold vs SGB?",
+        "a": "A Gold ETF vs Physical Gold vs SGB is an online tool that helps you compare returns and costs quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Gold ETF vs Physical Gold vs SGB free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Gold ETF vs Physical Gold vs SGB?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "What is a realistic return for Indian mutual funds?",
+        "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "investmentAmount",
+        "label": "Investment Amount (₹)",
+        "type": "number",
+        "min": 5000,
+        "max": 100000000,
+        "default": 100000,
+        "required": true
+      },
+      {
+        "name": "goldCagr",
+        "label": "Gold CAGR (%)",
+        "type": "number",
+        "min": 5,
+        "max": 25,
+        "default": 10,
+        "required": true
+      },
+      {
+        "name": "years",
+        "label": "Investment Period (Years)",
+        "type": "number",
+        "min": 1,
+        "max": 20,
+        "default": 10,
+        "required": true
+      },
+      {
+        "name": "makingCharges",
+        "label": "Making Charges % (Physical Gold)",
+        "type": "number",
+        "min": 0,
+        "max": 30,
+        "default": 15,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Gold ETF Maturity",
+      "Physical Gold Maturity (after charges)",
+      "SGB Maturity (including 2.5% interest)",
+      "Best Option"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Gold Investment Option",
+      "yAxis": "Maturity Value (₹)",
+      "title": "Gold ETF vs Physical vs SGB"
+    },
+    "validation_rules": {
+      "investmentAmount": {
+        "required": true,
+        "min": 5000,
+        "max": 100000000
+      },
+      "goldCagr": {
+        "required": true,
+        "min": 5,
+        "max": 25
+      },
+      "years": {
+        "required": true,
+        "min": 1,
+        "max": 20
+      },
+      "makingCharges": {
+        "required": true,
+        "min": 0,
+        "max": 30
+      }
+    },
+    "calculator_engine": "function goldComparison(invest,cagr,years,making){const etf=invest*Math.pow(1+(cagr-0.7)/100,years);const physical=(invest*(1-making/100))*Math.pow(1+cagr/100,years);const sgb=invest*Math.pow(1+cagr/100,years)+invest*0.025*years;return{etf,physical,sgb,best:sgb>etf&&sgb>physical?'SGB':etf>physical?'Gold ETF':'Physical Gold'};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "investment",
+    "category_hierarchy": [
+      "investment",
+      "gold",
+      "etf",
+      "comparison"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "gold_cluster",
+    "breadcrumb_label": "Gold ETF vs Physical Gold vs SGB"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-vs-dividend-reinvestment"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-vs-dividend-reinvestment"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

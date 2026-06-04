@@ -1,0 +1,441 @@
+{
+  "slug": "electric-vehicle-loan-emi-calculator",
+  "title": "Electric Vehicle Loan EMI Calculator",
+  "category": "individual",
+  "type": "loan",
+  "description": "Monthly EMI for EV",
+  "formula_template": "evLoanEmiFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Electric Vehicle Loan EMI Calculator",
+  "canonical_url": "https://yoursite.com/calculators/electric-vehicle-loan-emi-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "EV Loan EMI = P × r × (1+r)^n / ((1+r)^n − 1). Lower rates available under FAME subsidized schemes: 5-10% p.a. Green finance initiatives. Subsidy reduces effective loan amount.",
+  "formula_source": "Ministry of Heavy Industries / RBI",
+  "formula_source_url": "https://heavyindustries.gov.in",
+  "meta_title": "Electric Vehicle Loan EMI Calculator | Free Calculator India",
+  "meta_description": "Use our free electric vehicle loan emi calculator to monthly emi for ev. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Electric Vehicle Loan EMI Calculator",
+  "secondary_keywords": [
+    "electric vehicle loan emi calculator calculator online",
+    "electric vehicle loan emi calculator calculator india",
+    "electric vehicle loan emi calculator formula",
+    "best electric vehicle loan emi calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Electric Vehicle Loan EMI Calculator helps you monthly emi for ev accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Electric Vehicle Loan EMI Calculator is a digital tool that allows you to monthly emi for ev without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Electric Vehicle Loan EMI Calculator on this page. Step 2: Enter your EV Price (₹) (e.g., ₹1,200,000). Step 3: Enter your FAME/State Subsidy (₹) (e.g., ₹50,000). Step 4: Enter your Down Payment (₹) (e.g., ₹200,000). Step 5: Enter your Interest Rate (%) (e.g., ₹9). Step 6: Enter your Tenure (Months) (e.g., ₹60). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Electric Vehicle Loan EMI Calculator uses: EV Loan EMI = P × r × (1+r)^n / ((1+r)^n − 1). Lower rates available under FAME subsidized schemes: 5-10% p.a. Green finance initiatives. Subsidy reduces effective loan amount.. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – EV Price (₹)=1200000, FAME/State Subsidy (₹)=50000, Down Payment (₹)=200000 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Electric Vehicle Loan EMI Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "EMI is indicative. Actual EMI may vary. Consult your bank for exact terms.",
+  "pro_tips": "1. Maintain CIBIL score above 750. 2. Increase EMI by 5-10% annually. 3. Make prepayments during bonuses. 4. Compare 3+ banks before finalizing.",
+  "faq": [
+    {
+      "q": "What is a Electric Vehicle Loan EMI Calculator?",
+      "a": "A Electric Vehicle Loan EMI Calculator is an online tool that helps you monthly emi for ev quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Electric Vehicle Loan EMI Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Electric Vehicle Loan EMI Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "What is the max loan tenure?",
+      "a": "Home: 30yr; Personal: 7yr; Car: 7yr; Education: 15yr."
+    }
+  ],
+  "og_title": "Free Electric Vehicle Loan EMI Calculator – India's Best Onl",
+  "og_description": "Calculate monthly emi for ev instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "home-loan-emi-calculator",
+    "home-loan-prepayment-calculator",
+    "home-loan-balance-transfer-calculator",
+    "car-loan-emi-calculator",
+    "personal-loan-emi-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "evPrice",
+      "label": "EV Price (₹)",
+      "type": "number",
+      "min": 50000,
+      "max": 10000000,
+      "default": 1200000,
+      "required": true
+    },
+    {
+      "name": "subsidy",
+      "label": "FAME/State Subsidy (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 500000,
+      "default": 50000,
+      "required": false
+    },
+    {
+      "name": "downPayment",
+      "label": "Down Payment (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 5000000,
+      "default": 200000,
+      "required": false
+    },
+    {
+      "name": "annualRate",
+      "label": "Interest Rate (%)",
+      "type": "number",
+      "min": 5,
+      "max": 18,
+      "default": 9,
+      "required": true
+    },
+    {
+      "name": "tenureMonths",
+      "label": "Tenure (Months)",
+      "type": "number",
+      "min": 12,
+      "max": 84,
+      "default": 60,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Net Loan Amount (after subsidy)",
+    "Monthly EMI",
+    "Total Interest",
+    "Total Cost"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "EV Loan Breakdown"
+  },
+  "result_explanation": "The Electric Vehicle Loan EMI Calculator returns Net Loan Amount (after subsidy), Monthly EMI, Total Interest. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "evPrice": {
+      "required": true,
+      "min": 50000,
+      "max": 10000000
+    },
+    "subsidy": {
+      "required": false,
+      "min": 0,
+      "max": 500000
+    },
+    "downPayment": {
+      "required": false,
+      "min": 0,
+      "max": 5000000
+    },
+    "annualRate": {
+      "required": true,
+      "min": 5,
+      "max": 18
+    },
+    "tenureMonths": {
+      "required": true,
+      "min": 12,
+      "max": 84
+    }
+  },
+  "calculator_engine": "function evLoanEMI(price,subsidy,down,rate,months){const P=price-subsidy-down;const r=rate/100/12;const emi=P*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1);return{netLoan:P,emi,interest:emi*months-P,total:emi*months+down};}",
+  "category_hierarchy": [
+    "loan",
+    "ev_loan",
+    "electric_vehicle",
+    "emi"
+  ],
+  "calculator_group": "loan",
+  "topical_cluster": "auto_cluster",
+  "internal_link_targets": [
+    "home-loan-emi-calculator",
+    "home-loan-prepayment-calculator",
+    "home-loan-balance-transfer-calculator",
+    "car-loan-emi-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "electric vehicle loan emi calculator",
+    "ev loan calculator india",
+    "ev car emi 2024",
+    "fame subsidy loan calculator",
+    "tata nexon ev loan emi",
+    "ola electric scooter loan",
+    "electric vehicle finance india"
+  ],
+  "semantic_keywords": [
+    "EV loan",
+    "electric vehicle",
+    "FAME subsidy",
+    "PM Surya Ghar",
+    "green finance",
+    "EMI",
+    "SBI green car",
+    "EV policy",
+    "charging",
+    "battery"
+  ],
+  "paa_keywords": [
+    "EV loan interest rate India?",
+    "FAME subsidy on EV purchase?",
+    "Best bank for EV loan?",
+    "EV loan EMI calculator?",
+    "Is EV loan interest tax-deductible?"
+  ],
+  "voice_search_keywords": [
+    "electric vehicle loan emi",
+    "ev car loan calculator india",
+    "fame subsidy electric car",
+    "ev loan interest rate"
+  ],
+  "seo_score": 76,
+  "eeat_score": 72,
+  "discover_score": 70,
+  "ai_search_score": 73,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Electric Vehicle Loan EMI Calculator | Free Calculator India",
+    "meta_description": "Use our free electric vehicle loan emi calculator to monthly emi for ev. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Electric Vehicle Loan EMI Calculator",
+    "secondary_keywords": [
+      "electric vehicle loan emi calculator calculator online",
+      "electric vehicle loan emi calculator calculator india",
+      "electric vehicle loan emi calculator formula",
+      "best electric vehicle loan emi calculator calculator 2024"
+    ],
+    "og_title": "Free Electric Vehicle Loan EMI Calculator – India's Best Onl",
+    "og_description": "Calculate monthly emi for ev instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/electric-vehicle-loan-emi-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "electric vehicle loan emi calculator",
+      "ev loan calculator india",
+      "ev car emi 2024",
+      "fame subsidy loan calculator",
+      "tata nexon ev loan emi",
+      "ola electric scooter loan",
+      "electric vehicle finance india"
+    ],
+    "semantic_keywords": [
+      "EV loan",
+      "electric vehicle",
+      "FAME subsidy",
+      "PM Surya Ghar",
+      "green finance",
+      "EMI",
+      "SBI green car",
+      "EV policy",
+      "charging",
+      "battery"
+    ],
+    "paa_keywords": [
+      "EV loan interest rate India?",
+      "FAME subsidy on EV purchase?",
+      "Best bank for EV loan?",
+      "EV loan EMI calculator?",
+      "Is EV loan interest tax-deductible?"
+    ],
+    "voice_search_keywords": [
+      "electric vehicle loan emi",
+      "ev car loan calculator india",
+      "fame subsidy electric car",
+      "ev loan interest rate"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 72,
+    "discover_score": 70,
+    "ai_search_score": 73,
+    "ranking_priority": 3,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "EV Loan EMI = P × r × (1+r)^n / ((1+r)^n − 1). Lower rates available under FAME subsidized schemes: 5-10% p.a. Green finance initiatives. Subsidy reduces effective loan amount.",
+    "formula_template": "evLoanEmiFormula",
+    "formula_source": "Ministry of Heavy Industries / RBI",
+    "formula_source_url": "https://heavyindustries.gov.in",
+    "formula_explanation": "The Electric Vehicle Loan EMI Calculator uses: EV Loan EMI = P × r × (1+r)^n / ((1+r)^n − 1). Lower rates available under FAME subsidized schemes: 5-10% p.a. Green finance initiatives. Subsidy reduces effective loan amount.. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – EV Price (₹)=1200000, FAME/State Subsidy (₹)=50000, Down Payment (₹)=200000 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Electric Vehicle Loan EMI Calculator helps you monthly emi for ev accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Electric Vehicle Loan EMI Calculator is a digital tool that allows you to monthly emi for ev without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Electric Vehicle Loan EMI Calculator on this page. Step 2: Enter your EV Price (₹) (e.g., ₹1,200,000). Step 3: Enter your FAME/State Subsidy (₹) (e.g., ₹50,000). Step 4: Enter your Down Payment (₹) (e.g., ₹200,000). Step 5: Enter your Interest Rate (%) (e.g., ₹9). Step 6: Enter your Tenure (Months) (e.g., ₹60). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Electric Vehicle Loan EMI Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "EMI is indicative. Actual EMI may vary. Consult your bank for exact terms.",
+    "pro_tips": "1. Maintain CIBIL score above 750. 2. Increase EMI by 5-10% annually. 3. Make prepayments during bonuses. 4. Compare 3+ banks before finalizing.",
+    "result_explanation": "The Electric Vehicle Loan EMI Calculator returns Net Loan Amount (after subsidy), Monthly EMI, Total Interest. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Electric Vehicle Loan EMI Calculator?",
+        "a": "A Electric Vehicle Loan EMI Calculator is an online tool that helps you monthly emi for ev quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Electric Vehicle Loan EMI Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Electric Vehicle Loan EMI Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "What is the max loan tenure?",
+        "a": "Home: 30yr; Personal: 7yr; Car: 7yr; Education: 15yr."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "evPrice",
+        "label": "EV Price (₹)",
+        "type": "number",
+        "min": 50000,
+        "max": 10000000,
+        "default": 1200000,
+        "required": true
+      },
+      {
+        "name": "subsidy",
+        "label": "FAME/State Subsidy (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 500000,
+        "default": 50000,
+        "required": false
+      },
+      {
+        "name": "downPayment",
+        "label": "Down Payment (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 5000000,
+        "default": 200000,
+        "required": false
+      },
+      {
+        "name": "annualRate",
+        "label": "Interest Rate (%)",
+        "type": "number",
+        "min": 5,
+        "max": 18,
+        "default": 9,
+        "required": true
+      },
+      {
+        "name": "tenureMonths",
+        "label": "Tenure (Months)",
+        "type": "number",
+        "min": 12,
+        "max": 84,
+        "default": 60,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Net Loan Amount (after subsidy)",
+      "Monthly EMI",
+      "Total Interest",
+      "Total Cost"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "EV Loan Breakdown"
+    },
+    "validation_rules": {
+      "evPrice": {
+        "required": true,
+        "min": 50000,
+        "max": 10000000
+      },
+      "subsidy": {
+        "required": false,
+        "min": 0,
+        "max": 500000
+      },
+      "downPayment": {
+        "required": false,
+        "min": 0,
+        "max": 5000000
+      },
+      "annualRate": {
+        "required": true,
+        "min": 5,
+        "max": 18
+      },
+      "tenureMonths": {
+        "required": true,
+        "min": 12,
+        "max": 84
+      }
+    },
+    "calculator_engine": "function evLoanEMI(price,subsidy,down,rate,months){const P=price-subsidy-down;const r=rate/100/12;const emi=P*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1);return{netLoan:P,emi,interest:emi*months-P,total:emi*months+down};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "loan",
+    "category_hierarchy": [
+      "loan",
+      "ev_loan",
+      "electric_vehicle",
+      "emi"
+    ],
+    "calculator_group": "loan",
+    "topical_cluster": "auto_cluster",
+    "breadcrumb_label": "Electric Vehicle Loan EMI Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "home-loan-emi-calculator",
+      "home-loan-prepayment-calculator",
+      "home-loan-balance-transfer-calculator",
+      "car-loan-emi-calculator",
+      "personal-loan-emi-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "home-loan-emi-calculator",
+      "home-loan-prepayment-calculator",
+      "home-loan-balance-transfer-calculator",
+      "car-loan-emi-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

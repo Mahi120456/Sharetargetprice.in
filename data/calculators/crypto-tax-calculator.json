@@ -1,0 +1,427 @@
+{
+  "slug": "crypto-tax-calculator",
+  "title": "Crypto Tax Calculator (30% + 1% TDS)",
+  "category": "individual",
+  "type": "tax",
+  "description": "Tax on cryptocurrency gains",
+  "formula_template": "cryptoTaxFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Crypto Tax Calculator (30% + 1% TDS)",
+  "canonical_url": "https://yoursite.com/calculators/crypto-tax-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Tax = 30% on profits from VDA transfer; 1% TDS on transaction value; No deduction except cost of acquisition; Loss from crypto cannot offset other income (Finance Act 2022)",
+  "formula_source": "Income Tax Department India / Finance Act 2022",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "Crypto Tax Calculator (30% + 1% TDS) Calculator India",
+  "meta_description": "Use our free crypto tax calculator (30% + 1% tds) to tax on cryptocurrency gains. Get instant results with Indian context – ₹, lakhs, crores. Plan your finan...",
+  "focus_keyword": "Crypto Tax Calculator (30% + 1% TDS)",
+  "secondary_keywords": [
+    "crypto tax calculator (30% + 1% tds) online",
+    "crypto tax calculator (30% + 1% tds) india",
+    "crypto tax calculator (30% + 1% tds) calculator",
+    "crypto tax calculator (30% + 1% tds) formula",
+    "crypto tax calculator (30% + 1% tds) example",
+    "crypto tax calculator (30% + 1% tds) calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Crypto Tax Calculator (30% + 1% TDS) helps you tax on cryptocurrency gains accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Crypto Tax Calculator (30% + 1% TDS) is a digital tool that allows you to tax on cryptocurrency gains without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Crypto Tax Calculator (30% + 1% TDS) on this page. Step 2: Enter your Buy Price per Coin (₹) (e.g., ₹2,000,000). Step 3: Enter your Sell Price per Coin (₹) (e.g., ₹3,000,000). Step 4: Enter your Quantity of Coins (e.g., ₹1). Step 5: Enter your Total Transaction Value (₹) for TDS (e.g., ₹3,000,000). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Crypto Tax Calculator (30% + 1% TDS) uses the following mathematical formula: Tax = 30% on profits from VDA transfer; 1% TDS on transaction value; No deduction except cost of acquisition; Loss from crypto cannot offset other income (Finance Act 2022). Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Annual income ₹12 lakh → New Regime tax = ₹0 (with 87A rebate + standard deduction). Old Regime → ~₹1.17 lakh after deductions.",
+  "benefits": "<ul><li>Instant, accurate Crypto Tax Calculator (30% + 1% TDS) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative only. Tax laws change annually per Union Budget. Consult a CA for tax filing. Surcharge and cess applicable as per slab. This does not constitute tax advice.",
+  "pro_tips": "1. File ITR before due date to avoid penalty under 234F. 2. Compare old vs new regime annually as income changes. 3. Invest in 80C instruments before 31st March. 4. Keep all receipts and proof of investments ready.",
+  "faq": [
+    {
+      "q": "What is a Crypto Tax Calculator (30% + 1% TDS)?",
+      "a": "A Crypto Tax Calculator (30% + 1% TDS) is an online tool that helps you tax on cryptocurrency gains quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Crypto Tax Calculator (30% + 1% TDS) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this Crypto Tax Calculator (30% + 1% TDS)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this Crypto Tax Calculator (30% + 1% TDS) on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    },
+    {
+      "q": "Should I choose old or new tax regime?",
+      "a": "New regime is better if your total deductions (80C + 80D + HRA etc.) are less than ₹3.75 lakh for FY2024-25. Otherwise, old regime may save more tax."
+    }
+  ],
+  "og_title": "Free Crypto Tax Calculator (30% + 1% TDS) – India's Best Onl",
+  "og_description": "Calculate tax on cryptocurrency gains instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-new-calculator",
+    "capital-gains-property-calculator",
+    "tds-fd-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "buyPrice",
+      "label": "Buy Price per Coin (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 10000000,
+      "default": 2000000,
+      "required": true
+    },
+    {
+      "name": "sellPrice",
+      "label": "Sell Price per Coin (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 10000000,
+      "default": 3000000,
+      "required": true
+    },
+    {
+      "name": "quantity",
+      "label": "Quantity of Coins",
+      "type": "number",
+      "min": 1e-06,
+      "max": 1000000,
+      "default": 1,
+      "required": true
+    },
+    {
+      "name": "transactionValue",
+      "label": "Total Transaction Value (₹) for TDS",
+      "type": "number",
+      "min": 0,
+      "max": 1000000000,
+      "default": 3000000,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Profit/Loss",
+    "Tax @ 30%",
+    "TDS @ 1%",
+    "Net Profit After Tax"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "Crypto Tax Breakdown"
+  },
+  "result_explanation": "The Crypto Tax Calculator (30% + 1% TDS) returns Profit/Loss, Tax @ 30%, TDS @ 1%. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "buyPrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 10000000
+    },
+    "sellPrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 10000000
+    },
+    "quantity": {
+      "required": true,
+      "min": 1e-06,
+      "max": 1000000
+    },
+    "transactionValue": {
+      "required": true,
+      "min": 0,
+      "max": 1000000000
+    }
+  },
+  "calculator_engine": "function cryptoTax(buy,sell,qty,txnVal){const profit=(sell-buy)*qty;const tax=profit>0?profit*0.30:0;const tds=txnVal*0.01;return{profit,tax,tds,netProfit:profit-tax-tds};}",
+  "category_hierarchy": [
+    "tax",
+    "crypto",
+    "vda",
+    "special_income"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "crypto_cluster",
+  "internal_link_targets": [
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-new-calculator",
+    "capital-gains-property-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "crypto tax calculator india 2024",
+    "bitcoin tax india 30 percent",
+    "crypto tds 1 percent calculator",
+    "virtual digital asset tax india",
+    "crypto profit tax calculator",
+    "how to calculate crypto tax india",
+    "crypto tax on bitcoin profit",
+    "30% flat tax on crypto india"
+  ],
+  "semantic_keywords": [
+    "cryptocurrency tax",
+    "VDA",
+    "30% flat tax",
+    "1% TDS",
+    "Section 115BBH",
+    "no set-off",
+    "Finance Act 2022",
+    "Bitcoin",
+    "Ethereum",
+    "CBDT"
+  ],
+  "paa_keywords": [
+    "How much tax on crypto in India?",
+    "What is 1% TDS on crypto?",
+    "Can crypto loss offset other income?",
+    "How to report crypto in ITR?",
+    "Is crypto legal in India?"
+  ],
+  "voice_search_keywords": [
+    "how much tax do i pay on crypto in india",
+    "crypto tax calculator india",
+    "1 percent tds on cryptocurrency",
+    "how to calculate crypto gains tax india"
+  ],
+  "seo_score": 86,
+  "eeat_score": 84,
+  "discover_score": 82,
+  "ai_search_score": 87,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Crypto Tax Calculator (30% + 1% TDS) Calculator India",
+    "meta_description": "Use our free crypto tax calculator (30% + 1% tds) to tax on cryptocurrency gains. Get instant results with Indian context – ₹, lakhs, crores. Plan your finan...",
+    "focus_keyword": "Crypto Tax Calculator (30% + 1% TDS)",
+    "secondary_keywords": [
+      "crypto tax calculator (30% + 1% tds) online",
+      "crypto tax calculator (30% + 1% tds) india",
+      "crypto tax calculator (30% + 1% tds) calculator",
+      "crypto tax calculator (30% + 1% tds) formula",
+      "crypto tax calculator (30% + 1% tds) example",
+      "crypto tax calculator (30% + 1% tds) calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free Crypto Tax Calculator (30% + 1% TDS) – India's Best Onl",
+    "og_description": "Calculate tax on cryptocurrency gains instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/crypto-tax-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "crypto tax calculator india 2024",
+      "bitcoin tax india 30 percent",
+      "crypto tds 1 percent calculator",
+      "virtual digital asset tax india",
+      "crypto profit tax calculator",
+      "how to calculate crypto tax india",
+      "crypto tax on bitcoin profit",
+      "30% flat tax on crypto india"
+    ],
+    "semantic_keywords": [
+      "cryptocurrency tax",
+      "VDA",
+      "30% flat tax",
+      "1% TDS",
+      "Section 115BBH",
+      "no set-off",
+      "Finance Act 2022",
+      "Bitcoin",
+      "Ethereum",
+      "CBDT"
+    ],
+    "paa_keywords": [
+      "How much tax on crypto in India?",
+      "What is 1% TDS on crypto?",
+      "Can crypto loss offset other income?",
+      "How to report crypto in ITR?",
+      "Is crypto legal in India?"
+    ],
+    "voice_search_keywords": [
+      "how much tax do i pay on crypto in india",
+      "crypto tax calculator india",
+      "1 percent tds on cryptocurrency",
+      "how to calculate crypto gains tax india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 86,
+    "eeat_score": 84,
+    "discover_score": 82,
+    "ai_search_score": 87,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Tax = 30% on profits from VDA transfer; 1% TDS on transaction value; No deduction except cost of acquisition; Loss from crypto cannot offset other income (Finance Act 2022)",
+    "formula_template": "cryptoTaxFormula",
+    "formula_source": "Income Tax Department India / Finance Act 2022",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The Crypto Tax Calculator (30% + 1% TDS) uses the following mathematical formula: Tax = 30% on profits from VDA transfer; 1% TDS on transaction value; No deduction except cost of acquisition; Loss from crypto cannot offset other income (Finance Act 2022). Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Annual income ₹12 lakh → New Regime tax = ₹0 (with 87A rebate + standard deduction). Old Regime → ~₹1.17 lakh after deductions.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Crypto Tax Calculator (30% + 1% TDS) helps you tax on cryptocurrency gains accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Crypto Tax Calculator (30% + 1% TDS) is a digital tool that allows you to tax on cryptocurrency gains without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Crypto Tax Calculator (30% + 1% TDS) on this page. Step 2: Enter your Buy Price per Coin (₹) (e.g., ₹2,000,000). Step 3: Enter your Sell Price per Coin (₹) (e.g., ₹3,000,000). Step 4: Enter your Quantity of Coins (e.g., ₹1). Step 5: Enter your Total Transaction Value (₹) for TDS (e.g., ₹3,000,000). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Crypto Tax Calculator (30% + 1% TDS) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative only. Tax laws change annually per Union Budget. Consult a CA for tax filing. Surcharge and cess applicable as per slab. This does not constitute tax advice.",
+    "pro_tips": "1. File ITR before due date to avoid penalty under 234F. 2. Compare old vs new regime annually as income changes. 3. Invest in 80C instruments before 31st March. 4. Keep all receipts and proof of investments ready.",
+    "result_explanation": "The Crypto Tax Calculator (30% + 1% TDS) returns Profit/Loss, Tax @ 30%, TDS @ 1%. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a Crypto Tax Calculator (30% + 1% TDS)?",
+        "a": "A Crypto Tax Calculator (30% + 1% TDS) is an online tool that helps you tax on cryptocurrency gains quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Crypto Tax Calculator (30% + 1% TDS) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this Crypto Tax Calculator (30% + 1% TDS)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this Crypto Tax Calculator (30% + 1% TDS) on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      },
+      {
+        "q": "Should I choose old or new tax regime?",
+        "a": "New regime is better if your total deductions (80C + 80D + HRA etc.) are less than ₹3.75 lakh for FY2024-25. Otherwise, old regime may save more tax."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "buyPrice",
+        "label": "Buy Price per Coin (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 10000000,
+        "default": 2000000,
+        "required": true
+      },
+      {
+        "name": "sellPrice",
+        "label": "Sell Price per Coin (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 10000000,
+        "default": 3000000,
+        "required": true
+      },
+      {
+        "name": "quantity",
+        "label": "Quantity of Coins",
+        "type": "number",
+        "min": 1e-06,
+        "max": 1000000,
+        "default": 1,
+        "required": true
+      },
+      {
+        "name": "transactionValue",
+        "label": "Total Transaction Value (₹) for TDS",
+        "type": "number",
+        "min": 0,
+        "max": 1000000000,
+        "default": 3000000,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Profit/Loss",
+      "Tax @ 30%",
+      "TDS @ 1%",
+      "Net Profit After Tax"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "Crypto Tax Breakdown"
+    },
+    "validation_rules": {
+      "buyPrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 10000000
+      },
+      "sellPrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 10000000
+      },
+      "quantity": {
+        "required": true,
+        "min": 1e-06,
+        "max": 1000000
+      },
+      "transactionValue": {
+        "required": true,
+        "min": 0,
+        "max": 1000000000
+      }
+    },
+    "calculator_engine": "function cryptoTax(buy,sell,qty,txnVal){const profit=(sell-buy)*qty;const tax=profit>0?profit*0.30:0;const tds=txnVal*0.01;return{profit,tax,tds,netProfit:profit-tax-tds};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "crypto",
+      "vda",
+      "special_income"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "crypto_cluster",
+    "breadcrumb_label": "Crypto Tax Calculator (30% + 1% TDS)"
+  },
+  "_links": {
+    "related_calculators": [
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-new-calculator",
+      "capital-gains-property-calculator",
+      "tds-fd-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-new-calculator",
+      "capital-gains-property-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

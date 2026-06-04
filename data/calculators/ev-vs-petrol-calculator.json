@@ -1,0 +1,463 @@
+{
+  "slug": "ev-vs-petrol-calculator",
+  "title": "EV vs Petrol Running Cost (5 year)",
+  "category": "individual",
+  "type": "auto",
+  "description": "Total cost of ownership",
+  "formula_template": "evVsPetrolFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "EV vs Petrol Running Cost (5 year)",
+  "canonical_url": "https://yoursite.com/calculators/ev-vs-petrol-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "TCO (5-year): EV TCO = Purchase Price + (Annual km × Electricity cost/km × 5) + Insurance + Maintenance − Subsidy. Petrol TCO = Purchase Price + (Annual km × Petrol cost/km × 5) + Insurance + Maintenance. EV running cost ≈ ₹1-1.5/km; Petrol ≈ ₹6-8/km.",
+  "formula_source": "Ministry of Heavy Industries / EV Policy India",
+  "formula_source_url": "https://heavyindustries.gov.in",
+  "meta_title": "EV vs Petrol Running Cost (5 year) | Free Calculator India",
+  "meta_description": "Use our free ev vs petrol running cost (5 year) to total cost of ownership. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances to...",
+  "focus_keyword": "EV vs Petrol Running Cost (5 year)",
+  "secondary_keywords": [
+    "ev vs petrol running cost (5 year) calculator online",
+    "ev vs petrol running cost (5 year) calculator india",
+    "ev vs petrol running cost (5 year) formula",
+    "best ev vs petrol running cost (5 year) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our EV vs Petrol Running Cost (5 year) helps you total cost of ownership accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A EV vs Petrol Running Cost (5 year) is a digital tool that allows you to total cost of ownership without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the EV vs Petrol Running Cost (5 year) on this page. Step 2: Enter your EV Purchase Price (₹) (e.g., ₹1,200,000). Step 3: Enter your Petrol Car Price (₹) (e.g., ₹800,000). Step 4: Enter your Annual Driving (km) (e.g., ₹15,000). Step 5: Enter your Electricity Cost (₹/unit) (e.g., ₹6). Step 6: Enter your Petrol Cost (₹/litre) (e.g., ₹105). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The EV vs Petrol Running Cost (5 year) uses: TCO (5-year): EV TCO = Purchase Price + (Annual km × Electricity cost/km × 5) + Insurance + Maintenance − Subsidy. Petrol TCO = Purchase Price + (Annual km × Petrol cost/km × 5) + Insurance + Maintena. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – EV Purchase Price (₹)=1200000, Petrol Car Price (₹)=800000, Annual Driving (km)=15000 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate EV vs Petrol Running Cost (5 year) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a EV vs Petrol Running Cost (5 year)?",
+      "a": "A EV vs Petrol Running Cost (5 year) is an online tool that helps you total cost of ownership quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this EV vs Petrol Running Cost (5 year) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this EV vs Petrol Running Cost (5 year)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free EV vs Petrol Running Cost (5 year) – India's Best Onlin",
+  "og_description": "Calculate total cost of ownership instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "evPrice",
+      "label": "EV Purchase Price (₹)",
+      "type": "number",
+      "min": 100000,
+      "max": 10000000,
+      "default": 1200000,
+      "required": true
+    },
+    {
+      "name": "petrolPrice",
+      "label": "Petrol Car Price (₹)",
+      "type": "number",
+      "min": 50000,
+      "max": 5000000,
+      "default": 800000,
+      "required": true
+    },
+    {
+      "name": "annualKm",
+      "label": "Annual Driving (km)",
+      "type": "number",
+      "min": 1000,
+      "max": 100000,
+      "default": 15000,
+      "required": true
+    },
+    {
+      "name": "electricityRate",
+      "label": "Electricity Cost (₹/unit)",
+      "type": "number",
+      "min": 3,
+      "max": 12,
+      "default": 6,
+      "required": true
+    },
+    {
+      "name": "petrolRate",
+      "label": "Petrol Cost (₹/litre)",
+      "type": "number",
+      "min": 80,
+      "max": 200,
+      "default": 105,
+      "required": true
+    },
+    {
+      "name": "evSubsidy",
+      "label": "FAME/State Subsidy (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 500000,
+      "default": 50000,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "EV 5-Year TCO",
+    "Petrol 5-Year TCO",
+    "Annual Fuel Savings",
+    "Break-even Years",
+    "Total Savings Over 5 Years"
+  ],
+  "chart_config": {
+    "type": "line",
+    "xAxis": "Year",
+    "yAxis": "Cumulative Cost (₹)",
+    "title": "EV vs Petrol Total Cost of Ownership"
+  },
+  "result_explanation": "The EV vs Petrol Running Cost (5 year) returns EV 5-Year TCO, Petrol 5-Year TCO, Annual Fuel Savings. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "evPrice": {
+      "required": true,
+      "min": 100000,
+      "max": 10000000
+    },
+    "petrolPrice": {
+      "required": true,
+      "min": 50000,
+      "max": 5000000
+    },
+    "annualKm": {
+      "required": true,
+      "min": 1000,
+      "max": 100000
+    },
+    "electricityRate": {
+      "required": true,
+      "min": 3,
+      "max": 12
+    },
+    "petrolRate": {
+      "required": true,
+      "min": 80,
+      "max": 200
+    },
+    "evSubsidy": {
+      "required": false,
+      "min": 0,
+      "max": 500000
+    }
+  },
+  "calculator_engine": "function evVsPetrol(evP,petP,km,elec,petrol,subsidy){const evFuelCost=km*0.2*elec;const petrolFuelCost=km/16*petrol;const annualSaving=petrolFuelCost-evFuelCost;const evTco5=(evP-subsidy)+evFuelCost*5+20000*5;const petTco5=petP+petrolFuelCost*5+15000*5;const breakeven=(evP-petP-subsidy)/annualSaving;return{evTco5,petTco5,annualSaving,breakeven:breakeven.toFixed(1),totalSaving:petTco5-evTco5};}",
+  "category_hierarchy": [
+    "auto",
+    "ev",
+    "comparison",
+    "cost_analysis"
+  ],
+  "calculator_group": "loan",
+  "topical_cluster": "auto_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "ev vs petrol car calculator india",
+    "electric vehicle vs petrol total cost",
+    "ev running cost calculator india",
+    "fame subsidy calculator",
+    "ev break even calculator",
+    "electric car vs petrol savings",
+    "ev vs cng vs petrol india"
+  ],
+  "semantic_keywords": [
+    "EV",
+    "electric vehicle",
+    "petrol",
+    "TCO",
+    "FAME subsidy",
+    "running cost",
+    "charging",
+    "fuel savings",
+    "maintenance",
+    "break-even"
+  ],
+  "paa_keywords": [
+    "Is EV cheaper than petrol in India?",
+    "What is the break-even for EV vs petrol?",
+    "What is FAME subsidy for EV?",
+    "How to calculate EV running cost?",
+    "EV maintenance vs petrol car cost?"
+  ],
+  "voice_search_keywords": [
+    "ev vs petrol car cost comparison",
+    "electric vehicle savings calculator",
+    "is ev cheaper than petrol in india",
+    "ev break even period"
+  ],
+  "seo_score": 80,
+  "eeat_score": 74,
+  "discover_score": 76,
+  "ai_search_score": 78,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "EV vs Petrol Running Cost (5 year) | Free Calculator India",
+    "meta_description": "Use our free ev vs petrol running cost (5 year) to total cost of ownership. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances to...",
+    "focus_keyword": "EV vs Petrol Running Cost (5 year)",
+    "secondary_keywords": [
+      "ev vs petrol running cost (5 year) calculator online",
+      "ev vs petrol running cost (5 year) calculator india",
+      "ev vs petrol running cost (5 year) formula",
+      "best ev vs petrol running cost (5 year) calculator 2024"
+    ],
+    "og_title": "Free EV vs Petrol Running Cost (5 year) – India's Best Onlin",
+    "og_description": "Calculate total cost of ownership instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/ev-vs-petrol-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "ev vs petrol car calculator india",
+      "electric vehicle vs petrol total cost",
+      "ev running cost calculator india",
+      "fame subsidy calculator",
+      "ev break even calculator",
+      "electric car vs petrol savings",
+      "ev vs cng vs petrol india"
+    ],
+    "semantic_keywords": [
+      "EV",
+      "electric vehicle",
+      "petrol",
+      "TCO",
+      "FAME subsidy",
+      "running cost",
+      "charging",
+      "fuel savings",
+      "maintenance",
+      "break-even"
+    ],
+    "paa_keywords": [
+      "Is EV cheaper than petrol in India?",
+      "What is the break-even for EV vs petrol?",
+      "What is FAME subsidy for EV?",
+      "How to calculate EV running cost?",
+      "EV maintenance vs petrol car cost?"
+    ],
+    "voice_search_keywords": [
+      "ev vs petrol car cost comparison",
+      "electric vehicle savings calculator",
+      "is ev cheaper than petrol in india",
+      "ev break even period"
+    ]
+  },
+  "_scores": {
+    "seo_score": 80,
+    "eeat_score": 74,
+    "discover_score": 76,
+    "ai_search_score": 78,
+    "ranking_priority": 2,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "TCO (5-year): EV TCO = Purchase Price + (Annual km × Electricity cost/km × 5) + Insurance + Maintenance − Subsidy. Petrol TCO = Purchase Price + (Annual km × Petrol cost/km × 5) + Insurance + Maintenance. EV running cost ≈ ₹1-1.5/km; Petrol ≈ ₹6-8/km.",
+    "formula_template": "evVsPetrolFormula",
+    "formula_source": "Ministry of Heavy Industries / EV Policy India",
+    "formula_source_url": "https://heavyindustries.gov.in",
+    "formula_explanation": "The EV vs Petrol Running Cost (5 year) uses: TCO (5-year): EV TCO = Purchase Price + (Annual km × Electricity cost/km × 5) + Insurance + Maintenance − Subsidy. Petrol TCO = Purchase Price + (Annual km × Petrol cost/km × 5) + Insurance + Maintena. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – EV Purchase Price (₹)=1200000, Petrol Car Price (₹)=800000, Annual Driving (km)=15000 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our EV vs Petrol Running Cost (5 year) helps you total cost of ownership accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A EV vs Petrol Running Cost (5 year) is a digital tool that allows you to total cost of ownership without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the EV vs Petrol Running Cost (5 year) on this page. Step 2: Enter your EV Purchase Price (₹) (e.g., ₹1,200,000). Step 3: Enter your Petrol Car Price (₹) (e.g., ₹800,000). Step 4: Enter your Annual Driving (km) (e.g., ₹15,000). Step 5: Enter your Electricity Cost (₹/unit) (e.g., ₹6). Step 6: Enter your Petrol Cost (₹/litre) (e.g., ₹105). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate EV vs Petrol Running Cost (5 year) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The EV vs Petrol Running Cost (5 year) returns EV 5-Year TCO, Petrol 5-Year TCO, Annual Fuel Savings. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a EV vs Petrol Running Cost (5 year)?",
+        "a": "A EV vs Petrol Running Cost (5 year) is an online tool that helps you total cost of ownership quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this EV vs Petrol Running Cost (5 year) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this EV vs Petrol Running Cost (5 year)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "evPrice",
+        "label": "EV Purchase Price (₹)",
+        "type": "number",
+        "min": 100000,
+        "max": 10000000,
+        "default": 1200000,
+        "required": true
+      },
+      {
+        "name": "petrolPrice",
+        "label": "Petrol Car Price (₹)",
+        "type": "number",
+        "min": 50000,
+        "max": 5000000,
+        "default": 800000,
+        "required": true
+      },
+      {
+        "name": "annualKm",
+        "label": "Annual Driving (km)",
+        "type": "number",
+        "min": 1000,
+        "max": 100000,
+        "default": 15000,
+        "required": true
+      },
+      {
+        "name": "electricityRate",
+        "label": "Electricity Cost (₹/unit)",
+        "type": "number",
+        "min": 3,
+        "max": 12,
+        "default": 6,
+        "required": true
+      },
+      {
+        "name": "petrolRate",
+        "label": "Petrol Cost (₹/litre)",
+        "type": "number",
+        "min": 80,
+        "max": 200,
+        "default": 105,
+        "required": true
+      },
+      {
+        "name": "evSubsidy",
+        "label": "FAME/State Subsidy (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 500000,
+        "default": 50000,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "EV 5-Year TCO",
+      "Petrol 5-Year TCO",
+      "Annual Fuel Savings",
+      "Break-even Years",
+      "Total Savings Over 5 Years"
+    ],
+    "chart_config": {
+      "type": "line",
+      "xAxis": "Year",
+      "yAxis": "Cumulative Cost (₹)",
+      "title": "EV vs Petrol Total Cost of Ownership"
+    },
+    "validation_rules": {
+      "evPrice": {
+        "required": true,
+        "min": 100000,
+        "max": 10000000
+      },
+      "petrolPrice": {
+        "required": true,
+        "min": 50000,
+        "max": 5000000
+      },
+      "annualKm": {
+        "required": true,
+        "min": 1000,
+        "max": 100000
+      },
+      "electricityRate": {
+        "required": true,
+        "min": 3,
+        "max": 12
+      },
+      "petrolRate": {
+        "required": true,
+        "min": 80,
+        "max": 200
+      },
+      "evSubsidy": {
+        "required": false,
+        "min": 0,
+        "max": 500000
+      }
+    },
+    "calculator_engine": "function evVsPetrol(evP,petP,km,elec,petrol,subsidy){const evFuelCost=km*0.2*elec;const petrolFuelCost=km/16*petrol;const annualSaving=petrolFuelCost-evFuelCost;const evTco5=(evP-subsidy)+evFuelCost*5+20000*5;const petTco5=petP+petrolFuelCost*5+15000*5;const breakeven=(evP-petP-subsidy)/annualSaving;return{evTco5,petTco5,annualSaving,breakeven:breakeven.toFixed(1),totalSaving:petTco5-evTco5};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "auto",
+    "category_hierarchy": [
+      "auto",
+      "ev",
+      "comparison",
+      "cost_analysis"
+    ],
+    "calculator_group": "loan",
+    "topical_cluster": "auto_cluster",
+    "breadcrumb_label": "EV vs Petrol Running Cost (5 year)"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

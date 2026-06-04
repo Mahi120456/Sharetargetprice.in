@@ -1,0 +1,445 @@
+{
+  "slug": "capital-gains-property-calculator",
+  "title": "Capital Gains Tax on Property (Indexation)",
+  "category": "individual",
+  "type": "tax",
+  "description": "Capital gains with indexation",
+  "formula_template": "cgPropertyFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Capital Gains Tax on Property (Indexation)",
+  "canonical_url": "https://yoursite.com/calculators/capital-gains-property-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "LTCG on property: Holding > 2 years (pre-Budget 2024: indexation @20%; Post-Jul 2024: choose 12.5% without indexation or 20% with). Indexed cost = Cost × (CII of sale year / CII of purchase year). Tax = (Sale Price − Indexed Cost) × 20%. STCG (< 2yr): slab rate.",
+  "formula_source": "Income Tax Dept India / Section 48, Budget 2024",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "Capital Gains Tax on Property (Indexation) – Online Calculat",
+  "meta_description": "Use our free capital gains tax on property (indexation) to capital gains with indexation. Get instant results with Indian context – ₹, lakhs, crores. Plan yo...",
+  "focus_keyword": "Capital Gains Tax on Property (Indexation)",
+  "secondary_keywords": [
+    "capital gains tax on property (indexation) calculator online",
+    "capital gains tax on property (indexation) calculator india",
+    "capital gains tax on property (indexation) formula",
+    "best capital gains tax on property (indexation) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Capital Gains Tax on Property (Indexation) helps you capital gains with indexation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Capital Gains Tax on Property (Indexation) is a digital tool that allows you to capital gains with indexation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Capital Gains Tax on Property (Indexation) on this page. Step 2: Enter your Purchase Price (₹) (e.g., ₹5,000,000). Step 3: Enter your Sale Price (₹) (e.g., ₹9,000,000). Step 4: Enter your Purchase Year (for CII) (e.g., ₹2,015). Step 5: Enter your Sale Year (e.g., ₹2,024). Step 6: Enter your Tax Option). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Capital Gains Tax on Property (Indexation) uses: LTCG on property: Holding > 2 years (pre-Budget 2024: indexation @20%; Post-Jul 2024: choose 12.5% without indexation or 20% with). Indexed cost = Cost × (CII of sale year / CII of purchase year). Tax. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Purchase Price (₹)=5000000, Sale Price (₹)=9000000, Purchase Year (for CII)=2015 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Capital Gains Tax on Property (Indexation) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a Capital Gains Tax on Property (Indexation)?",
+      "a": "A Capital Gains Tax on Property (Indexation) is an online tool that helps you capital gains with indexation quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Capital Gains Tax on Property (Indexation) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Capital Gains Tax on Property (Indexation)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free Capital Gains Tax on Property (Indexation) – India's Be",
+  "og_description": "Calculate capital gains with indexation instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-old-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "purchasePrice",
+      "label": "Purchase Price (₹)",
+      "type": "number",
+      "min": 10000,
+      "max": 1000000000,
+      "default": 5000000,
+      "required": true
+    },
+    {
+      "name": "salePrice",
+      "label": "Sale Price (₹)",
+      "type": "number",
+      "min": 10000,
+      "max": 1000000000,
+      "default": 9000000,
+      "required": true
+    },
+    {
+      "name": "purchaseYear",
+      "label": "Purchase Year (for CII)",
+      "type": "number",
+      "min": 2001,
+      "max": 2024,
+      "default": 2015,
+      "required": true
+    },
+    {
+      "name": "saleYear",
+      "label": "Sale Year",
+      "type": "number",
+      "min": 2001,
+      "max": 2025,
+      "default": 2024,
+      "required": true
+    },
+    {
+      "name": "taxRegime",
+      "label": "Tax Option",
+      "type": "select",
+      "options": [
+        "20% with Indexation",
+        "12.5% without Indexation"
+      ],
+      "default": "12.5% without Indexation",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Indexed Cost (₹)",
+    "Capital Gain (₹)",
+    "Tax Payable (₹)",
+    "Effective Tax Rate (%)",
+    "Reinvestment needed for 54/54F exemption (₹)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "Capital Gains Tax on Property"
+  },
+  "result_explanation": "The Capital Gains Tax on Property (Indexation) returns Indexed Cost (₹), Capital Gain (₹), Tax Payable (₹). Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "purchasePrice": {
+      "required": true,
+      "min": 10000,
+      "max": 1000000000
+    },
+    "salePrice": {
+      "required": true,
+      "min": 10000,
+      "max": 1000000000
+    },
+    "purchaseYear": {
+      "required": true,
+      "min": 2001,
+      "max": 2024
+    },
+    "saleYear": {
+      "required": true,
+      "min": 2001,
+      "max": 2025
+    },
+    "taxRegime": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function propCapGains(buy,sell,buyYr,sellYr,useIndex){const cii={2001:100,2002:105,2003:109,2004:113,2005:117,2006:122,2007:129,2008:137,2009:148,2010:167,2011:184,2012:200,2013:220,2014:240,2015:254,2016:264,2017:272,2018:280,2019:289,2020:301,2021:317,2022:331,2023:348,2024:363,2025:376};const indexedCost=useIndex?buy*(cii[sellYr]||363)/(cii[buyYr]||100):buy;const gain=sell-indexedCost;const rate=useIndex?0.20:0.125;const tax=gain>0?gain*rate:0;return{indexedCost,gain,tax,effective:(tax/gain*100).toFixed(2)};}",
+  "category_hierarchy": [
+    "tax",
+    "capital_gains",
+    "property",
+    "ltcg"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "capital_gains_cluster",
+  "internal_link_targets": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "capital gains tax property calculator india",
+    "ltcg property indexation calculator",
+    "20 percent ltcg property calculator",
+    "property sale tax india 2024",
+    "capital gains with indexation property",
+    "section 54 exemption calculator",
+    "budget 2024 property tax calculator",
+    "12.5 vs 20 percent capital gains"
+  ],
+  "semantic_keywords": [
+    "LTCG",
+    "property",
+    "indexation",
+    "CII",
+    "Section 48",
+    "Section 54",
+    "Section 54F",
+    "Budget 2024",
+    "real estate",
+    "capital gains"
+  ],
+  "paa_keywords": [
+    "How is capital gains tax calculated on property?",
+    "What is indexation benefit?",
+    "Should I choose 12.5% or 20% indexation?",
+    "How to save capital gains tax on property sale?",
+    "What is Section 54 exemption?"
+  ],
+  "voice_search_keywords": [
+    "how to calculate capital gains on property sale",
+    "ltcg property tax calculator",
+    "indexation benefit on property",
+    "section 54 capital gains exemption"
+  ],
+  "seo_score": 86,
+  "eeat_score": 88,
+  "discover_score": 78,
+  "ai_search_score": 85,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Capital Gains Tax on Property (Indexation) – Online Calculat",
+    "meta_description": "Use our free capital gains tax on property (indexation) to capital gains with indexation. Get instant results with Indian context – ₹, lakhs, crores. Plan yo...",
+    "focus_keyword": "Capital Gains Tax on Property (Indexation)",
+    "secondary_keywords": [
+      "capital gains tax on property (indexation) calculator online",
+      "capital gains tax on property (indexation) calculator india",
+      "capital gains tax on property (indexation) formula",
+      "best capital gains tax on property (indexation) calculator 2024"
+    ],
+    "og_title": "Free Capital Gains Tax on Property (Indexation) – India's Be",
+    "og_description": "Calculate capital gains with indexation instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/capital-gains-property-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "capital gains tax property calculator india",
+      "ltcg property indexation calculator",
+      "20 percent ltcg property calculator",
+      "property sale tax india 2024",
+      "capital gains with indexation property",
+      "section 54 exemption calculator",
+      "budget 2024 property tax calculator",
+      "12.5 vs 20 percent capital gains"
+    ],
+    "semantic_keywords": [
+      "LTCG",
+      "property",
+      "indexation",
+      "CII",
+      "Section 48",
+      "Section 54",
+      "Section 54F",
+      "Budget 2024",
+      "real estate",
+      "capital gains"
+    ],
+    "paa_keywords": [
+      "How is capital gains tax calculated on property?",
+      "What is indexation benefit?",
+      "Should I choose 12.5% or 20% indexation?",
+      "How to save capital gains tax on property sale?",
+      "What is Section 54 exemption?"
+    ],
+    "voice_search_keywords": [
+      "how to calculate capital gains on property sale",
+      "ltcg property tax calculator",
+      "indexation benefit on property",
+      "section 54 capital gains exemption"
+    ]
+  },
+  "_scores": {
+    "seo_score": 86,
+    "eeat_score": 88,
+    "discover_score": 78,
+    "ai_search_score": 85,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "LTCG on property: Holding > 2 years (pre-Budget 2024: indexation @20%; Post-Jul 2024: choose 12.5% without indexation or 20% with). Indexed cost = Cost × (CII of sale year / CII of purchase year). Tax = (Sale Price − Indexed Cost) × 20%. STCG (< 2yr): slab rate.",
+    "formula_template": "cgPropertyFormula",
+    "formula_source": "Income Tax Dept India / Section 48, Budget 2024",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The Capital Gains Tax on Property (Indexation) uses: LTCG on property: Holding > 2 years (pre-Budget 2024: indexation @20%; Post-Jul 2024: choose 12.5% without indexation or 20% with). Indexed cost = Cost × (CII of sale year / CII of purchase year). Tax. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Purchase Price (₹)=5000000, Sale Price (₹)=9000000, Purchase Year (for CII)=2015 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Capital Gains Tax on Property (Indexation) helps you capital gains with indexation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Capital Gains Tax on Property (Indexation) is a digital tool that allows you to capital gains with indexation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Capital Gains Tax on Property (Indexation) on this page. Step 2: Enter your Purchase Price (₹) (e.g., ₹5,000,000). Step 3: Enter your Sale Price (₹) (e.g., ₹9,000,000). Step 4: Enter your Purchase Year (for CII) (e.g., ₹2,015). Step 5: Enter your Sale Year (e.g., ₹2,024). Step 6: Enter your Tax Option). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Capital Gains Tax on Property (Indexation) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The Capital Gains Tax on Property (Indexation) returns Indexed Cost (₹), Capital Gain (₹), Tax Payable (₹). Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Capital Gains Tax on Property (Indexation)?",
+        "a": "A Capital Gains Tax on Property (Indexation) is an online tool that helps you capital gains with indexation quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Capital Gains Tax on Property (Indexation) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Capital Gains Tax on Property (Indexation)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "purchasePrice",
+        "label": "Purchase Price (₹)",
+        "type": "number",
+        "min": 10000,
+        "max": 1000000000,
+        "default": 5000000,
+        "required": true
+      },
+      {
+        "name": "salePrice",
+        "label": "Sale Price (₹)",
+        "type": "number",
+        "min": 10000,
+        "max": 1000000000,
+        "default": 9000000,
+        "required": true
+      },
+      {
+        "name": "purchaseYear",
+        "label": "Purchase Year (for CII)",
+        "type": "number",
+        "min": 2001,
+        "max": 2024,
+        "default": 2015,
+        "required": true
+      },
+      {
+        "name": "saleYear",
+        "label": "Sale Year",
+        "type": "number",
+        "min": 2001,
+        "max": 2025,
+        "default": 2024,
+        "required": true
+      },
+      {
+        "name": "taxRegime",
+        "label": "Tax Option",
+        "type": "select",
+        "options": [
+          "20% with Indexation",
+          "12.5% without Indexation"
+        ],
+        "default": "12.5% without Indexation",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Indexed Cost (₹)",
+      "Capital Gain (₹)",
+      "Tax Payable (₹)",
+      "Effective Tax Rate (%)",
+      "Reinvestment needed for 54/54F exemption (₹)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "Capital Gains Tax on Property"
+    },
+    "validation_rules": {
+      "purchasePrice": {
+        "required": true,
+        "min": 10000,
+        "max": 1000000000
+      },
+      "salePrice": {
+        "required": true,
+        "min": 10000,
+        "max": 1000000000
+      },
+      "purchaseYear": {
+        "required": true,
+        "min": 2001,
+        "max": 2024
+      },
+      "saleYear": {
+        "required": true,
+        "min": 2001,
+        "max": 2025
+      },
+      "taxRegime": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function propCapGains(buy,sell,buyYr,sellYr,useIndex){const cii={2001:100,2002:105,2003:109,2004:113,2005:117,2006:122,2007:129,2008:137,2009:148,2010:167,2011:184,2012:200,2013:220,2014:240,2015:254,2016:264,2017:272,2018:280,2019:289,2020:301,2021:317,2022:331,2023:348,2024:363,2025:376};const indexedCost=useIndex?buy*(cii[sellYr]||363)/(cii[buyYr]||100):buy;const gain=sell-indexedCost;const rate=useIndex?0.20:0.125;const tax=gain>0?gain*rate:0;return{indexedCost,gain,tax,effective:(tax/gain*100).toFixed(2)};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "capital_gains",
+      "property",
+      "ltcg"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "capital_gains_cluster",
+    "breadcrumb_label": "Capital Gains Tax on Property (Indexation)"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-old-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}
