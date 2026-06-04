@@ -12,23 +12,55 @@ const LineChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Line),
 const BarChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Bar), { ssr: false });
 const PieChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Pie), { ssr: false });
 
-export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
-  const [inputs, setInputs] = useState({});
-  const [result, setResult] = useState(null);
+// Type definitions
+interface InputField {
+  name: string;
+  label: string;
+  type?: string;
+  min?: number;
+  max?: number;
+  default?: any;
+  required?: boolean;
+  options?: string[];
+  hint?: string;
+  step?: number;
+}
+
+interface CalculatorData {
+  id?: number;
+  slug: string;
+  title: string;
+  input_fields: InputField[] | string;
+  calculator_engine?: string;
+  chart_config?: any;
+  validation_rules?: Record<string, any>;
+  result_explanation?: string;
+  what_is?: string;
+  how_to_use?: string;
+  formula_explanation?: string;
+  benefits?: string;
+  pro_tips?: string;
+  important_notes?: string;
+  faq?: any;
+}
+
+export default function CalculatorGrowUI({ calculator }: { calculator: CalculatorData }) {
+  const [inputs, setInputs] = useState<Record<string, any>>({});
+  const [result, setResult] = useState<any>(null);
   const [error, setError] = useState('');
   const [isCalculating, setIsCalculating] = useState(false);
-  const [chartData, setChartData] = useState(null);
-  const [openSections, setOpenSections] = useState([]);
+  const [chartData, setChartData] = useState<any>(null);
+  const [openSections, setOpenSections] = useState<string[]>([]);
 
-  // Parse input_fields (safe)
-  const inputFields = (() => {
+  // Parse input_fields safely
+  const inputFields: InputField[] = (() => {
     const f = calculator.input_fields;
     if (!f) return [];
     if (Array.isArray(f)) return f;
-    try { return JSON.parse(f); } catch { return []; }
+    try { return JSON.parse(f as string); } catch { return []; }
   })();
 
-  const validationRules = (() => {
+  const validationRules: Record<string, any> = (() => {
     const v = calculator.validation_rules;
     if (!v) return {};
     if (typeof v === 'object') return v;
@@ -42,17 +74,17 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
     try { return JSON.parse(c); } catch { return null; }
   })();
 
-  const faqItems = (() => {
+  const faqItems: Array<{ q: string; a: string }> = (() => {
     const f = calculator.faq;
     if (!f) return [];
     if (Array.isArray(f)) return f;
     try { return JSON.parse(f); } catch { return []; }
   })();
 
-  // Default values
+  // Set default values
   useEffect(() => {
-    const defaults = {};
-    inputFields.forEach(field => {
+    const defaults: Record<string, any> = {};
+    inputFields.forEach((field: InputField) => {
       defaults[field.name] = field.default ?? (field.type === 'number' ? 0 : '');
     });
     setInputs(defaults);
@@ -89,25 +121,25 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
         setResult(null);
         setError('Invalid result from engine');
       }
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message);
       setResult(null);
     } finally {
       setIsCalculating(false);
     }
-  }, [calculator.calculator_engine, inputs, chartConfig]);
+  }, [calculator.calculator_engine, inputs, chartConfig, calculator.title]);
 
-  const handleInputChange = (name, value) => {
+  const handleInputChange = (name: string, value: any) => {
     setInputs(prev => ({ ...prev, [name]: value }));
   };
 
-  const toggleSection = (section) => {
+  const toggleSection = (section: string) => {
     setOpenSections(prev =>
       prev.includes(section) ? prev.filter(s => s !== section) : [...prev, section]
     );
   };
 
-  const formatValue = (val) => {
+  const formatValue = (val: any): string => {
     if (typeof val === 'number') {
       if (val >= 1e7) return `₹${(val / 1e7).toFixed(2)} Cr`;
       if (val >= 1e5) return `₹${(val / 1e5).toFixed(2)} L`;
@@ -116,7 +148,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
     return val ?? '';
   };
 
-  const renderField = (field) => {
+  const renderField = (field: InputField) => {
     const value = inputs[field.name] ?? '';
     const rules = validationRules[field.name] || {};
     const min = rules.min ?? field.min;
@@ -130,7 +162,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
           className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 bg-white"
         >
           <option value="">Select...</option>
-          {field.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+          {field.options.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
         </select>
       );
     }
@@ -169,7 +201,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
     );
   };
 
-  const Section = ({ id, title, icon: Icon, content }) => {
+  const Section = ({ id, title, icon: Icon, content }: { id: string; title: string; icon: any; content?: string }) => {
     if (!content) return null;
     const isOpen = openSections.includes(id);
     return (
@@ -198,7 +230,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
             Calculate Now
           </h2>
           <div className="space-y-5">
-            {inputFields.map(field => (
+            {inputFields.map((field: InputField) => (
               <div key={field.name}>
                 <label className="block font-medium text-gray-700 mb-1">
                   {field.label} {field.required && <span className="text-red-500">*</span>}
@@ -248,7 +280,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
             <h4 className="font-semibold mb-3">{chartConfig.title || 'Growth Over Time'}</h4>
             <div className="h-64">
               {chartConfig.type === 'line' && <LineChart data={chartData} options={{ maintainAspectRatio: false }} />}
-              {chartConfig.type === 'bar' && <BarChart data={chartData} options={{ maintainAspectRatio: false }} />}
+              {chartConfig.type === 'bar' && <BarChart data={chartData} options={{ maintainAastralRatio: false }} />}
               {chartConfig.type === 'pie' && <PieChart data={chartData} options={{ maintainAspectRatio: false }} />}
             </div>
           </div>
@@ -274,7 +306,7 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><HelpCircle className="w-5 h-5 text-orange-500" />Frequently Asked Questions</h3>
           <div itemScope itemType="https://schema.org/FAQPage" className="space-y-4">
-            {faqItems.map((item, idx) => (
+            {faqItems.map((item: { q: string; a: string }, idx: number) => (
               <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="border-b pb-3 last:border-0">
                 <h4 itemProp="name" className="font-semibold text-gray-800">{item.q}</h4>
                 <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
