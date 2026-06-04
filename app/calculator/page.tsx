@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
 
 export const metadata = {
@@ -21,12 +21,16 @@ const TYPE_LABELS: Record<string, string> = {
 }
 
 export default async function CalculatorsListPage() {
-  const supabase = createClient()
-  const { data: calculators } = await supabase
+  const { data: calculators, error } = await supabase
     .from('calculators')
     .select('slug, title, type, description')
     .eq('category', 'individual')
     .order('ranking_priority', { ascending: true })
+
+  if (error) {
+    console.error(error)
+    return <div>Error loading calculators</div>
+  }
 
   const grouped: Record<string, typeof calculators> = {}
   for (const calc of calculators ?? []) {
