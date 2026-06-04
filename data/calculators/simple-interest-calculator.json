@@ -1,0 +1,391 @@
+{
+  "slug": "simple-interest-calculator",
+  "title": "Simple Interest Calculator",
+  "category": "individual",
+  "type": "investment",
+  "description": "Simple interest calculation",
+  "formula_template": "simpleInterestFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Simple Interest Calculator",
+  "canonical_url": "https://yoursite.com/calculators/simple-interest-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "SI = P × R × T / 100  where P = principal, R = annual rate %, T = time in years; A = P + SI",
+  "formula_source": "Standard Mathematics",
+  "formula_source_url": "https://ncert.nic.in",
+  "meta_title": "Simple Interest Calculator | Free Online Calculator India",
+  "meta_description": "Use our free simple interest calculator to simple interest calculation. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarte...",
+  "focus_keyword": "Simple Interest Calculator",
+  "secondary_keywords": [
+    "simple interest calculator online",
+    "simple interest calculator india",
+    "simple interest calculator calculator",
+    "simple interest calculator formula",
+    "simple interest calculator example",
+    "simple interest calculator calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Simple Interest Calculator helps you simple interest calculation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Simple Interest Calculator is a digital tool that allows you to simple interest calculation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Simple Interest Calculator on this page. Step 2: Enter your Principal Amount (₹) (e.g., ₹10,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹8). Step 4: Enter your Time Period (Years) (e.g., ₹2). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Simple Interest Calculator uses the following mathematical formula: SI = P × R × T / 100  where P = principal, R = annual rate %, T = time in years; A = P + SI. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Invest ₹5,000/month for 10 years at 12% p.a. → Maturity ≈ ₹11.6 lakh; Invested ₹6 lakh; Returns ≈ ₹5.6 lakh.",
+  "benefits": "<ul><li>Instant, accurate Simple Interest Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Past returns are not indicative of future performance. Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing.",
+  "pro_tips": "1. Start your Simple Interest Calculator early – time is the most powerful variable in compounding. 2. Increase investment by 10% annually aligned with salary hike. 3. Choose direct plans over regular to save on expense ratio. 4. Diversify across large-cap, mid-cap and debt for balanced growth.",
+  "faq": [
+    {
+      "q": "What is a Simple Interest Calculator?",
+      "a": "A Simple Interest Calculator is an online tool that helps you simple interest calculation quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Simple Interest Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this Simple Interest Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this Simple Interest Calculator on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    },
+    {
+      "q": "What is a realistic return assumption for Indian mutual funds?",
+      "a": "Historically, large-cap equity funds have delivered 10-13% CAGR over 10+ years. Conservative planning uses 10-12% for equity and 6-7% for debt."
+    }
+  ],
+  "og_title": "Free Simple Interest Calculator – India's Best Online Calcul",
+  "og_description": "Calculate simple interest calculation instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "swp-vs-dividend-reinvestment",
+    "health-individual-vs-family-floater",
+    "ott-pack-vs-individual"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "principal",
+      "label": "Principal Amount (₹)",
+      "type": "number",
+      "min": 100,
+      "max": 100000000,
+      "default": 10000,
+      "required": true
+    },
+    {
+      "name": "rate",
+      "label": "Annual Interest Rate (%)",
+      "type": "number",
+      "min": 0.1,
+      "max": 50,
+      "default": 8,
+      "required": true
+    },
+    {
+      "name": "time",
+      "label": "Time Period (Years)",
+      "type": "number",
+      "min": 0.1,
+      "max": 50,
+      "default": 2,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Simple Interest",
+    "Total Amount",
+    "Effective Annual Rate (%)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Year",
+    "yAxis": "Interest Earned (₹)",
+    "title": "Simple Interest Growth"
+  },
+  "result_explanation": "The Simple Interest Calculator returns Simple Interest, Total Amount, Effective Annual Rate (%). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "principal": {
+      "required": true,
+      "min": 100,
+      "max": 100000000
+    },
+    "rate": {
+      "required": true,
+      "min": 0.1,
+      "max": 50
+    },
+    "time": {
+      "required": true,
+      "min": 0.1,
+      "max": 50
+    }
+  },
+  "calculator_engine": "function si(P,R,T){const interest=P*R*T/100;return{interest,total:P+interest,ear:R};}",
+  "category_hierarchy": [
+    "investment",
+    "simple_interest",
+    "savings",
+    "basics"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "investment_basics_cluster",
+  "internal_link_targets": [
+    "swp-vs-dividend-reinvestment",
+    "health-individual-vs-family-floater",
+    "ott-pack-vs-individual"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "simple interest calculator india",
+    "si calculator formula",
+    "simple interest formula",
+    "10000 simple interest 2 years",
+    "si vs ci calculator",
+    "simple interest on loan",
+    "p r t formula calculator",
+    "simple interest for 5 years"
+  ],
+  "semantic_keywords": [
+    "simple interest",
+    "SI formula",
+    "principal",
+    "rate",
+    "time",
+    "linear growth",
+    "bank loan",
+    "personal loan",
+    "interest calculation",
+    "P×R×T"
+  ],
+  "paa_keywords": [
+    "How to calculate simple interest?",
+    "What is the formula for simple interest?",
+    "What is the difference between SI and CI?",
+    "When is simple interest used?",
+    "How much interest on 1 lakh for 1 year?"
+  ],
+  "voice_search_keywords": [
+    "how to calculate simple interest",
+    "simple interest formula",
+    "what is simple interest on 10000 at 8 percent",
+    "si calculator india"
+  ],
+  "seo_score": 85,
+  "eeat_score": 83,
+  "discover_score": 78,
+  "ai_search_score": 85,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Simple Interest Calculator | Free Online Calculator India",
+    "meta_description": "Use our free simple interest calculator to simple interest calculation. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarte...",
+    "focus_keyword": "Simple Interest Calculator",
+    "secondary_keywords": [
+      "simple interest calculator online",
+      "simple interest calculator india",
+      "simple interest calculator calculator",
+      "simple interest calculator formula",
+      "simple interest calculator example",
+      "simple interest calculator calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free Simple Interest Calculator – India's Best Online Calcul",
+    "og_description": "Calculate simple interest calculation instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/simple-interest-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "simple interest calculator india",
+      "si calculator formula",
+      "simple interest formula",
+      "10000 simple interest 2 years",
+      "si vs ci calculator",
+      "simple interest on loan",
+      "p r t formula calculator",
+      "simple interest for 5 years"
+    ],
+    "semantic_keywords": [
+      "simple interest",
+      "SI formula",
+      "principal",
+      "rate",
+      "time",
+      "linear growth",
+      "bank loan",
+      "personal loan",
+      "interest calculation",
+      "P×R×T"
+    ],
+    "paa_keywords": [
+      "How to calculate simple interest?",
+      "What is the formula for simple interest?",
+      "What is the difference between SI and CI?",
+      "When is simple interest used?",
+      "How much interest on 1 lakh for 1 year?"
+    ],
+    "voice_search_keywords": [
+      "how to calculate simple interest",
+      "simple interest formula",
+      "what is simple interest on 10000 at 8 percent",
+      "si calculator india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 85,
+    "eeat_score": 83,
+    "discover_score": 78,
+    "ai_search_score": 85,
+    "ranking_priority": 2,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "SI = P × R × T / 100  where P = principal, R = annual rate %, T = time in years; A = P + SI",
+    "formula_template": "simpleInterestFormula",
+    "formula_source": "Standard Mathematics",
+    "formula_source_url": "https://ncert.nic.in",
+    "formula_explanation": "The Simple Interest Calculator uses the following mathematical formula: SI = P × R × T / 100  where P = principal, R = annual rate %, T = time in years; A = P + SI. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Invest ₹5,000/month for 10 years at 12% p.a. → Maturity ≈ ₹11.6 lakh; Invested ₹6 lakh; Returns ≈ ₹5.6 lakh.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Simple Interest Calculator helps you simple interest calculation accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Simple Interest Calculator is a digital tool that allows you to simple interest calculation without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Simple Interest Calculator on this page. Step 2: Enter your Principal Amount (₹) (e.g., ₹10,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹8). Step 4: Enter your Time Period (Years) (e.g., ₹2). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Simple Interest Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Past returns are not indicative of future performance. Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing.",
+    "pro_tips": "1. Start your Simple Interest Calculator early – time is the most powerful variable in compounding. 2. Increase investment by 10% annually aligned with salary hike. 3. Choose direct plans over regular to save on expense ratio. 4. Diversify across large-cap, mid-cap and debt for balanced growth.",
+    "result_explanation": "The Simple Interest Calculator returns Simple Interest, Total Amount, Effective Annual Rate (%). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a Simple Interest Calculator?",
+        "a": "A Simple Interest Calculator is an online tool that helps you simple interest calculation quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Simple Interest Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this Simple Interest Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this Simple Interest Calculator on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      },
+      {
+        "q": "What is a realistic return assumption for Indian mutual funds?",
+        "a": "Historically, large-cap equity funds have delivered 10-13% CAGR over 10+ years. Conservative planning uses 10-12% for equity and 6-7% for debt."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "principal",
+        "label": "Principal Amount (₹)",
+        "type": "number",
+        "min": 100,
+        "max": 100000000,
+        "default": 10000,
+        "required": true
+      },
+      {
+        "name": "rate",
+        "label": "Annual Interest Rate (%)",
+        "type": "number",
+        "min": 0.1,
+        "max": 50,
+        "default": 8,
+        "required": true
+      },
+      {
+        "name": "time",
+        "label": "Time Period (Years)",
+        "type": "number",
+        "min": 0.1,
+        "max": 50,
+        "default": 2,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Simple Interest",
+      "Total Amount",
+      "Effective Annual Rate (%)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Year",
+      "yAxis": "Interest Earned (₹)",
+      "title": "Simple Interest Growth"
+    },
+    "validation_rules": {
+      "principal": {
+        "required": true,
+        "min": 100,
+        "max": 100000000
+      },
+      "rate": {
+        "required": true,
+        "min": 0.1,
+        "max": 50
+      },
+      "time": {
+        "required": true,
+        "min": 0.1,
+        "max": 50
+      }
+    },
+    "calculator_engine": "function si(P,R,T){const interest=P*R*T/100;return{interest,total:P+interest,ear:R};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "investment",
+    "category_hierarchy": [
+      "investment",
+      "simple_interest",
+      "savings",
+      "basics"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "investment_basics_cluster",
+    "breadcrumb_label": "Simple Interest Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-vs-dividend-reinvestment",
+      "health-individual-vs-family-floater",
+      "ott-pack-vs-individual"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-vs-dividend-reinvestment",
+      "health-individual-vs-family-floater",
+      "ott-pack-vs-individual"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

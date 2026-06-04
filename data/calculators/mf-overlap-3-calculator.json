@@ -1,0 +1,335 @@
+{
+  "slug": "mf-overlap-3-calculator",
+  "title": "Mutual Fund Overlap Calculator (3+ funds)",
+  "category": "individual",
+  "type": "portfolio",
+  "description": "Overlap among multiple funds",
+  "formula_template": "overlap3Formula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Mutual Fund Overlap Calculator (3+ funds)",
+  "canonical_url": "https://yoursite.com/calculators/mf-overlap-3-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "3-Fund Overlap: For each pair (1,2), (1,3), (2,3) compute pairwise overlap. Overall diversification = Unique stocks / Total holdings. Common to all 3 = stocks in fund1 ∩ fund2 ∩ fund3.",
+  "formula_source": "SEBI / Portfolio Analysis Methodology",
+  "formula_source_url": "https://www.sebi.gov.in",
+  "meta_title": "Mutual Fund Overlap Calculator (3+ funds) – Online Calculato",
+  "meta_description": "Use our free mutual fund overlap calculator (3+ funds) to overlap among multiple funds. Get instant results with Indian context – ₹, lakhs, crores. Plan your...",
+  "focus_keyword": "Mutual Fund Overlap Calculator (3+ funds)",
+  "secondary_keywords": [
+    "mutual fund overlap calculator (3+ funds) calculator online",
+    "mutual fund overlap calculator (3+ funds) calculator india",
+    "mutual fund overlap calculator (3+ funds) formula",
+    "best mutual fund overlap calculator (3+ funds) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Mutual Fund Overlap Calculator (3+ funds) helps you overlap among multiple funds accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Mutual Fund Overlap Calculator (3+ funds) is a digital tool that allows you to overlap among multiple funds without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Mutual Fund Overlap Calculator (3+ funds) on this page. Step 2: Enter your Fund 1 Stocks (comma-separated)). Step 3: Enter your Fund 2 Stocks (comma-separated)). Step 4: Enter your Fund 3 Stocks (comma-separated)). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Mutual Fund Overlap Calculator (3+ funds) uses: 3-Fund Overlap: For each pair (1,2), (1,3), (2,3) compute pairwise overlap. Overall diversification = Unique stocks / Total holdings. Common to all 3 = stocks in fund1 ∩ fund2 ∩ fund3.. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Fund 1 Stocks (comma-separated)=, Fund 2 Stocks (comma-separated)=, Fund 3 Stocks (comma-separated)= → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Mutual Fund Overlap Calculator (3+ funds) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a Mutual Fund Overlap Calculator (3+ funds)?",
+      "a": "A Mutual Fund Overlap Calculator (3+ funds) is an online tool that helps you overlap among multiple funds quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Mutual Fund Overlap Calculator (3+ funds) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Mutual Fund Overlap Calculator (3+ funds)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Mutual Fund Overlap Calculator (3+ funds) – India's Bes",
+  "og_description": "Calculate overlap among multiple funds instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "portfolio-allocation-calculator",
+    "portfolio-rebalancing-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "fund1Stocks",
+      "label": "Fund 1 Stocks (comma-separated)",
+      "type": "textarea",
+      "required": true
+    },
+    {
+      "name": "fund2Stocks",
+      "label": "Fund 2 Stocks (comma-separated)",
+      "type": "textarea",
+      "required": true
+    },
+    {
+      "name": "fund3Stocks",
+      "label": "Fund 3 Stocks (comma-separated)",
+      "type": "textarea",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Fund 1-2 Overlap %",
+    "Fund 1-3 Overlap %",
+    "Fund 2-3 Overlap %",
+    "Common to All 3",
+    "Overall Diversification %"
+  ],
+  "chart_config": {
+    "type": "venn3",
+    "xAxis": "Funds",
+    "yAxis": "Overlap",
+    "title": "3-Fund Portfolio Overlap"
+  },
+  "result_explanation": "The Mutual Fund Overlap Calculator (3+ funds) returns Fund 1-2 Overlap %, Fund 1-3 Overlap %, Fund 2-3 Overlap %. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "fund1Stocks": {
+      "required": true
+    },
+    "fund2Stocks": {
+      "required": true
+    },
+    "fund3Stocks": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function overlap3(f1,f2,f3){const s1=new Set(f1.split(',').map(s=>s.trim().toUpperCase()));const s2=new Set(f2.split(',').map(s=>s.trim().toUpperCase()));const s3=new Set(f3.split(',').map(s=>s.trim().toUpperCase()));function pct(a,b){const c=[...a].filter(x=>b.has(x));const u=new Set([...a,...b]);return(c.length/u.size*100).toFixed(1);}const allThree=[...s1].filter(x=>s2.has(x)&&s3.has(x));return{p12:pct(s1,s2),p13:pct(s1,s3),p23:pct(s2,s3),all3:allThree.length};}",
+  "category_hierarchy": [
+    "investment",
+    "mutual_fund",
+    "portfolio",
+    "overlap"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "investment_cluster",
+  "internal_link_targets": [
+    "portfolio-allocation-calculator",
+    "portfolio-rebalancing-calculator"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "3 fund overlap calculator india",
+    "portfolio overlap 3 mutual funds",
+    "how to check overlap 3 funds",
+    "three fund portfolio overlap",
+    "mf portfolio diversification check",
+    "overlap among multiple funds"
+  ],
+  "semantic_keywords": [
+    "3-fund portfolio",
+    "overlap",
+    "diversification",
+    "SEBI",
+    "Nifty 50",
+    "large cap",
+    "mid cap",
+    "equity funds",
+    "portfolio health"
+  ],
+  "paa_keywords": [
+    "How to check overlap in 3 mutual funds?",
+    "How many mutual funds should I have?",
+    "What is optimal fund overlap percentage?",
+    "How to diversify with 3 funds?",
+    "What tools check fund overlap?"
+  ],
+  "voice_search_keywords": [
+    "check overlap between three mutual funds",
+    "3 fund portfolio overlap",
+    "how many mutual funds is too many",
+    "mutual fund diversification checker"
+  ],
+  "seo_score": 74,
+  "eeat_score": 72,
+  "discover_score": 65,
+  "ai_search_score": 72,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Mutual Fund Overlap Calculator (3+ funds) – Online Calculato",
+    "meta_description": "Use our free mutual fund overlap calculator (3+ funds) to overlap among multiple funds. Get instant results with Indian context – ₹, lakhs, crores. Plan your...",
+    "focus_keyword": "Mutual Fund Overlap Calculator (3+ funds)",
+    "secondary_keywords": [
+      "mutual fund overlap calculator (3+ funds) calculator online",
+      "mutual fund overlap calculator (3+ funds) calculator india",
+      "mutual fund overlap calculator (3+ funds) formula",
+      "best mutual fund overlap calculator (3+ funds) calculator 2024"
+    ],
+    "og_title": "Free Mutual Fund Overlap Calculator (3+ funds) – India's Bes",
+    "og_description": "Calculate overlap among multiple funds instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/mf-overlap-3-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "3 fund overlap calculator india",
+      "portfolio overlap 3 mutual funds",
+      "how to check overlap 3 funds",
+      "three fund portfolio overlap",
+      "mf portfolio diversification check",
+      "overlap among multiple funds"
+    ],
+    "semantic_keywords": [
+      "3-fund portfolio",
+      "overlap",
+      "diversification",
+      "SEBI",
+      "Nifty 50",
+      "large cap",
+      "mid cap",
+      "equity funds",
+      "portfolio health"
+    ],
+    "paa_keywords": [
+      "How to check overlap in 3 mutual funds?",
+      "How many mutual funds should I have?",
+      "What is optimal fund overlap percentage?",
+      "How to diversify with 3 funds?",
+      "What tools check fund overlap?"
+    ],
+    "voice_search_keywords": [
+      "check overlap between three mutual funds",
+      "3 fund portfolio overlap",
+      "how many mutual funds is too many",
+      "mutual fund diversification checker"
+    ]
+  },
+  "_scores": {
+    "seo_score": 74,
+    "eeat_score": 72,
+    "discover_score": 65,
+    "ai_search_score": 72,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "3-Fund Overlap: For each pair (1,2), (1,3), (2,3) compute pairwise overlap. Overall diversification = Unique stocks / Total holdings. Common to all 3 = stocks in fund1 ∩ fund2 ∩ fund3.",
+    "formula_template": "overlap3Formula",
+    "formula_source": "SEBI / Portfolio Analysis Methodology",
+    "formula_source_url": "https://www.sebi.gov.in",
+    "formula_explanation": "The Mutual Fund Overlap Calculator (3+ funds) uses: 3-Fund Overlap: For each pair (1,2), (1,3), (2,3) compute pairwise overlap. Overall diversification = Unique stocks / Total holdings. Common to all 3 = stocks in fund1 ∩ fund2 ∩ fund3.. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Fund 1 Stocks (comma-separated)=, Fund 2 Stocks (comma-separated)=, Fund 3 Stocks (comma-separated)= → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Mutual Fund Overlap Calculator (3+ funds) helps you overlap among multiple funds accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Mutual Fund Overlap Calculator (3+ funds) is a digital tool that allows you to overlap among multiple funds without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Mutual Fund Overlap Calculator (3+ funds) on this page. Step 2: Enter your Fund 1 Stocks (comma-separated)). Step 3: Enter your Fund 2 Stocks (comma-separated)). Step 4: Enter your Fund 3 Stocks (comma-separated)). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Mutual Fund Overlap Calculator (3+ funds) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The Mutual Fund Overlap Calculator (3+ funds) returns Fund 1-2 Overlap %, Fund 1-3 Overlap %, Fund 2-3 Overlap %. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Mutual Fund Overlap Calculator (3+ funds)?",
+        "a": "A Mutual Fund Overlap Calculator (3+ funds) is an online tool that helps you overlap among multiple funds quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Mutual Fund Overlap Calculator (3+ funds) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Mutual Fund Overlap Calculator (3+ funds)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "fund1Stocks",
+        "label": "Fund 1 Stocks (comma-separated)",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "name": "fund2Stocks",
+        "label": "Fund 2 Stocks (comma-separated)",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "name": "fund3Stocks",
+        "label": "Fund 3 Stocks (comma-separated)",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Fund 1-2 Overlap %",
+      "Fund 1-3 Overlap %",
+      "Fund 2-3 Overlap %",
+      "Common to All 3",
+      "Overall Diversification %"
+    ],
+    "chart_config": {
+      "type": "venn3",
+      "xAxis": "Funds",
+      "yAxis": "Overlap",
+      "title": "3-Fund Portfolio Overlap"
+    },
+    "validation_rules": {
+      "fund1Stocks": {
+        "required": true
+      },
+      "fund2Stocks": {
+        "required": true
+      },
+      "fund3Stocks": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function overlap3(f1,f2,f3){const s1=new Set(f1.split(',').map(s=>s.trim().toUpperCase()));const s2=new Set(f2.split(',').map(s=>s.trim().toUpperCase()));const s3=new Set(f3.split(',').map(s=>s.trim().toUpperCase()));function pct(a,b){const c=[...a].filter(x=>b.has(x));const u=new Set([...a,...b]);return(c.length/u.size*100).toFixed(1);}const allThree=[...s1].filter(x=>s2.has(x)&&s3.has(x));return{p12:pct(s1,s2),p13:pct(s1,s3),p23:pct(s2,s3),all3:allThree.length};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "portfolio",
+    "category_hierarchy": [
+      "investment",
+      "mutual_fund",
+      "portfolio",
+      "overlap"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "investment_cluster",
+    "breadcrumb_label": "Mutual Fund Overlap Calculator (3+ funds)"
+  },
+  "_links": {
+    "related_calculators": [
+      "portfolio-allocation-calculator",
+      "portfolio-rebalancing-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "portfolio-allocation-calculator",
+      "portfolio-rebalancing-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

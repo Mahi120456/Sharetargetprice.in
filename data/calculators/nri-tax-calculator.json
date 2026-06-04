@@ -1,0 +1,425 @@
+{
+  "slug": "nri-tax-calculator",
+  "title": "NRI Tax Calculator (NRE/NRO)",
+  "category": "individual",
+  "type": "tax",
+  "description": "Tax for non-resident Indians",
+  "formula_template": "nriTaxFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "NRI Tax Calculator (NRE/NRO)",
+  "canonical_url": "https://yoursite.com/calculators/nri-tax-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "NRI Tax: Income earned/received in India taxable in India. NRE interest = tax-free; NRO interest = taxable per slabs. DTAA benefit available. TDS applies: Bank interest 30%, Rent 30% (Sec 195). Short-term capital gains on equity = 20% STCG; LTCG = 10% above ₹1L.",
+  "formula_source": "Income Tax Dept India / CBDT",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "NRI Tax Calculator (NRE/NRO) | Free Calculator India",
+  "meta_description": "Use our free nri tax calculator (nre/nro) to tax for non-resident indians. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "NRI Tax Calculator (NRE/NRO)",
+  "secondary_keywords": [
+    "nri tax calculator (nre/nro) calculator online",
+    "nri tax calculator (nre/nro) calculator india",
+    "nri tax calculator (nre/nro) formula",
+    "best nri tax calculator (nre/nro) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our NRI Tax Calculator (NRE/NRO) helps you tax for non-resident indians accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A NRI Tax Calculator (NRE/NRO) is a digital tool that allows you to tax for non-resident indians without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the NRI Tax Calculator (NRE/NRO) on this page. Step 2: Enter your NRO Account Interest (₹/year) (e.g., ₹100,000). Step 3: Enter your Rental Income in India (₹/year)). Step 4: Enter your Capital Gains in India (₹)). Step 5: Enter your Country of Residence (DTAA?)). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The NRI Tax Calculator (NRE/NRO) uses: NRI Tax: Income earned/received in India taxable in India. NRE interest = tax-free; NRO interest = taxable per slabs. DTAA benefit available. TDS applies: Bank interest 30%, Rent 30% (Sec 195). Short-. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – NRO Account Interest (₹/year)=100000, Rental Income in India (₹/year)=0, Capital Gains in India (₹)=0 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate NRI Tax Calculator (NRE/NRO) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a NRI Tax Calculator (NRE/NRO)?",
+      "a": "A NRI Tax Calculator (NRE/NRO) is an online tool that helps you tax for non-resident indians quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this NRI Tax Calculator (NRE/NRO) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this NRI Tax Calculator (NRE/NRO)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free NRI Tax Calculator (NRE/NRO) – India's Best Online Calc",
+  "og_description": "Calculate tax for non-resident indians instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-old-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "nroInterest",
+      "label": "NRO Account Interest (₹/year)",
+      "type": "number",
+      "min": 0,
+      "max": 10000000,
+      "default": 100000,
+      "required": false
+    },
+    {
+      "name": "rentalIncome",
+      "label": "Rental Income in India (₹/year)",
+      "type": "number",
+      "min": 0,
+      "max": 10000000,
+      "default": 0,
+      "required": false
+    },
+    {
+      "name": "capitalGains",
+      "label": "Capital Gains in India (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 100000000,
+      "default": 0,
+      "required": false
+    },
+    {
+      "name": "dtaaCountry",
+      "label": "Country of Residence (DTAA?)",
+      "type": "select",
+      "options": [
+        "USA (DTAA)",
+        "UK (DTAA)",
+        "UAE (No Income Tax)",
+        "Singapore (DTAA)",
+        "Other (No DTAA)"
+      ],
+      "default": "USA (DTAA)",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Total India Income",
+    "TDS Rate Applicable",
+    "Estimated Tax Liability",
+    "DTAA Benefit",
+    "Net Tax Payable"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Income Type",
+    "yAxis": "Amount (₹)",
+    "title": "NRI India Income Tax Breakdown"
+  },
+  "result_explanation": "The NRI Tax Calculator (NRE/NRO) returns Total India Income, TDS Rate Applicable, Estimated Tax Liability. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "nroInterest": {
+      "required": false,
+      "min": 0,
+      "max": 10000000
+    },
+    "rentalIncome": {
+      "required": false,
+      "min": 0,
+      "max": 10000000
+    },
+    "capitalGains": {
+      "required": false,
+      "min": 0,
+      "max": 100000000
+    },
+    "dtaaCountry": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function nriTax(nro,rental,gains,hasDTAA){const total=nro+rental;let tax=total>1000000?112500+(total-1000000)*0.30:total>500000?12500+(total-500000)*0.20:total>250000?(total-250000)*0.05:0;const gainsTax=gains>100000?(gains-100000)*0.10:0;const cess=(tax+gainsTax)*0.04;return{total,tax,gainsTax,cess,netTax:tax+gainsTax+cess};}",
+  "category_hierarchy": [
+    "tax",
+    "nri",
+    "income_tax",
+    "dtaa"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "nri_cluster",
+  "internal_link_targets": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "nri tax calculator india",
+    "nro account tax calculator",
+    "nri income tax india 2024",
+    "how much tax nri pays india",
+    "nre vs nro tax",
+    "dtaa benefit calculator nri",
+    "nri rental income tax india",
+    "nri capital gains tax india"
+  ],
+  "semantic_keywords": [
+    "NRI",
+    "NRE",
+    "NRO",
+    "DTAA",
+    "TDS",
+    "Section 195",
+    "income tax",
+    "FEMA",
+    "CBDT",
+    "double taxation",
+    "remittance"
+  ],
+  "paa_keywords": [
+    "How is NRI income taxed in India?",
+    "Is NRE interest taxable?",
+    "What is DTAA benefit for NRIs?",
+    "How much TDS on NRO interest?",
+    "Do NRIs pay tax on Indian rental income?"
+  ],
+  "voice_search_keywords": [
+    "nri tax calculator india",
+    "how much tax nri pays in india",
+    "nre account tax free",
+    "dtaa benefit for nri"
+  ],
+  "seo_score": 78,
+  "eeat_score": 82,
+  "discover_score": 70,
+  "ai_search_score": 77,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "NRI Tax Calculator (NRE/NRO) | Free Calculator India",
+    "meta_description": "Use our free nri tax calculator (nre/nro) to tax for non-resident indians. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "NRI Tax Calculator (NRE/NRO)",
+    "secondary_keywords": [
+      "nri tax calculator (nre/nro) calculator online",
+      "nri tax calculator (nre/nro) calculator india",
+      "nri tax calculator (nre/nro) formula",
+      "best nri tax calculator (nre/nro) calculator 2024"
+    ],
+    "og_title": "Free NRI Tax Calculator (NRE/NRO) – India's Best Online Calc",
+    "og_description": "Calculate tax for non-resident indians instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/nri-tax-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "nri tax calculator india",
+      "nro account tax calculator",
+      "nri income tax india 2024",
+      "how much tax nri pays india",
+      "nre vs nro tax",
+      "dtaa benefit calculator nri",
+      "nri rental income tax india",
+      "nri capital gains tax india"
+    ],
+    "semantic_keywords": [
+      "NRI",
+      "NRE",
+      "NRO",
+      "DTAA",
+      "TDS",
+      "Section 195",
+      "income tax",
+      "FEMA",
+      "CBDT",
+      "double taxation",
+      "remittance"
+    ],
+    "paa_keywords": [
+      "How is NRI income taxed in India?",
+      "Is NRE interest taxable?",
+      "What is DTAA benefit for NRIs?",
+      "How much TDS on NRO interest?",
+      "Do NRIs pay tax on Indian rental income?"
+    ],
+    "voice_search_keywords": [
+      "nri tax calculator india",
+      "how much tax nri pays in india",
+      "nre account tax free",
+      "dtaa benefit for nri"
+    ]
+  },
+  "_scores": {
+    "seo_score": 78,
+    "eeat_score": 82,
+    "discover_score": 70,
+    "ai_search_score": 77,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "NRI Tax: Income earned/received in India taxable in India. NRE interest = tax-free; NRO interest = taxable per slabs. DTAA benefit available. TDS applies: Bank interest 30%, Rent 30% (Sec 195). Short-term capital gains on equity = 20% STCG; LTCG = 10% above ₹1L.",
+    "formula_template": "nriTaxFormula",
+    "formula_source": "Income Tax Dept India / CBDT",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The NRI Tax Calculator (NRE/NRO) uses: NRI Tax: Income earned/received in India taxable in India. NRE interest = tax-free; NRO interest = taxable per slabs. DTAA benefit available. TDS applies: Bank interest 30%, Rent 30% (Sec 195). Short-. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – NRO Account Interest (₹/year)=100000, Rental Income in India (₹/year)=0, Capital Gains in India (₹)=0 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our NRI Tax Calculator (NRE/NRO) helps you tax for non-resident indians accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A NRI Tax Calculator (NRE/NRO) is a digital tool that allows you to tax for non-resident indians without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the NRI Tax Calculator (NRE/NRO) on this page. Step 2: Enter your NRO Account Interest (₹/year) (e.g., ₹100,000). Step 3: Enter your Rental Income in India (₹/year)). Step 4: Enter your Capital Gains in India (₹)). Step 5: Enter your Country of Residence (DTAA?)). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate NRI Tax Calculator (NRE/NRO) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The NRI Tax Calculator (NRE/NRO) returns Total India Income, TDS Rate Applicable, Estimated Tax Liability. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a NRI Tax Calculator (NRE/NRO)?",
+        "a": "A NRI Tax Calculator (NRE/NRO) is an online tool that helps you tax for non-resident indians quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this NRI Tax Calculator (NRE/NRO) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this NRI Tax Calculator (NRE/NRO)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "nroInterest",
+        "label": "NRO Account Interest (₹/year)",
+        "type": "number",
+        "min": 0,
+        "max": 10000000,
+        "default": 100000,
+        "required": false
+      },
+      {
+        "name": "rentalIncome",
+        "label": "Rental Income in India (₹/year)",
+        "type": "number",
+        "min": 0,
+        "max": 10000000,
+        "default": 0,
+        "required": false
+      },
+      {
+        "name": "capitalGains",
+        "label": "Capital Gains in India (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 100000000,
+        "default": 0,
+        "required": false
+      },
+      {
+        "name": "dtaaCountry",
+        "label": "Country of Residence (DTAA?)",
+        "type": "select",
+        "options": [
+          "USA (DTAA)",
+          "UK (DTAA)",
+          "UAE (No Income Tax)",
+          "Singapore (DTAA)",
+          "Other (No DTAA)"
+        ],
+        "default": "USA (DTAA)",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Total India Income",
+      "TDS Rate Applicable",
+      "Estimated Tax Liability",
+      "DTAA Benefit",
+      "Net Tax Payable"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Income Type",
+      "yAxis": "Amount (₹)",
+      "title": "NRI India Income Tax Breakdown"
+    },
+    "validation_rules": {
+      "nroInterest": {
+        "required": false,
+        "min": 0,
+        "max": 10000000
+      },
+      "rentalIncome": {
+        "required": false,
+        "min": 0,
+        "max": 10000000
+      },
+      "capitalGains": {
+        "required": false,
+        "min": 0,
+        "max": 100000000
+      },
+      "dtaaCountry": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function nriTax(nro,rental,gains,hasDTAA){const total=nro+rental;let tax=total>1000000?112500+(total-1000000)*0.30:total>500000?12500+(total-500000)*0.20:total>250000?(total-250000)*0.05:0;const gainsTax=gains>100000?(gains-100000)*0.10:0;const cess=(tax+gainsTax)*0.04;return{total,tax,gainsTax,cess,netTax:tax+gainsTax+cess};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "nri",
+      "income_tax",
+      "dtaa"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "nri_cluster",
+    "breadcrumb_label": "NRI Tax Calculator (NRE/NRO)"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-old-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

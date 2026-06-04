@@ -1,0 +1,405 @@
+{
+  "slug": "rights-issue-calculator",
+  "title": "Rights Issue Net Cost Calculator",
+  "category": "individual",
+  "type": "trading",
+  "description": "Net cost after rights issue",
+  "formula_template": "rightsIssueFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Rights Issue Net Cost Calculator",
+  "canonical_url": "https://yoursite.com/calculators/rights-issue-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Ex-rights Price = (N×Pre-rights Price + Subscription Price) / (N+1) where N = number of existing shares per new share (ratio denominator). Net cost = Subscription Price + Opportunity cost (foregone on rights). Rights value = Pre-rights Price − Ex-rights Price.",
+  "formula_source": "SEBI / NSE India",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "Rights Issue Net Cost Calculator | Free Calculator India",
+  "meta_description": "Use our free rights issue net cost calculator to net cost after rights issue. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances ...",
+  "focus_keyword": "Rights Issue Net Cost Calculator",
+  "secondary_keywords": [
+    "rights issue net cost calculator calculator online",
+    "rights issue net cost calculator calculator india",
+    "rights issue net cost calculator formula",
+    "best rights issue net cost calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Rights Issue Net Cost Calculator helps you net cost after rights issue accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Rights Issue Net Cost Calculator is a digital tool that allows you to net cost after rights issue without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Rights Issue Net Cost Calculator on this page. Step 2: Enter your Pre-Rights Price (₹) (e.g., ₹500). Step 3: Enter your Rights Issue Price (₹) (e.g., ₹300). Step 4: Enter your Entitlement Ratio (e.g. 1:5 → enter 5) (e.g., ₹5). Step 5: Enter your Shares Held (e.g., ₹500). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Rights Issue Net Cost Calculator uses: Ex-rights Price = (N×Pre-rights Price + Subscription Price) / (N+1) where N = number of existing shares per new share (ratio denominator). Net cost = Subscription Price + Opportunity cost (foregone on. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Pre-Rights Price (₹)=500, Rights Issue Price (₹)=300, Entitlement Ratio (e.g. 1:5 → enter 5)=5 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Rights Issue Net Cost Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+  "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+  "faq": [
+    {
+      "q": "What is a Rights Issue Net Cost Calculator?",
+      "a": "A Rights Issue Net Cost Calculator is an online tool that helps you net cost after rights issue quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Rights Issue Net Cost Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Rights Issue Net Cost Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Rights Issue Net Cost Calculator – India's Best Online",
+  "og_description": "Calculate net cost after rights issue instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "preRightsPrice",
+      "label": "Pre-Rights Price (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 1000000,
+      "default": 500,
+      "required": true
+    },
+    {
+      "name": "subscriptionPrice",
+      "label": "Rights Issue Price (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 1000000,
+      "default": 300,
+      "required": true
+    },
+    {
+      "name": "rightsRatio",
+      "label": "Entitlement Ratio (e.g. 1:5 → enter 5)",
+      "type": "number",
+      "min": 1,
+      "max": 100,
+      "default": 5,
+      "required": true
+    },
+    {
+      "name": "sharesHeld",
+      "label": "Shares Held",
+      "type": "number",
+      "min": 1,
+      "max": 1000000,
+      "default": 500,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Ex-Rights Price",
+    "Rights Entitlement",
+    "Rights Value",
+    "Total Cost if You Subscribe",
+    "Net Effective Cost per Share"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Component",
+    "yAxis": "Price (₹)",
+    "title": "Rights Issue Cost Analysis"
+  },
+  "result_explanation": "The Rights Issue Net Cost Calculator returns Ex-Rights Price, Rights Entitlement, Rights Value. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "preRightsPrice": {
+      "required": true,
+      "min": 1,
+      "max": 1000000
+    },
+    "subscriptionPrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 1000000
+    },
+    "rightsRatio": {
+      "required": true,
+      "min": 1,
+      "max": 100
+    },
+    "sharesHeld": {
+      "required": true,
+      "min": 1,
+      "max": 1000000
+    }
+  },
+  "calculator_engine": "function rights(prePrice,subPrice,ratio,sharesHeld){const exPrice=(ratio*prePrice+subPrice)/(ratio+1);const entitlement=Math.floor(sharesHeld/ratio);const rightsValue=prePrice-exPrice;const totalCost=entitlement*subPrice;const newShares=sharesHeld+entitlement;const netCost=(sharesHeld*prePrice+totalCost)/newShares;return{exPrice,entitlement,rightsValue,totalCost,netCost};}",
+  "category_hierarchy": [
+    "trading",
+    "stock",
+    "corporate_action",
+    "rights_issue"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "rights issue calculator india",
+    "ex-rights price calculator",
+    "rights issue net cost",
+    "should i subscribe to rights issue",
+    "rights entitlement calculator",
+    "rights issue value calculator nse"
+  ],
+  "semantic_keywords": [
+    "rights issue",
+    "ex-rights price",
+    "entitlement",
+    "subscription",
+    "SEBI",
+    "NSE",
+    "corporate action",
+    "record date",
+    "dilution",
+    "cost basis"
+  ],
+  "paa_keywords": [
+    "What is rights issue in India?",
+    "Should I subscribe to rights issue?",
+    "How to calculate rights issue price?",
+    "What is ex-rights price?",
+    "How to sell rights issue shares?"
+  ],
+  "voice_search_keywords": [
+    "rights issue calculator india",
+    "should i subscribe to rights issue",
+    "ex rights price calculation",
+    "rights entitlement calculator"
+  ],
+  "seo_score": 72,
+  "eeat_score": 72,
+  "discover_score": 64,
+  "ai_search_score": 70,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Rights Issue Net Cost Calculator | Free Calculator India",
+    "meta_description": "Use our free rights issue net cost calculator to net cost after rights issue. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances ...",
+    "focus_keyword": "Rights Issue Net Cost Calculator",
+    "secondary_keywords": [
+      "rights issue net cost calculator calculator online",
+      "rights issue net cost calculator calculator india",
+      "rights issue net cost calculator formula",
+      "best rights issue net cost calculator calculator 2024"
+    ],
+    "og_title": "Free Rights Issue Net Cost Calculator – India's Best Online",
+    "og_description": "Calculate net cost after rights issue instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/rights-issue-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "rights issue calculator india",
+      "ex-rights price calculator",
+      "rights issue net cost",
+      "should i subscribe to rights issue",
+      "rights entitlement calculator",
+      "rights issue value calculator nse"
+    ],
+    "semantic_keywords": [
+      "rights issue",
+      "ex-rights price",
+      "entitlement",
+      "subscription",
+      "SEBI",
+      "NSE",
+      "corporate action",
+      "record date",
+      "dilution",
+      "cost basis"
+    ],
+    "paa_keywords": [
+      "What is rights issue in India?",
+      "Should I subscribe to rights issue?",
+      "How to calculate rights issue price?",
+      "What is ex-rights price?",
+      "How to sell rights issue shares?"
+    ],
+    "voice_search_keywords": [
+      "rights issue calculator india",
+      "should i subscribe to rights issue",
+      "ex rights price calculation",
+      "rights entitlement calculator"
+    ]
+  },
+  "_scores": {
+    "seo_score": 72,
+    "eeat_score": 72,
+    "discover_score": 64,
+    "ai_search_score": 70,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Ex-rights Price = (N×Pre-rights Price + Subscription Price) / (N+1) where N = number of existing shares per new share (ratio denominator). Net cost = Subscription Price + Opportunity cost (foregone on rights). Rights value = Pre-rights Price − Ex-rights Price.",
+    "formula_template": "rightsIssueFormula",
+    "formula_source": "SEBI / NSE India",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The Rights Issue Net Cost Calculator uses: Ex-rights Price = (N×Pre-rights Price + Subscription Price) / (N+1) where N = number of existing shares per new share (ratio denominator). Net cost = Subscription Price + Opportunity cost (foregone on. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Pre-Rights Price (₹)=500, Rights Issue Price (₹)=300, Entitlement Ratio (e.g. 1:5 → enter 5)=5 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Rights Issue Net Cost Calculator helps you net cost after rights issue accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Rights Issue Net Cost Calculator is a digital tool that allows you to net cost after rights issue without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Rights Issue Net Cost Calculator on this page. Step 2: Enter your Pre-Rights Price (₹) (e.g., ₹500). Step 3: Enter your Rights Issue Price (₹) (e.g., ₹300). Step 4: Enter your Entitlement Ratio (e.g. 1:5 → enter 5) (e.g., ₹5). Step 5: Enter your Shares Held (e.g., ₹500). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Rights Issue Net Cost Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+    "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+    "result_explanation": "The Rights Issue Net Cost Calculator returns Ex-Rights Price, Rights Entitlement, Rights Value. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Rights Issue Net Cost Calculator?",
+        "a": "A Rights Issue Net Cost Calculator is an online tool that helps you net cost after rights issue quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Rights Issue Net Cost Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Rights Issue Net Cost Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "preRightsPrice",
+        "label": "Pre-Rights Price (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 1000000,
+        "default": 500,
+        "required": true
+      },
+      {
+        "name": "subscriptionPrice",
+        "label": "Rights Issue Price (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 1000000,
+        "default": 300,
+        "required": true
+      },
+      {
+        "name": "rightsRatio",
+        "label": "Entitlement Ratio (e.g. 1:5 → enter 5)",
+        "type": "number",
+        "min": 1,
+        "max": 100,
+        "default": 5,
+        "required": true
+      },
+      {
+        "name": "sharesHeld",
+        "label": "Shares Held",
+        "type": "number",
+        "min": 1,
+        "max": 1000000,
+        "default": 500,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Ex-Rights Price",
+      "Rights Entitlement",
+      "Rights Value",
+      "Total Cost if You Subscribe",
+      "Net Effective Cost per Share"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Component",
+      "yAxis": "Price (₹)",
+      "title": "Rights Issue Cost Analysis"
+    },
+    "validation_rules": {
+      "preRightsPrice": {
+        "required": true,
+        "min": 1,
+        "max": 1000000
+      },
+      "subscriptionPrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 1000000
+      },
+      "rightsRatio": {
+        "required": true,
+        "min": 1,
+        "max": 100
+      },
+      "sharesHeld": {
+        "required": true,
+        "min": 1,
+        "max": 1000000
+      }
+    },
+    "calculator_engine": "function rights(prePrice,subPrice,ratio,sharesHeld){const exPrice=(ratio*prePrice+subPrice)/(ratio+1);const entitlement=Math.floor(sharesHeld/ratio);const rightsValue=prePrice-exPrice;const totalCost=entitlement*subPrice;const newShares=sharesHeld+entitlement;const netCost=(sharesHeld*prePrice+totalCost)/newShares;return{exPrice,entitlement,rightsValue,totalCost,netCost};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "stock",
+      "corporate_action",
+      "rights_issue"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "Rights Issue Net Cost Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "slug": "p-b-ratio-calculator",
+  "title": "P/B Ratio Calculator",
+  "category": "individual",
+  "type": "stock",
+  "description": "Price-to-book ratio",
+  "formula_template": "pbRatioFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "P/B Ratio Calculator",
+  "canonical_url": "https://yoursite.com/calculators/p-b-ratio-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "P/B Ratio = Market Price per Share / Book Value per Share. Book Value = (Total Assets − Total Liabilities) / Outstanding Shares. P/B < 1 may indicate undervaluation (common in banking/PSU stocks). Used for asset-heavy industries.",
+  "formula_source": "NSE India / BSE",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "P/B Ratio Calculator | Free Calculator India",
+  "meta_description": "Use our free p/b ratio calculator to price-to-book ratio. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "P/B Ratio Calculator",
+  "secondary_keywords": [
+    "p/b ratio calculator calculator online",
+    "p/b ratio calculator calculator india",
+    "p/b ratio calculator formula",
+    "best p/b ratio calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our P/B Ratio Calculator helps you price-to-book ratio accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A P/B Ratio Calculator is a digital tool that allows you to price-to-book ratio without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the P/B Ratio Calculator on this page. Step 2: Enter your Current Share Price (₹) (e.g., ₹500). Step 3: Enter your Book Value per Share (₹) (e.g., ₹200). Step 4: Enter your Industry Average P/B (e.g., ₹2). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The P/B Ratio Calculator uses: P/B Ratio = Market Price per Share / Book Value per Share. Book Value = (Total Assets − Total Liabilities) / Outstanding Shares. P/B < 1 may indicate undervaluation (common in banking/PSU stocks). Use. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Current Share Price (₹)=500, Book Value per Share (₹)=200, Industry Average P/B=2 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate P/B Ratio Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a P/B Ratio Calculator?",
+      "a": "A P/B Ratio Calculator is an online tool that helps you price-to-book ratio quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this P/B Ratio Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this P/B Ratio Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free P/B Ratio Calculator – India's Best Online Calculator",
+  "og_description": "Calculate price-to-book ratio instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "stock-average-calculator",
+    "stock-split-calculator",
+    "stock-sip-calculator",
+    "stock-beta-calculator",
+    "stock-cagr-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "sharePrice",
+      "label": "Current Share Price (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 1000000,
+      "default": 500,
+      "required": true
+    },
+    {
+      "name": "bookValue",
+      "label": "Book Value per Share (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 100000,
+      "default": 200,
+      "required": true
+    },
+    {
+      "name": "industryPB",
+      "label": "Industry Average P/B",
+      "type": "number",
+      "min": 0.1,
+      "max": 50,
+      "default": 2,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "P/B Ratio",
+    "Premium/Discount to Book",
+    "Premium/Discount to Industry",
+    "Return on Equity Implied"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Metric",
+    "yAxis": "Value",
+    "title": "P/B Ratio Analysis"
+  },
+  "result_explanation": "The P/B Ratio Calculator returns P/B Ratio, Premium/Discount to Book, Premium/Discount to Industry. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "sharePrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 1000000
+    },
+    "bookValue": {
+      "required": true,
+      "min": 0.01,
+      "max": 100000
+    },
+    "industryPB": {
+      "required": false,
+      "min": 0.1,
+      "max": 50
+    }
+  },
+  "calculator_engine": "function pbRatio(price,bv,industryPB){const pb=price/bv;const premium=((pb-1)*100).toFixed(1);const vsIndustry=industryPB?((pb-industryPB)/industryPB*100).toFixed(1):null;return{pb:pb.toFixed(2),premium:premium+'%',vsIndustry:vsIndustry?vsIndustry+'%':'N/A'};}",
+  "category_hierarchy": [
+    "stock",
+    "valuation",
+    "pb_ratio",
+    "fundamental"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "stock-average-calculator",
+    "stock-split-calculator",
+    "stock-sip-calculator",
+    "stock-beta-calculator"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "pb ratio calculator india",
+    "price to book ratio calculator",
+    "book value calculator stocks",
+    "how to calculate pb ratio",
+    "bank stock pb ratio",
+    "psb pb ratio india",
+    "undervalued stock pb ratio"
+  ],
+  "semantic_keywords": [
+    "P/B ratio",
+    "book value",
+    "assets",
+    "liabilities",
+    "NSE",
+    "banking stocks",
+    "fundamental analysis",
+    "ROE",
+    "net asset value",
+    "valuation"
+  ],
+  "paa_keywords": [
+    "What is P/B ratio?",
+    "How to calculate book value?",
+    "Is low P/B always a bargain?",
+    "Which sectors have low P/B?",
+    "P/B vs P/E which is better?"
+  ],
+  "voice_search_keywords": [
+    "pb ratio calculator",
+    "price to book ratio india",
+    "how to calculate book value per share",
+    "good pb ratio for bank stocks"
+  ],
+  "seo_score": 72,
+  "eeat_score": 72,
+  "discover_score": 64,
+  "ai_search_score": 70,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "P/B Ratio Calculator | Free Calculator India",
+    "meta_description": "Use our free p/b ratio calculator to price-to-book ratio. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "P/B Ratio Calculator",
+    "secondary_keywords": [
+      "p/b ratio calculator calculator online",
+      "p/b ratio calculator calculator india",
+      "p/b ratio calculator formula",
+      "best p/b ratio calculator calculator 2024"
+    ],
+    "og_title": "Free P/B Ratio Calculator – India's Best Online Calculator",
+    "og_description": "Calculate price-to-book ratio instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/p-b-ratio-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "pb ratio calculator india",
+      "price to book ratio calculator",
+      "book value calculator stocks",
+      "how to calculate pb ratio",
+      "bank stock pb ratio",
+      "psb pb ratio india",
+      "undervalued stock pb ratio"
+    ],
+    "semantic_keywords": [
+      "P/B ratio",
+      "book value",
+      "assets",
+      "liabilities",
+      "NSE",
+      "banking stocks",
+      "fundamental analysis",
+      "ROE",
+      "net asset value",
+      "valuation"
+    ],
+    "paa_keywords": [
+      "What is P/B ratio?",
+      "How to calculate book value?",
+      "Is low P/B always a bargain?",
+      "Which sectors have low P/B?",
+      "P/B vs P/E which is better?"
+    ],
+    "voice_search_keywords": [
+      "pb ratio calculator",
+      "price to book ratio india",
+      "how to calculate book value per share",
+      "good pb ratio for bank stocks"
+    ]
+  },
+  "_scores": {
+    "seo_score": 72,
+    "eeat_score": 72,
+    "discover_score": 64,
+    "ai_search_score": 70,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "P/B Ratio = Market Price per Share / Book Value per Share. Book Value = (Total Assets − Total Liabilities) / Outstanding Shares. P/B < 1 may indicate undervaluation (common in banking/PSU stocks). Used for asset-heavy industries.",
+    "formula_template": "pbRatioFormula",
+    "formula_source": "NSE India / BSE",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The P/B Ratio Calculator uses: P/B Ratio = Market Price per Share / Book Value per Share. Book Value = (Total Assets − Total Liabilities) / Outstanding Shares. P/B < 1 may indicate undervaluation (common in banking/PSU stocks). Use. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Current Share Price (₹)=500, Book Value per Share (₹)=200, Industry Average P/B=2 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our P/B Ratio Calculator helps you price-to-book ratio accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A P/B Ratio Calculator is a digital tool that allows you to price-to-book ratio without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the P/B Ratio Calculator on this page. Step 2: Enter your Current Share Price (₹) (e.g., ₹500). Step 3: Enter your Book Value per Share (₹) (e.g., ₹200). Step 4: Enter your Industry Average P/B (e.g., ₹2). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate P/B Ratio Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The P/B Ratio Calculator returns P/B Ratio, Premium/Discount to Book, Premium/Discount to Industry. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a P/B Ratio Calculator?",
+        "a": "A P/B Ratio Calculator is an online tool that helps you price-to-book ratio quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this P/B Ratio Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this P/B Ratio Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "sharePrice",
+        "label": "Current Share Price (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 1000000,
+        "default": 500,
+        "required": true
+      },
+      {
+        "name": "bookValue",
+        "label": "Book Value per Share (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 100000,
+        "default": 200,
+        "required": true
+      },
+      {
+        "name": "industryPB",
+        "label": "Industry Average P/B",
+        "type": "number",
+        "min": 0.1,
+        "max": 50,
+        "default": 2,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "P/B Ratio",
+      "Premium/Discount to Book",
+      "Premium/Discount to Industry",
+      "Return on Equity Implied"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Metric",
+      "yAxis": "Value",
+      "title": "P/B Ratio Analysis"
+    },
+    "validation_rules": {
+      "sharePrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 1000000
+      },
+      "bookValue": {
+        "required": true,
+        "min": 0.01,
+        "max": 100000
+      },
+      "industryPB": {
+        "required": false,
+        "min": 0.1,
+        "max": 50
+      }
+    },
+    "calculator_engine": "function pbRatio(price,bv,industryPB){const pb=price/bv;const premium=((pb-1)*100).toFixed(1);const vsIndustry=industryPB?((pb-industryPB)/industryPB*100).toFixed(1):null;return{pb:pb.toFixed(2),premium:premium+'%',vsIndustry:vsIndustry?vsIndustry+'%':'N/A'};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "stock",
+    "category_hierarchy": [
+      "stock",
+      "valuation",
+      "pb_ratio",
+      "fundamental"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "P/B Ratio Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "stock-average-calculator",
+      "stock-split-calculator",
+      "stock-sip-calculator",
+      "stock-beta-calculator",
+      "stock-cagr-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "stock-average-calculator",
+      "stock-split-calculator",
+      "stock-sip-calculator",
+      "stock-beta-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

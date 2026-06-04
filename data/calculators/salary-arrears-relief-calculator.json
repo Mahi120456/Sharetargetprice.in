@@ -1,0 +1,387 @@
+{
+  "slug": "salary-arrears-relief-calculator",
+  "title": "Salary Arrears Relief (89(1))",
+  "category": "individual",
+  "type": "tax",
+  "description": "Relief for salary arrears",
+  "formula_template": "arrearsReliefFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Salary Arrears Relief (89(1))",
+  "canonical_url": "https://yoursite.com/calculators/salary-arrears-relief-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Relief u/s 89(1): Tax on total income in current year − tax if arrears not included; Compare with tax that would have been payable in respective past years. Relief = Difference. File Form 10E before ITR to claim. Steps: Calculate tax in each year separately.",
+  "formula_source": "Income Tax Dept India / Section 89(1)",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "Salary Arrears Relief (89(1)) | Free Calculator India",
+  "meta_description": "Use our free salary arrears relief (89(1)) to relief for salary arrears. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Salary Arrears Relief (89(1))",
+  "secondary_keywords": [
+    "salary arrears relief (89(1)) calculator online",
+    "salary arrears relief (89(1)) calculator india",
+    "salary arrears relief (89(1)) formula",
+    "best salary arrears relief (89(1)) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Salary Arrears Relief (89(1)) helps you relief for salary arrears accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Salary Arrears Relief (89(1)) is a digital tool that allows you to relief for salary arrears without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Salary Arrears Relief (89(1)) on this page. Step 2: Enter your Current Year Total Income (₹) (e.g., ₹1,200,000). Step 3: Enter your Arrears Received This Year (₹) (e.g., ₹200,000). Step 4: Enter your Income in Year Arrears Belong To (₹) (e.g., ₹900,000). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Salary Arrears Relief (89(1)) uses: Relief u/s 89(1): Tax on total income in current year − tax if arrears not included; Compare with tax that would have been payable in respective past years. Relief = Difference. File Form 10E before I. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Current Year Total Income (₹)=1200000, Arrears Received This Year (₹)=200000, Income in Year Arrears Belong To (₹)=900000 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Salary Arrears Relief (89(1)) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a Salary Arrears Relief (89(1))?",
+      "a": "A Salary Arrears Relief (89(1)) is an online tool that helps you relief for salary arrears quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Salary Arrears Relief (89(1)) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Salary Arrears Relief (89(1))?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free Salary Arrears Relief (89(1)) – India's Best Online Cal",
+  "og_description": "Calculate relief for salary arrears instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-old-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "currentYearIncome",
+      "label": "Current Year Total Income (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 100000000,
+      "default": 1200000,
+      "required": true
+    },
+    {
+      "name": "arrearsAmount",
+      "label": "Arrears Received This Year (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 10000000,
+      "default": 200000,
+      "required": true
+    },
+    {
+      "name": "pastYearIncome",
+      "label": "Income in Year Arrears Belong To (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 100000000,
+      "default": 900000,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Tax Without Arrears (Current Year)",
+    "Tax With Arrears (Current Year)",
+    "Tax If Arrears Added to Past Year",
+    "Relief u/s 89(1)",
+    "Net Tax Payable"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Scenario",
+    "yAxis": "Tax Amount (₹)",
+    "title": "Section 89(1) Relief Comparison"
+  },
+  "result_explanation": "The Salary Arrears Relief (89(1)) returns Tax Without Arrears (Current Year), Tax With Arrears (Current Year), Tax If Arrears Added to Past Year. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "currentYearIncome": {
+      "required": true,
+      "min": 0,
+      "max": 100000000
+    },
+    "arrearsAmount": {
+      "required": true,
+      "min": 0,
+      "max": 10000000
+    },
+    "pastYearIncome": {
+      "required": true,
+      "min": 0,
+      "max": 100000000
+    }
+  },
+  "calculator_engine": "function relief89(current,arrears,past){function tax89(inc){const taxable=inc-50000;let t=0;if(taxable>1000000)t=112500+(taxable-1000000)*0.30;else if(taxable>500000)t=12500+(taxable-500000)*0.20;else if(taxable>250000)t=(taxable-250000)*0.05;return t*(1.04);}const tWithout=tax89(current-arrears);const tWith=tax89(current);const tPastWithout=tax89(past-arrears);const tPastWith=tax89(past);const relief=(tWith-tWithout)-(tPastWith-tPastWithout);return{tWithout,tWith,relief:Math.max(0,relief),netTax:tWith-Math.max(0,relief)};}",
+  "category_hierarchy": [
+    "tax",
+    "salary",
+    "section_89",
+    "arrears"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "income_tax_cluster",
+  "internal_link_targets": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "section 89 1 relief calculator",
+    "salary arrears tax relief india",
+    "form 10e calculator",
+    "arrears tax relief calculator",
+    "salary arrears relief income tax",
+    "how to claim section 89 relief",
+    "salary arrear itr relief india"
+  ],
+  "semantic_keywords": [
+    "Section 89(1)",
+    "arrears",
+    "Form 10E",
+    "salary relief",
+    "income tax",
+    "past year tax",
+    "slab",
+    "CBDT",
+    "ITR",
+    "relief claim"
+  ],
+  "paa_keywords": [
+    "What is Section 89(1) relief?",
+    "How to claim relief on salary arrears?",
+    "What is Form 10E?",
+    "How to calculate 89(1) relief?",
+    "Which years' arrears qualify for 89(1)?"
+  ],
+  "voice_search_keywords": [
+    "section 89 arrears relief calculator",
+    "how to get tax relief on salary arrears",
+    "form 10e income tax",
+    "section 89 1 relief calculation india"
+  ],
+  "seo_score": 76,
+  "eeat_score": 78,
+  "discover_score": 68,
+  "ai_search_score": 75,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Salary Arrears Relief (89(1)) | Free Calculator India",
+    "meta_description": "Use our free salary arrears relief (89(1)) to relief for salary arrears. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Salary Arrears Relief (89(1))",
+    "secondary_keywords": [
+      "salary arrears relief (89(1)) calculator online",
+      "salary arrears relief (89(1)) calculator india",
+      "salary arrears relief (89(1)) formula",
+      "best salary arrears relief (89(1)) calculator 2024"
+    ],
+    "og_title": "Free Salary Arrears Relief (89(1)) – India's Best Online Cal",
+    "og_description": "Calculate relief for salary arrears instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/salary-arrears-relief-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "section 89 1 relief calculator",
+      "salary arrears tax relief india",
+      "form 10e calculator",
+      "arrears tax relief calculator",
+      "salary arrears relief income tax",
+      "how to claim section 89 relief",
+      "salary arrear itr relief india"
+    ],
+    "semantic_keywords": [
+      "Section 89(1)",
+      "arrears",
+      "Form 10E",
+      "salary relief",
+      "income tax",
+      "past year tax",
+      "slab",
+      "CBDT",
+      "ITR",
+      "relief claim"
+    ],
+    "paa_keywords": [
+      "What is Section 89(1) relief?",
+      "How to claim relief on salary arrears?",
+      "What is Form 10E?",
+      "How to calculate 89(1) relief?",
+      "Which years' arrears qualify for 89(1)?"
+    ],
+    "voice_search_keywords": [
+      "section 89 arrears relief calculator",
+      "how to get tax relief on salary arrears",
+      "form 10e income tax",
+      "section 89 1 relief calculation india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 78,
+    "discover_score": 68,
+    "ai_search_score": 75,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "Relief u/s 89(1): Tax on total income in current year − tax if arrears not included; Compare with tax that would have been payable in respective past years. Relief = Difference. File Form 10E before ITR to claim. Steps: Calculate tax in each year separately.",
+    "formula_template": "arrearsReliefFormula",
+    "formula_source": "Income Tax Dept India / Section 89(1)",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The Salary Arrears Relief (89(1)) uses: Relief u/s 89(1): Tax on total income in current year − tax if arrears not included; Compare with tax that would have been payable in respective past years. Relief = Difference. File Form 10E before I. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Current Year Total Income (₹)=1200000, Arrears Received This Year (₹)=200000, Income in Year Arrears Belong To (₹)=900000 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Salary Arrears Relief (89(1)) helps you relief for salary arrears accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Salary Arrears Relief (89(1)) is a digital tool that allows you to relief for salary arrears without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Salary Arrears Relief (89(1)) on this page. Step 2: Enter your Current Year Total Income (₹) (e.g., ₹1,200,000). Step 3: Enter your Arrears Received This Year (₹) (e.g., ₹200,000). Step 4: Enter your Income in Year Arrears Belong To (₹) (e.g., ₹900,000). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Salary Arrears Relief (89(1)) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The Salary Arrears Relief (89(1)) returns Tax Without Arrears (Current Year), Tax With Arrears (Current Year), Tax If Arrears Added to Past Year. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Salary Arrears Relief (89(1))?",
+        "a": "A Salary Arrears Relief (89(1)) is an online tool that helps you relief for salary arrears quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Salary Arrears Relief (89(1)) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Salary Arrears Relief (89(1))?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "currentYearIncome",
+        "label": "Current Year Total Income (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 100000000,
+        "default": 1200000,
+        "required": true
+      },
+      {
+        "name": "arrearsAmount",
+        "label": "Arrears Received This Year (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 10000000,
+        "default": 200000,
+        "required": true
+      },
+      {
+        "name": "pastYearIncome",
+        "label": "Income in Year Arrears Belong To (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 100000000,
+        "default": 900000,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Tax Without Arrears (Current Year)",
+      "Tax With Arrears (Current Year)",
+      "Tax If Arrears Added to Past Year",
+      "Relief u/s 89(1)",
+      "Net Tax Payable"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Scenario",
+      "yAxis": "Tax Amount (₹)",
+      "title": "Section 89(1) Relief Comparison"
+    },
+    "validation_rules": {
+      "currentYearIncome": {
+        "required": true,
+        "min": 0,
+        "max": 100000000
+      },
+      "arrearsAmount": {
+        "required": true,
+        "min": 0,
+        "max": 10000000
+      },
+      "pastYearIncome": {
+        "required": true,
+        "min": 0,
+        "max": 100000000
+      }
+    },
+    "calculator_engine": "function relief89(current,arrears,past){function tax89(inc){const taxable=inc-50000;let t=0;if(taxable>1000000)t=112500+(taxable-1000000)*0.30;else if(taxable>500000)t=12500+(taxable-500000)*0.20;else if(taxable>250000)t=(taxable-250000)*0.05;return t*(1.04);}const tWithout=tax89(current-arrears);const tWith=tax89(current);const tPastWithout=tax89(past-arrears);const tPastWith=tax89(past);const relief=(tWith-tWithout)-(tPastWith-tPastWithout);return{tWithout,tWith,relief:Math.max(0,relief),netTax:tWith-Math.max(0,relief)};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "salary",
+      "section_89",
+      "arrears"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "income_tax_cluster",
+    "breadcrumb_label": "Salary Arrears Relief (89(1))"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-old-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

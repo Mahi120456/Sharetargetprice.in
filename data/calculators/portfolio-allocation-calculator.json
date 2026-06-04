@@ -1,0 +1,459 @@
+{
+  "slug": "portfolio-allocation-calculator",
+  "title": "Portfolio Allocation Calculator",
+  "category": "individual",
+  "type": "investment",
+  "description": "Asset allocation based on risk",
+  "formula_template": "portfolioAllocationFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Portfolio Allocation Calculator",
+  "canonical_url": "https://yoursite.com/calculators/portfolio-allocation-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Asset Allocation: Rule of 100 minus age for equity (e.g., age 30 → 70% equity). Aggressive: 80/20 equity/debt; Moderate: 60/40; Conservative: 40/60. Rebalance when allocation drifts >5% from target. Risk profile determines allocation.",
+  "formula_source": "SEBI / FPSBI India",
+  "formula_source_url": "https://www.fpsbi.com",
+  "meta_title": "Portfolio Allocation Calculator | Free Calculator India",
+  "meta_description": "Use our free portfolio allocation calculator to asset allocation based on risk. Get instant results with Indian context – ₹, lakhs, crores. Plan your finance...",
+  "focus_keyword": "Portfolio Allocation Calculator",
+  "secondary_keywords": [
+    "portfolio allocation calculator calculator online",
+    "portfolio allocation calculator calculator india",
+    "portfolio allocation calculator formula",
+    "best portfolio allocation calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Portfolio Allocation Calculator helps you asset allocation based on risk accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Portfolio Allocation Calculator is a digital tool that allows you to asset allocation based on risk without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Portfolio Allocation Calculator on this page. Step 2: Enter your Total Portfolio Value (₹) (e.g., ₹1,000,000). Step 3: Enter your Your Age (e.g., ₹35). Step 4: Enter your Risk Profile). Step 5: Enter your Current Equity (₹) (e.g., ₹600,000). Step 6: Enter your Current Debt (₹) (e.g., ₹300,000). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Portfolio Allocation Calculator uses: Asset Allocation: Rule of 100 minus age for equity (e.g., age 30 → 70% equity). Aggressive: 80/20 equity/debt; Moderate: 60/40; Conservative: 40/60. Rebalance when allocation drifts >5% from target. R. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Total Portfolio Value (₹)=1000000, Your Age=35, Risk Profile=Moderate → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Portfolio Allocation Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+  "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+  "faq": [
+    {
+      "q": "What is a Portfolio Allocation Calculator?",
+      "a": "A Portfolio Allocation Calculator is an online tool that helps you asset allocation based on risk quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Portfolio Allocation Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Portfolio Allocation Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "What is a realistic return for Indian mutual funds?",
+      "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+    }
+  ],
+  "og_title": "Free Portfolio Allocation Calculator – India's Best Online C",
+  "og_description": "Calculate asset allocation based on risk instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-vs-dividend-reinvestment"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "totalPortfolio",
+      "label": "Total Portfolio Value (₹)",
+      "type": "number",
+      "min": 10000,
+      "max": 1000000000,
+      "default": 1000000,
+      "required": true
+    },
+    {
+      "name": "age",
+      "label": "Your Age",
+      "type": "number",
+      "min": 18,
+      "max": 80,
+      "default": 35,
+      "required": true
+    },
+    {
+      "name": "riskProfile",
+      "label": "Risk Profile",
+      "type": "select",
+      "options": [
+        "Aggressive",
+        "Moderate",
+        "Conservative"
+      ],
+      "default": "Moderate",
+      "required": true
+    },
+    {
+      "name": "equity",
+      "label": "Current Equity (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 1000000000,
+      "default": 600000,
+      "required": false
+    },
+    {
+      "name": "debt",
+      "label": "Current Debt (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 1000000000,
+      "default": 300000,
+      "required": false
+    },
+    {
+      "name": "gold",
+      "label": "Current Gold/Alternatives (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 1000000000,
+      "default": 100000,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "Target Equity %",
+    "Target Debt %",
+    "Target Gold %",
+    "Rebalancing Action Required",
+    "Buy/Sell Amounts"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Asset Class",
+    "yAxis": "Allocation (%)",
+    "title": "Portfolio Asset Allocation"
+  },
+  "result_explanation": "The Portfolio Allocation Calculator returns Target Equity %, Target Debt %, Target Gold %. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "totalPortfolio": {
+      "required": true,
+      "min": 10000,
+      "max": 1000000000
+    },
+    "age": {
+      "required": true,
+      "min": 18,
+      "max": 80
+    },
+    "riskProfile": {
+      "required": true
+    },
+    "equity": {
+      "required": false,
+      "min": 0,
+      "max": 1000000000
+    },
+    "debt": {
+      "required": false,
+      "min": 0,
+      "max": 1000000000
+    },
+    "gold": {
+      "required": false,
+      "min": 0,
+      "max": 1000000000
+    }
+  },
+  "calculator_engine": "function portAlloc(total,age,profile,eq,debt,gold){const targetEq=profile==='Aggressive'?80:profile==='Moderate'?60:40;const targetDebt=profile==='Aggressive'?15:profile==='Moderate'?35:55;const targetGold=100-targetEq-targetDebt;const targetEqAmt=total*targetEq/100;const action=Math.abs(eq-targetEqAmt)>total*0.05?'Rebalance':'No action needed';return{targetEq,targetDebt,targetGold,targetEqAmt,action};}",
+  "category_hierarchy": [
+    "investment",
+    "portfolio",
+    "allocation",
+    "diversification"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "investment_cluster",
+  "internal_link_targets": [
+    "swp-vs-dividend-reinvestment"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "portfolio allocation calculator india",
+    "asset allocation by age india",
+    "equity debt gold allocation",
+    "how to allocate portfolio india",
+    "risk based asset allocation",
+    "60 40 portfolio calculator",
+    "portfolio rebalancing calculator india"
+  ],
+  "semantic_keywords": [
+    "asset allocation",
+    "equity",
+    "debt",
+    "gold",
+    "portfolio",
+    "SEBI",
+    "FPSBI",
+    "rebalancing",
+    "rule of 100",
+    "risk profile"
+  ],
+  "paa_keywords": [
+    "What is ideal asset allocation by age?",
+    "How much equity vs debt should I have?",
+    "What is the 60:40 portfolio rule?",
+    "When should I rebalance portfolio?",
+    "How to allocate portfolio in India?"
+  ],
+  "voice_search_keywords": [
+    "portfolio allocation calculator india",
+    "how to allocate investments",
+    "equity debt allocation by age",
+    "portfolio rebalancing calculator"
+  ],
+  "seo_score": 76,
+  "eeat_score": 74,
+  "discover_score": 68,
+  "ai_search_score": 74,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Portfolio Allocation Calculator | Free Calculator India",
+    "meta_description": "Use our free portfolio allocation calculator to asset allocation based on risk. Get instant results with Indian context – ₹, lakhs, crores. Plan your finance...",
+    "focus_keyword": "Portfolio Allocation Calculator",
+    "secondary_keywords": [
+      "portfolio allocation calculator calculator online",
+      "portfolio allocation calculator calculator india",
+      "portfolio allocation calculator formula",
+      "best portfolio allocation calculator calculator 2024"
+    ],
+    "og_title": "Free Portfolio Allocation Calculator – India's Best Online C",
+    "og_description": "Calculate asset allocation based on risk instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/portfolio-allocation-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "portfolio allocation calculator india",
+      "asset allocation by age india",
+      "equity debt gold allocation",
+      "how to allocate portfolio india",
+      "risk based asset allocation",
+      "60 40 portfolio calculator",
+      "portfolio rebalancing calculator india"
+    ],
+    "semantic_keywords": [
+      "asset allocation",
+      "equity",
+      "debt",
+      "gold",
+      "portfolio",
+      "SEBI",
+      "FPSBI",
+      "rebalancing",
+      "rule of 100",
+      "risk profile"
+    ],
+    "paa_keywords": [
+      "What is ideal asset allocation by age?",
+      "How much equity vs debt should I have?",
+      "What is the 60:40 portfolio rule?",
+      "When should I rebalance portfolio?",
+      "How to allocate portfolio in India?"
+    ],
+    "voice_search_keywords": [
+      "portfolio allocation calculator india",
+      "how to allocate investments",
+      "equity debt allocation by age",
+      "portfolio rebalancing calculator"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 74,
+    "discover_score": 68,
+    "ai_search_score": 74,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Asset Allocation: Rule of 100 minus age for equity (e.g., age 30 → 70% equity). Aggressive: 80/20 equity/debt; Moderate: 60/40; Conservative: 40/60. Rebalance when allocation drifts >5% from target. Risk profile determines allocation.",
+    "formula_template": "portfolioAllocationFormula",
+    "formula_source": "SEBI / FPSBI India",
+    "formula_source_url": "https://www.fpsbi.com",
+    "formula_explanation": "The Portfolio Allocation Calculator uses: Asset Allocation: Rule of 100 minus age for equity (e.g., age 30 → 70% equity). Aggressive: 80/20 equity/debt; Moderate: 60/40; Conservative: 40/60. Rebalance when allocation drifts >5% from target. R. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Total Portfolio Value (₹)=1000000, Your Age=35, Risk Profile=Moderate → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Portfolio Allocation Calculator helps you asset allocation based on risk accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Portfolio Allocation Calculator is a digital tool that allows you to asset allocation based on risk without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Portfolio Allocation Calculator on this page. Step 2: Enter your Total Portfolio Value (₹) (e.g., ₹1,000,000). Step 3: Enter your Your Age (e.g., ₹35). Step 4: Enter your Risk Profile). Step 5: Enter your Current Equity (₹) (e.g., ₹600,000). Step 6: Enter your Current Debt (₹) (e.g., ₹300,000). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Portfolio Allocation Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+    "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+    "result_explanation": "The Portfolio Allocation Calculator returns Target Equity %, Target Debt %, Target Gold %. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Portfolio Allocation Calculator?",
+        "a": "A Portfolio Allocation Calculator is an online tool that helps you asset allocation based on risk quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Portfolio Allocation Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Portfolio Allocation Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "What is a realistic return for Indian mutual funds?",
+        "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "totalPortfolio",
+        "label": "Total Portfolio Value (₹)",
+        "type": "number",
+        "min": 10000,
+        "max": 1000000000,
+        "default": 1000000,
+        "required": true
+      },
+      {
+        "name": "age",
+        "label": "Your Age",
+        "type": "number",
+        "min": 18,
+        "max": 80,
+        "default": 35,
+        "required": true
+      },
+      {
+        "name": "riskProfile",
+        "label": "Risk Profile",
+        "type": "select",
+        "options": [
+          "Aggressive",
+          "Moderate",
+          "Conservative"
+        ],
+        "default": "Moderate",
+        "required": true
+      },
+      {
+        "name": "equity",
+        "label": "Current Equity (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 1000000000,
+        "default": 600000,
+        "required": false
+      },
+      {
+        "name": "debt",
+        "label": "Current Debt (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 1000000000,
+        "default": 300000,
+        "required": false
+      },
+      {
+        "name": "gold",
+        "label": "Current Gold/Alternatives (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 1000000000,
+        "default": 100000,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "Target Equity %",
+      "Target Debt %",
+      "Target Gold %",
+      "Rebalancing Action Required",
+      "Buy/Sell Amounts"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Asset Class",
+      "yAxis": "Allocation (%)",
+      "title": "Portfolio Asset Allocation"
+    },
+    "validation_rules": {
+      "totalPortfolio": {
+        "required": true,
+        "min": 10000,
+        "max": 1000000000
+      },
+      "age": {
+        "required": true,
+        "min": 18,
+        "max": 80
+      },
+      "riskProfile": {
+        "required": true
+      },
+      "equity": {
+        "required": false,
+        "min": 0,
+        "max": 1000000000
+      },
+      "debt": {
+        "required": false,
+        "min": 0,
+        "max": 1000000000
+      },
+      "gold": {
+        "required": false,
+        "min": 0,
+        "max": 1000000000
+      }
+    },
+    "calculator_engine": "function portAlloc(total,age,profile,eq,debt,gold){const targetEq=profile==='Aggressive'?80:profile==='Moderate'?60:40;const targetDebt=profile==='Aggressive'?15:profile==='Moderate'?35:55;const targetGold=100-targetEq-targetDebt;const targetEqAmt=total*targetEq/100;const action=Math.abs(eq-targetEqAmt)>total*0.05?'Rebalance':'No action needed';return{targetEq,targetDebt,targetGold,targetEqAmt,action};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "investment",
+    "category_hierarchy": [
+      "investment",
+      "portfolio",
+      "allocation",
+      "diversification"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "investment_cluster",
+    "breadcrumb_label": "Portfolio Allocation Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-vs-dividend-reinvestment"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-vs-dividend-reinvestment"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

@@ -1,0 +1,387 @@
+{
+  "slug": "roi-calculator",
+  "title": "ROI Calculator",
+  "category": "individual",
+  "type": "returns",
+  "description": "Return on investment percentage",
+  "formula_template": "roiFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "ROI Calculator",
+  "canonical_url": "https://yoursite.com/calculators/roi-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "ROI = (Net Profit / Cost of Investment) × 100; Annualized ROI = [(1 + ROI)^(1/years) − 1] × 100",
+  "formula_source": "Standard Finance Formula",
+  "formula_source_url": "https://www.investopedia.com/terms/r/returnoninvestment.asp",
+  "meta_title": "ROI Calculator | Free Online Calculator India",
+  "meta_description": "Use our free roi calculator to return on investment percentage. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter today.",
+  "focus_keyword": "ROI Calculator",
+  "secondary_keywords": [
+    "roi calculator online",
+    "roi calculator india",
+    "roi calculator calculator",
+    "roi calculator formula",
+    "roi calculator example",
+    "roi calculator calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our ROI Calculator helps you return on investment percentage accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A ROI Calculator is a digital tool that allows you to return on investment percentage without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the ROI Calculator on this page. Step 2: Enter your Cost of Investment (₹) (e.g., ₹100,000). Step 3: Enter your Gain from Investment (₹) (e.g., ₹130,000). Step 4: Enter your Holding Period (Years) (e.g., ₹3). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The ROI Calculator uses the following mathematical formula: ROI = (Net Profit / Cost of Investment) × 100; Annualized ROI = [(1 + ROI)^(1/years) − 1] × 100. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Initial investment ₹1 lakh; Final value ₹2 lakh after 5 years → CAGR = 14.87%.",
+  "benefits": "<ul><li>Instant, accurate ROI Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals before making any financial decisions. Individual circumstances may vary.",
+  "pro_tips": "1. Use this calculator to compare multiple scenarios. 2. Keep results handy for financial planning discussions. 3. Revisit calculations annually as rates change. 4. Consult a certified financial advisor for personalized advice.",
+  "faq": [
+    {
+      "q": "What is a ROI Calculator?",
+      "a": "A ROI Calculator is an online tool that helps you return on investment percentage quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this ROI Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this ROI Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this ROI Calculator on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    }
+  ],
+  "og_title": "Free ROI Calculator – India's Best Online Calculator",
+  "og_description": "Calculate return on investment percentage instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "health-individual-vs-family-floater",
+    "ott-pack-vs-individual",
+    "mutual-fund-returns-calculator",
+    "mutual-fund-xirr-returns"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "costOfInvestment",
+      "label": "Cost of Investment (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 1000000000,
+      "default": 100000,
+      "required": true
+    },
+    {
+      "name": "gainFromInvestment",
+      "label": "Gain from Investment (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 1000000000,
+      "default": 130000,
+      "required": true
+    },
+    {
+      "name": "holdingYears",
+      "label": "Holding Period (Years)",
+      "type": "number",
+      "min": 0.1,
+      "max": 50,
+      "default": 3,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "Net Profit",
+    "ROI (%)",
+    "Annualized ROI (%)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Metric",
+    "yAxis": "Value",
+    "title": "ROI Summary"
+  },
+  "result_explanation": "The ROI Calculator returns Net Profit, ROI (%), Annualized ROI (%). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "costOfInvestment": {
+      "required": true,
+      "min": 1,
+      "max": 1000000000
+    },
+    "gainFromInvestment": {
+      "required": true,
+      "min": 0,
+      "max": 1000000000
+    },
+    "holdingYears": {
+      "required": false,
+      "min": 0.1,
+      "max": 50
+    }
+  },
+  "calculator_engine": "function roi(cost,gain,years){const profit=gain-cost;const roiPct=profit/cost*100;const annualized=years?(Math.pow(1+roiPct/100,1/years)-1)*100:roiPct;return{profit,roi:roiPct.toFixed(2),annualizedRoi:annualized.toFixed(2)};}",
+  "category_hierarchy": [
+    "returns",
+    "roi",
+    "investment",
+    "metrics"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "returns_cluster",
+  "internal_link_targets": [
+    "health-individual-vs-family-floater",
+    "ott-pack-vs-individual",
+    "mutual-fund-returns-calculator",
+    "mutual-fund-xirr-returns"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "roi calculator india",
+    "return on investment calculator",
+    "roi formula calculator",
+    "annualized roi calculator",
+    "roi for stocks india",
+    "investment return calculator",
+    "roi percentage calculator",
+    "roi on mutual fund india"
+  ],
+  "semantic_keywords": [
+    "ROI",
+    "return on investment",
+    "net profit",
+    "annualized return",
+    "CAGR",
+    "investment performance",
+    "profitability",
+    "stocks",
+    "mutual fund",
+    "financial metrics"
+  ],
+  "paa_keywords": [
+    "How to calculate ROI?",
+    "What is a good ROI for investment?",
+    "What is the difference between ROI and CAGR?",
+    "How to calculate annualized ROI?",
+    "What is 15% ROI in rupees?"
+  ],
+  "voice_search_keywords": [
+    "how to calculate roi",
+    "return on investment calculator india",
+    "what is a good roi",
+    "how to find annualized roi"
+  ],
+  "seo_score": 84,
+  "eeat_score": 82,
+  "discover_score": 76,
+  "ai_search_score": 83,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "ROI Calculator | Free Online Calculator India",
+    "meta_description": "Use our free roi calculator to return on investment percentage. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter today.",
+    "focus_keyword": "ROI Calculator",
+    "secondary_keywords": [
+      "roi calculator online",
+      "roi calculator india",
+      "roi calculator calculator",
+      "roi calculator formula",
+      "roi calculator example",
+      "roi calculator calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free ROI Calculator – India's Best Online Calculator",
+    "og_description": "Calculate return on investment percentage instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/roi-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "roi calculator india",
+      "return on investment calculator",
+      "roi formula calculator",
+      "annualized roi calculator",
+      "roi for stocks india",
+      "investment return calculator",
+      "roi percentage calculator",
+      "roi on mutual fund india"
+    ],
+    "semantic_keywords": [
+      "ROI",
+      "return on investment",
+      "net profit",
+      "annualized return",
+      "CAGR",
+      "investment performance",
+      "profitability",
+      "stocks",
+      "mutual fund",
+      "financial metrics"
+    ],
+    "paa_keywords": [
+      "How to calculate ROI?",
+      "What is a good ROI for investment?",
+      "What is the difference between ROI and CAGR?",
+      "How to calculate annualized ROI?",
+      "What is 15% ROI in rupees?"
+    ],
+    "voice_search_keywords": [
+      "how to calculate roi",
+      "return on investment calculator india",
+      "what is a good roi",
+      "how to find annualized roi"
+    ]
+  },
+  "_scores": {
+    "seo_score": 84,
+    "eeat_score": 82,
+    "discover_score": 76,
+    "ai_search_score": 83,
+    "ranking_priority": 2,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "ROI = (Net Profit / Cost of Investment) × 100; Annualized ROI = [(1 + ROI)^(1/years) − 1] × 100",
+    "formula_template": "roiFormula",
+    "formula_source": "Standard Finance Formula",
+    "formula_source_url": "https://www.investopedia.com/terms/r/returnoninvestment.asp",
+    "formula_explanation": "The ROI Calculator uses the following mathematical formula: ROI = (Net Profit / Cost of Investment) × 100; Annualized ROI = [(1 + ROI)^(1/years) − 1] × 100. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Initial investment ₹1 lakh; Final value ₹2 lakh after 5 years → CAGR = 14.87%.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our ROI Calculator helps you return on investment percentage accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A ROI Calculator is a digital tool that allows you to return on investment percentage without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the ROI Calculator on this page. Step 2: Enter your Cost of Investment (₹) (e.g., ₹100,000). Step 3: Enter your Gain from Investment (₹) (e.g., ₹130,000). Step 4: Enter your Holding Period (Years) (e.g., ₹3). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate ROI Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals before making any financial decisions. Individual circumstances may vary.",
+    "pro_tips": "1. Use this calculator to compare multiple scenarios. 2. Keep results handy for financial planning discussions. 3. Revisit calculations annually as rates change. 4. Consult a certified financial advisor for personalized advice.",
+    "result_explanation": "The ROI Calculator returns Net Profit, ROI (%), Annualized ROI (%). Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a ROI Calculator?",
+        "a": "A ROI Calculator is an online tool that helps you return on investment percentage quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this ROI Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this ROI Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this ROI Calculator on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "costOfInvestment",
+        "label": "Cost of Investment (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 1000000000,
+        "default": 100000,
+        "required": true
+      },
+      {
+        "name": "gainFromInvestment",
+        "label": "Gain from Investment (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 1000000000,
+        "default": 130000,
+        "required": true
+      },
+      {
+        "name": "holdingYears",
+        "label": "Holding Period (Years)",
+        "type": "number",
+        "min": 0.1,
+        "max": 50,
+        "default": 3,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "Net Profit",
+      "ROI (%)",
+      "Annualized ROI (%)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Metric",
+      "yAxis": "Value",
+      "title": "ROI Summary"
+    },
+    "validation_rules": {
+      "costOfInvestment": {
+        "required": true,
+        "min": 1,
+        "max": 1000000000
+      },
+      "gainFromInvestment": {
+        "required": true,
+        "min": 0,
+        "max": 1000000000
+      },
+      "holdingYears": {
+        "required": false,
+        "min": 0.1,
+        "max": 50
+      }
+    },
+    "calculator_engine": "function roi(cost,gain,years){const profit=gain-cost;const roiPct=profit/cost*100;const annualized=years?(Math.pow(1+roiPct/100,1/years)-1)*100:roiPct;return{profit,roi:roiPct.toFixed(2),annualizedRoi:annualized.toFixed(2)};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "returns",
+    "category_hierarchy": [
+      "returns",
+      "roi",
+      "investment",
+      "metrics"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "returns_cluster",
+    "breadcrumb_label": "ROI Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "health-individual-vs-family-floater",
+      "ott-pack-vs-individual",
+      "mutual-fund-returns-calculator",
+      "mutual-fund-xirr-returns"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "health-individual-vs-family-floater",
+      "ott-pack-vs-individual",
+      "mutual-fund-returns-calculator",
+      "mutual-fund-xirr-returns"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

@@ -1,0 +1,383 @@
+{
+  "slug": "loan-tenure-calculator",
+  "title": "Loan Tenure Calculator",
+  "category": "individual",
+  "type": "loan",
+  "description": "Find tenure for given EMI",
+  "formula_template": "loanTenureFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Loan Tenure Calculator",
+  "canonical_url": "https://yoursite.com/calculators/loan-tenure-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Tenure (months) = −ln(1 − P×r/EMI) / ln(1+r) where P = principal, r = monthly rate, EMI = desired monthly payment. Solve for n given EMI, principal, and rate.",
+  "formula_source": "RBI India",
+  "formula_source_url": "https://rbi.org.in",
+  "meta_title": "Loan Tenure Calculator | Free Calculator India",
+  "meta_description": "Use our free loan tenure calculator to find tenure for given emi. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Loan Tenure Calculator",
+  "secondary_keywords": [
+    "loan tenure calculator calculator online",
+    "loan tenure calculator calculator india",
+    "loan tenure calculator formula",
+    "best loan tenure calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Loan Tenure Calculator helps you find tenure for given emi accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Loan Tenure Calculator is a digital tool that allows you to find tenure for given emi without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Loan Tenure Calculator on this page. Step 2: Enter your Loan Amount (₹) (e.g., ₹2,000,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹9). Step 4: Enter your Desired Monthly EMI (₹) (e.g., ₹25,000). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Loan Tenure Calculator uses: Tenure (months) = −ln(1 − P×r/EMI) / ln(1+r) where P = principal, r = monthly rate, EMI = desired monthly payment. Solve for n given EMI, principal, and rate.. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Loan Amount (₹)=2000000, Annual Interest Rate (%)=9, Desired Monthly EMI (₹)=25000 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Loan Tenure Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "EMI is indicative. Actual EMI may vary. Consult your bank for exact terms.",
+  "pro_tips": "1. Maintain CIBIL score above 750. 2. Increase EMI by 5-10% annually. 3. Make prepayments during bonuses. 4. Compare 3+ banks before finalizing.",
+  "faq": [
+    {
+      "q": "What is a Loan Tenure Calculator?",
+      "a": "A Loan Tenure Calculator is an online tool that helps you find tenure for given emi quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Loan Tenure Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Loan Tenure Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "What is the max loan tenure?",
+      "a": "Home: 30yr; Personal: 7yr; Car: 7yr; Education: 15yr."
+    }
+  ],
+  "og_title": "Free Loan Tenure Calculator – India's Best Online Calculator",
+  "og_description": "Calculate find tenure for given emi instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "home-loan-emi-calculator",
+    "home-loan-prepayment-calculator",
+    "home-loan-balance-transfer-calculator",
+    "car-loan-emi-calculator",
+    "personal-loan-emi-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "loanAmount",
+      "label": "Loan Amount (₹)",
+      "type": "number",
+      "min": 10000,
+      "max": 100000000,
+      "default": 2000000,
+      "required": true
+    },
+    {
+      "name": "annualRate",
+      "label": "Annual Interest Rate (%)",
+      "type": "number",
+      "min": 1,
+      "max": 30,
+      "default": 9,
+      "required": true
+    },
+    {
+      "name": "desiredEMI",
+      "label": "Desired Monthly EMI (₹)",
+      "type": "number",
+      "min": 500,
+      "max": 1000000,
+      "default": 25000,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Required Tenure (Months)",
+    "Required Tenure (Years)",
+    "Total Interest",
+    "Total Payable"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "EMI Amount",
+    "yAxis": "Tenure (Years)",
+    "title": "Loan Tenure by EMI"
+  },
+  "result_explanation": "The Loan Tenure Calculator returns Required Tenure (Months), Required Tenure (Years), Total Interest. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "loanAmount": {
+      "required": true,
+      "min": 10000,
+      "max": 100000000
+    },
+    "annualRate": {
+      "required": true,
+      "min": 1,
+      "max": 30
+    },
+    "desiredEMI": {
+      "required": true,
+      "min": 500,
+      "max": 1000000
+    }
+  },
+  "calculator_engine": "function loanTenure(P,rate,emi){const r=rate/100/12;const n=-Math.log(1-P*r/emi)/Math.log(1+r);return{months:Math.ceil(n),years:(Math.ceil(n)/12).toFixed(1),interest:emi*Math.ceil(n)-P};}",
+  "category_hierarchy": [
+    "loan",
+    "tenure",
+    "emi",
+    "calculator"
+  ],
+  "calculator_group": "loan",
+  "topical_cluster": "loan_cluster",
+  "internal_link_targets": [
+    "home-loan-emi-calculator",
+    "home-loan-prepayment-calculator",
+    "home-loan-balance-transfer-calculator",
+    "car-loan-emi-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "loan tenure calculator india",
+    "how many years to repay loan",
+    "emi to tenure calculator",
+    "loan repayment period calculator",
+    "find tenure for emi",
+    "home loan tenure calculator"
+  ],
+  "semantic_keywords": [
+    "loan tenure",
+    "repayment period",
+    "EMI",
+    "principal",
+    "interest rate",
+    "RBI",
+    "home loan",
+    "personal loan",
+    "months",
+    "years"
+  ],
+  "paa_keywords": [
+    "How to calculate loan tenure?",
+    "What is the formula for loan tenure?",
+    "How to shorten loan tenure?",
+    "How tenure affects EMI?",
+    "Find tenure given EMI amount?"
+  ],
+  "voice_search_keywords": [
+    "how long to repay my loan",
+    "loan tenure calculator",
+    "find loan repayment period",
+    "emi to tenure calculator india"
+  ],
+  "seo_score": 76,
+  "eeat_score": 74,
+  "discover_score": 68,
+  "ai_search_score": 74,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Loan Tenure Calculator | Free Calculator India",
+    "meta_description": "Use our free loan tenure calculator to find tenure for given emi. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Loan Tenure Calculator",
+    "secondary_keywords": [
+      "loan tenure calculator calculator online",
+      "loan tenure calculator calculator india",
+      "loan tenure calculator formula",
+      "best loan tenure calculator calculator 2024"
+    ],
+    "og_title": "Free Loan Tenure Calculator – India's Best Online Calculator",
+    "og_description": "Calculate find tenure for given emi instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/loan-tenure-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "loan tenure calculator india",
+      "how many years to repay loan",
+      "emi to tenure calculator",
+      "loan repayment period calculator",
+      "find tenure for emi",
+      "home loan tenure calculator"
+    ],
+    "semantic_keywords": [
+      "loan tenure",
+      "repayment period",
+      "EMI",
+      "principal",
+      "interest rate",
+      "RBI",
+      "home loan",
+      "personal loan",
+      "months",
+      "years"
+    ],
+    "paa_keywords": [
+      "How to calculate loan tenure?",
+      "What is the formula for loan tenure?",
+      "How to shorten loan tenure?",
+      "How tenure affects EMI?",
+      "Find tenure given EMI amount?"
+    ],
+    "voice_search_keywords": [
+      "how long to repay my loan",
+      "loan tenure calculator",
+      "find loan repayment period",
+      "emi to tenure calculator india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 74,
+    "discover_score": 68,
+    "ai_search_score": 74,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "Tenure (months) = −ln(1 − P×r/EMI) / ln(1+r) where P = principal, r = monthly rate, EMI = desired monthly payment. Solve for n given EMI, principal, and rate.",
+    "formula_template": "loanTenureFormula",
+    "formula_source": "RBI India",
+    "formula_source_url": "https://rbi.org.in",
+    "formula_explanation": "The Loan Tenure Calculator uses: Tenure (months) = −ln(1 − P×r/EMI) / ln(1+r) where P = principal, r = monthly rate, EMI = desired monthly payment. Solve for n given EMI, principal, and rate.. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Loan Amount (₹)=2000000, Annual Interest Rate (%)=9, Desired Monthly EMI (₹)=25000 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Loan Tenure Calculator helps you find tenure for given emi accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Loan Tenure Calculator is a digital tool that allows you to find tenure for given emi without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Loan Tenure Calculator on this page. Step 2: Enter your Loan Amount (₹) (e.g., ₹2,000,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹9). Step 4: Enter your Desired Monthly EMI (₹) (e.g., ₹25,000). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Loan Tenure Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "EMI is indicative. Actual EMI may vary. Consult your bank for exact terms.",
+    "pro_tips": "1. Maintain CIBIL score above 750. 2. Increase EMI by 5-10% annually. 3. Make prepayments during bonuses. 4. Compare 3+ banks before finalizing.",
+    "result_explanation": "The Loan Tenure Calculator returns Required Tenure (Months), Required Tenure (Years), Total Interest. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Loan Tenure Calculator?",
+        "a": "A Loan Tenure Calculator is an online tool that helps you find tenure for given emi quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Loan Tenure Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Loan Tenure Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "What is the max loan tenure?",
+        "a": "Home: 30yr; Personal: 7yr; Car: 7yr; Education: 15yr."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "loanAmount",
+        "label": "Loan Amount (₹)",
+        "type": "number",
+        "min": 10000,
+        "max": 100000000,
+        "default": 2000000,
+        "required": true
+      },
+      {
+        "name": "annualRate",
+        "label": "Annual Interest Rate (%)",
+        "type": "number",
+        "min": 1,
+        "max": 30,
+        "default": 9,
+        "required": true
+      },
+      {
+        "name": "desiredEMI",
+        "label": "Desired Monthly EMI (₹)",
+        "type": "number",
+        "min": 500,
+        "max": 1000000,
+        "default": 25000,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Required Tenure (Months)",
+      "Required Tenure (Years)",
+      "Total Interest",
+      "Total Payable"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "EMI Amount",
+      "yAxis": "Tenure (Years)",
+      "title": "Loan Tenure by EMI"
+    },
+    "validation_rules": {
+      "loanAmount": {
+        "required": true,
+        "min": 10000,
+        "max": 100000000
+      },
+      "annualRate": {
+        "required": true,
+        "min": 1,
+        "max": 30
+      },
+      "desiredEMI": {
+        "required": true,
+        "min": 500,
+        "max": 1000000
+      }
+    },
+    "calculator_engine": "function loanTenure(P,rate,emi){const r=rate/100/12;const n=-Math.log(1-P*r/emi)/Math.log(1+r);return{months:Math.ceil(n),years:(Math.ceil(n)/12).toFixed(1),interest:emi*Math.ceil(n)-P};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "loan",
+    "category_hierarchy": [
+      "loan",
+      "tenure",
+      "emi",
+      "calculator"
+    ],
+    "calculator_group": "loan",
+    "topical_cluster": "loan_cluster",
+    "breadcrumb_label": "Loan Tenure Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "home-loan-emi-calculator",
+      "home-loan-prepayment-calculator",
+      "home-loan-balance-transfer-calculator",
+      "car-loan-emi-calculator",
+      "personal-loan-emi-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "home-loan-emi-calculator",
+      "home-loan-prepayment-calculator",
+      "home-loan-balance-transfer-calculator",
+      "car-loan-emi-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

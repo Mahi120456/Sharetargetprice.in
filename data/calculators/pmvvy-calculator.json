@@ -1,0 +1,377 @@
+{
+  "slug": "pmvvy-calculator",
+  "title": "PMVVY Monthly Pension",
+  "category": "individual",
+  "type": "retirement",
+  "description": "Pradhan Mantri Vaya Vandana Yojana",
+  "formula_template": "pmvvyFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "PMVVY Monthly Pension",
+  "canonical_url": "https://yoursite.com/calculators/pmvvy-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "PMVVY (Pradhan Mantri Vaya Vandana Yojana): Annuity from LIC. Guaranteed pension for 10 years. Monthly/quarterly/half-yearly/annual payout options. Policy closed for new subscribers (scheme closed Mar 2023 extended only). Rate was 7.4% p.a. for last batch. Interest = Purchase Price × Rate × Frequency.",
+  "formula_source": "LIC India / Ministry of Finance",
+  "formula_source_url": "https://licindia.in",
+  "meta_title": "PMVVY Monthly Pension | Free Calculator India",
+  "meta_description": "Use our free pmvvy monthly pension to pradhan mantri vaya vandana yojana. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "PMVVY Monthly Pension",
+  "secondary_keywords": [
+    "pmvvy monthly pension calculator online",
+    "pmvvy monthly pension calculator india",
+    "pmvvy monthly pension formula",
+    "best pmvvy monthly pension calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our PMVVY Monthly Pension helps you pradhan mantri vaya vandana yojana accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A PMVVY Monthly Pension is a digital tool that allows you to pradhan mantri vaya vandana yojana without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the PMVVY Monthly Pension on this page. Step 2: Enter your Policy Purchase Price (₹, max ₹15 lakh) (e.g., ₹1,500,000). Step 3: Enter your Guaranteed Interest Rate (%) (e.g., ₹7.4). Step 4: Enter your Payout Mode). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The PMVVY Monthly Pension uses: PMVVY (Pradhan Mantri Vaya Vandana Yojana): Annuity from LIC. Guaranteed pension for 10 years. Monthly/quarterly/half-yearly/annual payout options. Policy closed for new subscribers (scheme closed Mar. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Policy Purchase Price (₹, max ₹15 lakh)=1500000, Guaranteed Interest Rate (%)=7.4, Payout Mode=Monthly → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate PMVVY Monthly Pension results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Projections are estimates. Consult a certified financial planner.",
+  "pro_tips": "1. Start retirement planning in your 20s. 2. Use NPS for extra ₹50K deduction under 80CCD(1B). 3. Maintain 60% equity till age 50. 4. Rebalance every 6 months.",
+  "faq": [
+    {
+      "q": "What is a PMVVY Monthly Pension?",
+      "a": "A PMVVY Monthly Pension is an online tool that helps you pradhan mantri vaya vandana yojana quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this PMVVY Monthly Pension free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this PMVVY Monthly Pension?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "How much corpus to retire?",
+      "a": "25-33x annual expenses (3-4% withdrawal rule). ₹60K/month → ₹1.8-2.4Cr."
+    }
+  ],
+  "og_title": "Free PMVVY Monthly Pension – India's Best Online Calculator",
+  "og_description": "Calculate pradhan mantri vaya vandana yojana instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "retirement-corpus-calculator",
+    "retirement-swp-vs-annuity"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "purchasePrice",
+      "label": "Policy Purchase Price (₹, max ₹15 lakh)",
+      "type": "number",
+      "min": 100000,
+      "max": 1500000,
+      "default": 1500000,
+      "required": true
+    },
+    {
+      "name": "annualRate",
+      "label": "Guaranteed Interest Rate (%)",
+      "type": "number",
+      "min": 5,
+      "max": 10,
+      "default": 7.4,
+      "required": true
+    },
+    {
+      "name": "payoutMode",
+      "label": "Payout Mode",
+      "type": "select",
+      "options": [
+        "Monthly",
+        "Quarterly",
+        "Half-Yearly",
+        "Yearly"
+      ],
+      "default": "Monthly",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Monthly/Periodic Pension",
+    "Annual Pension",
+    "10-Year Total Payout",
+    "Maturity (Purchase Price Returned)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Year",
+    "yAxis": "Annual Pension (₹)",
+    "title": "PMVVY Annual Payout"
+  },
+  "result_explanation": "The PMVVY Monthly Pension returns Monthly/Periodic Pension, Annual Pension, 10-Year Total Payout. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "purchasePrice": {
+      "required": true,
+      "min": 100000,
+      "max": 1500000
+    },
+    "annualRate": {
+      "required": true,
+      "min": 5,
+      "max": 10
+    },
+    "payoutMode": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function pmvvy(price,rate,mode){const annual=price*rate/100;const freqMap={Monthly:12,Quarterly:4,'Half-Yearly':2,Yearly:1};const freq=freqMap[mode];const periodic=annual/freq;return{periodic,annual,total10:annual*10,maturity:price};}",
+  "category_hierarchy": [
+    "retirement",
+    "pmvvy",
+    "senior_citizen",
+    "government_scheme"
+  ],
+  "calculator_group": "retirement",
+  "topical_cluster": "retirement_cluster",
+  "internal_link_targets": [
+    "retirement-corpus-calculator",
+    "retirement-swp-vs-annuity"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "pmvvy calculator india",
+    "pradhan mantri vaya vandana yojana calculator",
+    "lic pmvvy pension calculator",
+    "pmvvy monthly pension 15 lakh",
+    "pmvvy vs scss comparison",
+    "pmvvy interest calculator",
+    "government pension scheme senior citizen"
+  ],
+  "semantic_keywords": [
+    "PMVVY",
+    "LIC",
+    "annuity",
+    "senior citizen",
+    "monthly pension",
+    "guaranteed return",
+    "Ministry of Finance",
+    "7.4% rate",
+    "10-year scheme"
+  ],
+  "paa_keywords": [
+    "What is PMVVY?",
+    "How much pension does PMVVY give?",
+    "Is PMVVY still open for subscription?",
+    "PMVVY vs SCSS which is better?",
+    "What is the maximum investment in PMVVY?"
+  ],
+  "voice_search_keywords": [
+    "pmvvy pension calculator",
+    "pmvvy monthly pension 15 lakh",
+    "lic pmvvy scheme",
+    "pradhan mantri vaya vandana yojana"
+  ],
+  "seo_score": 76,
+  "eeat_score": 80,
+  "discover_score": 68,
+  "ai_search_score": 75,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "PMVVY Monthly Pension | Free Calculator India",
+    "meta_description": "Use our free pmvvy monthly pension to pradhan mantri vaya vandana yojana. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "PMVVY Monthly Pension",
+    "secondary_keywords": [
+      "pmvvy monthly pension calculator online",
+      "pmvvy monthly pension calculator india",
+      "pmvvy monthly pension formula",
+      "best pmvvy monthly pension calculator 2024"
+    ],
+    "og_title": "Free PMVVY Monthly Pension – India's Best Online Calculator",
+    "og_description": "Calculate pradhan mantri vaya vandana yojana instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/pmvvy-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "pmvvy calculator india",
+      "pradhan mantri vaya vandana yojana calculator",
+      "lic pmvvy pension calculator",
+      "pmvvy monthly pension 15 lakh",
+      "pmvvy vs scss comparison",
+      "pmvvy interest calculator",
+      "government pension scheme senior citizen"
+    ],
+    "semantic_keywords": [
+      "PMVVY",
+      "LIC",
+      "annuity",
+      "senior citizen",
+      "monthly pension",
+      "guaranteed return",
+      "Ministry of Finance",
+      "7.4% rate",
+      "10-year scheme"
+    ],
+    "paa_keywords": [
+      "What is PMVVY?",
+      "How much pension does PMVVY give?",
+      "Is PMVVY still open for subscription?",
+      "PMVVY vs SCSS which is better?",
+      "What is the maximum investment in PMVVY?"
+    ],
+    "voice_search_keywords": [
+      "pmvvy pension calculator",
+      "pmvvy monthly pension 15 lakh",
+      "lic pmvvy scheme",
+      "pradhan mantri vaya vandana yojana"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 80,
+    "discover_score": 68,
+    "ai_search_score": 75,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "PMVVY (Pradhan Mantri Vaya Vandana Yojana): Annuity from LIC. Guaranteed pension for 10 years. Monthly/quarterly/half-yearly/annual payout options. Policy closed for new subscribers (scheme closed Mar 2023 extended only). Rate was 7.4% p.a. for last batch. Interest = Purchase Price × Rate × Frequency.",
+    "formula_template": "pmvvyFormula",
+    "formula_source": "LIC India / Ministry of Finance",
+    "formula_source_url": "https://licindia.in",
+    "formula_explanation": "The PMVVY Monthly Pension uses: PMVVY (Pradhan Mantri Vaya Vandana Yojana): Annuity from LIC. Guaranteed pension for 10 years. Monthly/quarterly/half-yearly/annual payout options. Policy closed for new subscribers (scheme closed Mar. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Policy Purchase Price (₹, max ₹15 lakh)=1500000, Guaranteed Interest Rate (%)=7.4, Payout Mode=Monthly → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our PMVVY Monthly Pension helps you pradhan mantri vaya vandana yojana accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A PMVVY Monthly Pension is a digital tool that allows you to pradhan mantri vaya vandana yojana without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the PMVVY Monthly Pension on this page. Step 2: Enter your Policy Purchase Price (₹, max ₹15 lakh) (e.g., ₹1,500,000). Step 3: Enter your Guaranteed Interest Rate (%) (e.g., ₹7.4). Step 4: Enter your Payout Mode). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate PMVVY Monthly Pension results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Projections are estimates. Consult a certified financial planner.",
+    "pro_tips": "1. Start retirement planning in your 20s. 2. Use NPS for extra ₹50K deduction under 80CCD(1B). 3. Maintain 60% equity till age 50. 4. Rebalance every 6 months.",
+    "result_explanation": "The PMVVY Monthly Pension returns Monthly/Periodic Pension, Annual Pension, 10-Year Total Payout. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a PMVVY Monthly Pension?",
+        "a": "A PMVVY Monthly Pension is an online tool that helps you pradhan mantri vaya vandana yojana quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this PMVVY Monthly Pension free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this PMVVY Monthly Pension?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "How much corpus to retire?",
+        "a": "25-33x annual expenses (3-4% withdrawal rule). ₹60K/month → ₹1.8-2.4Cr."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "purchasePrice",
+        "label": "Policy Purchase Price (₹, max ₹15 lakh)",
+        "type": "number",
+        "min": 100000,
+        "max": 1500000,
+        "default": 1500000,
+        "required": true
+      },
+      {
+        "name": "annualRate",
+        "label": "Guaranteed Interest Rate (%)",
+        "type": "number",
+        "min": 5,
+        "max": 10,
+        "default": 7.4,
+        "required": true
+      },
+      {
+        "name": "payoutMode",
+        "label": "Payout Mode",
+        "type": "select",
+        "options": [
+          "Monthly",
+          "Quarterly",
+          "Half-Yearly",
+          "Yearly"
+        ],
+        "default": "Monthly",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Monthly/Periodic Pension",
+      "Annual Pension",
+      "10-Year Total Payout",
+      "Maturity (Purchase Price Returned)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Year",
+      "yAxis": "Annual Pension (₹)",
+      "title": "PMVVY Annual Payout"
+    },
+    "validation_rules": {
+      "purchasePrice": {
+        "required": true,
+        "min": 100000,
+        "max": 1500000
+      },
+      "annualRate": {
+        "required": true,
+        "min": 5,
+        "max": 10
+      },
+      "payoutMode": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function pmvvy(price,rate,mode){const annual=price*rate/100;const freqMap={Monthly:12,Quarterly:4,'Half-Yearly':2,Yearly:1};const freq=freqMap[mode];const periodic=annual/freq;return{periodic,annual,total10:annual*10,maturity:price};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "retirement",
+    "category_hierarchy": [
+      "retirement",
+      "pmvvy",
+      "senior_citizen",
+      "government_scheme"
+    ],
+    "calculator_group": "retirement",
+    "topical_cluster": "retirement_cluster",
+    "breadcrumb_label": "PMVVY Monthly Pension"
+  },
+  "_links": {
+    "related_calculators": [
+      "retirement-corpus-calculator",
+      "retirement-swp-vs-annuity"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "retirement-corpus-calculator",
+      "retirement-swp-vs-annuity"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

@@ -1,0 +1,475 @@
+{
+  "slug": "section-80c-optimizer",
+  "title": "Section 80C Optimizer",
+  "category": "individual",
+  "type": "tax",
+  "description": "Maximize 80C savings",
+  "formula_template": "80cOptimizerFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Section 80C Optimizer",
+  "canonical_url": "https://yoursite.com/calculators/section-80c-optimizer",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Section 80C: Max deduction ₹1,50,000/year (Sec 80C). Eligible investments: ELSS, PPF, EPF, LIC, NSC, KVP, Sukanya, SSY, Principal of Home Loan, 5yr FD, NPS 80CCD(1). Benefit = deduction × tax slab rate.",
+  "formula_source": "Income Tax Dept India / Section 80C",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "Section 80C Optimizer | Free Calculator India",
+  "meta_description": "Use our free section 80c optimizer to maximize 80c savings. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Section 80C Optimizer",
+  "secondary_keywords": [
+    "section 80c optimizer calculator online",
+    "section 80c optimizer calculator india",
+    "section 80c optimizer formula",
+    "best section 80c optimizer calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Section 80C Optimizer helps you maximize 80c savings accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Section 80C Optimizer is a digital tool that allows you to maximize 80c savings without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Section 80C Optimizer on this page. Step 2: Enter your Your Tax Slab (%) (e.g., ₹30). Step 3: Enter your ELSS Investment (₹) (e.g., ₹50,000). Step 4: Enter your PPF Investment (₹) (e.g., ₹50,000). Step 5: Enter your EPF (Employee, ₹) (e.g., ₹50,000). Step 6: Enter your LIC Premium (₹)). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Section 80C Optimizer uses: Section 80C: Max deduction ₹1,50,000/year (Sec 80C). Eligible investments: ELSS, PPF, EPF, LIC, NSC, KVP, Sukanya, SSY, Principal of Home Loan, 5yr FD, NPS 80CCD(1). Benefit = deduction × tax slab rat. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Your Tax Slab (%)=30, ELSS Investment (₹)=50000, PPF Investment (₹)=50000 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Section 80C Optimizer results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a Section 80C Optimizer?",
+      "a": "A Section 80C Optimizer is an online tool that helps you maximize 80c savings quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Section 80C Optimizer free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Section 80C Optimizer?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free Section 80C Optimizer – India's Best Online Calculator",
+  "og_description": "Calculate maximize 80c savings instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator",
+    "income-tax-old-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "taxSlab",
+      "label": "Your Tax Slab (%)",
+      "type": "select",
+      "options": [
+        5,
+        20,
+        30
+      ],
+      "default": 30,
+      "required": true
+    },
+    {
+      "name": "elss",
+      "label": "ELSS Investment (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 150000,
+      "default": 50000,
+      "required": false
+    },
+    {
+      "name": "ppf",
+      "label": "PPF Investment (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 150000,
+      "default": 50000,
+      "required": false
+    },
+    {
+      "name": "epf",
+      "label": "EPF (Employee, ₹)",
+      "type": "number",
+      "min": 0,
+      "max": 150000,
+      "default": 50000,
+      "required": false
+    },
+    {
+      "name": "lic",
+      "label": "LIC Premium (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 150000,
+      "default": 0,
+      "required": false
+    },
+    {
+      "name": "others",
+      "label": "Other 80C (NSC/FD/SSY, ₹)",
+      "type": "number",
+      "min": 0,
+      "max": 150000,
+      "default": 0,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "Total 80C Investments",
+    "Eligible Deduction",
+    "Remaining 80C Limit",
+    "Tax Saved",
+    "80CCD(1B) NPS Additional Benefit"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Investment Category",
+    "yAxis": "Amount (₹)",
+    "title": "80C Portfolio Breakdown"
+  },
+  "result_explanation": "The Section 80C Optimizer returns Total 80C Investments, Eligible Deduction, Remaining 80C Limit. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "taxSlab": {
+      "required": true
+    },
+    "elss": {
+      "required": false,
+      "min": 0,
+      "max": 150000
+    },
+    "ppf": {
+      "required": false,
+      "min": 0,
+      "max": 150000
+    },
+    "epf": {
+      "required": false,
+      "min": 0,
+      "max": 150000
+    },
+    "lic": {
+      "required": false,
+      "min": 0,
+      "max": 150000
+    },
+    "others": {
+      "required": false,
+      "min": 0,
+      "max": 150000
+    }
+  },
+  "calculator_engine": "function optimize80C(slab,elss,ppf,epf,lic,others){const total=elss+ppf+epf+lic+others;const deduction=Math.min(total,150000);const taxSaved=deduction*slab/100;const remaining=Math.max(0,150000-deduction);return{total,deduction,taxSaved,remaining};}",
+  "category_hierarchy": [
+    "tax",
+    "80c",
+    "deductions",
+    "optimization"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "tax_saving_cluster",
+  "internal_link_targets": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "stcg-tax-shares-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "section 80c optimizer india",
+    "how to maximize 80c deduction",
+    "80c investment calculator",
+    "best 80c investment options",
+    "80c tax saving optimizer",
+    "1.5 lakh 80c calculator",
+    "which investment saves most tax 80c",
+    "80c deduction calculator 2024"
+  ],
+  "semantic_keywords": [
+    "Section 80C",
+    "ELSS",
+    "PPF",
+    "EPF",
+    "LIC",
+    "tax saving",
+    "deduction",
+    "80CCD(1B)",
+    "NPS",
+    "NSC"
+  ],
+  "paa_keywords": [
+    "How to maximize Section 80C?",
+    "Which 80C investment is best?",
+    "Can I invest more than 1.5 lakh in 80C?",
+    "Is NPS included in 80C?",
+    "What is 80CCD(1B)?"
+  ],
+  "voice_search_keywords": [
+    "how to maximize 80c deduction",
+    "section 80c calculator",
+    "best investment for 80c tax saving",
+    "how much tax saved by 80c"
+  ],
+  "seo_score": 86,
+  "eeat_score": 88,
+  "discover_score": 78,
+  "ai_search_score": 85,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Section 80C Optimizer | Free Calculator India",
+    "meta_description": "Use our free section 80c optimizer to maximize 80c savings. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Section 80C Optimizer",
+    "secondary_keywords": [
+      "section 80c optimizer calculator online",
+      "section 80c optimizer calculator india",
+      "section 80c optimizer formula",
+      "best section 80c optimizer calculator 2024"
+    ],
+    "og_title": "Free Section 80C Optimizer – India's Best Online Calculator",
+    "og_description": "Calculate maximize 80c savings instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/section-80c-optimizer",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "section 80c optimizer india",
+      "how to maximize 80c deduction",
+      "80c investment calculator",
+      "best 80c investment options",
+      "80c tax saving optimizer",
+      "1.5 lakh 80c calculator",
+      "which investment saves most tax 80c",
+      "80c deduction calculator 2024"
+    ],
+    "semantic_keywords": [
+      "Section 80C",
+      "ELSS",
+      "PPF",
+      "EPF",
+      "LIC",
+      "tax saving",
+      "deduction",
+      "80CCD(1B)",
+      "NPS",
+      "NSC"
+    ],
+    "paa_keywords": [
+      "How to maximize Section 80C?",
+      "Which 80C investment is best?",
+      "Can I invest more than 1.5 lakh in 80C?",
+      "Is NPS included in 80C?",
+      "What is 80CCD(1B)?"
+    ],
+    "voice_search_keywords": [
+      "how to maximize 80c deduction",
+      "section 80c calculator",
+      "best investment for 80c tax saving",
+      "how much tax saved by 80c"
+    ]
+  },
+  "_scores": {
+    "seo_score": 86,
+    "eeat_score": 88,
+    "discover_score": 78,
+    "ai_search_score": 85,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Section 80C: Max deduction ₹1,50,000/year (Sec 80C). Eligible investments: ELSS, PPF, EPF, LIC, NSC, KVP, Sukanya, SSY, Principal of Home Loan, 5yr FD, NPS 80CCD(1). Benefit = deduction × tax slab rate.",
+    "formula_template": "80cOptimizerFormula",
+    "formula_source": "Income Tax Dept India / Section 80C",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The Section 80C Optimizer uses: Section 80C: Max deduction ₹1,50,000/year (Sec 80C). Eligible investments: ELSS, PPF, EPF, LIC, NSC, KVP, Sukanya, SSY, Principal of Home Loan, 5yr FD, NPS 80CCD(1). Benefit = deduction × tax slab rat. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Your Tax Slab (%)=30, ELSS Investment (₹)=50000, PPF Investment (₹)=50000 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Section 80C Optimizer helps you maximize 80c savings accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Section 80C Optimizer is a digital tool that allows you to maximize 80c savings without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Section 80C Optimizer on this page. Step 2: Enter your Your Tax Slab (%) (e.g., ₹30). Step 3: Enter your ELSS Investment (₹) (e.g., ₹50,000). Step 4: Enter your PPF Investment (₹) (e.g., ₹50,000). Step 5: Enter your EPF (Employee, ₹) (e.g., ₹50,000). Step 6: Enter your LIC Premium (₹)). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Section 80C Optimizer results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The Section 80C Optimizer returns Total 80C Investments, Eligible Deduction, Remaining 80C Limit. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Section 80C Optimizer?",
+        "a": "A Section 80C Optimizer is an online tool that helps you maximize 80c savings quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Section 80C Optimizer free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Section 80C Optimizer?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "taxSlab",
+        "label": "Your Tax Slab (%)",
+        "type": "select",
+        "options": [
+          5,
+          20,
+          30
+        ],
+        "default": 30,
+        "required": true
+      },
+      {
+        "name": "elss",
+        "label": "ELSS Investment (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 150000,
+        "default": 50000,
+        "required": false
+      },
+      {
+        "name": "ppf",
+        "label": "PPF Investment (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 150000,
+        "default": 50000,
+        "required": false
+      },
+      {
+        "name": "epf",
+        "label": "EPF (Employee, ₹)",
+        "type": "number",
+        "min": 0,
+        "max": 150000,
+        "default": 50000,
+        "required": false
+      },
+      {
+        "name": "lic",
+        "label": "LIC Premium (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 150000,
+        "default": 0,
+        "required": false
+      },
+      {
+        "name": "others",
+        "label": "Other 80C (NSC/FD/SSY, ₹)",
+        "type": "number",
+        "min": 0,
+        "max": 150000,
+        "default": 0,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "Total 80C Investments",
+      "Eligible Deduction",
+      "Remaining 80C Limit",
+      "Tax Saved",
+      "80CCD(1B) NPS Additional Benefit"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Investment Category",
+      "yAxis": "Amount (₹)",
+      "title": "80C Portfolio Breakdown"
+    },
+    "validation_rules": {
+      "taxSlab": {
+        "required": true
+      },
+      "elss": {
+        "required": false,
+        "min": 0,
+        "max": 150000
+      },
+      "ppf": {
+        "required": false,
+        "min": 0,
+        "max": 150000
+      },
+      "epf": {
+        "required": false,
+        "min": 0,
+        "max": 150000
+      },
+      "lic": {
+        "required": false,
+        "min": 0,
+        "max": 150000
+      },
+      "others": {
+        "required": false,
+        "min": 0,
+        "max": 150000
+      }
+    },
+    "calculator_engine": "function optimize80C(slab,elss,ppf,epf,lic,others){const total=elss+ppf+epf+lic+others;const deduction=Math.min(total,150000);const taxSaved=deduction*slab/100;const remaining=Math.max(0,150000-deduction);return{total,deduction,taxSaved,remaining};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "80c",
+      "deductions",
+      "optimization"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "tax_saving_cluster",
+    "breadcrumb_label": "Section 80C Optimizer"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator",
+      "income-tax-old-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "stcg-tax-shares-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

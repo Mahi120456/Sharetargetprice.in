@@ -1,0 +1,405 @@
+{
+  "slug": "p-e-ratio-calculator",
+  "title": "P/E Ratio Calculator",
+  "category": "individual",
+  "type": "stock",
+  "description": "Price-to-earnings ratio",
+  "formula_template": "peRatioFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "P/E Ratio Calculator",
+  "canonical_url": "https://yoursite.com/calculators/p-e-ratio-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "P/E Ratio = Market Price per Share / Earnings per Share (EPS). EPS = Net Profit / Outstanding Shares. Forward P/E uses projected EPS. PEG = P/E / Earnings Growth Rate. Low P/E relative to sector may indicate undervaluation.",
+  "formula_source": "NSE India / SEBI",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "P/E Ratio Calculator | Free Calculator India",
+  "meta_description": "Use our free p/e ratio calculator to price-to-earnings ratio. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "P/E Ratio Calculator",
+  "secondary_keywords": [
+    "p/e ratio calculator calculator online",
+    "p/e ratio calculator calculator india",
+    "p/e ratio calculator formula",
+    "best p/e ratio calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our P/E Ratio Calculator helps you price-to-earnings ratio accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A P/E Ratio Calculator is a digital tool that allows you to price-to-earnings ratio without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the P/E Ratio Calculator on this page. Step 2: Enter your Current Share Price (₹) (e.g., ₹500). Step 3: Enter your Earnings Per Share (₹) (e.g., ₹25). Step 4: Enter your Industry Average P/E (e.g., ₹20). Step 5: Enter your Earnings Growth Rate (%) (e.g., ₹15). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The P/E Ratio Calculator uses: P/E Ratio = Market Price per Share / Earnings per Share (EPS). EPS = Net Profit / Outstanding Shares. Forward P/E uses projected EPS. PEG = P/E / Earnings Growth Rate. Low P/E relative to sector may i. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Current Share Price (₹)=500, Earnings Per Share (₹)=25, Industry Average P/E=20 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate P/E Ratio Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a P/E Ratio Calculator?",
+      "a": "A P/E Ratio Calculator is an online tool that helps you price-to-earnings ratio quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this P/E Ratio Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this P/E Ratio Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free P/E Ratio Calculator – India's Best Online Calculator",
+  "og_description": "Calculate price-to-earnings ratio instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "stock-average-calculator",
+    "stock-split-calculator",
+    "stock-sip-calculator",
+    "stock-beta-calculator",
+    "stock-cagr-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "sharePrice",
+      "label": "Current Share Price (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 1000000,
+      "default": 500,
+      "required": true
+    },
+    {
+      "name": "eps",
+      "label": "Earnings Per Share (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 100000,
+      "default": 25,
+      "required": true
+    },
+    {
+      "name": "industryPE",
+      "label": "Industry Average P/E",
+      "type": "number",
+      "min": 1,
+      "max": 200,
+      "default": 20,
+      "required": false
+    },
+    {
+      "name": "earningsGrowth",
+      "label": "Earnings Growth Rate (%)",
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "default": 15,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "P/E Ratio",
+    "PEG Ratio",
+    "Premium/Discount to Industry",
+    "Implied Earnings at Industry P/E"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Metric",
+    "yAxis": "Value",
+    "title": "P/E Analysis"
+  },
+  "result_explanation": "The P/E Ratio Calculator returns P/E Ratio, PEG Ratio, Premium/Discount to Industry. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "sharePrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 1000000
+    },
+    "eps": {
+      "required": true,
+      "min": 0.01,
+      "max": 100000
+    },
+    "industryPE": {
+      "required": false,
+      "min": 1,
+      "max": 200
+    },
+    "earningsGrowth": {
+      "required": false,
+      "min": 0,
+      "max": 100
+    }
+  },
+  "calculator_engine": "function peRatio(price,eps,industryPE,growth){const pe=price/eps;const peg=growth?pe/growth:null;const premium=industryPE?(pe-industryPE)/industryPE*100:null;return{pe:pe.toFixed(2),peg:peg?peg.toFixed(2):'N/A',premium:premium?premium.toFixed(1)+'%':'N/A'};}",
+  "category_hierarchy": [
+    "stock",
+    "valuation",
+    "pe_ratio",
+    "fundamental"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "stock-average-calculator",
+    "stock-split-calculator",
+    "stock-sip-calculator",
+    "stock-beta-calculator"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "pe ratio calculator india",
+    "price to earnings calculator",
+    "how to calculate pe ratio",
+    "peg ratio calculator",
+    "nifty pe ratio",
+    "stock valuation pe",
+    "pe ratio comparison sector"
+  ],
+  "semantic_keywords": [
+    "P/E ratio",
+    "EPS",
+    "valuation",
+    "fundamental analysis",
+    "NSE",
+    "PEG ratio",
+    "sector comparison",
+    "overvalued",
+    "undervalued",
+    "Nifty P/E"
+  ],
+  "paa_keywords": [
+    "What is a good P/E ratio for stocks?",
+    "How to calculate P/E ratio?",
+    "What is PEG ratio?",
+    "Is low P/E always good?",
+    "What is Nifty 50 P/E ratio?"
+  ],
+  "voice_search_keywords": [
+    "pe ratio calculator india",
+    "how to calculate price to earnings ratio",
+    "good pe ratio for indian stocks",
+    "peg ratio calculator"
+  ],
+  "seo_score": 76,
+  "eeat_score": 76,
+  "discover_score": 68,
+  "ai_search_score": 74,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "P/E Ratio Calculator | Free Calculator India",
+    "meta_description": "Use our free p/e ratio calculator to price-to-earnings ratio. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "P/E Ratio Calculator",
+    "secondary_keywords": [
+      "p/e ratio calculator calculator online",
+      "p/e ratio calculator calculator india",
+      "p/e ratio calculator formula",
+      "best p/e ratio calculator calculator 2024"
+    ],
+    "og_title": "Free P/E Ratio Calculator – India's Best Online Calculator",
+    "og_description": "Calculate price-to-earnings ratio instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/p-e-ratio-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "pe ratio calculator india",
+      "price to earnings calculator",
+      "how to calculate pe ratio",
+      "peg ratio calculator",
+      "nifty pe ratio",
+      "stock valuation pe",
+      "pe ratio comparison sector"
+    ],
+    "semantic_keywords": [
+      "P/E ratio",
+      "EPS",
+      "valuation",
+      "fundamental analysis",
+      "NSE",
+      "PEG ratio",
+      "sector comparison",
+      "overvalued",
+      "undervalued",
+      "Nifty P/E"
+    ],
+    "paa_keywords": [
+      "What is a good P/E ratio for stocks?",
+      "How to calculate P/E ratio?",
+      "What is PEG ratio?",
+      "Is low P/E always good?",
+      "What is Nifty 50 P/E ratio?"
+    ],
+    "voice_search_keywords": [
+      "pe ratio calculator india",
+      "how to calculate price to earnings ratio",
+      "good pe ratio for indian stocks",
+      "peg ratio calculator"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 76,
+    "discover_score": 68,
+    "ai_search_score": 74,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "P/E Ratio = Market Price per Share / Earnings per Share (EPS). EPS = Net Profit / Outstanding Shares. Forward P/E uses projected EPS. PEG = P/E / Earnings Growth Rate. Low P/E relative to sector may indicate undervaluation.",
+    "formula_template": "peRatioFormula",
+    "formula_source": "NSE India / SEBI",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The P/E Ratio Calculator uses: P/E Ratio = Market Price per Share / Earnings per Share (EPS). EPS = Net Profit / Outstanding Shares. Forward P/E uses projected EPS. PEG = P/E / Earnings Growth Rate. Low P/E relative to sector may i. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Current Share Price (₹)=500, Earnings Per Share (₹)=25, Industry Average P/E=20 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our P/E Ratio Calculator helps you price-to-earnings ratio accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A P/E Ratio Calculator is a digital tool that allows you to price-to-earnings ratio without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the P/E Ratio Calculator on this page. Step 2: Enter your Current Share Price (₹) (e.g., ₹500). Step 3: Enter your Earnings Per Share (₹) (e.g., ₹25). Step 4: Enter your Industry Average P/E (e.g., ₹20). Step 5: Enter your Earnings Growth Rate (%) (e.g., ₹15). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate P/E Ratio Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The P/E Ratio Calculator returns P/E Ratio, PEG Ratio, Premium/Discount to Industry. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a P/E Ratio Calculator?",
+        "a": "A P/E Ratio Calculator is an online tool that helps you price-to-earnings ratio quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this P/E Ratio Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this P/E Ratio Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "sharePrice",
+        "label": "Current Share Price (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 1000000,
+        "default": 500,
+        "required": true
+      },
+      {
+        "name": "eps",
+        "label": "Earnings Per Share (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 100000,
+        "default": 25,
+        "required": true
+      },
+      {
+        "name": "industryPE",
+        "label": "Industry Average P/E",
+        "type": "number",
+        "min": 1,
+        "max": 200,
+        "default": 20,
+        "required": false
+      },
+      {
+        "name": "earningsGrowth",
+        "label": "Earnings Growth Rate (%)",
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "default": 15,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "P/E Ratio",
+      "PEG Ratio",
+      "Premium/Discount to Industry",
+      "Implied Earnings at Industry P/E"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Metric",
+      "yAxis": "Value",
+      "title": "P/E Analysis"
+    },
+    "validation_rules": {
+      "sharePrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 1000000
+      },
+      "eps": {
+        "required": true,
+        "min": 0.01,
+        "max": 100000
+      },
+      "industryPE": {
+        "required": false,
+        "min": 1,
+        "max": 200
+      },
+      "earningsGrowth": {
+        "required": false,
+        "min": 0,
+        "max": 100
+      }
+    },
+    "calculator_engine": "function peRatio(price,eps,industryPE,growth){const pe=price/eps;const peg=growth?pe/growth:null;const premium=industryPE?(pe-industryPE)/industryPE*100:null;return{pe:pe.toFixed(2),peg:peg?peg.toFixed(2):'N/A',premium:premium?premium.toFixed(1)+'%':'N/A'};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "stock",
+    "category_hierarchy": [
+      "stock",
+      "valuation",
+      "pe_ratio",
+      "fundamental"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "P/E Ratio Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "stock-average-calculator",
+      "stock-split-calculator",
+      "stock-sip-calculator",
+      "stock-beta-calculator",
+      "stock-cagr-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "stock-average-calculator",
+      "stock-split-calculator",
+      "stock-sip-calculator",
+      "stock-beta-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

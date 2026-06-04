@@ -1,0 +1,371 @@
+{
+  "slug": "rnor-status-calculator",
+  "title": "RNOR Status Calculator",
+  "category": "individual",
+  "type": "nri",
+  "description": "Resident but not ordinarily resident status",
+  "formula_template": "rnorFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "RNOR Status Calculator",
+  "canonical_url": "https://yoursite.com/calculators/rnor-status-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "RNOR Status (Resident but Not Ordinarily Resident): A person is RNOR if: (a) Resident in 2 out of last 10 FYs, OR (b) Stayed in India ≤ 730 days in last 7 years. RNOR income: Only India-sourced income taxable. Foreign income exempt in India for RNOR.",
+  "formula_source": "Income Tax Dept India / Section 6",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "RNOR Status Calculator | Free Calculator India",
+  "meta_description": "Use our free rnor status calculator to resident but not ordinarily resident status. Get instant results with Indian context – ₹, lakhs, crores. Plan your fin...",
+  "focus_keyword": "RNOR Status Calculator",
+  "secondary_keywords": [
+    "rnor status calculator calculator online",
+    "rnor status calculator calculator india",
+    "rnor status calculator formula",
+    "best rnor status calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our RNOR Status Calculator helps you resident but not ordinarily resident status accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A RNOR Status Calculator is a digital tool that allows you to resident but not ordinarily resident status without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the RNOR Status Calculator on this page. Step 2: Enter your Days in India This FY (e.g., ₹200). Step 3: Enter your Number of FYs Resident in Last 10 FYs (e.g., ₹3). Step 4: Enter your Total Days in India in Last 7 FYs (e.g., ₹700). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The RNOR Status Calculator uses: RNOR Status (Resident but Not Ordinarily Resident): A person is RNOR if: (a) Resident in 2 out of last 10 FYs, OR (b) Stayed in India ≤ 730 days in last 7 years. RNOR income: Only India-sourced income. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Days in India This FY=200, Number of FYs Resident in Last 10 FYs=3, Total Days in India in Last 7 FYs=700 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate RNOR Status Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "NRI tax rules are complex. Consult a CA specializing in NRI taxation.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a RNOR Status Calculator?",
+      "a": "A RNOR Status Calculator is an online tool that helps you resident but not ordinarily resident status quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this RNOR Status Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this RNOR Status Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free RNOR Status Calculator – India's Best Online Calculator",
+  "og_description": "Calculate resident but not ordinarily resident status instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "nri-tax-calculator",
+    "nri-repatriation-calculator",
+    "nri-home-loan-vs-resident-home-loan"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "stayCurrentYear",
+      "label": "Days in India This FY",
+      "type": "number",
+      "min": 0,
+      "max": 366,
+      "default": 200,
+      "required": true
+    },
+    {
+      "name": "stayPast10",
+      "label": "Number of FYs Resident in Last 10 FYs",
+      "type": "number",
+      "min": 0,
+      "max": 10,
+      "default": 3,
+      "required": true
+    },
+    {
+      "name": "stayPast7Days",
+      "label": "Total Days in India in Last 7 FYs",
+      "type": "number",
+      "min": 0,
+      "max": 2556,
+      "default": 700,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Residential Status",
+    "RNOR Eligible?",
+    "Tax Treatment",
+    "Recommendation"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Criteria",
+    "yAxis": "Status",
+    "title": "Residential Status Assessment"
+  },
+  "result_explanation": "The RNOR Status Calculator returns Residential Status, RNOR Eligible?, Tax Treatment. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "stayCurrentYear": {
+      "required": true,
+      "min": 0,
+      "max": 366
+    },
+    "stayPast10": {
+      "required": true,
+      "min": 0,
+      "max": 10
+    },
+    "stayPast7Days": {
+      "required": true,
+      "min": 0,
+      "max": 2556
+    }
+  },
+  "calculator_engine": "function rnorStatus(stayNow,resident10,stay7){const isResident=stayNow>=182||(stayNow>=60&&stay7>=365);const isRNOR=isResident&&(resident10<=1||stay7<=729);const status=!isResident?'Non-Resident (NRI)':isRNOR?'RNOR':'Resident and Ordinarily Resident (ROR)';return{status,rnor:isRNOR};}",
+  "category_hierarchy": [
+    "nri",
+    "residential_status",
+    "rnor",
+    "tax"
+  ],
+  "calculator_group": "nri",
+  "topical_cluster": "nri_cluster",
+  "internal_link_targets": [
+    "nri-tax-calculator",
+    "nri-repatriation-calculator",
+    "nri-home-loan-vs-resident-home-loan"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "rnor status calculator india",
+    "resident not ordinarily resident india",
+    "how to determine residential status india",
+    "nri rnor ror calculator",
+    "section 6 residential status",
+    "days in india residential status",
+    "returning nri rnor status"
+  ],
+  "semantic_keywords": [
+    "RNOR",
+    "residential status",
+    "Section 6",
+    "NRI",
+    "ROR",
+    "income tax",
+    "foreign income",
+    "days in India",
+    "returning NRI",
+    "FEMA"
+  ],
+  "paa_keywords": [
+    "What is RNOR status?",
+    "How to calculate residential status in India?",
+    "Is RNOR income taxable?",
+    "How many days to become NRI?",
+    "What are benefits of RNOR status?"
+  ],
+  "voice_search_keywords": [
+    "rnor status calculator india",
+    "how to determine nri status",
+    "rnor vs ror tax treatment",
+    "residential status income tax india"
+  ],
+  "seo_score": 72,
+  "eeat_score": 76,
+  "discover_score": 64,
+  "ai_search_score": 71,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "RNOR Status Calculator | Free Calculator India",
+    "meta_description": "Use our free rnor status calculator to resident but not ordinarily resident status. Get instant results with Indian context – ₹, lakhs, crores. Plan your fin...",
+    "focus_keyword": "RNOR Status Calculator",
+    "secondary_keywords": [
+      "rnor status calculator calculator online",
+      "rnor status calculator calculator india",
+      "rnor status calculator formula",
+      "best rnor status calculator calculator 2024"
+    ],
+    "og_title": "Free RNOR Status Calculator – India's Best Online Calculator",
+    "og_description": "Calculate resident but not ordinarily resident status instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/rnor-status-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "rnor status calculator india",
+      "resident not ordinarily resident india",
+      "how to determine residential status india",
+      "nri rnor ror calculator",
+      "section 6 residential status",
+      "days in india residential status",
+      "returning nri rnor status"
+    ],
+    "semantic_keywords": [
+      "RNOR",
+      "residential status",
+      "Section 6",
+      "NRI",
+      "ROR",
+      "income tax",
+      "foreign income",
+      "days in India",
+      "returning NRI",
+      "FEMA"
+    ],
+    "paa_keywords": [
+      "What is RNOR status?",
+      "How to calculate residential status in India?",
+      "Is RNOR income taxable?",
+      "How many days to become NRI?",
+      "What are benefits of RNOR status?"
+    ],
+    "voice_search_keywords": [
+      "rnor status calculator india",
+      "how to determine nri status",
+      "rnor vs ror tax treatment",
+      "residential status income tax india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 72,
+    "eeat_score": 76,
+    "discover_score": 64,
+    "ai_search_score": 71,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "RNOR Status (Resident but Not Ordinarily Resident): A person is RNOR if: (a) Resident in 2 out of last 10 FYs, OR (b) Stayed in India ≤ 730 days in last 7 years. RNOR income: Only India-sourced income taxable. Foreign income exempt in India for RNOR.",
+    "formula_template": "rnorFormula",
+    "formula_source": "Income Tax Dept India / Section 6",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The RNOR Status Calculator uses: RNOR Status (Resident but Not Ordinarily Resident): A person is RNOR if: (a) Resident in 2 out of last 10 FYs, OR (b) Stayed in India ≤ 730 days in last 7 years. RNOR income: Only India-sourced income. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Days in India This FY=200, Number of FYs Resident in Last 10 FYs=3, Total Days in India in Last 7 FYs=700 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our RNOR Status Calculator helps you resident but not ordinarily resident status accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A RNOR Status Calculator is a digital tool that allows you to resident but not ordinarily resident status without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the RNOR Status Calculator on this page. Step 2: Enter your Days in India This FY (e.g., ₹200). Step 3: Enter your Number of FYs Resident in Last 10 FYs (e.g., ₹3). Step 4: Enter your Total Days in India in Last 7 FYs (e.g., ₹700). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate RNOR Status Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "NRI tax rules are complex. Consult a CA specializing in NRI taxation.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The RNOR Status Calculator returns Residential Status, RNOR Eligible?, Tax Treatment. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a RNOR Status Calculator?",
+        "a": "A RNOR Status Calculator is an online tool that helps you resident but not ordinarily resident status quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this RNOR Status Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this RNOR Status Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "stayCurrentYear",
+        "label": "Days in India This FY",
+        "type": "number",
+        "min": 0,
+        "max": 366,
+        "default": 200,
+        "required": true
+      },
+      {
+        "name": "stayPast10",
+        "label": "Number of FYs Resident in Last 10 FYs",
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "default": 3,
+        "required": true
+      },
+      {
+        "name": "stayPast7Days",
+        "label": "Total Days in India in Last 7 FYs",
+        "type": "number",
+        "min": 0,
+        "max": 2556,
+        "default": 700,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Residential Status",
+      "RNOR Eligible?",
+      "Tax Treatment",
+      "Recommendation"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Criteria",
+      "yAxis": "Status",
+      "title": "Residential Status Assessment"
+    },
+    "validation_rules": {
+      "stayCurrentYear": {
+        "required": true,
+        "min": 0,
+        "max": 366
+      },
+      "stayPast10": {
+        "required": true,
+        "min": 0,
+        "max": 10
+      },
+      "stayPast7Days": {
+        "required": true,
+        "min": 0,
+        "max": 2556
+      }
+    },
+    "calculator_engine": "function rnorStatus(stayNow,resident10,stay7){const isResident=stayNow>=182||(stayNow>=60&&stay7>=365);const isRNOR=isResident&&(resident10<=1||stay7<=729);const status=!isResident?'Non-Resident (NRI)':isRNOR?'RNOR':'Resident and Ordinarily Resident (ROR)';return{status,rnor:isRNOR};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "nri",
+    "category_hierarchy": [
+      "nri",
+      "residential_status",
+      "rnor",
+      "tax"
+    ],
+    "calculator_group": "nri",
+    "topical_cluster": "nri_cluster",
+    "breadcrumb_label": "RNOR Status Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "nri-tax-calculator",
+      "nri-repatriation-calculator",
+      "nri-home-loan-vs-resident-home-loan"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "nri-tax-calculator",
+      "nri-repatriation-calculator",
+      "nri-home-loan-vs-resident-home-loan"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

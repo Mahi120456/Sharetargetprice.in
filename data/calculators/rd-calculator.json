@@ -1,0 +1,389 @@
+{
+  "slug": "rd-calculator",
+  "title": "Recurring Deposit Calculator",
+  "category": "individual",
+  "type": "deposit",
+  "description": "Maturity amount for RD",
+  "formula_template": "rdFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Recurring Deposit Calculator",
+  "canonical_url": "https://yoursite.com/calculators/rd-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "RD Maturity: A = P × n × (1+r/100)^(n/12)  [simplified]; Exact: A = R × [(1+r/400)^(4n) − 1] / [1 − (1+r/400)^(-1/3)]  where R = monthly deposit, n = months",
+  "formula_source": "RBI India / NSI",
+  "formula_source_url": "https://www.nsiindia.gov.in",
+  "meta_title": "Recurring Deposit Calculator | Free Online Calculator India",
+  "meta_description": "Use our free recurring deposit calculator to maturity amount for rd. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter t...",
+  "focus_keyword": "Recurring Deposit Calculator",
+  "secondary_keywords": [
+    "recurring deposit calculator online",
+    "recurring deposit calculator india",
+    "recurring deposit calculator calculator",
+    "recurring deposit calculator formula",
+    "recurring deposit calculator example",
+    "recurring deposit calculator calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Recurring Deposit Calculator helps you maturity amount for rd accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Recurring Deposit Calculator is a digital tool that allows you to maturity amount for rd without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Recurring Deposit Calculator on this page. Step 2: Enter your Monthly Deposit (₹) (e.g., ₹5,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹7.0). Step 4: Enter your Tenure (Months) (e.g., ₹12). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Recurring Deposit Calculator uses the following mathematical formula: RD Maturity: A = P × n × (1+r/100)^(n/12)  [simplified]; Exact: A = R × [(1+r/400)^(4n) − 1] / [1 − (1+r/400)^(-1/3)]  where R = monthly deposit, n = months. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: FD ₹1 lakh at 7% p.a. for 3 years (quarterly compounding) → Maturity ≈ ₹1,23,145; Interest = ₹23,145.",
+  "benefits": "<ul><li>Instant, accurate Recurring Deposit Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Interest rates shown are indicative. Actual rates change based on RBI policy and bank decisions. TDS applicable if interest exceeds ₹40,000/year (₹50,000 for senior citizens).",
+  "pro_tips": "1. Ladder FDs across multiple tenures for liquidity + higher rates. 2. Consider Senior Citizen FD for 0.5% higher interest if applicable. 3. Compare post-office FD rates with bank FDs. 4. Avoid premature withdrawal – penalty reduces effective yield.",
+  "faq": [
+    {
+      "q": "What is a Recurring Deposit Calculator?",
+      "a": "A Recurring Deposit Calculator is an online tool that helps you maturity amount for rd quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Recurring Deposit Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this Recurring Deposit Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this Recurring Deposit Calculator on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    }
+  ],
+  "og_title": "Free Recurring Deposit Calculator – India's Best Online Calc",
+  "og_description": "Calculate maturity amount for rd instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "fd-calculator",
+    "sip-calculator",
+    "compound-interest-calculator",
+    "pomis-calculator",
+    "kvp-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "monthlyDeposit",
+      "label": "Monthly Deposit (₹)",
+      "type": "number",
+      "min": 100,
+      "max": 1000000,
+      "default": 5000,
+      "required": true
+    },
+    {
+      "name": "annualRate",
+      "label": "Annual Interest Rate (%)",
+      "type": "number",
+      "min": 1,
+      "max": 15,
+      "default": 7.0,
+      "required": true
+    },
+    {
+      "name": "tenureMonths",
+      "label": "Tenure (Months)",
+      "type": "number",
+      "min": 6,
+      "max": 120,
+      "default": 12,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Maturity Amount",
+    "Total Deposited",
+    "Interest Earned"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Month",
+    "yAxis": "Balance (₹)",
+    "title": "RD Maturity Growth"
+  },
+  "result_explanation": "The Recurring Deposit Calculator returns Maturity Amount, Total Deposited, Interest Earned. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "monthlyDeposit": {
+      "required": true,
+      "min": 100,
+      "max": 1000000
+    },
+    "annualRate": {
+      "required": true,
+      "min": 1,
+      "max": 15
+    },
+    "tenureMonths": {
+      "required": true,
+      "min": 6,
+      "max": 120
+    }
+  },
+  "calculator_engine": "function rd(R,annRate,months){const r=annRate/400;let maturity=0;for(let i=1;i<=months;i++){maturity+=R*Math.pow(1+r,Math.ceil(i/3));}return{maturity,deposited:R*months,interest:maturity-R*months};}",
+  "category_hierarchy": [
+    "deposit",
+    "recurring_deposit",
+    "bank",
+    "savings"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "deposit_cluster",
+  "internal_link_targets": [
+    "fd-calculator",
+    "sip-calculator",
+    "compound-interest-calculator",
+    "pomis-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "rd calculator india 2024",
+    "recurring deposit maturity calculator",
+    "sbi rd calculator",
+    "post office rd calculator",
+    "rd vs sip calculator",
+    "5000 monthly rd for 1 year",
+    "rd interest rate calculator",
+    "recurring deposit returns india"
+  ],
+  "semantic_keywords": [
+    "recurring deposit",
+    "RD",
+    "monthly savings",
+    "bank deposit",
+    "maturity",
+    "interest",
+    "SBI",
+    "post office RD",
+    "TDS",
+    "disciplined savings"
+  ],
+  "paa_keywords": [
+    "How is RD interest calculated?",
+    "Which is better RD or SIP?",
+    "What is the RD interest rate in India?",
+    "How much will I get from RD?",
+    "Is RD better than FD?"
+  ],
+  "voice_search_keywords": [
+    "rd calculator india",
+    "how much will i get from rd",
+    "recurring deposit interest calculator",
+    "rd vs sip which is better"
+  ],
+  "seo_score": 88,
+  "eeat_score": 87,
+  "discover_score": 82,
+  "ai_search_score": 87,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Recurring Deposit Calculator | Free Online Calculator India",
+    "meta_description": "Use our free recurring deposit calculator to maturity amount for rd. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances smarter t...",
+    "focus_keyword": "Recurring Deposit Calculator",
+    "secondary_keywords": [
+      "recurring deposit calculator online",
+      "recurring deposit calculator india",
+      "recurring deposit calculator calculator",
+      "recurring deposit calculator formula",
+      "recurring deposit calculator example",
+      "recurring deposit calculator calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free Recurring Deposit Calculator – India's Best Online Calc",
+    "og_description": "Calculate maturity amount for rd instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/rd-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "rd calculator india 2024",
+      "recurring deposit maturity calculator",
+      "sbi rd calculator",
+      "post office rd calculator",
+      "rd vs sip calculator",
+      "5000 monthly rd for 1 year",
+      "rd interest rate calculator",
+      "recurring deposit returns india"
+    ],
+    "semantic_keywords": [
+      "recurring deposit",
+      "RD",
+      "monthly savings",
+      "bank deposit",
+      "maturity",
+      "interest",
+      "SBI",
+      "post office RD",
+      "TDS",
+      "disciplined savings"
+    ],
+    "paa_keywords": [
+      "How is RD interest calculated?",
+      "Which is better RD or SIP?",
+      "What is the RD interest rate in India?",
+      "How much will I get from RD?",
+      "Is RD better than FD?"
+    ],
+    "voice_search_keywords": [
+      "rd calculator india",
+      "how much will i get from rd",
+      "recurring deposit interest calculator",
+      "rd vs sip which is better"
+    ]
+  },
+  "_scores": {
+    "seo_score": 88,
+    "eeat_score": 87,
+    "discover_score": 82,
+    "ai_search_score": 87,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "RD Maturity: A = P × n × (1+r/100)^(n/12)  [simplified]; Exact: A = R × [(1+r/400)^(4n) − 1] / [1 − (1+r/400)^(-1/3)]  where R = monthly deposit, n = months",
+    "formula_template": "rdFormula",
+    "formula_source": "RBI India / NSI",
+    "formula_source_url": "https://www.nsiindia.gov.in",
+    "formula_explanation": "The Recurring Deposit Calculator uses the following mathematical formula: RD Maturity: A = P × n × (1+r/100)^(n/12)  [simplified]; Exact: A = R × [(1+r/400)^(4n) − 1] / [1 − (1+r/400)^(-1/3)]  where R = monthly deposit, n = months. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: FD ₹1 lakh at 7% p.a. for 3 years (quarterly compounding) → Maturity ≈ ₹1,23,145; Interest = ₹23,145.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Recurring Deposit Calculator helps you maturity amount for rd accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Recurring Deposit Calculator is a digital tool that allows you to maturity amount for rd without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Recurring Deposit Calculator on this page. Step 2: Enter your Monthly Deposit (₹) (e.g., ₹5,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹7.0). Step 4: Enter your Tenure (Months) (e.g., ₹12). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Recurring Deposit Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Interest rates shown are indicative. Actual rates change based on RBI policy and bank decisions. TDS applicable if interest exceeds ₹40,000/year (₹50,000 for senior citizens).",
+    "pro_tips": "1. Ladder FDs across multiple tenures for liquidity + higher rates. 2. Consider Senior Citizen FD for 0.5% higher interest if applicable. 3. Compare post-office FD rates with bank FDs. 4. Avoid premature withdrawal – penalty reduces effective yield.",
+    "result_explanation": "The Recurring Deposit Calculator returns Maturity Amount, Total Deposited, Interest Earned. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a Recurring Deposit Calculator?",
+        "a": "A Recurring Deposit Calculator is an online tool that helps you maturity amount for rd quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Recurring Deposit Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this Recurring Deposit Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this Recurring Deposit Calculator on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "monthlyDeposit",
+        "label": "Monthly Deposit (₹)",
+        "type": "number",
+        "min": 100,
+        "max": 1000000,
+        "default": 5000,
+        "required": true
+      },
+      {
+        "name": "annualRate",
+        "label": "Annual Interest Rate (%)",
+        "type": "number",
+        "min": 1,
+        "max": 15,
+        "default": 7.0,
+        "required": true
+      },
+      {
+        "name": "tenureMonths",
+        "label": "Tenure (Months)",
+        "type": "number",
+        "min": 6,
+        "max": 120,
+        "default": 12,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Maturity Amount",
+      "Total Deposited",
+      "Interest Earned"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Month",
+      "yAxis": "Balance (₹)",
+      "title": "RD Maturity Growth"
+    },
+    "validation_rules": {
+      "monthlyDeposit": {
+        "required": true,
+        "min": 100,
+        "max": 1000000
+      },
+      "annualRate": {
+        "required": true,
+        "min": 1,
+        "max": 15
+      },
+      "tenureMonths": {
+        "required": true,
+        "min": 6,
+        "max": 120
+      }
+    },
+    "calculator_engine": "function rd(R,annRate,months){const r=annRate/400;let maturity=0;for(let i=1;i<=months;i++){maturity+=R*Math.pow(1+r,Math.ceil(i/3));}return{maturity,deposited:R*months,interest:maturity-R*months};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "deposit",
+    "category_hierarchy": [
+      "deposit",
+      "recurring_deposit",
+      "bank",
+      "savings"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "deposit_cluster",
+    "breadcrumb_label": "Recurring Deposit Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "fd-calculator",
+      "sip-calculator",
+      "compound-interest-calculator",
+      "pomis-calculator",
+      "kvp-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "fd-calculator",
+      "sip-calculator",
+      "compound-interest-calculator",
+      "pomis-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

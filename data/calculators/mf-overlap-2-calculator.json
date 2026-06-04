@@ -1,0 +1,317 @@
+{
+  "slug": "mf-overlap-2-calculator",
+  "title": "Mutual Fund Overlap Calculator (2 funds)",
+  "category": "individual",
+  "type": "portfolio",
+  "description": "Calculate overlap between two funds",
+  "formula_template": "overlap2Formula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Mutual Fund Overlap Calculator (2 funds)",
+  "canonical_url": "https://yoursite.com/calculators/mf-overlap-2-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Overlap % = (Number of common stocks / Total unique stocks in both funds) × 100. Or by weight: Overlap = Σ min(wA_i, wB_i) × 100% for all common stocks i.",
+  "formula_source": "SEBI / Morningstar Portfolio Overlap Method",
+  "formula_source_url": "https://www.sebi.gov.in",
+  "meta_title": "Mutual Fund Overlap Calculator (2 funds) – Online Calculator",
+  "meta_description": "Use our free mutual fund overlap calculator (2 funds) to calculate overlap between two funds. Get instant results with Indian context – ₹, lakhs, crores. Pla...",
+  "focus_keyword": "Mutual Fund Overlap Calculator (2 funds)",
+  "secondary_keywords": [
+    "mutual fund overlap calculator (2 funds) calculator online",
+    "mutual fund overlap calculator (2 funds) calculator india",
+    "mutual fund overlap calculator (2 funds) formula",
+    "best mutual fund overlap calculator (2 funds) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Mutual Fund Overlap Calculator (2 funds) helps you calculate overlap between two funds accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Mutual Fund Overlap Calculator (2 funds) is a digital tool that allows you to calculate overlap between two funds without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Mutual Fund Overlap Calculator (2 funds) on this page. Step 2: Enter your Fund 1 Stock List (comma-separated tickers)). Step 3: Enter your Fund 2 Stock List (comma-separated tickers)). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Mutual Fund Overlap Calculator (2 funds) uses: Overlap % = (Number of common stocks / Total unique stocks in both funds) × 100. Or by weight: Overlap = Σ min(wA_i, wB_i) × 100% for all common stocks i.. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Fund 1 Stock List (comma-separated tickers)=, Fund 2 Stock List (comma-separated tickers)= → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Mutual Fund Overlap Calculator (2 funds) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a Mutual Fund Overlap Calculator (2 funds)?",
+      "a": "A Mutual Fund Overlap Calculator (2 funds) is an online tool that helps you calculate overlap between two funds quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Mutual Fund Overlap Calculator (2 funds) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Mutual Fund Overlap Calculator (2 funds)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Mutual Fund Overlap Calculator (2 funds) – India's Best",
+  "og_description": "Calculate calculate overlap between two funds instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "portfolio-allocation-calculator",
+    "portfolio-rebalancing-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "fund1Stocks",
+      "label": "Fund 1 Stock List (comma-separated tickers)",
+      "type": "textarea",
+      "required": true
+    },
+    {
+      "name": "fund2Stocks",
+      "label": "Fund 2 Stock List (comma-separated tickers)",
+      "type": "textarea",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Overlap %",
+    "Common Stocks",
+    "Total Unique Stocks",
+    "Diversification Score"
+  ],
+  "chart_config": {
+    "type": "venn",
+    "xAxis": "Fund 1",
+    "yAxis": "Fund 2",
+    "title": "Portfolio Overlap (Venn Diagram)"
+  },
+  "result_explanation": "The Mutual Fund Overlap Calculator (2 funds) returns Overlap %, Common Stocks, Total Unique Stocks. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "fund1Stocks": {
+      "required": true
+    },
+    "fund2Stocks": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function overlap2(fund1,fund2){const set1=new Set(fund1.split(',').map(s=>s.trim().toUpperCase()));const set2=new Set(fund2.split(',').map(s=>s.trim().toUpperCase()));const common=[...set1].filter(s=>set2.has(s));const unique=new Set([...set1,...set2]);const pct=(common.length/unique.size)*100;return{overlap:pct.toFixed(1),common:common.length,total:unique.size};}",
+  "category_hierarchy": [
+    "investment",
+    "mutual_fund",
+    "portfolio",
+    "overlap"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "investment_cluster",
+  "internal_link_targets": [
+    "portfolio-allocation-calculator",
+    "portfolio-rebalancing-calculator"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "mutual fund overlap calculator 2 funds",
+    "portfolio overlap tool india",
+    "check mf overlap",
+    "duplicate holdings calculator",
+    "how to check mutual fund overlap",
+    "mf overlap percentage",
+    "fund overlap sebi",
+    "portfolio diversification checker"
+  ],
+  "semantic_keywords": [
+    "fund overlap",
+    "portfolio diversification",
+    "common stocks",
+    "SEBI",
+    "duplicate holdings",
+    "Nifty 50",
+    "large-cap",
+    "fund comparison"
+  ],
+  "paa_keywords": [
+    "What is mutual fund overlap?",
+    "How to check if two funds have same stocks?",
+    "What is acceptable fund overlap?",
+    "How to reduce portfolio overlap?",
+    "Is high fund overlap bad?"
+  ],
+  "voice_search_keywords": [
+    "how to check mutual fund overlap",
+    "what is portfolio overlap",
+    "two funds same stocks calculator",
+    "how to avoid fund duplication"
+  ],
+  "seo_score": 76,
+  "eeat_score": 74,
+  "discover_score": 68,
+  "ai_search_score": 74,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Mutual Fund Overlap Calculator (2 funds) – Online Calculator",
+    "meta_description": "Use our free mutual fund overlap calculator (2 funds) to calculate overlap between two funds. Get instant results with Indian context – ₹, lakhs, crores. Pla...",
+    "focus_keyword": "Mutual Fund Overlap Calculator (2 funds)",
+    "secondary_keywords": [
+      "mutual fund overlap calculator (2 funds) calculator online",
+      "mutual fund overlap calculator (2 funds) calculator india",
+      "mutual fund overlap calculator (2 funds) formula",
+      "best mutual fund overlap calculator (2 funds) calculator 2024"
+    ],
+    "og_title": "Free Mutual Fund Overlap Calculator (2 funds) – India's Best",
+    "og_description": "Calculate calculate overlap between two funds instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/mf-overlap-2-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "mutual fund overlap calculator 2 funds",
+      "portfolio overlap tool india",
+      "check mf overlap",
+      "duplicate holdings calculator",
+      "how to check mutual fund overlap",
+      "mf overlap percentage",
+      "fund overlap sebi",
+      "portfolio diversification checker"
+    ],
+    "semantic_keywords": [
+      "fund overlap",
+      "portfolio diversification",
+      "common stocks",
+      "SEBI",
+      "duplicate holdings",
+      "Nifty 50",
+      "large-cap",
+      "fund comparison"
+    ],
+    "paa_keywords": [
+      "What is mutual fund overlap?",
+      "How to check if two funds have same stocks?",
+      "What is acceptable fund overlap?",
+      "How to reduce portfolio overlap?",
+      "Is high fund overlap bad?"
+    ],
+    "voice_search_keywords": [
+      "how to check mutual fund overlap",
+      "what is portfolio overlap",
+      "two funds same stocks calculator",
+      "how to avoid fund duplication"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 74,
+    "discover_score": 68,
+    "ai_search_score": 74,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Overlap % = (Number of common stocks / Total unique stocks in both funds) × 100. Or by weight: Overlap = Σ min(wA_i, wB_i) × 100% for all common stocks i.",
+    "formula_template": "overlap2Formula",
+    "formula_source": "SEBI / Morningstar Portfolio Overlap Method",
+    "formula_source_url": "https://www.sebi.gov.in",
+    "formula_explanation": "The Mutual Fund Overlap Calculator (2 funds) uses: Overlap % = (Number of common stocks / Total unique stocks in both funds) × 100. Or by weight: Overlap = Σ min(wA_i, wB_i) × 100% for all common stocks i.. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Fund 1 Stock List (comma-separated tickers)=, Fund 2 Stock List (comma-separated tickers)= → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Mutual Fund Overlap Calculator (2 funds) helps you calculate overlap between two funds accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Mutual Fund Overlap Calculator (2 funds) is a digital tool that allows you to calculate overlap between two funds without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Mutual Fund Overlap Calculator (2 funds) on this page. Step 2: Enter your Fund 1 Stock List (comma-separated tickers)). Step 3: Enter your Fund 2 Stock List (comma-separated tickers)). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Mutual Fund Overlap Calculator (2 funds) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The Mutual Fund Overlap Calculator (2 funds) returns Overlap %, Common Stocks, Total Unique Stocks. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Mutual Fund Overlap Calculator (2 funds)?",
+        "a": "A Mutual Fund Overlap Calculator (2 funds) is an online tool that helps you calculate overlap between two funds quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Mutual Fund Overlap Calculator (2 funds) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Mutual Fund Overlap Calculator (2 funds)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "fund1Stocks",
+        "label": "Fund 1 Stock List (comma-separated tickers)",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "name": "fund2Stocks",
+        "label": "Fund 2 Stock List (comma-separated tickers)",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Overlap %",
+      "Common Stocks",
+      "Total Unique Stocks",
+      "Diversification Score"
+    ],
+    "chart_config": {
+      "type": "venn",
+      "xAxis": "Fund 1",
+      "yAxis": "Fund 2",
+      "title": "Portfolio Overlap (Venn Diagram)"
+    },
+    "validation_rules": {
+      "fund1Stocks": {
+        "required": true
+      },
+      "fund2Stocks": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function overlap2(fund1,fund2){const set1=new Set(fund1.split(',').map(s=>s.trim().toUpperCase()));const set2=new Set(fund2.split(',').map(s=>s.trim().toUpperCase()));const common=[...set1].filter(s=>set2.has(s));const unique=new Set([...set1,...set2]);const pct=(common.length/unique.size)*100;return{overlap:pct.toFixed(1),common:common.length,total:unique.size};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "portfolio",
+    "category_hierarchy": [
+      "investment",
+      "mutual_fund",
+      "portfolio",
+      "overlap"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "investment_cluster",
+    "breadcrumb_label": "Mutual Fund Overlap Calculator (2 funds)"
+  },
+  "_links": {
+    "related_calculators": [
+      "portfolio-allocation-calculator",
+      "portfolio-rebalancing-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "portfolio-allocation-calculator",
+      "portfolio-rebalancing-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

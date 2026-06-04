@@ -1,0 +1,353 @@
+{
+  "slug": "margin-calculator",
+  "title": "Margin Calculator",
+  "category": "individual",
+  "type": "trading",
+  "description": "Trading margin requirement",
+  "formula_template": "marginFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Margin Calculator",
+  "canonical_url": "https://yoursite.com/calculators/margin-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Margin Requirement: SPAN + Exposure. For equity delivery: 100% margin (full amount). Intraday: Typically 5-10x leverage (broker-specific). NSE SPAN margin calculator updated daily. MIS product leverage up to 5x for intraday.",
+  "formula_source": "NSE India / SEBI",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "Margin Calculator | Free Calculator India",
+  "meta_description": "Use our free margin calculator to trading margin requirement. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Margin Calculator",
+  "secondary_keywords": [
+    "margin calculator calculator online",
+    "margin calculator calculator india",
+    "margin calculator formula",
+    "best margin calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Margin Calculator helps you trading margin requirement accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Margin Calculator is a digital tool that allows you to trading margin requirement without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Margin Calculator on this page. Step 2: Enter your Trade Value (₹) (e.g., ₹500,000). Step 3: Enter your Margin Type). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Margin Calculator uses: Margin Requirement: SPAN + Exposure. For equity delivery: 100% margin (full amount). Intraday: Typically 5-10x leverage (broker-specific). NSE SPAN margin calculator updated daily. MIS product leverag. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Trade Value (₹)=500000, Margin Type=Intraday (20% SEBI min) → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Margin Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+  "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+  "faq": [
+    {
+      "q": "What is a Margin Calculator?",
+      "a": "A Margin Calculator is an online tool that helps you trading margin requirement quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Margin Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Margin Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Margin Calculator – India's Best Online Calculator",
+  "og_description": "Calculate trading margin requirement instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "tradeValue",
+      "label": "Trade Value (₹)",
+      "type": "number",
+      "min": 1000,
+      "max": 100000000,
+      "default": 500000,
+      "required": true
+    },
+    {
+      "name": "marginType",
+      "label": "Margin Type",
+      "type": "select",
+      "options": [
+        "Delivery (100%)",
+        "Intraday (20% SEBI min)",
+        "Intraday (Broker 5x)",
+        "F&O SPAN (15%)"
+      ],
+      "default": "Intraday (20% SEBI min)",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Margin Required (₹)",
+    "Leverage Obtained (x)",
+    "Trade Value Supported",
+    "Free Capital After Margin"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Margin Type",
+    "yAxis": "Required (₹)",
+    "title": "Margin Requirement by Type"
+  },
+  "result_explanation": "The Margin Calculator returns Margin Required (₹), Leverage Obtained (x), Trade Value Supported. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "tradeValue": {
+      "required": true,
+      "min": 1000,
+      "max": 100000000
+    },
+    "marginType": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function marginCalc(tradeVal,type){const rates={Delivery:1.0,Intraday20:0.20,Intraday5x:0.20,FO15:0.15};const rate=type.includes('Delivery')?1:type.includes('5x')?0.20:type.includes('F&O')?0.15:0.20;const margin=tradeVal*rate;return{margin,leverage:(1/rate).toFixed(1),tradeValue:tradeVal};}",
+  "category_hierarchy": [
+    "trading",
+    "margin",
+    "equity",
+    "leverage"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "margin calculator india",
+    "intraday margin calculator",
+    "trading margin requirement",
+    "sebi intraday margin 20 percent",
+    "equity trading margin",
+    "leverage calculator trading",
+    "f&o margin calculator india"
+  ],
+  "semantic_keywords": [
+    "margin",
+    "leverage",
+    "SEBI",
+    "NSE",
+    "SPAN",
+    "MIS",
+    "intraday",
+    "delivery",
+    "equity",
+    "broker"
+  ],
+  "paa_keywords": [
+    "What is minimum margin for intraday trading?",
+    "How much leverage allowed in India?",
+    "What is SPAN margin?",
+    "How to calculate F&O margin?",
+    "What is delivery vs intraday margin?"
+  ],
+  "voice_search_keywords": [
+    "intraday margin calculator",
+    "trading leverage india",
+    "how much margin for trading",
+    "sebi margin rules india"
+  ],
+  "seo_score": 76,
+  "eeat_score": 74,
+  "discover_score": 68,
+  "ai_search_score": 74,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Margin Calculator | Free Calculator India",
+    "meta_description": "Use our free margin calculator to trading margin requirement. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Margin Calculator",
+    "secondary_keywords": [
+      "margin calculator calculator online",
+      "margin calculator calculator india",
+      "margin calculator formula",
+      "best margin calculator calculator 2024"
+    ],
+    "og_title": "Free Margin Calculator – India's Best Online Calculator",
+    "og_description": "Calculate trading margin requirement instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/margin-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "margin calculator india",
+      "intraday margin calculator",
+      "trading margin requirement",
+      "sebi intraday margin 20 percent",
+      "equity trading margin",
+      "leverage calculator trading",
+      "f&o margin calculator india"
+    ],
+    "semantic_keywords": [
+      "margin",
+      "leverage",
+      "SEBI",
+      "NSE",
+      "SPAN",
+      "MIS",
+      "intraday",
+      "delivery",
+      "equity",
+      "broker"
+    ],
+    "paa_keywords": [
+      "What is minimum margin for intraday trading?",
+      "How much leverage allowed in India?",
+      "What is SPAN margin?",
+      "How to calculate F&O margin?",
+      "What is delivery vs intraday margin?"
+    ],
+    "voice_search_keywords": [
+      "intraday margin calculator",
+      "trading leverage india",
+      "how much margin for trading",
+      "sebi margin rules india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 74,
+    "discover_score": 68,
+    "ai_search_score": 74,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Margin Requirement: SPAN + Exposure. For equity delivery: 100% margin (full amount). Intraday: Typically 5-10x leverage (broker-specific). NSE SPAN margin calculator updated daily. MIS product leverage up to 5x for intraday.",
+    "formula_template": "marginFormula",
+    "formula_source": "NSE India / SEBI",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The Margin Calculator uses: Margin Requirement: SPAN + Exposure. For equity delivery: 100% margin (full amount). Intraday: Typically 5-10x leverage (broker-specific). NSE SPAN margin calculator updated daily. MIS product leverag. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Trade Value (₹)=500000, Margin Type=Intraday (20% SEBI min) → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Margin Calculator helps you trading margin requirement accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Margin Calculator is a digital tool that allows you to trading margin requirement without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Margin Calculator on this page. Step 2: Enter your Trade Value (₹) (e.g., ₹500,000). Step 3: Enter your Margin Type). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Margin Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+    "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+    "result_explanation": "The Margin Calculator returns Margin Required (₹), Leverage Obtained (x), Trade Value Supported. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Margin Calculator?",
+        "a": "A Margin Calculator is an online tool that helps you trading margin requirement quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Margin Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Margin Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "tradeValue",
+        "label": "Trade Value (₹)",
+        "type": "number",
+        "min": 1000,
+        "max": 100000000,
+        "default": 500000,
+        "required": true
+      },
+      {
+        "name": "marginType",
+        "label": "Margin Type",
+        "type": "select",
+        "options": [
+          "Delivery (100%)",
+          "Intraday (20% SEBI min)",
+          "Intraday (Broker 5x)",
+          "F&O SPAN (15%)"
+        ],
+        "default": "Intraday (20% SEBI min)",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Margin Required (₹)",
+      "Leverage Obtained (x)",
+      "Trade Value Supported",
+      "Free Capital After Margin"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Margin Type",
+      "yAxis": "Required (₹)",
+      "title": "Margin Requirement by Type"
+    },
+    "validation_rules": {
+      "tradeValue": {
+        "required": true,
+        "min": 1000,
+        "max": 100000000
+      },
+      "marginType": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function marginCalc(tradeVal,type){const rates={Delivery:1.0,Intraday20:0.20,Intraday5x:0.20,FO15:0.15};const rate=type.includes('Delivery')?1:type.includes('5x')?0.20:type.includes('F&O')?0.15:0.20;const margin=tradeVal*rate;return{margin,leverage:(1/rate).toFixed(1),tradeValue:tradeVal};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "margin",
+      "equity",
+      "leverage"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "Margin Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

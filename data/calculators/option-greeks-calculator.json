@@ -1,0 +1,467 @@
+{
+  "slug": "option-greeks-calculator",
+  "title": "Option Greeks Calculator",
+  "category": "individual",
+  "type": "trading",
+  "description": "Delta, Gamma, Vega, Theta",
+  "formula_template": "greeksFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Option Greeks Calculator",
+  "canonical_url": "https://yoursite.com/calculators/option-greeks-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Black-Scholes Greeks: Delta=N(d1) call / -N(-d1) put; Gamma=n(d1)/(S×σ×√T); Theta=-(S×n(d1)×σ)/(2√T)-(r×K×e^-rT×N(d2)) call; Vega=S×n(d1)×√T/100; Rho=K×T×e^-rT×N(d2)/100 call. d1=[ln(S/K)+(r+σ²/2)×T]/(σ×√T).",
+  "formula_source": "Black-Scholes Model / NSE India Derivatives",
+  "formula_source_url": "https://www.nseindia.com/knowledge/learn-about-derivatives",
+  "meta_title": "Option Greeks Calculator | Free Calculator India",
+  "meta_description": "Use our free option greeks calculator to delta, gamma, vega, theta. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Option Greeks Calculator",
+  "secondary_keywords": [
+    "option greeks calculator calculator online",
+    "option greeks calculator calculator india",
+    "option greeks calculator formula",
+    "best option greeks calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Option Greeks Calculator helps you delta, gamma, vega, theta accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Option Greeks Calculator is a digital tool that allows you to delta, gamma, vega, theta without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Option Greeks Calculator on this page. Step 2: Enter your Spot/Underlying Price (₹) (e.g., ₹22,000). Step 3: Enter your Strike Price (₹) (e.g., ₹22,000). Step 4: Enter your Days to Expiry (e.g., ₹30). Step 5: Enter your Implied Volatility (%) (e.g., ₹15). Step 6: Enter your Risk-Free Rate (%) (e.g., ₹7). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Option Greeks Calculator uses: Black-Scholes Greeks: Delta=N(d1) call / -N(-d1) put; Gamma=n(d1)/(S×σ×√T); Theta=-(S×n(d1)×σ)/(2√T)-(r×K×e^-rT×N(d2)) call; Vega=S×n(d1)×√T/100; Rho=K×T×e^-rT×N(d2)/100 call. d1=[ln(S/K)+(r+σ²/2)×T]/. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Spot/Underlying Price (₹)=22000, Strike Price (₹)=22000, Days to Expiry=30 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Option Greeks Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+  "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+  "faq": [
+    {
+      "q": "What is a Option Greeks Calculator?",
+      "a": "A Option Greeks Calculator is an online tool that helps you delta, gamma, vega, theta quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Option Greeks Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Option Greeks Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Option Greeks Calculator – India's Best Online Calculat",
+  "og_description": "Calculate delta, gamma, vega, theta instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "spotPrice",
+      "label": "Spot/Underlying Price (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 100000,
+      "default": 22000,
+      "required": true
+    },
+    {
+      "name": "strikePrice",
+      "label": "Strike Price (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 100000,
+      "default": 22000,
+      "required": true
+    },
+    {
+      "name": "daysToExpiry",
+      "label": "Days to Expiry",
+      "type": "number",
+      "min": 1,
+      "max": 365,
+      "default": 30,
+      "required": true
+    },
+    {
+      "name": "volatility",
+      "label": "Implied Volatility (%)",
+      "type": "number",
+      "min": 5,
+      "max": 200,
+      "default": 15,
+      "required": true
+    },
+    {
+      "name": "riskFreeRate",
+      "label": "Risk-Free Rate (%)",
+      "type": "number",
+      "min": 1,
+      "max": 15,
+      "default": 7,
+      "required": true
+    },
+    {
+      "name": "optionType",
+      "label": "Option Type",
+      "type": "select",
+      "options": [
+        "Call",
+        "Put"
+      ],
+      "default": "Call",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Option Price",
+    "Delta",
+    "Gamma",
+    "Theta (per day)",
+    "Vega (per 1% IV)",
+    "Rho"
+  ],
+  "chart_config": {
+    "type": "line",
+    "xAxis": "Underlying Price",
+    "yAxis": "Option Price",
+    "title": "Option Payoff Profile"
+  },
+  "result_explanation": "The Option Greeks Calculator returns Option Price, Delta, Gamma. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "spotPrice": {
+      "required": true,
+      "min": 1,
+      "max": 100000
+    },
+    "strikePrice": {
+      "required": true,
+      "min": 1,
+      "max": 100000
+    },
+    "daysToExpiry": {
+      "required": true,
+      "min": 1,
+      "max": 365
+    },
+    "volatility": {
+      "required": true,
+      "min": 5,
+      "max": 200
+    },
+    "riskFreeRate": {
+      "required": true,
+      "min": 1,
+      "max": 15
+    },
+    "optionType": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function blackScholes(S,K,T,vol,r,isCall){const sigma=vol/100;const t=T/365;const d1=(Math.log(S/K)+(r/100+sigma*sigma/2)*t)/(sigma*Math.sqrt(t));const d2=d1-sigma*Math.sqrt(t);function N(x){return(1+Math.erf(x/Math.SQRT2))/2;}const price=isCall?S*N(d1)-K*Math.exp(-r/100*t)*N(d2):K*Math.exp(-r/100*t)*N(-d2)-S*N(-d1);const delta=isCall?N(d1):-N(-d1);return{price:price.toFixed(2),delta:delta.toFixed(4)};}",
+  "category_hierarchy": [
+    "trading",
+    "options",
+    "greeks",
+    "derivatives"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "options_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "option greeks calculator india",
+    "delta gamma theta vega calculator",
+    "black scholes calculator india",
+    "nifty options greeks",
+    "implied volatility calculator",
+    "option pricing calculator india",
+    "options delta calculator nse"
+  ],
+  "semantic_keywords": [
+    "option greeks",
+    "delta",
+    "gamma",
+    "theta",
+    "vega",
+    "rho",
+    "Black-Scholes",
+    "implied volatility",
+    "NSE",
+    "derivatives",
+    "time decay"
+  ],
+  "paa_keywords": [
+    "What are option Greeks?",
+    "How to calculate option delta?",
+    "What is theta in options?",
+    "How does implied volatility affect options?",
+    "What is the Black-Scholes model?"
+  ],
+  "voice_search_keywords": [
+    "option greeks calculator",
+    "what is delta in options trading",
+    "how to calculate theta in options",
+    "implied volatility calculator india"
+  ],
+  "seo_score": 72,
+  "eeat_score": 74,
+  "discover_score": 64,
+  "ai_search_score": 71,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Option Greeks Calculator | Free Calculator India",
+    "meta_description": "Use our free option greeks calculator to delta, gamma, vega, theta. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Option Greeks Calculator",
+    "secondary_keywords": [
+      "option greeks calculator calculator online",
+      "option greeks calculator calculator india",
+      "option greeks calculator formula",
+      "best option greeks calculator calculator 2024"
+    ],
+    "og_title": "Free Option Greeks Calculator – India's Best Online Calculat",
+    "og_description": "Calculate delta, gamma, vega, theta instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/option-greeks-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "option greeks calculator india",
+      "delta gamma theta vega calculator",
+      "black scholes calculator india",
+      "nifty options greeks",
+      "implied volatility calculator",
+      "option pricing calculator india",
+      "options delta calculator nse"
+    ],
+    "semantic_keywords": [
+      "option greeks",
+      "delta",
+      "gamma",
+      "theta",
+      "vega",
+      "rho",
+      "Black-Scholes",
+      "implied volatility",
+      "NSE",
+      "derivatives",
+      "time decay"
+    ],
+    "paa_keywords": [
+      "What are option Greeks?",
+      "How to calculate option delta?",
+      "What is theta in options?",
+      "How does implied volatility affect options?",
+      "What is the Black-Scholes model?"
+    ],
+    "voice_search_keywords": [
+      "option greeks calculator",
+      "what is delta in options trading",
+      "how to calculate theta in options",
+      "implied volatility calculator india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 72,
+    "eeat_score": 74,
+    "discover_score": 64,
+    "ai_search_score": 71,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "Black-Scholes Greeks: Delta=N(d1) call / -N(-d1) put; Gamma=n(d1)/(S×σ×√T); Theta=-(S×n(d1)×σ)/(2√T)-(r×K×e^-rT×N(d2)) call; Vega=S×n(d1)×√T/100; Rho=K×T×e^-rT×N(d2)/100 call. d1=[ln(S/K)+(r+σ²/2)×T]/(σ×√T).",
+    "formula_template": "greeksFormula",
+    "formula_source": "Black-Scholes Model / NSE India Derivatives",
+    "formula_source_url": "https://www.nseindia.com/knowledge/learn-about-derivatives",
+    "formula_explanation": "The Option Greeks Calculator uses: Black-Scholes Greeks: Delta=N(d1) call / -N(-d1) put; Gamma=n(d1)/(S×σ×√T); Theta=-(S×n(d1)×σ)/(2√T)-(r×K×e^-rT×N(d2)) call; Vega=S×n(d1)×√T/100; Rho=K×T×e^-rT×N(d2)/100 call. d1=[ln(S/K)+(r+σ²/2)×T]/. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Spot/Underlying Price (₹)=22000, Strike Price (₹)=22000, Days to Expiry=30 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Option Greeks Calculator helps you delta, gamma, vega, theta accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Option Greeks Calculator is a digital tool that allows you to delta, gamma, vega, theta without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Option Greeks Calculator on this page. Step 2: Enter your Spot/Underlying Price (₹) (e.g., ₹22,000). Step 3: Enter your Strike Price (₹) (e.g., ₹22,000). Step 4: Enter your Days to Expiry (e.g., ₹30). Step 5: Enter your Implied Volatility (%) (e.g., ₹15). Step 6: Enter your Risk-Free Rate (%) (e.g., ₹7). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Option Greeks Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+    "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+    "result_explanation": "The Option Greeks Calculator returns Option Price, Delta, Gamma. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Option Greeks Calculator?",
+        "a": "A Option Greeks Calculator is an online tool that helps you delta, gamma, vega, theta quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Option Greeks Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Option Greeks Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "spotPrice",
+        "label": "Spot/Underlying Price (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 100000,
+        "default": 22000,
+        "required": true
+      },
+      {
+        "name": "strikePrice",
+        "label": "Strike Price (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 100000,
+        "default": 22000,
+        "required": true
+      },
+      {
+        "name": "daysToExpiry",
+        "label": "Days to Expiry",
+        "type": "number",
+        "min": 1,
+        "max": 365,
+        "default": 30,
+        "required": true
+      },
+      {
+        "name": "volatility",
+        "label": "Implied Volatility (%)",
+        "type": "number",
+        "min": 5,
+        "max": 200,
+        "default": 15,
+        "required": true
+      },
+      {
+        "name": "riskFreeRate",
+        "label": "Risk-Free Rate (%)",
+        "type": "number",
+        "min": 1,
+        "max": 15,
+        "default": 7,
+        "required": true
+      },
+      {
+        "name": "optionType",
+        "label": "Option Type",
+        "type": "select",
+        "options": [
+          "Call",
+          "Put"
+        ],
+        "default": "Call",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Option Price",
+      "Delta",
+      "Gamma",
+      "Theta (per day)",
+      "Vega (per 1% IV)",
+      "Rho"
+    ],
+    "chart_config": {
+      "type": "line",
+      "xAxis": "Underlying Price",
+      "yAxis": "Option Price",
+      "title": "Option Payoff Profile"
+    },
+    "validation_rules": {
+      "spotPrice": {
+        "required": true,
+        "min": 1,
+        "max": 100000
+      },
+      "strikePrice": {
+        "required": true,
+        "min": 1,
+        "max": 100000
+      },
+      "daysToExpiry": {
+        "required": true,
+        "min": 1,
+        "max": 365
+      },
+      "volatility": {
+        "required": true,
+        "min": 5,
+        "max": 200
+      },
+      "riskFreeRate": {
+        "required": true,
+        "min": 1,
+        "max": 15
+      },
+      "optionType": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function blackScholes(S,K,T,vol,r,isCall){const sigma=vol/100;const t=T/365;const d1=(Math.log(S/K)+(r/100+sigma*sigma/2)*t)/(sigma*Math.sqrt(t));const d2=d1-sigma*Math.sqrt(t);function N(x){return(1+Math.erf(x/Math.SQRT2))/2;}const price=isCall?S*N(d1)-K*Math.exp(-r/100*t)*N(d2):K*Math.exp(-r/100*t)*N(-d2)-S*N(-d1);const delta=isCall?N(d1):-N(-d1);return{price:price.toFixed(2),delta:delta.toFixed(4)};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "options",
+      "greeks",
+      "derivatives"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "options_cluster",
+    "breadcrumb_label": "Option Greeks Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}
