@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import fs from 'fs';
 import path from 'path';
 import CalculatorPro from '@/components/CalculatorPro';
-import { calculatorEngines } from '@/lib/calculatorEngines';
 
 function getNested(obj: any, pathStr: string) {
   return pathStr.split('.').reduce((o, k) => o?.[k], obj);
@@ -55,8 +54,6 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
   const raw = await getCalculator(params.slug);
   if (!raw) notFound();
   const calculator = flattenCalculator(raw);
-  const engine = calculatorEngines[params.slug];
-  if (!engine) notFound();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
@@ -68,7 +65,8 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{calculator.title}</h1>
           {calculator.intro_paragraph && <p className="text-gray-700 mt-3 text-lg">{calculator.intro_paragraph}</p>}
         </div>
-        <CalculatorPro calculator={calculator} engine={engine} />
+        {/* PASS ONLY SLUG, NOT THE FUNCTION */}
+        <CalculatorPro calculator={calculator} slug={params.slug} />
       </div>
     </div>
   );
