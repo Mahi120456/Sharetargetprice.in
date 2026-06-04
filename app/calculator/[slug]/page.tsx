@@ -3,10 +3,10 @@ import { createClient } from '@/utils/supabase/server';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle, Lightbulb, ThumbsUp } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import AuthorCard from '@/components/AuthorCard';
 import { getAuthorBySlug } from '@/data/authors';
-import CalculatorInteractive from '@/components/CalculatorInteractive';
+import CalculatorGrowUI from '@/components/CalculatorGrowUI'; // NAYA COMPONENT
 
 export async function generateStaticParams() {
   const supabase = createClient();
@@ -37,74 +37,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-// Helper: parse JSON field safely (handles both JSONB and legacy string)
-function safeParseJsonField(value: any, defaultValue: any = null) {
-  if (!value) return defaultValue;
-  if (typeof value === 'object') return value; // already parsed (JSONB)
-  if (typeof value === 'string') {
-    try {
-      return JSON.parse(value);
-    } catch {
-      return defaultValue;
-    }
-  }
-  return defaultValue;
-}
-
-// Helper Component: FAQ Section with Schema.org markup
-function FAQSection({ faqJson }: { faqJson?: string }) {
-  if (!faqJson) return null;
-  let faqItems;
-  try {
-    faqItems = JSON.parse(faqJson);
-  } catch {
-    return null;
-  }
-  if (!Array.isArray(faqItems) || faqItems.length === 0) return null;
-  return (
-    <div className="mt-8 bg-white rounded-xl p-6 shadow-sm border">
-      <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
-      <div itemScope itemType="https://schema.org/FAQPage">
-        {faqItems.map((item: any, idx: number) => (
-          <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" className="mb-4 border-b pb-3 last:border-0">
-            <h3 itemProp="name" className="font-semibold text-gray-800">{item.q}</h3>
-            <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-              <div itemProp="text" className="text-gray-600 mt-1">{item.a}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// Helper Component: Rich Text Block with optional icon
-function RichTextBlock({ html, title, icon }: { html?: string; title?: string; icon?: React.ReactNode }) {
-  if (!html) return null;
-  return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border mt-6">
-      {title && (
-        <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-          {icon && <span>{icon}</span>}
-          {title}
-        </h2>
-      )}
-      <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
-  );
-}
-
 export default async function CalculatorPage({ params }: { params: { slug: string } }) {
   const calc = await getCalculator(params.slug);
   if (!calc) notFound();
 
   const author = getAuthorBySlug('mahendra-maurya');
 
-  // ✅ Safe parsing for JSONB columns (already objects)
-  const inputFields = safeParseJsonField(calc.input_fields, []);
-  const chartConfig = safeParseJsonField(calc.chart_config, null);
-  const validationRules = safeParseJsonField(calc.validation_rules, null);
-
+  // Schema for WebApplication (same as before)
   const webAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -131,38 +70,10 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
             {calc.intro_paragraph && <p className="text-gray-700 mt-3 text-lg">{calc.intro_paragraph}</p>}
           </div>
 
-          {/* Interactive Calculator */}
-          <CalculatorInteractive
-            inputFields={inputFields}
-            calculatorEngine={calc.calculator_engine}
-            chartConfig={chartConfig}
-            validationRules={validationRules}
-            title={calc.title}
-          />
+          {/* ✅ NEW: Groww-style Calculator Component (handles inputs, calculate, results, what-is, how-to, formula, benefits, pro-tips, FAQ, chart) */}
+          <CalculatorGrowUI calculator={calc} />
 
-          {/* SEO Content Blocks */}
-          {calc.what_is && (
-            <div className="bg-white rounded-xl p-6 shadow-sm border mt-6">
-              <h2 className="text-2xl font-bold mb-2">What is {calc.title}?</h2>
-              <p className="text-gray-700">{calc.what_is}</p>
-            </div>
-          )}
-
-          {calc.how_to_use && <RichTextBlock html={calc.how_to_use} title="How to Use" icon={<CheckCircle className="w-5 h-5 text-green-600" />} />}
-          {calc.formula_explanation && <RichTextBlock html={calc.formula_explanation} title="Formula & Calculation" icon={<Lightbulb className="w-5 h-5 text-yellow-600" />} />}
-          {calc.example_calculation && <RichTextBlock html={calc.example_calculation} title="Example Calculation" icon={<Lightbulb className="w-5 h-5 text-blue-600" />} />}
-          {calc.benefits && <RichTextBlock html={calc.benefits} title="Key Benefits" icon={<ThumbsUp className="w-5 h-5 text-green-600" />} />}
-          
-          {calc.important_notes && (
-            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl mt-6">
-              <p className="text-amber-800 text-sm">{calc.important_notes}</p>
-            </div>
-          )}
-          
-          {calc.pro_tips && <RichTextBlock html={calc.pro_tips} title="Pro Tips for Better Results" icon={<Lightbulb className="w-5 h-5 text-orange-600" />} />}
-          
-          <FAQSection faqJson={calc.faq} />
-
+          {/* Related Calculators */}
           {calc.related_calculators && (
             <div className="mt-10 bg-white rounded-xl p-6 shadow-sm border">
               <h3 className="text-xl font-bold mb-3">Related Calculators</h3>
