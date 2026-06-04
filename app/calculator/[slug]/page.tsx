@@ -1,9 +1,8 @@
-import { createClient } from '@/lib/supabase/server'
+import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import CalculatorPage from '@/components/CalculatorPage'
 
 async function getCalculator(slug: string) {
-  const supabase = createClient()
   const { data, error } = await supabase
     .from('calculators')
     .select('*')
@@ -14,7 +13,6 @@ async function getCalculator(slug: string) {
 }
 
 export async function generateStaticParams() {
-  const supabase = createClient()
   const { data } = await supabase.from('calculators').select('slug')
   return (data ?? []).map((row) => ({ slug: row.slug }))
 }
