@@ -280,7 +280,9 @@ export default function CalculatorGrowUI({ calculator }: { calculator: Calculato
             <h4 className="font-semibold mb-3">{chartConfig.title || 'Growth Over Time'}</h4>
             <div className="h-64">
               {chartConfig.type === 'line' && <LineChart data={chartData} options={{ maintainAspectRatio: false }} />}
-              {chartConfig.type === 'bar' && <BarChart data={chartData} options={{ maintainAastralRatio: false }} />}
+              
+              {chartConfig.type === 'bar' && <BarChart data={chartData} options={{ maintainAspectRatio: false }} />}
+              
               {chartConfig.type === 'pie' && <PieChart data={chartData} options={{ maintainAspectRatio: false }} />}
             </div>
           </div>
