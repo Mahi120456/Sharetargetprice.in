@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "node scripts/build-calculators.js",
     "dev": "next dev",
     "build": "next build && node scripts/generate-sitemap.js",
     "start": "next start",
