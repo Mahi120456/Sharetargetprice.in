@@ -1,4 +1,3 @@
-// components/CalculatorPro.tsx
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -8,7 +7,6 @@ import {
   ThumbsUp, AlertCircle, ChevronDown, ChevronUp, HelpCircle,
   Share2, Check,
 } from 'lucide-react';
-import { calculatorEngines } from '@/lib/calculatorEngines';
 
 const LineChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Line), { ssr: false });
 const BarChart = dynamic(() => import('react-chartjs-2').then(mod => mod.Bar), { ssr: false });
@@ -31,7 +29,14 @@ function formatValue(key: string, val: any): string {
   return formatCurrency(val);
 }
 
-export default function CalculatorPro({ calculator, slug }: { calculator: any; slug: string }) {
+// Extract parameter names from engine string (old style function)
+function getParamNames(engineStr: string): string[] {
+  const match = engineStr.match(/function\s+\w*\s*\(\s*([^)]*)\s*\)/);
+  if (!match) return [];
+  return match[1].split(',').map(p => p.trim()).filter(p => p);
+}
+
+export default function CalculatorPro({ calculator }: { calculator: any }) {
   const [inputs, setInputs] = useState<Record<string, any>>({});
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState('');
@@ -44,9 +49,7 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
   const validationRules = calculator.validation_rules || {};
   const chartConfig = calculator.chart_config || null;
   const faqItems = calculator.faq || [];
-
-  // Get engine from pre-built map
-  const engine = calculatorEngines[slug];
+  const engineStr = calculator.calculator_engine || '';
 
   // Set default values
   useEffect(() => {
@@ -83,7 +86,7 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
   }, [inputFields]);
 
   const calculate = useCallback(() => {
-    if (!engine) {
+    if (!engineStr) {
       setError('Calculation engine not available');
       return;
     }
@@ -91,7 +94,32 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
     setIsCalculating(true);
     try {
       const processed = preprocessInputs(inputs);
-      const output = engine(processed);
+      
+      // Get parameter names from engine (e.g., ['rate', 'years', 'amount'])
+      const paramNames = getParamNames(engineStr);
+      if (paramNames.length === 0) throw new Error('Cannot parse engine parameters');
+      
+      // Map input field values to parameter order
+      // We need to map by name: if a param matches an input field name, use that value
+      // Otherwise, try to match by common aliases or position
+      const args = paramNames.map(param => {
+        // Direct match
+        if (processed[param] !== undefined) return processed[param];
+        // Try case-insensitive match
+        const lowerParam = param.toLowerCase();
+        const matchedKey = Object.keys(processed).find(k => k.toLowerCase() === lowerParam);
+        if (matchedKey) return processed[matchedKey];
+        // Fallback: try to use first input field (for simple calculators with one input)
+        if (paramNames.length === 1 && Object.keys(processed).length > 0) {
+          return Object.values(processed)[0];
+        }
+        return 0;
+      });
+      
+      // Create function and call
+      const fn = new Function(`return (${engineStr})`)();
+      const output = fn(...args);
+      
       if (output && typeof output === 'object') {
         setResult(output);
         const points = output.chartPoints || output.yearlyData;
@@ -122,7 +150,7 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
     } finally {
       setIsCalculating(false);
     }
-  }, [engine, inputs, preprocessInputs, calculator.title, chartConfig]);
+  }, [engineStr, inputs, preprocessInputs, calculator.title, chartConfig]);
 
   const handleInputChange = (name: string, value: any) => {
     setInputs(prev => ({ ...prev, [name]: value }));
@@ -223,7 +251,6 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
 
   return (
     <div className="space-y-6">
-      {/* Main Calculator Card */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-6 md:p-8">
           <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2 mb-6">
@@ -253,14 +280,8 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
         {result && (
           <div className="border-t border-gray-100 bg-gradient-to-br from-green-50 to-emerald-50 p-6 md:p-8">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-green-600" />
-                Your Result
-              </h3>
-              <button
-                onClick={shareResult}
-                className="text-sm text-orange-600 hover:text-orange-700 flex items-center gap-1"
-              >
+              <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2"><TrendingUp className="w-5 h-5 text-green-600" />Your Result</h3>
+              <button onClick={shareResult} className="text-sm text-orange-600 hover:text-orange-700 flex items-center gap-1">
                 {copied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
                 {copied ? 'Copied!' : 'Share'}
               </button>
@@ -284,9 +305,7 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
                 );
               })}
             </div>
-            {calculator.result_explanation && (
-              <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">{calculator.result_explanation}</p>
-            )}
+            {calculator.result_explanation && <p className="mt-4 text-sm text-gray-600 bg-white/60 p-3 rounded-lg">{calculator.result_explanation}</p>}
           </div>
         )}
 
@@ -308,7 +327,6 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
         )}
       </div>
 
-      {/* Educational Sections */}
       <div className="space-y-3">
         <Section id="what" title="What is this calculator?" icon={Info} content={calculator.what_is} />
         <Section id="how" title="How to use" icon={Lightbulb} content={calculator.how_to_use} />
@@ -322,7 +340,6 @@ export default function CalculatorPro({ calculator, slug }: { calculator: any; s
         )}
       </div>
 
-      {/* FAQ */}
       {faqItems.length > 0 && (
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><HelpCircle className="w-5 h-5 text-orange-500" />Frequently Asked Questions</h3>
