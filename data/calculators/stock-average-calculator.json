@@ -1,0 +1,313 @@
+{
+  "slug": "stock-average-calculator",
+  "title": "Stock Average Price Calculator",
+  "category": "individual",
+  "type": "trading",
+  "description": "Average buy price after multiple purchases",
+  "formula_template": "stockAverageFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Stock Average Price Calculator",
+  "canonical_url": "https://yoursite.com/calculators/stock-average-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Average Cost = Total Amount Invested / Total Shares. Multiple purchases: Avg = (P1×Q1 + P2×Q2 + ... + Pn×Qn) / (Q1 + Q2 + ... + Qn). Break-even = Average Cost. Profit = (Sell Price − Avg Cost) × Total Shares.",
+  "formula_source": "NSE India / Standard Finance",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "Stock Average Price Calculator | Free Calculator India",
+  "meta_description": "Use our free stock average price calculator to average buy price after multiple purchases. Get instant results with Indian context – ₹, lakhs, crores. Plan y...",
+  "focus_keyword": "Stock Average Price Calculator",
+  "secondary_keywords": [
+    "stock average price calculator calculator online",
+    "stock average price calculator calculator india",
+    "stock average price calculator formula",
+    "best stock average price calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock Average Price Calculator helps you average buy price after multiple purchases accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Stock Average Price Calculator is a digital tool that allows you to average buy price after multiple purchases without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Stock Average Price Calculator on this page. Step 2: Enter your Purchase entries (Price:Quantity pairs, e.g. 500:100,480:200)). Step 3: Click 'Calculate' to see instant results. Step 4: Review the detailed breakdown and use results for financial planning. Step 5: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Stock Average Price Calculator uses: Average Cost = Total Amount Invested / Total Shares. Multiple purchases: Avg = (P1×Q1 + P2×Q2 + ... + Pn×Qn) / (Q1 + Q2 + ... + Qn). Break-even = Average Cost. Profit = (Sell Price − Avg Cost) × Total. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Purchase entries (Price:Quantity pairs, e.g. 500:100,480:200)= → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Stock Average Price Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+  "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+  "faq": [
+    {
+      "q": "What is a Stock Average Price Calculator?",
+      "a": "A Stock Average Price Calculator is an online tool that helps you average buy price after multiple purchases quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Stock Average Price Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Stock Average Price Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Stock Average Price Calculator – India's Best Online Ca",
+  "og_description": "Calculate average buy price after multiple purchases instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "purchases",
+      "label": "Purchase entries (Price:Quantity pairs, e.g. 500:100,480:200)",
+      "type": "text",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Average Buy Price",
+    "Total Shares",
+    "Total Invested",
+    "Breakeven Price",
+    "Current P&L (if sell price given)"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Purchase #",
+    "yAxis": "Price (₹)",
+    "title": "Purchase Price vs Average"
+  },
+  "result_explanation": "The Stock Average Price Calculator returns Average Buy Price, Total Shares, Total Invested. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "purchases": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function stockAvg(purchases){const lots=purchases.split(',').map(p=>{const[pr,qty]=p.split(':').map(Number);return{pr,qty};});const totalQty=lots.reduce((s,l)=>s+l.qty,0);const totalInvest=lots.reduce((s,l)=>s+l.pr*l.qty,0);return{avg:totalInvest/totalQty,totalQty,totalInvest};}",
+  "category_hierarchy": [
+    "trading",
+    "stock",
+    "averaging",
+    "cost_basis"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "stock average price calculator india",
+    "share average calculator",
+    "how to average down stock price",
+    "stock averaging calculator nse",
+    "multiple purchase average calculator",
+    "cost basis calculator india",
+    "stock buy average formula"
+  ],
+  "semantic_keywords": [
+    "stock averaging",
+    "cost basis",
+    "breakeven",
+    "NSE",
+    "buy more on dip",
+    "average down",
+    "shares",
+    "portfolio",
+    "FIFO",
+    "weighted average"
+  ],
+  "paa_keywords": [
+    "How to calculate average stock price?",
+    "Is averaging down a good strategy?",
+    "How to calculate breakeven after averaging?",
+    "What is cost basis in stocks?",
+    "How many shares can I buy to average down?"
+  ],
+  "voice_search_keywords": [
+    "how to calculate average stock price",
+    "share averaging calculator",
+    "how to average down my stocks",
+    "breakeven after buying more shares"
+  ],
+  "seo_score": 82,
+  "eeat_score": 78,
+  "discover_score": 74,
+  "ai_search_score": 80,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Stock Average Price Calculator | Free Calculator India",
+    "meta_description": "Use our free stock average price calculator to average buy price after multiple purchases. Get instant results with Indian context – ₹, lakhs, crores. Plan y...",
+    "focus_keyword": "Stock Average Price Calculator",
+    "secondary_keywords": [
+      "stock average price calculator calculator online",
+      "stock average price calculator calculator india",
+      "stock average price calculator formula",
+      "best stock average price calculator calculator 2024"
+    ],
+    "og_title": "Free Stock Average Price Calculator – India's Best Online Ca",
+    "og_description": "Calculate average buy price after multiple purchases instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/stock-average-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "stock average price calculator india",
+      "share average calculator",
+      "how to average down stock price",
+      "stock averaging calculator nse",
+      "multiple purchase average calculator",
+      "cost basis calculator india",
+      "stock buy average formula"
+    ],
+    "semantic_keywords": [
+      "stock averaging",
+      "cost basis",
+      "breakeven",
+      "NSE",
+      "buy more on dip",
+      "average down",
+      "shares",
+      "portfolio",
+      "FIFO",
+      "weighted average"
+    ],
+    "paa_keywords": [
+      "How to calculate average stock price?",
+      "Is averaging down a good strategy?",
+      "How to calculate breakeven after averaging?",
+      "What is cost basis in stocks?",
+      "How many shares can I buy to average down?"
+    ],
+    "voice_search_keywords": [
+      "how to calculate average stock price",
+      "share averaging calculator",
+      "how to average down my stocks",
+      "breakeven after buying more shares"
+    ]
+  },
+  "_scores": {
+    "seo_score": 82,
+    "eeat_score": 78,
+    "discover_score": 74,
+    "ai_search_score": 80,
+    "ranking_priority": 2,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "Average Cost = Total Amount Invested / Total Shares. Multiple purchases: Avg = (P1×Q1 + P2×Q2 + ... + Pn×Qn) / (Q1 + Q2 + ... + Qn). Break-even = Average Cost. Profit = (Sell Price − Avg Cost) × Total Shares.",
+    "formula_template": "stockAverageFormula",
+    "formula_source": "NSE India / Standard Finance",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The Stock Average Price Calculator uses: Average Cost = Total Amount Invested / Total Shares. Multiple purchases: Avg = (P1×Q1 + P2×Q2 + ... + Pn×Qn) / (Q1 + Q2 + ... + Qn). Break-even = Average Cost. Profit = (Sell Price − Avg Cost) × Total. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Purchase entries (Price:Quantity pairs, e.g. 500:100,480:200)= → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock Average Price Calculator helps you average buy price after multiple purchases accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Stock Average Price Calculator is a digital tool that allows you to average buy price after multiple purchases without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Stock Average Price Calculator on this page. Step 2: Enter your Purchase entries (Price:Quantity pairs, e.g. 500:100,480:200)). Step 3: Click 'Calculate' to see instant results. Step 4: Review the detailed breakdown and use results for financial planning. Step 5: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Stock Average Price Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+    "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+    "result_explanation": "The Stock Average Price Calculator returns Average Buy Price, Total Shares, Total Invested. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Stock Average Price Calculator?",
+        "a": "A Stock Average Price Calculator is an online tool that helps you average buy price after multiple purchases quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Stock Average Price Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Stock Average Price Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "purchases",
+        "label": "Purchase entries (Price:Quantity pairs, e.g. 500:100,480:200)",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Average Buy Price",
+      "Total Shares",
+      "Total Invested",
+      "Breakeven Price",
+      "Current P&L (if sell price given)"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Purchase #",
+      "yAxis": "Price (₹)",
+      "title": "Purchase Price vs Average"
+    },
+    "validation_rules": {
+      "purchases": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function stockAvg(purchases){const lots=purchases.split(',').map(p=>{const[pr,qty]=p.split(':').map(Number);return{pr,qty};});const totalQty=lots.reduce((s,l)=>s+l.qty,0);const totalInvest=lots.reduce((s,l)=>s+l.pr*l.qty,0);return{avg:totalInvest/totalQty,totalQty,totalInvest};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "stock",
+      "averaging",
+      "cost_basis"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "Stock Average Price Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

@@ -1,0 +1,443 @@
+{
+  "slug": "swp-tax-calculator",
+  "title": "SWP Tax Impact Calculator",
+  "category": "individual",
+  "type": "tax",
+  "description": "Estimate tax on SWP",
+  "formula_template": "swpTaxFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "SWP Tax Impact Calculator",
+  "canonical_url": "https://yoursite.com/calculators/swp-tax-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "SWP Tax: Equity MF (held >1yr): LTCG @10% above ₹1L per FY; Debt MF: slab rate (marginal tax rate) on gains. Each redemption = FIFO. Gains per unit = (Redemption NAV − Purchase NAV). Tax = gains × applicable rate.",
+  "formula_source": "Income Tax Dept India / Budget 2023",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "SWP Tax Impact Calculator | Free Calculator India",
+  "meta_description": "Use our free swp tax impact calculator to estimate tax on swp. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "SWP Tax Impact Calculator",
+  "secondary_keywords": [
+    "swp tax impact calculator calculator online",
+    "swp tax impact calculator calculator india",
+    "swp tax impact calculator formula",
+    "best swp tax impact calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our SWP Tax Impact Calculator helps you estimate tax on swp accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A SWP Tax Impact Calculator is a digital tool that allows you to estimate tax on swp without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the SWP Tax Impact Calculator on this page. Step 2: Enter your Monthly Withdrawal (₹) (e.g., ₹10,000). Step 3: Enter your Average Purchase NAV (₹) (e.g., ₹50). Step 4: Enter your Current NAV (₹) (e.g., ₹100). Step 5: Enter your Fund Type). Step 6: Enter your Your Tax Slab (%) (e.g., ₹30). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The SWP Tax Impact Calculator uses: SWP Tax: Equity MF (held >1yr): LTCG @10% above ₹1L per FY; Debt MF: slab rate (marginal tax rate) on gains. Each redemption = FIFO. Gains per unit = (Redemption NAV − Purchase NAV). Tax = gains × app. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Monthly Withdrawal (₹)=10000, Average Purchase NAV (₹)=50, Current NAV (₹)=100 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate SWP Tax Impact Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a SWP Tax Impact Calculator?",
+      "a": "A SWP Tax Impact Calculator is an online tool that helps you estimate tax on swp quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this SWP Tax Impact Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this SWP Tax Impact Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free SWP Tax Impact Calculator – India's Best Online Calcula",
+  "og_description": "Calculate estimate tax on swp instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "retirement-corpus-calculator",
+    "swp-inflation-calculator",
+    "fd-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "monthlyWithdrawal",
+      "label": "Monthly Withdrawal (₹)",
+      "type": "number",
+      "min": 500,
+      "max": 500000,
+      "default": 10000,
+      "required": true
+    },
+    {
+      "name": "purchaseNav",
+      "label": "Average Purchase NAV (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 10000,
+      "default": 50,
+      "required": true
+    },
+    {
+      "name": "currentNav",
+      "label": "Current NAV (₹)",
+      "type": "number",
+      "min": 1,
+      "max": 10000,
+      "default": 100,
+      "required": true
+    },
+    {
+      "name": "fundType",
+      "label": "Fund Type",
+      "type": "select",
+      "options": [
+        "Equity MF (LTCG >1yr @10%)",
+        "Debt MF (Slab Rate)"
+      ],
+      "default": "Equity MF (LTCG >1yr @10%)",
+      "required": true
+    },
+    {
+      "name": "taxSlab",
+      "label": "Your Tax Slab (%)",
+      "type": "select",
+      "options": [
+        5,
+        20,
+        30
+      ],
+      "default": 30,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Taxable Gain per Month",
+    "Tax Payable per Month",
+    "Post-Tax Monthly Income",
+    "Annual Tax Liability"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "SWP Tax Impact"
+  },
+  "result_explanation": "The SWP Tax Impact Calculator returns Taxable Gain per Month, Tax Payable per Month, Post-Tax Monthly Income. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "monthlyWithdrawal": {
+      "required": true,
+      "min": 500,
+      "max": 500000
+    },
+    "purchaseNav": {
+      "required": true,
+      "min": 1,
+      "max": 10000
+    },
+    "currentNav": {
+      "required": true,
+      "min": 1,
+      "max": 10000
+    },
+    "fundType": {
+      "required": true
+    },
+    "taxSlab": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function swpTax(withdrawal,buyNav,currNav,isEquity,slab){const gainPct=(currNav-buyNav)/buyNav;const gain=withdrawal*gainPct;const ltcgExempt=100000/12;const taxableGain=isEquity?Math.max(0,gain-ltcgExempt):gain;const rate=isEquity?0.10:slab/100;const tax=taxableGain*rate;return{gain,tax,postTax:withdrawal-tax,annualTax:tax*12};}",
+  "category_hierarchy": [
+    "tax",
+    "swp",
+    "mutual_fund",
+    "capital_gains"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "swp_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "retirement-corpus-calculator",
+    "swp-inflation-calculator",
+    "fd-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "swp tax calculator india",
+    "tax on swp mutual fund",
+    "ltcg on swp",
+    "swp tax impact calculator",
+    "how is swp taxed india",
+    "tax efficient swp strategy",
+    "swp equity fund tax",
+    "swp debt fund tax"
+  ],
+  "semantic_keywords": [
+    "SWP tax",
+    "LTCG",
+    "STCG",
+    "FIFO method",
+    "NAV",
+    "equity MF",
+    "debt MF",
+    "slab rate",
+    "redemption tax",
+    "Section 112A"
+  ],
+  "paa_keywords": [
+    "How is SWP taxed in India?",
+    "Is SWP taxable?",
+    "What is LTCG on SWP?",
+    "How to minimize tax on SWP?",
+    "Which fund type has lower SWP tax?"
+  ],
+  "voice_search_keywords": [
+    "how is swp taxed in india",
+    "tax on systematic withdrawal plan",
+    "swp tax calculator",
+    "ltcg on mutual fund withdrawal"
+  ],
+  "seo_score": 78,
+  "eeat_score": 80,
+  "discover_score": 70,
+  "ai_search_score": 77,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "SWP Tax Impact Calculator | Free Calculator India",
+    "meta_description": "Use our free swp tax impact calculator to estimate tax on swp. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "SWP Tax Impact Calculator",
+    "secondary_keywords": [
+      "swp tax impact calculator calculator online",
+      "swp tax impact calculator calculator india",
+      "swp tax impact calculator formula",
+      "best swp tax impact calculator calculator 2024"
+    ],
+    "og_title": "Free SWP Tax Impact Calculator – India's Best Online Calcula",
+    "og_description": "Calculate estimate tax on swp instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/swp-tax-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "swp tax calculator india",
+      "tax on swp mutual fund",
+      "ltcg on swp",
+      "swp tax impact calculator",
+      "how is swp taxed india",
+      "tax efficient swp strategy",
+      "swp equity fund tax",
+      "swp debt fund tax"
+    ],
+    "semantic_keywords": [
+      "SWP tax",
+      "LTCG",
+      "STCG",
+      "FIFO method",
+      "NAV",
+      "equity MF",
+      "debt MF",
+      "slab rate",
+      "redemption tax",
+      "Section 112A"
+    ],
+    "paa_keywords": [
+      "How is SWP taxed in India?",
+      "Is SWP taxable?",
+      "What is LTCG on SWP?",
+      "How to minimize tax on SWP?",
+      "Which fund type has lower SWP tax?"
+    ],
+    "voice_search_keywords": [
+      "how is swp taxed in india",
+      "tax on systematic withdrawal plan",
+      "swp tax calculator",
+      "ltcg on mutual fund withdrawal"
+    ]
+  },
+  "_scores": {
+    "seo_score": 78,
+    "eeat_score": 80,
+    "discover_score": 70,
+    "ai_search_score": 77,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "SWP Tax: Equity MF (held >1yr): LTCG @10% above ₹1L per FY; Debt MF: slab rate (marginal tax rate) on gains. Each redemption = FIFO. Gains per unit = (Redemption NAV − Purchase NAV). Tax = gains × applicable rate.",
+    "formula_template": "swpTaxFormula",
+    "formula_source": "Income Tax Dept India / Budget 2023",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The SWP Tax Impact Calculator uses: SWP Tax: Equity MF (held >1yr): LTCG @10% above ₹1L per FY; Debt MF: slab rate (marginal tax rate) on gains. Each redemption = FIFO. Gains per unit = (Redemption NAV − Purchase NAV). Tax = gains × app. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Monthly Withdrawal (₹)=10000, Average Purchase NAV (₹)=50, Current NAV (₹)=100 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our SWP Tax Impact Calculator helps you estimate tax on swp accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A SWP Tax Impact Calculator is a digital tool that allows you to estimate tax on swp without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the SWP Tax Impact Calculator on this page. Step 2: Enter your Monthly Withdrawal (₹) (e.g., ₹10,000). Step 3: Enter your Average Purchase NAV (₹) (e.g., ₹50). Step 4: Enter your Current NAV (₹) (e.g., ₹100). Step 5: Enter your Fund Type). Step 6: Enter your Your Tax Slab (%) (e.g., ₹30). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate SWP Tax Impact Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The SWP Tax Impact Calculator returns Taxable Gain per Month, Tax Payable per Month, Post-Tax Monthly Income. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a SWP Tax Impact Calculator?",
+        "a": "A SWP Tax Impact Calculator is an online tool that helps you estimate tax on swp quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this SWP Tax Impact Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this SWP Tax Impact Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "monthlyWithdrawal",
+        "label": "Monthly Withdrawal (₹)",
+        "type": "number",
+        "min": 500,
+        "max": 500000,
+        "default": 10000,
+        "required": true
+      },
+      {
+        "name": "purchaseNav",
+        "label": "Average Purchase NAV (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 10000,
+        "default": 50,
+        "required": true
+      },
+      {
+        "name": "currentNav",
+        "label": "Current NAV (₹)",
+        "type": "number",
+        "min": 1,
+        "max": 10000,
+        "default": 100,
+        "required": true
+      },
+      {
+        "name": "fundType",
+        "label": "Fund Type",
+        "type": "select",
+        "options": [
+          "Equity MF (LTCG >1yr @10%)",
+          "Debt MF (Slab Rate)"
+        ],
+        "default": "Equity MF (LTCG >1yr @10%)",
+        "required": true
+      },
+      {
+        "name": "taxSlab",
+        "label": "Your Tax Slab (%)",
+        "type": "select",
+        "options": [
+          5,
+          20,
+          30
+        ],
+        "default": 30,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Taxable Gain per Month",
+      "Tax Payable per Month",
+      "Post-Tax Monthly Income",
+      "Annual Tax Liability"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "SWP Tax Impact"
+    },
+    "validation_rules": {
+      "monthlyWithdrawal": {
+        "required": true,
+        "min": 500,
+        "max": 500000
+      },
+      "purchaseNav": {
+        "required": true,
+        "min": 1,
+        "max": 10000
+      },
+      "currentNav": {
+        "required": true,
+        "min": 1,
+        "max": 10000
+      },
+      "fundType": {
+        "required": true
+      },
+      "taxSlab": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function swpTax(withdrawal,buyNav,currNav,isEquity,slab){const gainPct=(currNav-buyNav)/buyNav;const gain=withdrawal*gainPct;const ltcgExempt=100000/12;const taxableGain=isEquity?Math.max(0,gain-ltcgExempt):gain;const rate=isEquity?0.10:slab/100;const tax=taxableGain*rate;return{gain,tax,postTax:withdrawal-tax,annualTax:tax*12};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "swp",
+      "mutual_fund",
+      "capital_gains"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "swp_cluster",
+    "breadcrumb_label": "SWP Tax Impact Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "retirement-corpus-calculator",
+      "swp-inflation-calculator",
+      "fd-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "retirement-corpus-calculator",
+      "swp-inflation-calculator",
+      "fd-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

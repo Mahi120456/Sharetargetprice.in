@@ -1,0 +1,383 @@
+{
+  "slug": "stock-sip-calculator",
+  "title": "Stock SIP Calculator",
+  "category": "individual",
+  "type": "investment",
+  "description": "Periodic investment in stocks",
+  "formula_template": "stockSipFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Stock SIP Calculator",
+  "canonical_url": "https://yoursite.com/calculators/stock-sip-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Stock SIP: Same as mutual fund SIP formula. FV = P × [(1+r)^n − 1] / r × (1+r). r = monthly return of stock = (annual CAGR)/12/100. Unlike MF, stock SIP has higher risk; no expense ratio but brokerage applies each purchase.",
+  "formula_source": "NSE India",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "Stock SIP Calculator | Free Calculator India",
+  "meta_description": "Use our free stock sip calculator to periodic investment in stocks. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Stock SIP Calculator",
+  "secondary_keywords": [
+    "stock sip calculator calculator online",
+    "stock sip calculator calculator india",
+    "stock sip calculator formula",
+    "best stock sip calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock SIP Calculator helps you periodic investment in stocks accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Stock SIP Calculator is a digital tool that allows you to periodic investment in stocks without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Stock SIP Calculator on this page. Step 2: Enter your Monthly Investment in Stock (₹) (e.g., ₹5,000). Step 3: Enter your Expected Stock CAGR (%) (e.g., ₹15). Step 4: Enter your Investment Period (Years) (e.g., ₹10). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Stock SIP Calculator uses: Stock SIP: Same as mutual fund SIP formula. FV = P × [(1+r)^n − 1] / r × (1+r). r = monthly return of stock = (annual CAGR)/12/100. Unlike MF, stock SIP has higher risk; no expense ratio but brokerage. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Monthly Investment in Stock (₹)=5000, Expected Stock CAGR (%)=15, Investment Period (Years)=10 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Stock SIP Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+  "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+  "faq": [
+    {
+      "q": "What is a Stock SIP Calculator?",
+      "a": "A Stock SIP Calculator is an online tool that helps you periodic investment in stocks quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Stock SIP Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Stock SIP Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "What is a realistic return for Indian mutual funds?",
+      "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+    }
+  ],
+  "og_title": "Free Stock SIP Calculator – India's Best Online Calculator",
+  "og_description": "Calculate periodic investment in stocks instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "step-up-sip-calculator",
+    "lumpsum-calculator",
+    "swp-calculator",
+    "cagr-calculator",
+    "goal-based-sip-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "monthlyInvestment",
+      "label": "Monthly Investment in Stock (₹)",
+      "type": "number",
+      "min": 100,
+      "max": 1000000,
+      "default": 5000,
+      "required": true
+    },
+    {
+      "name": "stockCagr",
+      "label": "Expected Stock CAGR (%)",
+      "type": "number",
+      "min": 1,
+      "max": 100,
+      "default": 15,
+      "required": true
+    },
+    {
+      "name": "years",
+      "label": "Investment Period (Years)",
+      "type": "number",
+      "min": 1,
+      "max": 30,
+      "default": 10,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Maturity Value",
+    "Total Invested",
+    "Estimated Returns",
+    "vs Nifty 50 SIP Comparison"
+  ],
+  "chart_config": {
+    "type": "area",
+    "xAxis": "Year",
+    "yAxis": "Value (₹)",
+    "title": "Stock SIP Growth"
+  },
+  "result_explanation": "The Stock SIP Calculator returns Maturity Value, Total Invested, Estimated Returns. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "monthlyInvestment": {
+      "required": true,
+      "min": 100,
+      "max": 1000000
+    },
+    "stockCagr": {
+      "required": true,
+      "min": 1,
+      "max": 100
+    },
+    "years": {
+      "required": true,
+      "min": 1,
+      "max": 30
+    }
+  },
+  "calculator_engine": "function stockSip(P,cagr,years){const r=cagr/100/12;const n=years*12;const fv=P*(Math.pow(1+r,n)-1)/r*(1+r);const niftyFv=P*(Math.pow(1+12/100/12,n)-1)/(12/100/12)*(1+12/100/12);return{maturity:fv,invested:P*n,returns:fv-P*n,niftyComparison:niftyFv};}",
+  "category_hierarchy": [
+    "investment",
+    "stock",
+    "sip",
+    "direct_equity"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "sip_cluster",
+  "internal_link_targets": [
+    "step-up-sip-calculator",
+    "lumpsum-calculator",
+    "swp-calculator",
+    "cagr-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "stock sip calculator india",
+    "monthly stock investment calculator",
+    "direct equity sip returns",
+    "stock systematic investment plan",
+    "how much will stock sip give",
+    "equity sip calculator nse",
+    "stock sip vs mf sip"
+  ],
+  "semantic_keywords": [
+    "stock SIP",
+    "direct equity",
+    "periodic investment",
+    "NSE",
+    "CAGR",
+    "rupee cost averaging",
+    "Nifty 50",
+    "wealth creation",
+    "risk"
+  ],
+  "paa_keywords": [
+    "What is stock SIP?",
+    "Is stock SIP better than mutual fund SIP?",
+    "How to do SIP in stocks?",
+    "What is the return on stock SIP?",
+    "What is the risk in stock SIP?"
+  ],
+  "voice_search_keywords": [
+    "stock sip calculator",
+    "monthly stock investment returns",
+    "how to do sip in stocks",
+    "stock sip vs mutual fund sip"
+  ],
+  "seo_score": 78,
+  "eeat_score": 74,
+  "discover_score": 70,
+  "ai_search_score": 76,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Stock SIP Calculator | Free Calculator India",
+    "meta_description": "Use our free stock sip calculator to periodic investment in stocks. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Stock SIP Calculator",
+    "secondary_keywords": [
+      "stock sip calculator calculator online",
+      "stock sip calculator calculator india",
+      "stock sip calculator formula",
+      "best stock sip calculator calculator 2024"
+    ],
+    "og_title": "Free Stock SIP Calculator – India's Best Online Calculator",
+    "og_description": "Calculate periodic investment in stocks instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/stock-sip-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "stock sip calculator india",
+      "monthly stock investment calculator",
+      "direct equity sip returns",
+      "stock systematic investment plan",
+      "how much will stock sip give",
+      "equity sip calculator nse",
+      "stock sip vs mf sip"
+    ],
+    "semantic_keywords": [
+      "stock SIP",
+      "direct equity",
+      "periodic investment",
+      "NSE",
+      "CAGR",
+      "rupee cost averaging",
+      "Nifty 50",
+      "wealth creation",
+      "risk"
+    ],
+    "paa_keywords": [
+      "What is stock SIP?",
+      "Is stock SIP better than mutual fund SIP?",
+      "How to do SIP in stocks?",
+      "What is the return on stock SIP?",
+      "What is the risk in stock SIP?"
+    ],
+    "voice_search_keywords": [
+      "stock sip calculator",
+      "monthly stock investment returns",
+      "how to do sip in stocks",
+      "stock sip vs mutual fund sip"
+    ]
+  },
+  "_scores": {
+    "seo_score": 78,
+    "eeat_score": 74,
+    "discover_score": 70,
+    "ai_search_score": 76,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Stock SIP: Same as mutual fund SIP formula. FV = P × [(1+r)^n − 1] / r × (1+r). r = monthly return of stock = (annual CAGR)/12/100. Unlike MF, stock SIP has higher risk; no expense ratio but brokerage applies each purchase.",
+    "formula_template": "stockSipFormula",
+    "formula_source": "NSE India",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The Stock SIP Calculator uses: Stock SIP: Same as mutual fund SIP formula. FV = P × [(1+r)^n − 1] / r × (1+r). r = monthly return of stock = (annual CAGR)/12/100. Unlike MF, stock SIP has higher risk; no expense ratio but brokerage. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Monthly Investment in Stock (₹)=5000, Expected Stock CAGR (%)=15, Investment Period (Years)=10 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock SIP Calculator helps you periodic investment in stocks accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Stock SIP Calculator is a digital tool that allows you to periodic investment in stocks without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Stock SIP Calculator on this page. Step 2: Enter your Monthly Investment in Stock (₹) (e.g., ₹5,000). Step 3: Enter your Expected Stock CAGR (%) (e.g., ₹15). Step 4: Enter your Investment Period (Years) (e.g., ₹10). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Stock SIP Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+    "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+    "result_explanation": "The Stock SIP Calculator returns Maturity Value, Total Invested, Estimated Returns. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Stock SIP Calculator?",
+        "a": "A Stock SIP Calculator is an online tool that helps you periodic investment in stocks quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Stock SIP Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Stock SIP Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "What is a realistic return for Indian mutual funds?",
+        "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "monthlyInvestment",
+        "label": "Monthly Investment in Stock (₹)",
+        "type": "number",
+        "min": 100,
+        "max": 1000000,
+        "default": 5000,
+        "required": true
+      },
+      {
+        "name": "stockCagr",
+        "label": "Expected Stock CAGR (%)",
+        "type": "number",
+        "min": 1,
+        "max": 100,
+        "default": 15,
+        "required": true
+      },
+      {
+        "name": "years",
+        "label": "Investment Period (Years)",
+        "type": "number",
+        "min": 1,
+        "max": 30,
+        "default": 10,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Maturity Value",
+      "Total Invested",
+      "Estimated Returns",
+      "vs Nifty 50 SIP Comparison"
+    ],
+    "chart_config": {
+      "type": "area",
+      "xAxis": "Year",
+      "yAxis": "Value (₹)",
+      "title": "Stock SIP Growth"
+    },
+    "validation_rules": {
+      "monthlyInvestment": {
+        "required": true,
+        "min": 100,
+        "max": 1000000
+      },
+      "stockCagr": {
+        "required": true,
+        "min": 1,
+        "max": 100
+      },
+      "years": {
+        "required": true,
+        "min": 1,
+        "max": 30
+      }
+    },
+    "calculator_engine": "function stockSip(P,cagr,years){const r=cagr/100/12;const n=years*12;const fv=P*(Math.pow(1+r,n)-1)/r*(1+r);const niftyFv=P*(Math.pow(1+12/100/12,n)-1)/(12/100/12)*(1+12/100/12);return{maturity:fv,invested:P*n,returns:fv-P*n,niftyComparison:niftyFv};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "investment",
+    "category_hierarchy": [
+      "investment",
+      "stock",
+      "sip",
+      "direct_equity"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "sip_cluster",
+    "breadcrumb_label": "Stock SIP Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "step-up-sip-calculator",
+      "lumpsum-calculator",
+      "swp-calculator",
+      "cagr-calculator",
+      "goal-based-sip-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "step-up-sip-calculator",
+      "lumpsum-calculator",
+      "swp-calculator",
+      "cagr-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

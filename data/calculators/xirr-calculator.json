@@ -1,0 +1,341 @@
+{
+  "slug": "xirr-calculator",
+  "title": "XIRR Calculator (MF)",
+  "category": "individual",
+  "type": "returns",
+  "description": "Calculate XIRR for irregular cash flows",
+  "formula_template": "xirrFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "XIRR Calculator (MF)",
+  "canonical_url": "https://yoursite.com/calculators/xirr-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "XIRR solves: Σ [CF_i / (1+r)^(d_i/365)] = 0  where CF_i = cash flow, d_i = days from start, r = XIRR rate (Newton-Raphson method)",
+  "formula_source": "SEBI / ClearTax",
+  "formula_source_url": "https://cleartax.in/s/xirr-calculator",
+  "meta_title": "XIRR Calculator (MF) | Free Online Calculator India",
+  "meta_description": "Use our free xirr calculator (mf) to calculate xirr for irregular cash flows. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances ...",
+  "focus_keyword": "XIRR Calculator (MF)",
+  "secondary_keywords": [
+    "xirr calculator (mf) online",
+    "xirr calculator (mf) india",
+    "xirr calculator (mf) calculator",
+    "xirr calculator (mf) formula",
+    "xirr calculator (mf) example",
+    "xirr calculator (mf) calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our XIRR Calculator (MF) helps you calculate xirr for irregular cash flows accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A XIRR Calculator (MF) is a digital tool that allows you to calculate xirr for irregular cash flows without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the XIRR Calculator (MF) on this page. Step 2: Enter your Cash Flows (₹, negative=investment, positive=redemption)). Step 3: Enter your Dates (DD/MM/YYYY, one per line)). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The XIRR Calculator (MF) uses the following mathematical formula: XIRR solves: Σ [CF_i / (1+r)^(d_i/365)] = 0  where CF_i = cash flow, d_i = days from start, r = XIRR rate (Newton-Raphson method). Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Initial investment ₹1 lakh; Final value ₹2 lakh after 5 years → CAGR = 14.87%.",
+  "benefits": "<ul><li>Instant, accurate XIRR Calculator (MF) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals before making any financial decisions. Individual circumstances may vary.",
+  "pro_tips": "1. Use this calculator to compare multiple scenarios. 2. Keep results handy for financial planning discussions. 3. Revisit calculations annually as rates change. 4. Consult a certified financial advisor for personalized advice.",
+  "faq": [
+    {
+      "q": "What is a XIRR Calculator (MF)?",
+      "a": "A XIRR Calculator (MF) is an online tool that helps you calculate xirr for irregular cash flows quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this XIRR Calculator (MF) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this XIRR Calculator (MF)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this XIRR Calculator (MF) on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    }
+  ],
+  "og_title": "Free XIRR Calculator (MF) – India's Best Online Calculator",
+  "og_description": "Calculate calculate xirr for irregular cash flows instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "health-individual-vs-family-floater",
+    "ott-pack-vs-individual",
+    "mutual-fund-returns-calculator",
+    "mutual-fund-xirr-returns"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "cashFlows",
+      "label": "Cash Flows (₹, negative=investment, positive=redemption)",
+      "type": "textarea",
+      "required": true
+    },
+    {
+      "name": "dates",
+      "label": "Dates (DD/MM/YYYY, one per line)",
+      "type": "textarea",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "XIRR (%)",
+    "Annualized Return",
+    "Total Invested",
+    "Total Redeemed"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Date",
+    "yAxis": "Cash Flow (₹)",
+    "title": "Cash Flow Timeline"
+  },
+  "result_explanation": "The XIRR Calculator (MF) returns XIRR (%), Annualized Return, Total Invested. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "cashFlows": {
+      "required": true
+    },
+    "dates": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function xirr(cashFlows,dates){// Newton-Raphson iteration\nlet r=0.1;for(let i=0;i<100;i++){let f=0,df=0;for(let j=0;j<cashFlows.length;j++){const t=(dates[j]-dates[0])/(365*24*3600*1000);f+=cashFlows[j]/Math.pow(1+r,t);df+=-t*cashFlows[j]/Math.pow(1+r,t+1);}const nr=r-f/df;if(Math.abs(nr-r)<1e-7)return{xirr:(nr*100).toFixed(2)};r=nr;}return{xirr:(r*100).toFixed(2)};}",
+  "category_hierarchy": [
+    "investment",
+    "mutual_fund",
+    "returns",
+    "xirr"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "returns_cluster",
+  "internal_link_targets": [
+    "health-individual-vs-family-floater",
+    "ott-pack-vs-individual",
+    "mutual-fund-returns-calculator",
+    "mutual-fund-xirr-returns"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "advanced",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "xirr calculator mutual fund india",
+    "how to calculate xirr in excel",
+    "xirr vs cagr difference",
+    "xirr calculator for irregular cash flows",
+    "mutual fund xirr calculator online",
+    "xirr formula explained",
+    "xirr calculator with dates",
+    "best xirr calculator india"
+  ],
+  "semantic_keywords": [
+    "extended internal rate of return",
+    "annualized return",
+    "irregular cash flows",
+    "mutual fund performance",
+    "SIP XIRR",
+    "portfolio return",
+    "time-weighted return",
+    "IRR",
+    "compounding",
+    "financial analysis"
+  ],
+  "paa_keywords": [
+    "What is XIRR in mutual funds?",
+    "How is XIRR different from CAGR?",
+    "Is 15% XIRR good?",
+    "How to calculate XIRR for SIP?",
+    "What is a good XIRR for mutual fund?"
+  ],
+  "voice_search_keywords": [
+    "what is xirr in mutual fund",
+    "how to calculate xirr",
+    "difference between xirr and cagr",
+    "how to find xirr for my sip"
+  ],
+  "seo_score": 80,
+  "eeat_score": 82,
+  "discover_score": 70,
+  "ai_search_score": 82,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "XIRR Calculator (MF) | Free Online Calculator India",
+    "meta_description": "Use our free xirr calculator (mf) to calculate xirr for irregular cash flows. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances ...",
+    "focus_keyword": "XIRR Calculator (MF)",
+    "secondary_keywords": [
+      "xirr calculator (mf) online",
+      "xirr calculator (mf) india",
+      "xirr calculator (mf) calculator",
+      "xirr calculator (mf) formula",
+      "xirr calculator (mf) example",
+      "xirr calculator (mf) calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free XIRR Calculator (MF) – India's Best Online Calculator",
+    "og_description": "Calculate calculate xirr for irregular cash flows instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/xirr-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "xirr calculator mutual fund india",
+      "how to calculate xirr in excel",
+      "xirr vs cagr difference",
+      "xirr calculator for irregular cash flows",
+      "mutual fund xirr calculator online",
+      "xirr formula explained",
+      "xirr calculator with dates",
+      "best xirr calculator india"
+    ],
+    "semantic_keywords": [
+      "extended internal rate of return",
+      "annualized return",
+      "irregular cash flows",
+      "mutual fund performance",
+      "SIP XIRR",
+      "portfolio return",
+      "time-weighted return",
+      "IRR",
+      "compounding",
+      "financial analysis"
+    ],
+    "paa_keywords": [
+      "What is XIRR in mutual funds?",
+      "How is XIRR different from CAGR?",
+      "Is 15% XIRR good?",
+      "How to calculate XIRR for SIP?",
+      "What is a good XIRR for mutual fund?"
+    ],
+    "voice_search_keywords": [
+      "what is xirr in mutual fund",
+      "how to calculate xirr",
+      "difference between xirr and cagr",
+      "how to find xirr for my sip"
+    ]
+  },
+  "_scores": {
+    "seo_score": 80,
+    "eeat_score": 82,
+    "discover_score": 70,
+    "ai_search_score": 82,
+    "ranking_priority": 2,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "advanced"
+  },
+  "_formula": {
+    "formula_verified": "XIRR solves: Σ [CF_i / (1+r)^(d_i/365)] = 0  where CF_i = cash flow, d_i = days from start, r = XIRR rate (Newton-Raphson method)",
+    "formula_template": "xirrFormula",
+    "formula_source": "SEBI / ClearTax",
+    "formula_source_url": "https://cleartax.in/s/xirr-calculator",
+    "formula_explanation": "The XIRR Calculator (MF) uses the following mathematical formula: XIRR solves: Σ [CF_i / (1+r)^(d_i/365)] = 0  where CF_i = cash flow, d_i = days from start, r = XIRR rate (Newton-Raphson method). Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Initial investment ₹1 lakh; Final value ₹2 lakh after 5 years → CAGR = 14.87%.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our XIRR Calculator (MF) helps you calculate xirr for irregular cash flows accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A XIRR Calculator (MF) is a digital tool that allows you to calculate xirr for irregular cash flows without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the XIRR Calculator (MF) on this page. Step 2: Enter your Cash Flows (₹, negative=investment, positive=redemption)). Step 3: Enter your Dates (DD/MM/YYYY, one per line)). Step 4: Click 'Calculate' to see instant results. Step 5: Review the detailed breakdown and use results for financial planning. Step 6: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate XIRR Calculator (MF) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals before making any financial decisions. Individual circumstances may vary.",
+    "pro_tips": "1. Use this calculator to compare multiple scenarios. 2. Keep results handy for financial planning discussions. 3. Revisit calculations annually as rates change. 4. Consult a certified financial advisor for personalized advice.",
+    "result_explanation": "The XIRR Calculator (MF) returns XIRR (%), Annualized Return, Total Invested. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a XIRR Calculator (MF)?",
+        "a": "A XIRR Calculator (MF) is an online tool that helps you calculate xirr for irregular cash flows quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this XIRR Calculator (MF) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this XIRR Calculator (MF)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this XIRR Calculator (MF) on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "cashFlows",
+        "label": "Cash Flows (₹, negative=investment, positive=redemption)",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "name": "dates",
+        "label": "Dates (DD/MM/YYYY, one per line)",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "XIRR (%)",
+      "Annualized Return",
+      "Total Invested",
+      "Total Redeemed"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Date",
+      "yAxis": "Cash Flow (₹)",
+      "title": "Cash Flow Timeline"
+    },
+    "validation_rules": {
+      "cashFlows": {
+        "required": true
+      },
+      "dates": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function xirr(cashFlows,dates){// Newton-Raphson iteration\nlet r=0.1;for(let i=0;i<100;i++){let f=0,df=0;for(let j=0;j<cashFlows.length;j++){const t=(dates[j]-dates[0])/(365*24*3600*1000);f+=cashFlows[j]/Math.pow(1+r,t);df+=-t*cashFlows[j]/Math.pow(1+r,t+1);}const nr=r-f/df;if(Math.abs(nr-r)<1e-7)return{xirr:(nr*100).toFixed(2)};r=nr;}return{xirr:(r*100).toFixed(2)};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "returns",
+    "category_hierarchy": [
+      "investment",
+      "mutual_fund",
+      "returns",
+      "xirr"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "returns_cluster",
+    "breadcrumb_label": "XIRR Calculator (MF)"
+  },
+  "_links": {
+    "related_calculators": [
+      "health-individual-vs-family-floater",
+      "ott-pack-vs-individual",
+      "mutual-fund-returns-calculator",
+      "mutual-fund-xirr-returns"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "health-individual-vs-family-floater",
+      "ott-pack-vs-individual",
+      "mutual-fund-returns-calculator",
+      "mutual-fund-xirr-returns"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

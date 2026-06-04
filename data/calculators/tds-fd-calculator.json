@@ -1,0 +1,415 @@
+{
+  "slug": "tds-fd-calculator",
+  "title": "TDS on FD/RD Interest (194A)",
+  "category": "individual",
+  "type": "tax",
+  "description": "TDS on fixed deposit interest",
+  "formula_template": "tdsFdFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "TDS on FD/RD Interest (194A)",
+  "canonical_url": "https://yoursite.com/calculators/tds-fd-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "TDS on FD (Section 194A): TDS @10% if annual interest > ₹40,000 (₹50,000 for senior citizens). If PAN not submitted, TDS @20%. Senior citizens can submit Form 15H (nil TDS if income below exemption). Others submit Form 15G.",
+  "formula_source": "Income Tax Dept India / Section 194A",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "TDS on FD/RD Interest (194A) | Free Calculator India",
+  "meta_description": "Use our free tds on fd/rd interest (194a) to tds on fixed deposit interest. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances to...",
+  "focus_keyword": "TDS on FD/RD Interest (194A)",
+  "secondary_keywords": [
+    "tds on fd/rd interest (194a) calculator online",
+    "tds on fd/rd interest (194a) calculator india",
+    "tds on fd/rd interest (194a) formula",
+    "best tds on fd/rd interest (194a) calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our TDS on FD/RD Interest (194A) helps you tds on fixed deposit interest accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A TDS on FD/RD Interest (194A) is a digital tool that allows you to tds on fixed deposit interest without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the TDS on FD/RD Interest (194A) on this page. Step 2: Enter your FD Amount (₹) (e.g., ₹1,000,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹7). Step 4: Enter your Senior Citizen (60+)?). Step 5: Enter your PAN Submitted?). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The TDS on FD/RD Interest (194A) uses: TDS on FD (Section 194A): TDS @10% if annual interest > ₹40,000 (₹50,000 for senior citizens). If PAN not submitted, TDS @20%. Senior citizens can submit Form 15H (nil TDS if income below exemption). . Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – FD Amount (₹)=1000000, Annual Interest Rate (%)=7, Senior Citizen (60+)?=No → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate TDS on FD/RD Interest (194A) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+  "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+  "faq": [
+    {
+      "q": "What is a TDS on FD/RD Interest (194A)?",
+      "a": "A TDS on FD/RD Interest (194A) is an online tool that helps you tds on fixed deposit interest quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this TDS on FD/RD Interest (194A) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this TDS on FD/RD Interest (194A)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "Old or new tax regime?",
+      "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+    }
+  ],
+  "og_title": "Free TDS on FD/RD Interest (194A) – India's Best Online Calc",
+  "og_description": "Calculate tds on fixed deposit interest instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "rd-calculator",
+    "compound-interest-calculator",
+    "sip-calculator",
+    "ppf-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "fdAmount",
+      "label": "FD Amount (₹)",
+      "type": "number",
+      "min": 1000,
+      "max": 100000000,
+      "default": 1000000,
+      "required": true
+    },
+    {
+      "name": "annualRate",
+      "label": "Annual Interest Rate (%)",
+      "type": "number",
+      "min": 1,
+      "max": 15,
+      "default": 7,
+      "required": true
+    },
+    {
+      "name": "isSenior",
+      "label": "Senior Citizen (60+)?",
+      "type": "select",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No",
+      "required": true
+    },
+    {
+      "name": "hasPan",
+      "label": "PAN Submitted?",
+      "type": "select",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "default": "Yes",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Annual Interest",
+    "TDS Rate",
+    "TDS Amount",
+    "Interest After TDS",
+    "Form to Submit (if applicable)"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "FD Interest TDS Breakdown"
+  },
+  "result_explanation": "The TDS on FD/RD Interest (194A) returns Annual Interest, TDS Rate, TDS Amount. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "fdAmount": {
+      "required": true,
+      "min": 1000,
+      "max": 100000000
+    },
+    "annualRate": {
+      "required": true,
+      "min": 1,
+      "max": 15
+    },
+    "isSenior": {
+      "required": true
+    },
+    "hasPan": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function tdsFD(amount,rate,isSenior,hasPan){const interest=amount*rate/100;const threshold=isSenior?50000:40000;const tdsRate=hasPan?0.10:0.20;const tds=interest>threshold?interest*tdsRate:0;return{interest,tds,net:interest-tds,form:interest<threshold?(isSenior?'Form 15H':'Form 15G'):'TDS applicable'};}",
+  "category_hierarchy": [
+    "tax",
+    "tds",
+    "fixed_deposit",
+    "bank"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "deposit_cluster",
+  "internal_link_targets": [
+    "rd-calculator",
+    "compound-interest-calculator",
+    "sip-calculator",
+    "ppf-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "tds on fd calculator india",
+    "section 194a tds fd",
+    "how much tds on fixed deposit",
+    "tds fd interest calculator",
+    "form 15g 15h fd",
+    "tds on fd senior citizen",
+    "bank fd tds calculation 2024",
+    "tds on rd interest"
+  ],
+  "semantic_keywords": [
+    "TDS",
+    "Section 194A",
+    "FD interest",
+    "Form 15G",
+    "Form 15H",
+    "senior citizen",
+    "PAN",
+    "income tax",
+    "bank deposit",
+    "CBDT"
+  ],
+  "paa_keywords": [
+    "How much TDS is deducted on FD interest?",
+    "Can I avoid TDS on FD?",
+    "What is Form 15G and 15H?",
+    "Is FD interest taxable for senior citizens?",
+    "When is TDS deducted on FD?"
+  ],
+  "voice_search_keywords": [
+    "how much tds on fd interest",
+    "tds calculator for fixed deposit",
+    "form 15g for fd",
+    "how to avoid tds on fd"
+  ],
+  "seo_score": 84,
+  "eeat_score": 86,
+  "discover_score": 76,
+  "ai_search_score": 83,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "TDS on FD/RD Interest (194A) | Free Calculator India",
+    "meta_description": "Use our free tds on fd/rd interest (194a) to tds on fixed deposit interest. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances to...",
+    "focus_keyword": "TDS on FD/RD Interest (194A)",
+    "secondary_keywords": [
+      "tds on fd/rd interest (194a) calculator online",
+      "tds on fd/rd interest (194a) calculator india",
+      "tds on fd/rd interest (194a) formula",
+      "best tds on fd/rd interest (194a) calculator 2024"
+    ],
+    "og_title": "Free TDS on FD/RD Interest (194A) – India's Best Online Calc",
+    "og_description": "Calculate tds on fixed deposit interest instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/tds-fd-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "tds on fd calculator india",
+      "section 194a tds fd",
+      "how much tds on fixed deposit",
+      "tds fd interest calculator",
+      "form 15g 15h fd",
+      "tds on fd senior citizen",
+      "bank fd tds calculation 2024",
+      "tds on rd interest"
+    ],
+    "semantic_keywords": [
+      "TDS",
+      "Section 194A",
+      "FD interest",
+      "Form 15G",
+      "Form 15H",
+      "senior citizen",
+      "PAN",
+      "income tax",
+      "bank deposit",
+      "CBDT"
+    ],
+    "paa_keywords": [
+      "How much TDS is deducted on FD interest?",
+      "Can I avoid TDS on FD?",
+      "What is Form 15G and 15H?",
+      "Is FD interest taxable for senior citizens?",
+      "When is TDS deducted on FD?"
+    ],
+    "voice_search_keywords": [
+      "how much tds on fd interest",
+      "tds calculator for fixed deposit",
+      "form 15g for fd",
+      "how to avoid tds on fd"
+    ]
+  },
+  "_scores": {
+    "seo_score": 84,
+    "eeat_score": 86,
+    "discover_score": 76,
+    "ai_search_score": 83,
+    "ranking_priority": 2,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "TDS on FD (Section 194A): TDS @10% if annual interest > ₹40,000 (₹50,000 for senior citizens). If PAN not submitted, TDS @20%. Senior citizens can submit Form 15H (nil TDS if income below exemption). Others submit Form 15G.",
+    "formula_template": "tdsFdFormula",
+    "formula_source": "Income Tax Dept India / Section 194A",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The TDS on FD/RD Interest (194A) uses: TDS on FD (Section 194A): TDS @10% if annual interest > ₹40,000 (₹50,000 for senior citizens). If PAN not submitted, TDS @20%. Senior citizens can submit Form 15H (nil TDS if income below exemption). . Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – FD Amount (₹)=1000000, Annual Interest Rate (%)=7, Senior Citizen (60+)?=No → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our TDS on FD/RD Interest (194A) helps you tds on fixed deposit interest accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A TDS on FD/RD Interest (194A) is a digital tool that allows you to tds on fixed deposit interest without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the TDS on FD/RD Interest (194A) on this page. Step 2: Enter your FD Amount (₹) (e.g., ₹1,000,000). Step 3: Enter your Annual Interest Rate (%) (e.g., ₹7). Step 4: Enter your Senior Citizen (60+)?). Step 5: Enter your PAN Submitted?). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate TDS on FD/RD Interest (194A) results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative. Tax laws change annually. Consult a CA for tax filing.",
+    "pro_tips": "1. File ITR before due date to avoid 234F penalty. 2. Compare old vs new regime annually. 3. Invest in 80C instruments by March 31. 4. Keep all receipts and proof.",
+    "result_explanation": "The TDS on FD/RD Interest (194A) returns Annual Interest, TDS Rate, TDS Amount. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a TDS on FD/RD Interest (194A)?",
+        "a": "A TDS on FD/RD Interest (194A) is an online tool that helps you tds on fixed deposit interest quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this TDS on FD/RD Interest (194A) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this TDS on FD/RD Interest (194A)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "Old or new tax regime?",
+        "a": "New regime if total deductions <₹3.75L; old regime otherwise."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "fdAmount",
+        "label": "FD Amount (₹)",
+        "type": "number",
+        "min": 1000,
+        "max": 100000000,
+        "default": 1000000,
+        "required": true
+      },
+      {
+        "name": "annualRate",
+        "label": "Annual Interest Rate (%)",
+        "type": "number",
+        "min": 1,
+        "max": 15,
+        "default": 7,
+        "required": true
+      },
+      {
+        "name": "isSenior",
+        "label": "Senior Citizen (60+)?",
+        "type": "select",
+        "options": [
+          "No",
+          "Yes"
+        ],
+        "default": "No",
+        "required": true
+      },
+      {
+        "name": "hasPan",
+        "label": "PAN Submitted?",
+        "type": "select",
+        "options": [
+          "Yes",
+          "No"
+        ],
+        "default": "Yes",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Annual Interest",
+      "TDS Rate",
+      "TDS Amount",
+      "Interest After TDS",
+      "Form to Submit (if applicable)"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "FD Interest TDS Breakdown"
+    },
+    "validation_rules": {
+      "fdAmount": {
+        "required": true,
+        "min": 1000,
+        "max": 100000000
+      },
+      "annualRate": {
+        "required": true,
+        "min": 1,
+        "max": 15
+      },
+      "isSenior": {
+        "required": true
+      },
+      "hasPan": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function tdsFD(amount,rate,isSenior,hasPan){const interest=amount*rate/100;const threshold=isSenior?50000:40000;const tdsRate=hasPan?0.10:0.20;const tds=interest>threshold?interest*tdsRate:0;return{interest,tds,net:interest-tds,form:interest<threshold?(isSenior?'Form 15H':'Form 15G'):'TDS applicable'};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "tds",
+      "fixed_deposit",
+      "bank"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "deposit_cluster",
+    "breadcrumb_label": "TDS on FD/RD Interest (194A)"
+  },
+  "_links": {
+    "related_calculators": [
+      "rd-calculator",
+      "compound-interest-calculator",
+      "sip-calculator",
+      "ppf-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "rd-calculator",
+      "compound-interest-calculator",
+      "sip-calculator",
+      "ppf-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

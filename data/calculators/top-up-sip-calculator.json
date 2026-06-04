@@ -1,0 +1,437 @@
+{
+  "slug": "top-up-sip-calculator",
+  "title": "Top-Up SIP Calculator",
+  "category": "individual",
+  "type": "investment",
+  "description": "One-time additional investment during SIP",
+  "formula_template": "topUpFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Top-Up SIP Calculator",
+  "canonical_url": "https://yoursite.com/calculators/top-up-sip-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Standard SIP formula applied to combined regular + one-time top-up. Top-up FV = TopUpAmount × (1+r)^(remaining_months); Total = SIP_FV + TopUp_FV. r = monthly rate = annualRate/12/100.",
+  "formula_source": "AMFI India",
+  "formula_source_url": "https://www.amfiindia.com",
+  "meta_title": "Top-Up SIP Calculator | Free Calculator India",
+  "meta_description": "Use our free top-up sip calculator to one-time additional investment during sip. Get instant results with Indian context – ₹, lakhs, crores. Plan your financ...",
+  "focus_keyword": "Top-Up SIP Calculator",
+  "secondary_keywords": [
+    "top-up sip calculator calculator online",
+    "top-up sip calculator calculator india",
+    "top-up sip calculator formula",
+    "best top-up sip calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Top-Up SIP Calculator helps you one-time additional investment during sip accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Top-Up SIP Calculator is a digital tool that allows you to one-time additional investment during sip without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Top-Up SIP Calculator on this page. Step 2: Enter your Monthly SIP (₹) (e.g., ₹5,000). Step 3: Enter your One-Time Top-Up (₹) (e.g., ₹50,000). Step 4: Enter your Top-Up at Month # (e.g., ₹12). Step 5: Enter your Expected Annual Return (%) (e.g., ₹12). Step 6: Enter your Total Investment Period (Years) (e.g., ₹10). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Top-Up SIP Calculator uses: Standard SIP formula applied to combined regular + one-time top-up. Top-up FV = TopUpAmount × (1+r)^(remaining_months); Total = SIP_FV + TopUp_FV. r = monthly rate = annualRate/12/100.. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Monthly SIP (₹)=5000, One-Time Top-Up (₹)=50000, Top-Up at Month #=12 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Top-Up SIP Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+  "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+  "faq": [
+    {
+      "q": "What is a Top-Up SIP Calculator?",
+      "a": "A Top-Up SIP Calculator is an online tool that helps you one-time additional investment during sip quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Top-Up SIP Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Top-Up SIP Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    },
+    {
+      "q": "What is a realistic return for Indian mutual funds?",
+      "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+    }
+  ],
+  "og_title": "Free Top-Up SIP Calculator – India's Best Online Calculator",
+  "og_description": "Calculate one-time additional investment during sip instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "step-up-sip-calculator",
+    "lumpsum-calculator",
+    "swp-calculator",
+    "cagr-calculator",
+    "goal-based-sip-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "monthlyInvestment",
+      "label": "Monthly SIP (₹)",
+      "type": "number",
+      "min": 500,
+      "max": 1000000,
+      "default": 5000,
+      "required": true
+    },
+    {
+      "name": "topUpAmount",
+      "label": "One-Time Top-Up (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 10000000,
+      "default": 50000,
+      "required": false
+    },
+    {
+      "name": "topUpMonth",
+      "label": "Top-Up at Month #",
+      "type": "number",
+      "min": 1,
+      "max": 480,
+      "default": 12,
+      "required": false
+    },
+    {
+      "name": "annualReturn",
+      "label": "Expected Annual Return (%)",
+      "type": "number",
+      "min": 1,
+      "max": 50,
+      "default": 12,
+      "required": true
+    },
+    {
+      "name": "years",
+      "label": "Total Investment Period (Years)",
+      "type": "number",
+      "min": 1,
+      "max": 40,
+      "default": 10,
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "SIP Component FV",
+    "Top-Up Component FV",
+    "Total Maturity Value",
+    "Total Invested"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "Top-Up SIP vs Regular SIP"
+  },
+  "result_explanation": "The Top-Up SIP Calculator returns SIP Component FV, Top-Up Component FV, Total Maturity Value. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "monthlyInvestment": {
+      "required": true,
+      "min": 500,
+      "max": 1000000
+    },
+    "topUpAmount": {
+      "required": false,
+      "min": 0,
+      "max": 10000000
+    },
+    "topUpMonth": {
+      "required": false,
+      "min": 1,
+      "max": 480
+    },
+    "annualReturn": {
+      "required": true,
+      "min": 1,
+      "max": 50
+    },
+    "years": {
+      "required": true,
+      "min": 1,
+      "max": 40
+    }
+  },
+  "calculator_engine": "function topUpSip(P,topUp,topUpMonth,r,years){const mRate=r/100/12;const n=years*12;const sipFV=P*(Math.pow(1+mRate,n)-1)/mRate*(1+mRate);const remaining=n-topUpMonth;const topUpFV=topUp>0?topUp*Math.pow(1+mRate,remaining):0;return{sipFV,topUpFV,total:sipFV+topUpFV,invested:P*n+topUp};}",
+  "category_hierarchy": [
+    "investment",
+    "mutual_fund",
+    "sip",
+    "top_up"
+  ],
+  "calculator_group": "investment",
+  "topical_cluster": "sip_cluster",
+  "internal_link_targets": [
+    "step-up-sip-calculator",
+    "lumpsum-calculator",
+    "swp-calculator",
+    "cagr-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "top up sip calculator india",
+    "sip with lumpsum top up",
+    "how to add lumpsum to sip",
+    "sip top up calculator online",
+    "sip plus one time investment calculator",
+    "mutual fund top up sip returns",
+    "additional investment in sip",
+    "sip booster calculator"
+  ],
+  "semantic_keywords": [
+    "SIP top-up",
+    "lumpsum addition",
+    "mutual fund",
+    "AMFI",
+    "compound returns",
+    "incremental investment",
+    "SIP flexibility",
+    "MF returns"
+  ],
+  "paa_keywords": [
+    "What is top-up SIP?",
+    "Can I add lumpsum to my SIP?",
+    "How does top-up SIP work?",
+    "Is top-up SIP better than regular SIP?",
+    "What is the benefit of SIP top-up?"
+  ],
+  "voice_search_keywords": [
+    "what is top up sip",
+    "how to add extra money to sip",
+    "top up sip calculator india"
+  ],
+  "seo_score": 78,
+  "eeat_score": 76,
+  "discover_score": 70,
+  "ai_search_score": 76,
+  "ranking_priority": 2,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Top-Up SIP Calculator | Free Calculator India",
+    "meta_description": "Use our free top-up sip calculator to one-time additional investment during sip. Get instant results with Indian context – ₹, lakhs, crores. Plan your financ...",
+    "focus_keyword": "Top-Up SIP Calculator",
+    "secondary_keywords": [
+      "top-up sip calculator calculator online",
+      "top-up sip calculator calculator india",
+      "top-up sip calculator formula",
+      "best top-up sip calculator calculator 2024"
+    ],
+    "og_title": "Free Top-Up SIP Calculator – India's Best Online Calculator",
+    "og_description": "Calculate one-time additional investment during sip instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/top-up-sip-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "top up sip calculator india",
+      "sip with lumpsum top up",
+      "how to add lumpsum to sip",
+      "sip top up calculator online",
+      "sip plus one time investment calculator",
+      "mutual fund top up sip returns",
+      "additional investment in sip",
+      "sip booster calculator"
+    ],
+    "semantic_keywords": [
+      "SIP top-up",
+      "lumpsum addition",
+      "mutual fund",
+      "AMFI",
+      "compound returns",
+      "incremental investment",
+      "SIP flexibility",
+      "MF returns"
+    ],
+    "paa_keywords": [
+      "What is top-up SIP?",
+      "Can I add lumpsum to my SIP?",
+      "How does top-up SIP work?",
+      "Is top-up SIP better than regular SIP?",
+      "What is the benefit of SIP top-up?"
+    ],
+    "voice_search_keywords": [
+      "what is top up sip",
+      "how to add extra money to sip",
+      "top up sip calculator india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 78,
+    "eeat_score": 76,
+    "discover_score": 70,
+    "ai_search_score": 76,
+    "ranking_priority": 2,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "Standard SIP formula applied to combined regular + one-time top-up. Top-up FV = TopUpAmount × (1+r)^(remaining_months); Total = SIP_FV + TopUp_FV. r = monthly rate = annualRate/12/100.",
+    "formula_template": "topUpFormula",
+    "formula_source": "AMFI India",
+    "formula_source_url": "https://www.amfiindia.com",
+    "formula_explanation": "The Top-Up SIP Calculator uses: Standard SIP formula applied to combined regular + one-time top-up. Top-up FV = TopUpAmount × (1+r)^(remaining_months); Total = SIP_FV + TopUp_FV. r = monthly rate = annualRate/12/100.. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Monthly SIP (₹)=5000, One-Time Top-Up (₹)=50000, Top-Up at Month #=12 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Top-Up SIP Calculator helps you one-time additional investment during sip accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Top-Up SIP Calculator is a digital tool that allows you to one-time additional investment during sip without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Top-Up SIP Calculator on this page. Step 2: Enter your Monthly SIP (₹) (e.g., ₹5,000). Step 3: Enter your One-Time Top-Up (₹) (e.g., ₹50,000). Step 4: Enter your Top-Up at Month # (e.g., ₹12). Step 5: Enter your Expected Annual Return (%) (e.g., ₹12). Step 6: Enter your Total Investment Period (Years) (e.g., ₹10). Step 7: Click 'Calculate' to see instant results. Step 8: Review the detailed breakdown and use results for financial planning. Step 9: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Top-Up SIP Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Mutual fund investments subject to market risks. Past returns not indicative of future.",
+    "pro_tips": "1. Start early – compounding works best over long periods. 2. Increase SIP by 10% annually. 3. Choose direct plans over regular. 4. Diversify across asset classes.",
+    "result_explanation": "The Top-Up SIP Calculator returns SIP Component FV, Top-Up Component FV, Total Maturity Value. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Top-Up SIP Calculator?",
+        "a": "A Top-Up SIP Calculator is an online tool that helps you one-time additional investment during sip quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Top-Up SIP Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Top-Up SIP Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      },
+      {
+        "q": "What is a realistic return for Indian mutual funds?",
+        "a": "Historically 10-13% CAGR for large-cap equity over 10+ years."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "monthlyInvestment",
+        "label": "Monthly SIP (₹)",
+        "type": "number",
+        "min": 500,
+        "max": 1000000,
+        "default": 5000,
+        "required": true
+      },
+      {
+        "name": "topUpAmount",
+        "label": "One-Time Top-Up (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 10000000,
+        "default": 50000,
+        "required": false
+      },
+      {
+        "name": "topUpMonth",
+        "label": "Top-Up at Month #",
+        "type": "number",
+        "min": 1,
+        "max": 480,
+        "default": 12,
+        "required": false
+      },
+      {
+        "name": "annualReturn",
+        "label": "Expected Annual Return (%)",
+        "type": "number",
+        "min": 1,
+        "max": 50,
+        "default": 12,
+        "required": true
+      },
+      {
+        "name": "years",
+        "label": "Total Investment Period (Years)",
+        "type": "number",
+        "min": 1,
+        "max": 40,
+        "default": 10,
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "SIP Component FV",
+      "Top-Up Component FV",
+      "Total Maturity Value",
+      "Total Invested"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "Top-Up SIP vs Regular SIP"
+    },
+    "validation_rules": {
+      "monthlyInvestment": {
+        "required": true,
+        "min": 500,
+        "max": 1000000
+      },
+      "topUpAmount": {
+        "required": false,
+        "min": 0,
+        "max": 10000000
+      },
+      "topUpMonth": {
+        "required": false,
+        "min": 1,
+        "max": 480
+      },
+      "annualReturn": {
+        "required": true,
+        "min": 1,
+        "max": 50
+      },
+      "years": {
+        "required": true,
+        "min": 1,
+        "max": 40
+      }
+    },
+    "calculator_engine": "function topUpSip(P,topUp,topUpMonth,r,years){const mRate=r/100/12;const n=years*12;const sipFV=P*(Math.pow(1+mRate,n)-1)/mRate*(1+mRate);const remaining=n-topUpMonth;const topUpFV=topUp>0?topUp*Math.pow(1+mRate,remaining):0;return{sipFV,topUpFV,total:sipFV+topUpFV,invested:P*n+topUp};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "investment",
+    "category_hierarchy": [
+      "investment",
+      "mutual_fund",
+      "sip",
+      "top_up"
+    ],
+    "calculator_group": "investment",
+    "topical_cluster": "sip_cluster",
+    "breadcrumb_label": "Top-Up SIP Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "step-up-sip-calculator",
+      "lumpsum-calculator",
+      "swp-calculator",
+      "cagr-calculator",
+      "goal-based-sip-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "step-up-sip-calculator",
+      "lumpsum-calculator",
+      "swp-calculator",
+      "cagr-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

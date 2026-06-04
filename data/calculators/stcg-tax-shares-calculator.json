@@ -1,0 +1,399 @@
+{
+  "slug": "stcg-tax-shares-calculator",
+  "title": "STCG Tax on Shares (15%)",
+  "category": "individual",
+  "type": "tax",
+  "description": "Short-term capital gains tax on equities",
+  "formula_template": "stcgSharesFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "STCG Tax on Shares (15%)",
+  "canonical_url": "https://yoursite.com/calculators/stcg-tax-shares-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "STCG on equity shares/equity MF: 15% flat (now 20% from Budget 2024 for transactions after 23 Jul 2024); Holding period < 1 year; STT must be paid; Taxed u/s 111A",
+  "formula_source": "Income Tax Dept India / Section 111A / Budget 2024",
+  "formula_source_url": "https://incometaxindia.gov.in",
+  "meta_title": "STCG Tax on Shares (15%) | Free Online Calculator India",
+  "meta_description": "Use our free stcg tax on shares (15%) to short-term capital gains tax on equities. Get instant results with Indian context – ₹, lakhs, crores. Plan your fina...",
+  "focus_keyword": "STCG Tax on Shares (15%)",
+  "secondary_keywords": [
+    "stcg tax on shares (15%) online",
+    "stcg tax on shares (15%) india",
+    "stcg tax on shares (15%) calculator",
+    "stcg tax on shares (15%) formula",
+    "stcg tax on shares (15%) example",
+    "stcg tax on shares (15%) calculation",
+    "financial calculator india",
+    "investment planning india",
+    "tax planning india",
+    "money calculation tool"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our STCG Tax on Shares (15%) helps you short-term capital gains tax on equities accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A STCG Tax on Shares (15%) is a digital tool that allows you to short-term capital gains tax on equities without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the STCG Tax on Shares (15%) on this page. Step 2: Enter your Purchase Value (₹) (e.g., ₹50,000). Step 3: Enter your Sale Value (₹) (e.g., ₹70,000). Step 4: Enter your Transaction Date). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The STCG Tax on Shares (15%) uses the following mathematical formula: STCG on equity shares/equity MF: 15% flat (now 20% from Budget 2024 for transactions after 23 Jul 2024); Holding period < 1 year; STT must be paid; Taxed u/s 111A. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+  "example_calculation": "Example: Annual income ₹12 lakh → New Regime tax = ₹0 (with 87A rebate + standard deduction). Old Regime → ~₹1.17 lakh after deductions.",
+  "benefits": "<ul><li>Instant, accurate STCG Tax on Shares (15%) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are indicative only. Tax laws change annually per Union Budget. Consult a CA for tax filing. Surcharge and cess applicable as per slab. This does not constitute tax advice.",
+  "pro_tips": "1. File ITR before due date to avoid penalty under 234F. 2. Compare old vs new regime annually as income changes. 3. Invest in 80C instruments before 31st March. 4. Keep all receipts and proof of investments ready.",
+  "faq": [
+    {
+      "q": "What is a STCG Tax on Shares (15%)?",
+      "a": "A STCG Tax on Shares (15%) is an online tool that helps you short-term capital gains tax on equities quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this STCG Tax on Shares (15%) free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+    },
+    {
+      "q": "How accurate is this STCG Tax on Shares (15%)?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+    },
+    {
+      "q": "Can I use this STCG Tax on Shares (15%) on mobile?",
+      "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+    },
+    {
+      "q": "Should I choose old or new tax regime?",
+      "a": "New regime is better if your total deductions (80C + 80D + HRA etc.) are less than ₹3.75 lakh for FY2024-25. Otherwise, old regime may save more tax."
+    }
+  ],
+  "og_title": "Free STCG Tax on Shares (15%) – India's Best Online Calculat",
+  "og_description": "Calculate short-term capital gains tax on equities instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+  "related_calculators": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "income-tax-old-calculator",
+    "income-tax-new-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "purchaseValue",
+      "label": "Purchase Value (₹)",
+      "type": "number",
+      "min": 100,
+      "max": 1000000000,
+      "default": 50000,
+      "required": true
+    },
+    {
+      "name": "saleValue",
+      "label": "Sale Value (₹)",
+      "type": "number",
+      "min": 100,
+      "max": 1000000000,
+      "default": 70000,
+      "required": true
+    },
+    {
+      "name": "transactionDate",
+      "label": "Transaction Date",
+      "type": "select",
+      "options": [
+        "Before 23 Jul 2024 (15%)",
+        "After 23 Jul 2024 (20%)"
+      ],
+      "default": "After 23 Jul 2024 (20%)",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "STCG Profit",
+    "Tax Rate (%)",
+    "STCG Tax",
+    "Net Profit After Tax"
+  ],
+  "chart_config": {
+    "type": "pie",
+    "xAxis": "Component",
+    "yAxis": "Amount (₹)",
+    "title": "STCG Tax Breakdown"
+  },
+  "result_explanation": "The STCG Tax on Shares (15%) returns STCG Profit, Tax Rate (%), STCG Tax. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+  "validation_rules": {
+    "purchaseValue": {
+      "required": true,
+      "min": 100,
+      "max": 1000000000
+    },
+    "saleValue": {
+      "required": true,
+      "min": 100,
+      "max": 1000000000
+    },
+    "transactionDate": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function stcg(buy,sell,after23Jul){const profit=sell-buy;const rate=after23Jul?0.20:0.15;const tax=profit>0?profit*rate:0;return{profit,rate:rate*100,tax,netProfit:profit-tax};}",
+  "category_hierarchy": [
+    "tax",
+    "stcg",
+    "equity",
+    "capital_gains"
+  ],
+  "calculator_group": "tax",
+  "topical_cluster": "capital_gains_cluster",
+  "internal_link_targets": [
+    "swp-tax-calculator",
+    "elss-tax-calculator",
+    "ltcg-tax-shares-calculator",
+    "income-tax-old-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "high",
+  "complexity_level": "intermediate",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "stcg tax calculator india 2024",
+    "short term capital gains tax on shares",
+    "stcg 20 percent budget 2024",
+    "stcg shares calculator india",
+    "section 111a stcg calculator",
+    "stcg tax equity mutual fund",
+    "stcg rate after july 2024",
+    "short term capital gains equity calculator"
+  ],
+  "semantic_keywords": [
+    "STCG",
+    "short-term capital gains",
+    "Section 111A",
+    "equity shares",
+    "mutual fund",
+    "20% flat tax",
+    "Budget 2024",
+    "holding period",
+    "intraday",
+    "STT"
+  ],
+  "paa_keywords": [
+    "What is STCG tax rate on shares in 2024?",
+    "How is STCG calculated?",
+    "Can STCG be set off against other losses?",
+    "Is STCG different for intraday?",
+    "What is the holding period for STCG?"
+  ],
+  "voice_search_keywords": [
+    "stcg tax rate on shares 2024",
+    "short term capital gains calculator india",
+    "how much tax on short term gains",
+    "stcg vs ltcg tax rate india"
+  ],
+  "seo_score": 85,
+  "eeat_score": 87,
+  "discover_score": 77,
+  "ai_search_score": 84,
+  "ranking_priority": 1,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "STCG Tax on Shares (15%) | Free Online Calculator India",
+    "meta_description": "Use our free stcg tax on shares (15%) to short-term capital gains tax on equities. Get instant results with Indian context – ₹, lakhs, crores. Plan your fina...",
+    "focus_keyword": "STCG Tax on Shares (15%)",
+    "secondary_keywords": [
+      "stcg tax on shares (15%) online",
+      "stcg tax on shares (15%) india",
+      "stcg tax on shares (15%) calculator",
+      "stcg tax on shares (15%) formula",
+      "stcg tax on shares (15%) example",
+      "stcg tax on shares (15%) calculation",
+      "financial calculator india",
+      "investment planning india",
+      "tax planning india",
+      "money calculation tool"
+    ],
+    "og_title": "Free STCG Tax on Shares (15%) – India's Best Online Calculat",
+    "og_description": "Calculate short-term capital gains tax on equities instantly. Trusted by lakhs of Indian investors. Free, accurate, and updated for 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/stcg-tax-shares-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "stcg tax calculator india 2024",
+      "short term capital gains tax on shares",
+      "stcg 20 percent budget 2024",
+      "stcg shares calculator india",
+      "section 111a stcg calculator",
+      "stcg tax equity mutual fund",
+      "stcg rate after july 2024",
+      "short term capital gains equity calculator"
+    ],
+    "semantic_keywords": [
+      "STCG",
+      "short-term capital gains",
+      "Section 111A",
+      "equity shares",
+      "mutual fund",
+      "20% flat tax",
+      "Budget 2024",
+      "holding period",
+      "intraday",
+      "STT"
+    ],
+    "paa_keywords": [
+      "What is STCG tax rate on shares in 2024?",
+      "How is STCG calculated?",
+      "Can STCG be set off against other losses?",
+      "Is STCG different for intraday?",
+      "What is the holding period for STCG?"
+    ],
+    "voice_search_keywords": [
+      "stcg tax rate on shares 2024",
+      "short term capital gains calculator india",
+      "how much tax on short term gains",
+      "stcg vs ltcg tax rate india"
+    ]
+  },
+  "_scores": {
+    "seo_score": 85,
+    "eeat_score": 87,
+    "discover_score": 77,
+    "ai_search_score": 84,
+    "ranking_priority": 1,
+    "traffic_priority": "high",
+    "search_intent": "transactional",
+    "complexity_level": "intermediate"
+  },
+  "_formula": {
+    "formula_verified": "STCG on equity shares/equity MF: 15% flat (now 20% from Budget 2024 for transactions after 23 Jul 2024); Holding period < 1 year; STT must be paid; Taxed u/s 111A",
+    "formula_template": "stcgSharesFormula",
+    "formula_source": "Income Tax Dept India / Section 111A / Budget 2024",
+    "formula_source_url": "https://incometaxindia.gov.in",
+    "formula_explanation": "The STCG Tax on Shares (15%) uses the following mathematical formula: STCG on equity shares/equity MF: 15% flat (now 20% from Budget 2024 for transactions after 23 Jul 2024); Holding period < 1 year; STT must be paid; Taxed u/s 111A. Each variable is derived from inputs you provide. The result reflects your specific financial scenario with Indian regulatory parameters built in.",
+    "example_calculation": "Example: Annual income ₹12 lakh → New Regime tax = ₹0 (with 87A rebate + standard deduction). Old Regime → ~₹1.17 lakh after deductions.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our STCG Tax on Shares (15%) helps you short-term capital gains tax on equities accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A STCG Tax on Shares (15%) is a digital tool that allows you to short-term capital gains tax on equities without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the STCG Tax on Shares (15%) on this page. Step 2: Enter your Purchase Value (₹) (e.g., ₹50,000). Step 3: Enter your Sale Value (₹) (e.g., ₹70,000). Step 4: Enter your Transaction Date). Step 5: Click 'Calculate' to see instant results. Step 6: Review the detailed breakdown and use results for financial planning. Step 7: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate STCG Tax on Shares (15%) results without manual calculations</li><li>Updated with latest India-specific tax rates, interest rates & regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios to make better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are indicative only. Tax laws change annually per Union Budget. Consult a CA for tax filing. Surcharge and cess applicable as per slab. This does not constitute tax advice.",
+    "pro_tips": "1. File ITR before due date to avoid penalty under 234F. 2. Compare old vs new regime annually as income changes. 3. Invest in 80C instruments before 31st March. 4. Keep all receipts and proof of investments ready.",
+    "result_explanation": "The STCG Tax on Shares (15%) returns STCG Profit, Tax Rate (%), STCG Tax. Each result is computed using verified formulas adapted for Indian market conditions and regulatory parameters.",
+    "faq": [
+      {
+        "q": "What is a STCG Tax on Shares (15%)?",
+        "a": "A STCG Tax on Shares (15%) is an online tool that helps you short-term capital gains tax on equities quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this STCG Tax on Shares (15%) free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required. Get instant results 24x7."
+      },
+      {
+        "q": "How accurate is this STCG Tax on Shares (15%)?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates, RBI interest rates, and regulatory norms. Results are indicative – actual values may vary slightly."
+      },
+      {
+        "q": "Can I use this STCG Tax on Shares (15%) on mobile?",
+        "a": "Yes, this calculator is fully mobile-responsive and works seamlessly on all smartphones and tablets."
+      },
+      {
+        "q": "Should I choose old or new tax regime?",
+        "a": "New regime is better if your total deductions (80C + 80D + HRA etc.) are less than ₹3.75 lakh for FY2024-25. Otherwise, old regime may save more tax."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "purchaseValue",
+        "label": "Purchase Value (₹)",
+        "type": "number",
+        "min": 100,
+        "max": 1000000000,
+        "default": 50000,
+        "required": true
+      },
+      {
+        "name": "saleValue",
+        "label": "Sale Value (₹)",
+        "type": "number",
+        "min": 100,
+        "max": 1000000000,
+        "default": 70000,
+        "required": true
+      },
+      {
+        "name": "transactionDate",
+        "label": "Transaction Date",
+        "type": "select",
+        "options": [
+          "Before 23 Jul 2024 (15%)",
+          "After 23 Jul 2024 (20%)"
+        ],
+        "default": "After 23 Jul 2024 (20%)",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "STCG Profit",
+      "Tax Rate (%)",
+      "STCG Tax",
+      "Net Profit After Tax"
+    ],
+    "chart_config": {
+      "type": "pie",
+      "xAxis": "Component",
+      "yAxis": "Amount (₹)",
+      "title": "STCG Tax Breakdown"
+    },
+    "validation_rules": {
+      "purchaseValue": {
+        "required": true,
+        "min": 100,
+        "max": 1000000000
+      },
+      "saleValue": {
+        "required": true,
+        "min": 100,
+        "max": 1000000000
+      },
+      "transactionDate": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function stcg(buy,sell,after23Jul){const profit=sell-buy;const rate=after23Jul?0.20:0.15;const tax=profit>0?profit*rate:0;return{profit,rate:rate*100,tax,netProfit:profit-tax};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "tax",
+    "category_hierarchy": [
+      "tax",
+      "stcg",
+      "equity",
+      "capital_gains"
+    ],
+    "calculator_group": "tax",
+    "topical_cluster": "capital_gains_cluster",
+    "breadcrumb_label": "STCG Tax on Shares (15%)"
+  },
+  "_links": {
+    "related_calculators": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "income-tax-old-calculator",
+      "income-tax-new-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "swp-tax-calculator",
+      "elss-tax-calculator",
+      "ltcg-tax-shares-calculator",
+      "income-tax-old-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

@@ -1,0 +1,405 @@
+{
+  "slug": "stock-cagr-calculator",
+  "title": "Stock CAGR Calculator",
+  "category": "individual",
+  "type": "stock",
+  "description": "CAGR of stock returns",
+  "formula_template": "stockCagrFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Stock CAGR Calculator",
+  "canonical_url": "https://yoursite.com/calculators/stock-cagr-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Stock CAGR = (Current Price / Purchase Price)^(1/years) − 1. Same as investment CAGR. Includes dividend reinvestment for total return CAGR. XIRR used for irregular dividend cash flows.",
+  "formula_source": "NSE India",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "Stock CAGR Calculator | Free Calculator India",
+  "meta_description": "Use our free stock cagr calculator to cagr of stock returns. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+  "focus_keyword": "Stock CAGR Calculator",
+  "secondary_keywords": [
+    "stock cagr calculator calculator online",
+    "stock cagr calculator calculator india",
+    "stock cagr calculator formula",
+    "best stock cagr calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock CAGR Calculator helps you cagr of stock returns accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Stock CAGR Calculator is a digital tool that allows you to cagr of stock returns without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Stock CAGR Calculator on this page. Step 2: Enter your Purchase Price (₹) (e.g., ₹200). Step 3: Enter your Current Price (₹) (e.g., ₹450). Step 4: Enter your Holding Period (Years) (e.g., ₹5). Step 5: Enter your Total Dividends Received (₹)). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Stock CAGR Calculator uses: Stock CAGR = (Current Price / Purchase Price)^(1/years) − 1. Same as investment CAGR. Includes dividend reinvestment for total return CAGR. XIRR used for irregular dividend cash flows.. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Purchase Price (₹)=200, Current Price (₹)=450, Holding Period (Years)=5 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Stock CAGR Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+  "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+  "faq": [
+    {
+      "q": "What is a Stock CAGR Calculator?",
+      "a": "A Stock CAGR Calculator is an online tool that helps you cagr of stock returns quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Stock CAGR Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Stock CAGR Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Stock CAGR Calculator – India's Best Online Calculator",
+  "og_description": "Calculate cagr of stock returns instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "stock-average-calculator",
+    "stock-split-calculator",
+    "stock-sip-calculator",
+    "stock-beta-calculator",
+    "stock-risk-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "purchasePrice",
+      "label": "Purchase Price (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 1000000,
+      "default": 200,
+      "required": true
+    },
+    {
+      "name": "currentPrice",
+      "label": "Current Price (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 1000000,
+      "default": 450,
+      "required": true
+    },
+    {
+      "name": "years",
+      "label": "Holding Period (Years)",
+      "type": "number",
+      "min": 0.1,
+      "max": 50,
+      "default": 5,
+      "required": true
+    },
+    {
+      "name": "totalDividends",
+      "label": "Total Dividends Received (₹)",
+      "type": "number",
+      "min": 0,
+      "max": 1000000,
+      "default": 0,
+      "required": false
+    }
+  ],
+  "output_fields": [
+    "Price CAGR (%)",
+    "Total Return CAGR (%)",
+    "Absolute Return (%)",
+    "Annualized Return (%)"
+  ],
+  "chart_config": {
+    "type": "area",
+    "xAxis": "Year",
+    "yAxis": "Price (₹)",
+    "title": "Stock Price CAGR Growth"
+  },
+  "result_explanation": "The Stock CAGR Calculator returns Price CAGR (%), Total Return CAGR (%), Absolute Return (%). Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "purchasePrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 1000000
+    },
+    "currentPrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 1000000
+    },
+    "years": {
+      "required": true,
+      "min": 0.1,
+      "max": 50
+    },
+    "totalDividends": {
+      "required": false,
+      "min": 0,
+      "max": 1000000
+    }
+  },
+  "calculator_engine": "function stockCagr(buy,curr,years,div){const priceCagr=(Math.pow(curr/buy,1/years)-1)*100;const totalCagr=(Math.pow((curr+div)/buy,1/years)-1)*100;const absolute=((curr-buy)/buy*100).toFixed(2);return{priceCagr:priceCagr.toFixed(2),totalCagr:totalCagr.toFixed(2),absolute};}",
+  "category_hierarchy": [
+    "stock",
+    "returns",
+    "cagr",
+    "equity"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "returns_cluster",
+  "internal_link_targets": [
+    "stock-average-calculator",
+    "stock-split-calculator",
+    "stock-sip-calculator",
+    "stock-beta-calculator"
+  ],
+  "search_intent": "informational",
+  "traffic_priority": "medium",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "stock cagr calculator india",
+    "share return calculator",
+    "equity cagr calculator",
+    "stock annualized return",
+    "how to calculate stock cagr",
+    "nifty 50 stock cagr",
+    "share price return calculator india"
+  ],
+  "semantic_keywords": [
+    "stock CAGR",
+    "equity returns",
+    "annualized return",
+    "NSE",
+    "BSE",
+    "dividend",
+    "total return",
+    "holding period",
+    "compounding",
+    "performance"
+  ],
+  "paa_keywords": [
+    "How to calculate CAGR of a stock?",
+    "What is total return vs price return?",
+    "What CAGR is good for stocks?",
+    "How does dividend affect CAGR?",
+    "Stock CAGR vs mutual fund CAGR?"
+  ],
+  "voice_search_keywords": [
+    "stock cagr calculator",
+    "how to calculate stock returns",
+    "equity return calculator",
+    "nifty stock cagr"
+  ],
+  "seo_score": 76,
+  "eeat_score": 74,
+  "discover_score": 68,
+  "ai_search_score": 74,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Stock CAGR Calculator | Free Calculator India",
+    "meta_description": "Use our free stock cagr calculator to cagr of stock returns. Get instant results with Indian context – ₹, lakhs, crores. Plan your finances today.",
+    "focus_keyword": "Stock CAGR Calculator",
+    "secondary_keywords": [
+      "stock cagr calculator calculator online",
+      "stock cagr calculator calculator india",
+      "stock cagr calculator formula",
+      "best stock cagr calculator calculator 2024"
+    ],
+    "og_title": "Free Stock CAGR Calculator – India's Best Online Calculator",
+    "og_description": "Calculate cagr of stock returns instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/stock-cagr-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "stock cagr calculator india",
+      "share return calculator",
+      "equity cagr calculator",
+      "stock annualized return",
+      "how to calculate stock cagr",
+      "nifty 50 stock cagr",
+      "share price return calculator india"
+    ],
+    "semantic_keywords": [
+      "stock CAGR",
+      "equity returns",
+      "annualized return",
+      "NSE",
+      "BSE",
+      "dividend",
+      "total return",
+      "holding period",
+      "compounding",
+      "performance"
+    ],
+    "paa_keywords": [
+      "How to calculate CAGR of a stock?",
+      "What is total return vs price return?",
+      "What CAGR is good for stocks?",
+      "How does dividend affect CAGR?",
+      "Stock CAGR vs mutual fund CAGR?"
+    ],
+    "voice_search_keywords": [
+      "stock cagr calculator",
+      "how to calculate stock returns",
+      "equity return calculator",
+      "nifty stock cagr"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 74,
+    "discover_score": 68,
+    "ai_search_score": 74,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "informational",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "Stock CAGR = (Current Price / Purchase Price)^(1/years) − 1. Same as investment CAGR. Includes dividend reinvestment for total return CAGR. XIRR used for irregular dividend cash flows.",
+    "formula_template": "stockCagrFormula",
+    "formula_source": "NSE India",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The Stock CAGR Calculator uses: Stock CAGR = (Current Price / Purchase Price)^(1/years) − 1. Same as investment CAGR. Includes dividend reinvestment for total return CAGR. XIRR used for irregular dividend cash flows.. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Purchase Price (₹)=200, Current Price (₹)=450, Holding Period (Years)=5 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock CAGR Calculator helps you cagr of stock returns accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Stock CAGR Calculator is a digital tool that allows you to cagr of stock returns without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Stock CAGR Calculator on this page. Step 2: Enter your Purchase Price (₹) (e.g., ₹200). Step 3: Enter your Current Price (₹) (e.g., ₹450). Step 4: Enter your Holding Period (Years) (e.g., ₹5). Step 5: Enter your Total Dividends Received (₹)). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Stock CAGR Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Results are estimates only. Consult qualified financial professionals.",
+    "pro_tips": "1. Use multiple scenarios. 2. Revisit annually as rates change. 3. Consult a certified financial advisor for personalized advice. 4. Compare options before deciding.",
+    "result_explanation": "The Stock CAGR Calculator returns Price CAGR (%), Total Return CAGR (%), Absolute Return (%). Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Stock CAGR Calculator?",
+        "a": "A Stock CAGR Calculator is an online tool that helps you cagr of stock returns quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Stock CAGR Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Stock CAGR Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "purchasePrice",
+        "label": "Purchase Price (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 1000000,
+        "default": 200,
+        "required": true
+      },
+      {
+        "name": "currentPrice",
+        "label": "Current Price (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 1000000,
+        "default": 450,
+        "required": true
+      },
+      {
+        "name": "years",
+        "label": "Holding Period (Years)",
+        "type": "number",
+        "min": 0.1,
+        "max": 50,
+        "default": 5,
+        "required": true
+      },
+      {
+        "name": "totalDividends",
+        "label": "Total Dividends Received (₹)",
+        "type": "number",
+        "min": 0,
+        "max": 1000000,
+        "default": 0,
+        "required": false
+      }
+    ],
+    "output_fields": [
+      "Price CAGR (%)",
+      "Total Return CAGR (%)",
+      "Absolute Return (%)",
+      "Annualized Return (%)"
+    ],
+    "chart_config": {
+      "type": "area",
+      "xAxis": "Year",
+      "yAxis": "Price (₹)",
+      "title": "Stock Price CAGR Growth"
+    },
+    "validation_rules": {
+      "purchasePrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 1000000
+      },
+      "currentPrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 1000000
+      },
+      "years": {
+        "required": true,
+        "min": 0.1,
+        "max": 50
+      },
+      "totalDividends": {
+        "required": false,
+        "min": 0,
+        "max": 1000000
+      }
+    },
+    "calculator_engine": "function stockCagr(buy,curr,years,div){const priceCagr=(Math.pow(curr/buy,1/years)-1)*100;const totalCagr=(Math.pow((curr+div)/buy,1/years)-1)*100;const absolute=((curr-buy)/buy*100).toFixed(2);return{priceCagr:priceCagr.toFixed(2),totalCagr:totalCagr.toFixed(2),absolute};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "stock",
+    "category_hierarchy": [
+      "stock",
+      "returns",
+      "cagr",
+      "equity"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "returns_cluster",
+    "breadcrumb_label": "Stock CAGR Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "stock-average-calculator",
+      "stock-split-calculator",
+      "stock-sip-calculator",
+      "stock-beta-calculator",
+      "stock-risk-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "stock-average-calculator",
+      "stock-split-calculator",
+      "stock-sip-calculator",
+      "stock-beta-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}

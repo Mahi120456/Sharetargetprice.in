@@ -1,0 +1,405 @@
+{
+  "slug": "stock-split-calculator",
+  "title": "Stock Split/Bonus Adj. Price Calculator",
+  "category": "individual",
+  "type": "trading",
+  "description": "Adjusted price after split/bonus",
+  "formula_template": "stockSplitFormula",
+  "schema_type": "FAQPage,HowTo",
+  "breadcrumb_label": "Stock Split/Bonus Adj. Price Calculator",
+  "canonical_url": "https://yoursite.com/calculators/stock-split-calculator",
+  "last_updated": "2026-06-03",
+  "formula_verified": "Split Adjusted Price = Pre-split Price / Split Ratio. Post-split Shares = Pre-split Shares × Split Ratio. Bonus adjusted: Add bonus shares, reduce cost per share proportionally. Total investment value unchanged.",
+  "formula_source": "NSE India / BSE India",
+  "formula_source_url": "https://www.nseindia.com",
+  "meta_title": "Stock Split/Bonus Adj. Price Calculator – Online Calculator",
+  "meta_description": "Use our free stock split/bonus adj. price calculator to adjusted price after split/bonus. Get instant results with Indian context – ₹, lakhs, crores. Plan yo...",
+  "focus_keyword": "Stock Split/Bonus Adj. Price Calculator",
+  "secondary_keywords": [
+    "stock split/bonus adj. price calculator calculator online",
+    "stock split/bonus adj. price calculator calculator india",
+    "stock split/bonus adj. price calculator formula",
+    "best stock split/bonus adj. price calculator calculator 2024"
+  ],
+  "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock Split/Bonus Adj. Price Calculator helps you adjusted price after split/bonus accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+  "what_is": "A Stock Split/Bonus Adj. Price Calculator is a digital tool that allows you to adjusted price after split/bonus without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+  "how_to_use": "Step 1: Open the Stock Split/Bonus Adj. Price Calculator on this page. Step 2: Enter your Pre-Split/Bonus Price (₹) (e.g., ₹1,000). Step 3: Enter your Pre-Split Shares Held (e.g., ₹100). Step 4: Enter your Split Ratio (e.g. 5 for 1:5) (e.g., ₹5). Step 5: Enter your Event Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+  "formula_explanation": "The Stock Split/Bonus Adj. Price Calculator uses: Split Adjusted Price = Pre-split Price / Split Ratio. Post-split Shares = Pre-split Shares × Split Ratio. Bonus adjusted: Add bonus shares, reduce cost per share proportionally. Total investment value. Each variable is derived from your inputs with Indian regulatory parameters.",
+  "example_calculation": "Example: Using default values – Pre-Split/Bonus Price (₹)=1000, Pre-Split Shares Held=100, Split Ratio (e.g. 5 for 1:5)=5 → computed results shown in the output section below.",
+  "benefits": "<ul><li>Instant, accurate Stock Split/Bonus Adj. Price Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+  "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+  "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+  "faq": [
+    {
+      "q": "What is a Stock Split/Bonus Adj. Price Calculator?",
+      "a": "A Stock Split/Bonus Adj. Price Calculator is an online tool that helps you adjusted price after split/bonus quickly and accurately using standard financial formulas adapted for Indian regulations."
+    },
+    {
+      "q": "Is this Stock Split/Bonus Adj. Price Calculator free to use?",
+      "a": "Yes, this calculator is completely free to use with no login or registration required."
+    },
+    {
+      "q": "How accurate is this Stock Split/Bonus Adj. Price Calculator?",
+      "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+    },
+    {
+      "q": "Can I use this on mobile?",
+      "a": "Yes, fully mobile-responsive and works on all smartphones."
+    }
+  ],
+  "og_title": "Free Stock Split/Bonus Adj. Price Calculator – India's Best",
+  "og_description": "Calculate adjusted price after split/bonus instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+  "related_calculators": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator",
+    "lumpsum-calculator"
+  ],
+  "related_articles": [],
+  "input_fields": [
+    {
+      "name": "preSplitPrice",
+      "label": "Pre-Split/Bonus Price (₹)",
+      "type": "number",
+      "min": 0.01,
+      "max": 1000000,
+      "default": 1000,
+      "required": true
+    },
+    {
+      "name": "preSplitQty",
+      "label": "Pre-Split Shares Held",
+      "type": "number",
+      "min": 1,
+      "max": 1000000,
+      "default": 100,
+      "required": true
+    },
+    {
+      "name": "splitRatio",
+      "label": "Split Ratio (e.g. 5 for 1:5)",
+      "type": "number",
+      "min": 1,
+      "max": 100,
+      "default": 5,
+      "required": true
+    },
+    {
+      "name": "eventType",
+      "label": "Event Type",
+      "type": "select",
+      "options": [
+        "Stock Split",
+        "Bonus Issue"
+      ],
+      "default": "Stock Split",
+      "required": true
+    }
+  ],
+  "output_fields": [
+    "Adjusted Price per Share",
+    "New Total Shares",
+    "Total Holding Value",
+    "Effective Cost Basis"
+  ],
+  "chart_config": {
+    "type": "bar",
+    "xAxis": "Before/After",
+    "yAxis": "Price (₹)",
+    "title": "Stock Split/Bonus Price Adjustment"
+  },
+  "result_explanation": "The Stock Split/Bonus Adj. Price Calculator returns Adjusted Price per Share, New Total Shares, Total Holding Value. Results use verified formulas adapted for Indian market conditions.",
+  "validation_rules": {
+    "preSplitPrice": {
+      "required": true,
+      "min": 0.01,
+      "max": 1000000
+    },
+    "preSplitQty": {
+      "required": true,
+      "min": 1,
+      "max": 1000000
+    },
+    "splitRatio": {
+      "required": true,
+      "min": 1,
+      "max": 100
+    },
+    "eventType": {
+      "required": true
+    }
+  },
+  "calculator_engine": "function stockSplit(price,qty,ratio,isSplit){const newPrice=price/ratio;const newQty=qty*ratio;return{newPrice,newQty,totalValue:newPrice*newQty,costBasis:price*qty};}",
+  "category_hierarchy": [
+    "trading",
+    "stock",
+    "corporate_action",
+    "split_bonus"
+  ],
+  "calculator_group": "trading",
+  "topical_cluster": "trading_cluster",
+  "internal_link_targets": [
+    "sip-calculator",
+    "step-up-sip-calculator",
+    "top-up-sip-calculator",
+    "perpetual-sip-calculator"
+  ],
+  "search_intent": "transactional",
+  "traffic_priority": "medium",
+  "complexity_level": "beginner",
+  "schema_recommendation": [
+    "SoftwareApplication",
+    "FAQPage",
+    "HowTo"
+  ],
+  "long_tail_keywords": [
+    "stock split calculator india",
+    "bonus share calculator nse",
+    "adjusted price after split",
+    "how to calculate adjusted stock price",
+    "1 to 5 split calculator",
+    "bonus issue share calculator",
+    "corporate action calculator india"
+  ],
+  "semantic_keywords": [
+    "stock split",
+    "bonus issue",
+    "adjusted price",
+    "NSE",
+    "BSE",
+    "corporate action",
+    "ex-date",
+    "record date",
+    "lot size",
+    "cost basis"
+  ],
+  "paa_keywords": [
+    "How to calculate adjusted price after stock split?",
+    "What happens to my shares in bonus issue?",
+    "Is stock split good for investors?",
+    "How is bonus issue different from split?",
+    "How to update cost basis after split?"
+  ],
+  "voice_search_keywords": [
+    "stock split calculator india",
+    "adjusted price after bonus issue",
+    "how stock split affects my portfolio",
+    "bonus share price calculation"
+  ],
+  "seo_score": 76,
+  "eeat_score": 74,
+  "discover_score": 68,
+  "ai_search_score": 74,
+  "ranking_priority": 3,
+  "review_required": false,
+  "_seo": {
+    "meta_title": "Stock Split/Bonus Adj. Price Calculator – Online Calculator",
+    "meta_description": "Use our free stock split/bonus adj. price calculator to adjusted price after split/bonus. Get instant results with Indian context – ₹, lakhs, crores. Plan yo...",
+    "focus_keyword": "Stock Split/Bonus Adj. Price Calculator",
+    "secondary_keywords": [
+      "stock split/bonus adj. price calculator calculator online",
+      "stock split/bonus adj. price calculator calculator india",
+      "stock split/bonus adj. price calculator formula",
+      "best stock split/bonus adj. price calculator calculator 2024"
+    ],
+    "og_title": "Free Stock Split/Bonus Adj. Price Calculator – India's Best",
+    "og_description": "Calculate adjusted price after split/bonus instantly. Trusted by Indian investors. Free, accurate, updated 2024-25.",
+    "canonical_url": "https://yoursite.com/calculators/stock-split-calculator",
+    "schema_type": "FAQPage,HowTo",
+    "schema_recommendation": [
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo"
+    ],
+    "long_tail_keywords": [
+      "stock split calculator india",
+      "bonus share calculator nse",
+      "adjusted price after split",
+      "how to calculate adjusted stock price",
+      "1 to 5 split calculator",
+      "bonus issue share calculator",
+      "corporate action calculator india"
+    ],
+    "semantic_keywords": [
+      "stock split",
+      "bonus issue",
+      "adjusted price",
+      "NSE",
+      "BSE",
+      "corporate action",
+      "ex-date",
+      "record date",
+      "lot size",
+      "cost basis"
+    ],
+    "paa_keywords": [
+      "How to calculate adjusted price after stock split?",
+      "What happens to my shares in bonus issue?",
+      "Is stock split good for investors?",
+      "How is bonus issue different from split?",
+      "How to update cost basis after split?"
+    ],
+    "voice_search_keywords": [
+      "stock split calculator india",
+      "adjusted price after bonus issue",
+      "how stock split affects my portfolio",
+      "bonus share price calculation"
+    ]
+  },
+  "_scores": {
+    "seo_score": 76,
+    "eeat_score": 74,
+    "discover_score": 68,
+    "ai_search_score": 74,
+    "ranking_priority": 3,
+    "traffic_priority": "medium",
+    "search_intent": "transactional",
+    "complexity_level": "beginner"
+  },
+  "_formula": {
+    "formula_verified": "Split Adjusted Price = Pre-split Price / Split Ratio. Post-split Shares = Pre-split Shares × Split Ratio. Bonus adjusted: Add bonus shares, reduce cost per share proportionally. Total investment value unchanged.",
+    "formula_template": "stockSplitFormula",
+    "formula_source": "NSE India / BSE India",
+    "formula_source_url": "https://www.nseindia.com",
+    "formula_explanation": "The Stock Split/Bonus Adj. Price Calculator uses: Split Adjusted Price = Pre-split Price / Split Ratio. Post-split Shares = Pre-split Shares × Split Ratio. Bonus adjusted: Add bonus shares, reduce cost per share proportionally. Total investment value. Each variable is derived from your inputs with Indian regulatory parameters.",
+    "example_calculation": "Example: Using default values – Pre-Split/Bonus Price (₹)=1000, Pre-Split Shares Held=100, Split Ratio (e.g. 5 for 1:5)=5 → computed results shown in the output section below.",
+    "review_required": false
+  },
+  "_content": {
+    "intro_paragraph": "Planning your finances in India starts with the right tools. Our Stock Split/Bonus Adj. Price Calculator helps you adjusted price after split/bonus accurately and instantly. Whether you're a salaried professional, investor, or business owner, this calculator provides results tailored to Indian tax laws, interest rates, and regulatory norms. Use it to make smarter individual decisions today.",
+    "what_is": "A Stock Split/Bonus Adj. Price Calculator is a digital tool that allows you to adjusted price after split/bonus without complex manual calculations. In the Indian financial ecosystem, accurate calculations are crucial given dynamic tax slabs, RBI interest rate changes, SEBI regulations, and government scheme updates. This calculator incorporates all India-specific parameters to give you precise, actionable results.",
+    "how_to_use": "Step 1: Open the Stock Split/Bonus Adj. Price Calculator on this page. Step 2: Enter your Pre-Split/Bonus Price (₹) (e.g., ₹1,000). Step 3: Enter your Pre-Split Shares Held (e.g., ₹100). Step 4: Enter your Split Ratio (e.g. 5 for 1:5) (e.g., ₹5). Step 5: Enter your Event Type). Step 6: Click 'Calculate' to see instant results. Step 7: Review the detailed breakdown and use results for financial planning. Step 8: Adjust inputs to explore different scenarios.",
+    "benefits": "<ul><li>Instant, accurate Stock Split/Bonus Adj. Price Calculator results without manual calculations</li><li>Updated with latest India-specific tax rates and regulatory norms</li><li>Supports ₹ (Indian Rupee) with lakh/crore denomination display</li><li>Compare multiple scenarios for better financial decisions</li><li>Free, secure, and no login required</li><li>Mobile-friendly and accessible 24x7</li></ul>",
+    "important_notes": "Trading involves significant risk. Charges shown are approximate.",
+    "pro_tips": "1. Always calculate total cost including brokerage. 2. Use limit orders. 3. Keep a trading journal. 4. Never risk more than 2% per trade.",
+    "result_explanation": "The Stock Split/Bonus Adj. Price Calculator returns Adjusted Price per Share, New Total Shares, Total Holding Value. Results use verified formulas adapted for Indian market conditions.",
+    "faq": [
+      {
+        "q": "What is a Stock Split/Bonus Adj. Price Calculator?",
+        "a": "A Stock Split/Bonus Adj. Price Calculator is an online tool that helps you adjusted price after split/bonus quickly and accurately using standard financial formulas adapted for Indian regulations."
+      },
+      {
+        "q": "Is this Stock Split/Bonus Adj. Price Calculator free to use?",
+        "a": "Yes, this calculator is completely free to use with no login or registration required."
+      },
+      {
+        "q": "How accurate is this Stock Split/Bonus Adj. Price Calculator?",
+        "a": "The calculator uses verified financial formulas updated for India's current tax rates and regulatory norms. Results are indicative."
+      },
+      {
+        "q": "Can I use this on mobile?",
+        "a": "Yes, fully mobile-responsive and works on all smartphones."
+      }
+    ]
+  },
+  "_calculator": {
+    "input_fields": [
+      {
+        "name": "preSplitPrice",
+        "label": "Pre-Split/Bonus Price (₹)",
+        "type": "number",
+        "min": 0.01,
+        "max": 1000000,
+        "default": 1000,
+        "required": true
+      },
+      {
+        "name": "preSplitQty",
+        "label": "Pre-Split Shares Held",
+        "type": "number",
+        "min": 1,
+        "max": 1000000,
+        "default": 100,
+        "required": true
+      },
+      {
+        "name": "splitRatio",
+        "label": "Split Ratio (e.g. 5 for 1:5)",
+        "type": "number",
+        "min": 1,
+        "max": 100,
+        "default": 5,
+        "required": true
+      },
+      {
+        "name": "eventType",
+        "label": "Event Type",
+        "type": "select",
+        "options": [
+          "Stock Split",
+          "Bonus Issue"
+        ],
+        "default": "Stock Split",
+        "required": true
+      }
+    ],
+    "output_fields": [
+      "Adjusted Price per Share",
+      "New Total Shares",
+      "Total Holding Value",
+      "Effective Cost Basis"
+    ],
+    "chart_config": {
+      "type": "bar",
+      "xAxis": "Before/After",
+      "yAxis": "Price (₹)",
+      "title": "Stock Split/Bonus Price Adjustment"
+    },
+    "validation_rules": {
+      "preSplitPrice": {
+        "required": true,
+        "min": 0.01,
+        "max": 1000000
+      },
+      "preSplitQty": {
+        "required": true,
+        "min": 1,
+        "max": 1000000
+      },
+      "splitRatio": {
+        "required": true,
+        "min": 1,
+        "max": 100
+      },
+      "eventType": {
+        "required": true
+      }
+    },
+    "calculator_engine": "function stockSplit(price,qty,ratio,isSplit){const newPrice=price/ratio;const newQty=qty*ratio;return{newPrice,newQty,totalValue:newPrice*newQty,costBasis:price*qty};}"
+  },
+  "_taxonomy": {
+    "category": "individual",
+    "type": "trading",
+    "category_hierarchy": [
+      "trading",
+      "stock",
+      "corporate_action",
+      "split_bonus"
+    ],
+    "calculator_group": "trading",
+    "topical_cluster": "trading_cluster",
+    "breadcrumb_label": "Stock Split/Bonus Adj. Price Calculator"
+  },
+  "_links": {
+    "related_calculators": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator",
+      "lumpsum-calculator"
+    ],
+    "related_articles": [],
+    "internal_link_targets": [
+      "sip-calculator",
+      "step-up-sip-calculator",
+      "top-up-sip-calculator",
+      "perpetual-sip-calculator"
+    ]
+  },
+  "_meta": {
+    "last_updated": "2026-06-03",
+    "export_version": "1.0",
+    "export_date": "2026-06-03"
+  }
+}
