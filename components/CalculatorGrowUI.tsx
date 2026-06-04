@@ -102,7 +102,6 @@ function wrapOldEngine(engineStr: string, inputFields: any[]): string | null {
   const bodyMatch = engineStr.match(/\{([\s\S]*)\}/);
   if (!bodyMatch) return null;
   let body = bodyMatch[1];
-  // Remove trailing return? No, keep as is.
   return `function(inputs) {
   const { ${destructure} } = inputs;
   ${body}
@@ -154,8 +153,15 @@ export default function CalculatorGrowUI({ calculator }: { calculator: any }) {
         else throw new Error('Cannot parse engine – unsupported format');
       }
 
-      // Step 3: execute engine
-      const engineFn = new Function('inputs', engine);
+      // Step 3: Convert engine string to executable function
+      // 🔥 FIX: Use eval with parentheses to treat as expression, avoiding "Function statements require a function name"
+      let engineFn;
+      if (engine.trim().startsWith('function')) {
+        // Wrap in parentheses to make it a function expression
+        engineFn = eval(`(${engine})`);
+      } else {
+        engineFn = new Function('inputs', engine);
+      }
       const output = engineFn(processed);
 
       if (output && typeof output === 'object') {
