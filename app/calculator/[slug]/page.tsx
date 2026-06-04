@@ -37,6 +37,20 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
+// Helper: parse JSON field safely (handles both JSONB and legacy string)
+function safeParseJsonField(value: any, defaultValue: any = null) {
+  if (!value) return defaultValue;
+  if (typeof value === 'object') return value; // already parsed (JSONB)
+  if (typeof value === 'string') {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return defaultValue;
+    }
+  }
+  return defaultValue;
+}
+
 // Helper Component: FAQ Section with Schema.org markup
 function FAQSection({ faqJson }: { faqJson?: string }) {
   if (!faqJson) return null;
@@ -86,13 +100,10 @@ export default async function CalculatorPage({ params }: { params: { slug: strin
 
   const author = getAuthorBySlug('mahendra-maurya');
 
-  // Parse JSON fields
-  let inputFields: any[] = [];
-  let chartConfig = null;
-  let validationRules = null;
-  try { inputFields = JSON.parse(calc.input_fields || '[]'); } catch(e) { console.error('Failed to parse input_fields', e); }
-  try { chartConfig = JSON.parse(calc.chart_config || 'null'); } catch(e) { console.error('Failed to parse chart_config', e); }
-  try { validationRules = JSON.parse(calc.validation_rules || '{}'); } catch(e) { console.error('Failed to parse validation_rules', e); }
+  // ✅ Safe parsing for JSONB columns (already objects)
+  const inputFields = safeParseJsonField(calc.input_fields, []);
+  const chartConfig = safeParseJsonField(calc.chart_config, null);
+  const validationRules = safeParseJsonField(calc.validation_rules, null);
 
   const webAppSchema = {
     "@context": "https://schema.org",
