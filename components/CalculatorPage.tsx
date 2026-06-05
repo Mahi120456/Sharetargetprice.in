@@ -13,8 +13,7 @@ function safeArray(value: any): any[] {
       const parsed = JSON.parse(value)
       return Array.isArray(parsed) ? parsed : []
     } catch {
-      // fallback: split by comma
-      return value.split(',').map(s => s.trim()).filter(Boolean)
+      return []
     }
   }
   return []
@@ -22,7 +21,7 @@ function safeArray(value: any): any[] {
 
 export default function CalculatorPage({ calculator }: { calculator: any }) {
   const relatedCalculators = safeArray(calculator.related_calculators)
-  const faqItems = safeArray(calculator.faq)
+  const faqItems = safeArray(calculator.faq)  // ✅ safe array for FAQ
 
   return (
     <>
@@ -57,6 +56,7 @@ export default function CalculatorPage({ calculator }: { calculator: any }) {
         {calculator.important_notes && <div className="bg-yellow-50 p-4 rounded border border-yellow-200"><h2 className="text-xl font-semibold">⚠️ Important Notes</h2><p>{calculator.important_notes}</p></div>}
       </section>
 
+      {/* ✅ Pass safe faqItems array */}
       {faqItems.length > 0 && <FAQSection faq={faqItems} />}
 
       {relatedCalculators.length > 0 && (
