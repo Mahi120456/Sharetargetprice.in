@@ -27,11 +27,11 @@ import ProsCons from '@/components/mutual-fund/ProsCons';
 import FAQSection from '@/components/mutual-fund/FAQSection';
 import RelatedFunds from '@/components/mutual-fund/RelatedFunds';
 import ComparisonLinks from '@/components/mutual-fund/ComparisonLinks';
-import FundExtraStats from '@/components/mutual-fund/FundExtraStats';   // ✅ New component
+import FundExtraStats from '@/components/mutual-fund/FundExtraStats';
 
-export const dynamic = 'force-dynamic';
 export const revalidate = 86400;
 export const dynamicParams = true;
+// ❌ Removed: export const dynamic = 'force-dynamic';
 
 async function getFund(slug: string) {
   const { data, error } = await supabase
@@ -141,7 +141,7 @@ export default async function MutualFundPage({ params }: { params: { slug: strin
           <Riskometer fund={fund} />
         </div>
 
-        {/* ✅ Extra stats – Fund Manager, Volatility, Sharpe Ratio, Asset Allocation, Investment Objective, etc. */}
+        {/* Extra stats */}
         <FundExtraStats fund={fund} />
 
         {/* Top Holdings */}
@@ -233,9 +233,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-5 md:p-6 shadow-sm">
       <h2 className="text-xl font-bold text-gray-800 mb-4 border-l-4 border-orange-500 pl-3">{title}</h2>
-      <div className="mutual-fund-content">
-        {children}
-      </div>
+      <div className="mutual-fund-content">{children}</div>
     </div>
   );
 }
