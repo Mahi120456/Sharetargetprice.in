@@ -24,6 +24,20 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: calc.meta_title,
     description: calc.meta_description,
     alternates: { canonical: calc.canonical_url },
+    // ✅ ADDED: Open Graph tags
+    openGraph: {
+      title: calc.og_title || calc.meta_title,
+      description: calc.og_description || calc.meta_description,
+      url: calc.canonical_url,
+      type: 'website',
+      siteName: 'Share Target Price',
+    },
+    // ✅ ADDED: Twitter Card
+    twitter: {
+      card: 'summary_large_image',
+      title: calc.og_title || calc.meta_title,
+      description: calc.og_description || calc.meta_description,
+    },
   }
 }
 
