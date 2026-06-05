@@ -56,6 +56,8 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="google-site-verification" content="hafalse8HQrL6F1jcch_jCMJKRaE7JrUCFezXd3eG1o" />
+        {/* ✅ AdSense Verification Meta Tag (required for approval) */}
+        <meta name="google-adsense-account" content="ca-pub-6527944927674692" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -63,20 +65,18 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Share Target Price" />
         <meta name="mobile-web-app-capable" content="yes" />
 
-        {/* Google AdSense */}
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
-          <Script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-        )}
+        {/* ✅ Google AdSense Script (hardcoded with your client ID) */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6527944927674692"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
 
-        {/* ✅ Google Analytics (gtag.js) - New Tag G-R2H0T83KS7 */}
+        {/* ✅ Google Analytics (gtag.js) – Updated ID */}
         <Script
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-R2H0T83KS7"
+          src="https://www.googletagmanager.com/gtag/js?id=G-F9TG7CDJP2"
         />
         <Script
           id="ga-init"
@@ -86,7 +86,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-R2H0T83KS7', {
+              gtag('config', 'G-F9TG7CDJP2', {
                 page_path: window.location.pathname,
                 send_page_view: true,
               });
