@@ -5,6 +5,8 @@ import CalculatorEngine from './CalculatorEngine'
 import FAQSection from './FAQSection'
 import JsonLdSchema from './JsonLdSchema'
 import { ChevronDown, ChevronUp, Calculator, TrendingUp, Info, Lightbulb, CheckCircle, ThumbsUp, AlertCircle, BookOpen, Sparkles } from 'lucide-react'
+// ✅ ADD THIS IMPORT
+import { getDescriptiveName } from '@/lib/calculatorNames'
 
 // Safe array helper
 function safeArray(value: any): any[] {
@@ -16,7 +18,7 @@ function safeArray(value: any): any[] {
   return []
 }
 
-// Accordion Section Component
+// Accordion Section Component (no change)
 function AccordionSection({ title, icon: Icon, children, defaultOpen = false }: { title: string; icon?: any; children: React.ReactNode; defaultOpen?: boolean }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
   return (
@@ -53,7 +55,7 @@ export default function CalculatorPage({ calculator }: { calculator: any }) {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
         <div className="container mx-auto px-4 py-6 md:py-8 max-w-5xl">
           
-          {/* Breadcrumb */}
+          {/* Breadcrumb (no change) */}
           <nav className="text-sm text-gray-500 mb-4">
             <ol className="flex flex-wrap items-center gap-1">
               <li><a href="/" className="hover:text-orange-600 transition">Home</a></li>
@@ -73,13 +75,19 @@ export default function CalculatorPage({ calculator }: { calculator: any }) {
                 <span className="text-xs font-medium text-orange-600 bg-orange-100 px-2 py-0.5 rounded-full">Financial Tool</span>
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{calculator.title}</h1>
+              {/* ✅ ADD H2 SUBHEADING */}
+              {calculator.focus_keyword && (
+                <h2 className="text-lg md:text-xl text-gray-700 mb-3 font-medium">
+                  {calculator.focus_keyword} – Accurate planning for Indian investors
+                </h2>
+              )}
               {calculator.intro_paragraph && (
                 <p className="text-gray-700 text-base md:text-lg max-w-3xl">{calculator.intro_paragraph}</p>
               )}
             </div>
           </div>
 
-          {/* Main Calculator Card */}
+          {/* Main Calculator Card (no change) */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
             <div className="p-6 md:p-8">
               <div className="flex items-center gap-2 mb-6">
@@ -96,7 +104,7 @@ export default function CalculatorPage({ calculator }: { calculator: any }) {
             </div>
           </div>
 
-          {/* Educational Content - Accordion Sections */}
+          {/* Educational Content - Accordion Sections (no change) */}
           {hasContent && (
             <div className="space-y-4 mb-8">
               {calculator.what_is && (
@@ -142,14 +150,14 @@ export default function CalculatorPage({ calculator }: { calculator: any }) {
             </div>
           )}
 
-          {/* FAQ Section */}
+          {/* FAQ Section (no change) */}
           {faqItems.length > 0 && (
             <div className="mb-8">
               <FAQSection faq={faqItems} />
             </div>
           )}
 
-          {/* Related Calculators */}
+          {/* Related Calculators - ✅ UPDATE ANCHOR TEXT */}
           {relatedCalculators.length > 0 && (
             <div className="bg-white rounded-2xl border border-gray-100 p-6 md:p-8">
               <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
@@ -163,14 +171,14 @@ export default function CalculatorPage({ calculator }: { calculator: any }) {
                     href={`/calculators/${slug}`}
                     className="px-4 py-2 bg-gray-100 hover:bg-orange-100 text-gray-700 hover:text-orange-700 rounded-full text-sm transition-colors"
                   >
-                    {slug.replace(/-/g, ' ')}
+                    {getDescriptiveName(slug)}  {/* ✅ REPLACED slug.replace... with getDescriptiveName */}
                   </a>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Footer Note */}
+          {/* Footer Note (no change) */}
           <div className="mt-8 text-center text-xs text-gray-400 border-t pt-6">
             Last updated: {calculator.last_updated ? new Date(calculator.last_updated).toLocaleDateString('en-IN') : new Date().toLocaleDateString('en-IN')}
             {calculator.seo_score && <span className="mx-2">•</span>}
