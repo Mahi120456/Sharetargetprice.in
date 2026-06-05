@@ -59,11 +59,11 @@ async function generateSitemap() {
     .select('slug, updated_at, published_at')
     .eq('post_type', 'post');
 
-  // Fetch calculator pages
+  // ✅ FIX: Fetch calculator pages from 'calculators' table, not 'posts'
   const { data: calculators } = await supabase
-    .from('posts')
-    .select('slug')
-    .eq('category', 'Calculator');
+    .from('calculators')
+    .select('slug, last_updated')
+    .order('slug');
 
   // Fetch authors
   const { data: authors } = await supabase
@@ -119,7 +119,7 @@ async function generateSitemap() {
         comparisonSlugs.push(`${shortSlugs[i]}-vs-${shortSlugs[j]}`);
       }
     }
-    console.log(`Generated ${comparisonSlugs.length} comparison page slugs (4950 expected)`);
+    console.log(`Generated ${comparisonSlugs.length} comparison page slugs (expected ~4950)`);
   } else {
     console.warn('Could not fetch top 100 funds, comparison pages will be missing from sitemap');
   }
@@ -159,12 +159,12 @@ async function generateSitemap() {
   </url>`);
   });
 
-  // Calculators
+  // ✅ ADD ALL CALCULATOR PAGES FROM calculators TABLE
   (calculators || []).forEach(calc => {
     urls.push(`
   <url>
     <loc>${baseUrl}/calculator/${calc.slug}</loc>
-    <lastmod>${now}</lastmod>
+    <lastmod>${calc.last_updated || now}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`);
@@ -225,7 +225,7 @@ async function generateSitemap() {
   </url>`);
   });
 
-  // ✅ Add all generated comparison pages (4950+)
+  // Add all generated comparison pages
   comparisonSlugs.forEach(slug => {
     urls.push(`
   <url>
@@ -241,7 +241,7 @@ async function generateSitemap() {
 </urlset>`;
 
   fs.writeFileSync('./public/sitemap.xml', sitemap);
-  console.log(`✅ Sitemap generated with ${urls.length} URLs (including ${comparisonSlugs.length} comparison pages)`);
+  console.log(`✅ Sitemap generated with ${urls.length} URLs (including ${comparisonSlugs.length} comparison pages and ${calculators?.length || 0} calculator pages)`);
 }
 
 generateSitemap().catch(console.error);
