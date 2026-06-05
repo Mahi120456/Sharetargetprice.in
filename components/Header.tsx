@@ -13,7 +13,7 @@ const categories = [
       { name: "🔄 Fund Comparisons", slug: "/mutual-funds/comparisons" },
       { name: "🏆 Top Performing Funds", slug: "/mutual-funds/top-performing-funds" },
       { name: "⭐ Best Funds by Category", slug: "/mutual-funds/best" },
-      { name: "📁 Categories", slug: "/mutual-funds/categories" },
+      { name: "📁 Categories", slug: "/mutual-funds/category" },
       { name: "🏢 AMC (Fund Houses)", slug: "/mutual-funds/amc" },
     ],
   },
