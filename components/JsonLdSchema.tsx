@@ -1,11 +1,26 @@
+function safeArray(value: any): any[] {
+  if (!value) return []
+  if (Array.isArray(value)) return value
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value)
+      return Array.isArray(parsed) ? parsed : []
+    } catch {
+      return []
+    }
+  }
+  return []
+}
+
 export default function JsonLdSchema({ calculator }: { calculator: any }) {
   const schemas = []
+  const faqItems = safeArray(calculator.faq)
 
-  if (calculator.faq?.length > 0) {
+  if (faqItems.length > 0) {
     schemas.push({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: calculator.faq.map((item: { q: string; a: string }) => ({
+      mainEntity: faqItems.map((item: { q: string; a: string }) => ({
         '@type': 'Question',
         name: item.q,
         acceptedAnswer: { '@type': 'Answer', text: item.a },
