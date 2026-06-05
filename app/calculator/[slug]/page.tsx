@@ -2,6 +2,9 @@ import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import CalculatorPage from '@/components/CalculatorPage'
 
+export const revalidate = 86400 // ISR – revalidate every 24 hours
+export const dynamicParams = true
+
 async function getCalculator(slug: string) {
   const { data, error } = await supabase
     .from('calculators')
@@ -24,7 +27,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: calc.meta_title,
     description: calc.meta_description,
     alternates: { canonical: calc.canonical_url },
-    // ✅ ADDED: Open Graph tags
     openGraph: {
       title: calc.og_title || calc.meta_title,
       description: calc.og_description || calc.meta_description,
@@ -32,7 +34,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       type: 'website',
       siteName: 'Share Target Price',
     },
-    // ✅ ADDED: Twitter Card
     twitter: {
       card: 'summary_large_image',
       title: calc.og_title || calc.meta_title,
