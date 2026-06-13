@@ -36,9 +36,20 @@ export default async function PaginatedStocksPage({ params }: { params: { page: 
   };
   const formatPrice = (val: number | null) => (val ? `₹${val.toLocaleString('en-IN')}` : '—');
 
+  // ✅ Smart display name: fallback to symbol if name is garbage
+  const getDisplayName = (stock: any) => {
+    const name = stock.name?.trim();
+    if (!name) return stock.symbol;
+    // If name contains comma, '0P', or is too long -> likely garbage
+    if (name.includes(',') || name.includes('0P') || name.length > 50 || name.includes('.')) {
+      return stock.symbol;
+    }
+    return name;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-orange-800 text-white py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <div className="inline-block bg-white/10 backdrop-blur-sm rounded-full px-4 py-1 text-sm mb-6">📊 4700+ Indian Stocks</div>
@@ -52,7 +63,7 @@ export default async function PaginatedStocksPage({ params }: { params: { page: 
         </div>
       </section>
 
-      {/* Stats Bar */}
+      {/* Stats */}
       <div className="bg-white border-b border-gray-100 py-6">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           <div><div className="text-2xl font-black text-orange-500">{count}+</div><div className="text-xs text-gray-500">STOCKS</div></div>
@@ -62,35 +73,38 @@ export default async function PaginatedStocksPage({ params }: { params: { page: 
         </div>
       </div>
 
-      {/* Stock Grid */}
+      {/* Grid */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {stocks.map((stock) => (
-            <Link
-              key={stock.symbol}
-              href={`/stock/${stock.symbol.toLowerCase()}-share-price-target-2026-to-2050`}
-              className="group bg-white rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-lg transition-all overflow-hidden"
-            >
-              <div className="p-4">
-                <h3 className="font-extrabold text-gray-800 group-hover:text-orange-600 line-clamp-1">
-                  {stock.name}
-                </h3>
-                <p className="text-xs text-gray-400 mt-0.5">{stock.symbol}</p>
-                <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                  <div><span className="text-gray-400">Price</span><br/>{formatPrice(stock.current_price)}</div>
-                  <div><span className="text-gray-400">Mkt Cap</span><br/>{formatMarketCap(stock.market_cap)}</div>
-                  <div><span className="text-gray-400">P/E</span><br/>{stock.pe_ratio ?? '—'}</div>
-                  <div><span className="text-gray-400">ROE</span><br/>{stock.roe ? `${stock.roe}%` : '—'}</div>
-                </div>
-                {stock.sector && (
-                  <div className="mt-2">
-                    <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{stock.sector}</span>
+          {stocks.map((stock) => {
+            const displayName = getDisplayName(stock);
+            return (
+              <Link
+                key={stock.symbol}
+                href={`/stock/${stock.symbol.toLowerCase()}-share-price-target-2026-to-2050`}
+                className="group bg-white rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-lg transition-all overflow-hidden"
+              >
+                <div className="p-4">
+                  <h3 className="font-extrabold text-gray-800 group-hover:text-orange-600 line-clamp-1">
+                    {displayName}
+                  </h3>
+                  <p className="text-xs text-gray-400 mt-0.5">{stock.symbol}</p>
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    <div><span className="text-gray-400">Price</span><br/>{formatPrice(stock.current_price)}</div>
+                    <div><span className="text-gray-400">Mkt Cap</span><br/>{formatMarketCap(stock.market_cap)}</div>
+                    <div><span className="text-gray-400">P/E</span><br/>{stock.pe_ratio ?? '—'}</div>
+                    <div><span className="text-gray-400">ROE</span><br/>{stock.roe ? `${stock.roe}%` : '—'}</div>
                   </div>
-                )}
-                <div className="mt-3 text-orange-500 text-xs font-medium group-hover:underline">View Analysis →</div>
-              </div>
-            </Link>
-          ))}
+                  {stock.sector && (
+                    <div className="mt-2">
+                      <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{stock.sector}</span>
+                    </div>
+                  )}
+                  <div className="mt-3 text-orange-500 text-xs font-medium group-hover:underline">View Analysis →</div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         {/* Pagination */}
@@ -111,7 +125,7 @@ export default async function PaginatedStocksPage({ params }: { params: { page: 
         )}
       </div>
 
-      {/* Footer CTA */}
+      {/* CTA */}
       <div className="bg-gradient-to-r from-orange-50 to-amber-50 py-12 mt-8">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Why Use ShareTargetPrice.in for Stocks?</h2>
