@@ -11,7 +11,8 @@ import { getAuthorBySlug } from '@/data/authors';
 
 export default function StocksCsvClient({ stock, basePrice, targets, years, symbol }: any) {
   const router = useRouter();
-  const author = getAuthorBySlug('mahendra-maurya');
+  // ✅ Fix: Convert undefined to null to match AuthorCard props
+  const author = getAuthorBySlug('mahendra-maurya') || null;
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8 bg-gray-50 min-h-screen">
