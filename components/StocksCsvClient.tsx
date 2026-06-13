@@ -9,9 +9,17 @@ import BullBearCase from '@/components/BullBearCase';
 import AuthorCard from '@/components/AuthorCard';
 import { getAuthorBySlug } from '@/data/authors';
 
-export default function StocksCsvClient({ stock, basePrice, targets, years, symbol }: any) {
+// Define the props type
+interface Props {
+  stock: any;
+  basePrice: number;
+  targets: Record<number, string>;
+  years: number[];
+  symbol: string;
+}
+
+export default function StocksCsvClient({ stock, basePrice, targets, years, symbol }: Props) {
   const router = useRouter();
-  // ✅ Fix: Convert undefined to null to match AuthorCard props
   const author = getAuthorBySlug('mahendra-maurya') || null;
 
   return (
@@ -41,7 +49,7 @@ export default function StocksCsvClient({ stock, basePrice, targets, years, symb
         <aside className="space-y-4">
           <div className="bg-gray-900 text-white rounded-2xl p-6 sticky top-24">
             <h3 className="text-xl font-bold">Price Prediction</h3>
-            {years.map((y) => (
+            {years.map((y: number) => (
               <div key={y} className="flex justify-between py-2 border-b border-gray-700">
                 <span>{y}</span>
                 <span className="text-orange-400 font-bold">{targets[y]}</span>
