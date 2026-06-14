@@ -1,7 +1,6 @@
 name: Insert All NSE+BSE Stocks (One Time)
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   insert:
@@ -11,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install axios @supabase/supabase-js dotenv
+      - run: npm install axios @supabase/supabase-js dotenv csv-parser
       - run: node scripts/insert-all-stocks.js
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
