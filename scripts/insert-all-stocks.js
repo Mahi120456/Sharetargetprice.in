@@ -8,92 +8,53 @@ function createSlug(name, symbol) {
   return base.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
 }
 
-async function fetchAllNSEStocks() {
-  console.log('📥 Fetching all NSE stocks...');
-  const csvUrl = 'https://www.nseindia.com/static/market-data/securities-available-for-trading.csv';
-  let cookie = '';
-
-  try {
-    const homeRes = await axios.get('https://www.nseindia.com', {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9',
-      }
-    });
-    const setCookie = homeRes.headers['set-cookie'];
-    if (setCookie) cookie = setCookie.map(c => c.split(';')[0]).join('; ');
-  } catch (err) {
-    console.warn('Cookie fetch warning:', err.message);
-  }
-
-  try {
-    const response = await axios.get(csvUrl, {
-      headers: { 'User-Agent': 'Mozilla/5.0', 'Cookie': cookie, 'Accept': 'text/csv' },
-      timeout: 30000
-    });
-    
-    const lines = response.data.split('\n');
-    const headers = lines[0].toLowerCase().split(',');
-    const symbolIdx = headers.findIndex(h => h.includes('symbol'));
-    const nameIdx = headers.findIndex(h => h.includes('name'));
-    
-    const stocks = [];
-    for (let i = 1; i < lines.length; i++) {
-      const parts = lines[i].split(',');
-      let symbol = parts[symbolIdx]?.trim()?.replace(/"/g, '');
-      let name = nameIdx !== -1 ? parts[nameIdx]?.trim()?.replace(/"/g, '') : symbol;
-      
-      if (!symbol || symbol === 'SYMBOL') continue;
-      if (symbol.includes('ETF') || symbol.includes('SGBN') || symbol.includes('NIFTY') || symbol.includes('BANKNIFTY')) continue;
-      if (symbol.startsWith('NIFTY') || symbol.startsWith('BANKNIFTY')) continue;
-      
-      stocks.push({ symbol, name: name || symbol, slug: createSlug(name, symbol), sector: 'General', source: 'NSE' });
-    }
-    console.log(`✅ NSE: ${stocks.length} stocks fetched`);
-    return stocks;
-  } catch (err) {
-    console.error('❌ NSE CSV fetch failed:', err.message);
-    return [];
-  }
-}
-
-async function fetchAllBSEStocks() {
-  console.log('📥 Fetching all BSE stocks...');
-  const csvUrl = 'https://raw.githubusercontent.com/utkarshkant/Indian-Stocks-List/main/List%20of%20Companies%20Listed%20in%20BSE%20(EQ).csv';
+async function fetchStocksFromGitHub() {
+  console.log('📥 Fetching stock list from GitHub repository...');
+  // Using a reliable GitHub repo that maintains combined NSE+BSE equity list
+  const csvUrl = 'https://raw.githubusercontent.com/shubham9011/nse-bse-stock-list/main/stock_list.csv';
+  // Alternative fallback if above fails
+  const fallbackUrl = 'https://raw.githubusercontent.com/abhijitparida/stock-data/master/nse_eq_symbols.csv';
   
+  let response;
   try {
-    const response = await axios.get(csvUrl, { timeout: 30000 });
-    const lines = response.data.split('\n');
-    const headers = lines[0].toLowerCase().split(',');
-    const symbolIdx = headers.findIndex(h => h.includes('symbol'));
-    const nameIdx = headers.findIndex(h => h.includes('name'));
-    
-    const stocks = [];
-    for (let i = 1; i < lines.length; i++) {
-      const parts = lines[i].split(',');
-      let symbol = parts[symbolIdx]?.trim()?.replace(/"/g, '');
-      let name = nameIdx !== -1 ? parts[nameIdx]?.trim()?.replace(/"/g, '') : symbol;
-      
-      if (!symbol || symbol === 'SYMBOL') continue;
-      if (symbol.includes('ETF') || symbol.includes('NIFTY') || symbol.includes('BANKNIFTY')) continue;
-      
-      stocks.push({ symbol, name: name || symbol, slug: createSlug(name, symbol), sector: 'General', source: 'BSE' });
-    }
-    console.log(`✅ BSE: ${stocks.length} stocks fetched`);
-    return stocks;
+    response = await axios.get(csvUrl, { timeout: 30000 });
+    console.log('✅ Primary source working');
   } catch (err) {
-    console.error('❌ BSE CSV fetch failed:', err.message);
-    return [];
+    console.warn('Primary source failed, trying fallback...');
+    try {
+      response = await axios.get(fallbackUrl, { timeout: 30000 });
+      console.log('✅ Fallback source working');
+    } catch (fallbackErr) {
+      throw new Error('Both sources failed');
+    }
   }
-}
-
-function mergeStocks(nseStocks, bseStocks) {
-  const map = new Map();
-  nseStocks.forEach(stock => map.set(stock.symbol, stock));
-  bseStocks.forEach(stock => { if (!map.has(stock.symbol)) map.set(stock.symbol, stock); });
-  const merged = Array.from(map.values());
-  console.log(`📊 Total unique stocks after merge: ${merged.length}`);
-  return merged;
+  
+  const lines = response.data.split('\n');
+  const headers = lines[0].toLowerCase().split(',');
+  // Find symbol and name columns
+  let symbolIdx = headers.findIndex(h => h.includes('symbol') || h === 'symbol');
+  let nameIdx = headers.findIndex(h => h.includes('name') || h === 'name' || h === 'company name');
+  if (symbolIdx === -1) symbolIdx = 0;
+  if (nameIdx === -1) nameIdx = 1;
+  
+  const stocks = [];
+  for (let i = 1; i < lines.length; i++) {
+    const parts = lines[i].split(',');
+    let symbol = parts[symbolIdx]?.trim()?.replace(/"/g, '');
+    let name = nameIdx !== -1 ? parts[nameIdx]?.trim()?.replace(/"/g, '') : symbol;
+    if (!symbol || symbol === '' || symbol === 'SYMBOL') continue;
+    // filter out indices, ETFs, etc.
+    if (symbol.includes('ETF') || symbol.includes('NIFTY') || symbol.includes('BANKNIFTY') || symbol.includes('SGBN')) continue;
+    if (symbol.startsWith('NIFTY') || symbol.startsWith('BANKNIFTY')) continue;
+    stocks.push({
+      symbol: symbol,
+      name: name || symbol,
+      slug: createSlug(name, symbol),
+      sector: 'General',
+    });
+  }
+  console.log(`✅ Fetched ${stocks.length} unique stocks`);
+  return stocks;
 }
 
 async function insertStocks(stocks) {
@@ -105,7 +66,12 @@ async function insertStocks(stocks) {
     for (const stock of batch) {
       const { error } = await supabase
         .from('stocks')
-        .upsert({ slug: stock.slug, name: stock.name, symbol: stock.symbol, sector: stock.sector }, { onConflict: 'symbol', ignoreDuplicates: true });
+        .upsert({
+          slug: stock.slug,
+          name: stock.name,
+          symbol: stock.symbol,
+          sector: stock.sector,
+        }, { onConflict: 'symbol', ignoreDuplicates: true });
       if (error && error.code !== '23505') {
         console.error(`❌ Error for ${stock.symbol}:`, error.message);
         skipped++;
@@ -121,16 +87,16 @@ async function insertStocks(stocks) {
 }
 
 async function main() {
-  console.log('🚀 Starting full NSE + BSE stock import...\n');
-  const nseStocks = await fetchAllNSEStocks();
-  const bseStocks = await fetchAllBSEStocks();
-  if (nseStocks.length === 0 && bseStocks.length === 0) {
-    console.error('❌ No stocks fetched. Check internet or sources.');
-    return;
+  console.log('🚀 Starting stock import from GitHub repository...\n');
+  try {
+    const stocks = await fetchStocksFromGitHub();
+    if (stocks.length === 0) throw new Error('No stocks fetched');
+    await insertStocks(stocks);
+    console.log('\n✅ All stocks imported successfully!');
+  } catch (err) {
+    console.error('❌ Error:', err.message);
+    process.exit(1);
   }
-  const allStocks = mergeStocks(nseStocks, bseStocks);
-  await insertStocks(allStocks);
-  console.log('\n✅ All stocks imported successfully!');
 }
 
 main().catch(console.error);
