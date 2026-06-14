@@ -9,10 +9,10 @@ const supabase = createClient(
 );
 
 async function insertAllStocks() {
-  console.log('📥 Fetching stock list from GitHub CSV...');
+  console.log('📥 Fetching stock list from reliable NSE CSV...');
   
-  // Reliable CSV source (NSE + BSE listed stocks, maintained by community)
-  const csvUrl = 'https://raw.githubusercontent.com/architsharma25/Indian-Stocks-List/main/NSE_BSE_All_Stocks.csv';
+  // ✅ Working CSV – NSE equity symbols (maintained by community)
+  const csvUrl = 'https://raw.githubusercontent.com/abhijitparida/stock-data/master/nse_eq_symbols.csv';
   
   try {
     const response = await axios.get(csvUrl, {
@@ -22,10 +22,11 @@ async function insertAllStocks() {
     const lines = response.data.split('\n');
     const headers = lines[0].split(',');
     
+    // Find columns
     const symbolIdx = headers.findIndex(h => h.toLowerCase().includes('symbol'));
-    const nameIdx = headers.findIndex(h => h.toLowerCase().includes('name') || h.toLowerCase().includes('company'));
+    const nameIdx = headers.findIndex(h => h.toLowerCase().includes('name'));
     
-    if (symbolIdx === -1) throw new Error('Symbol column not found in CSV');
+    if (symbolIdx === -1) throw new Error('Symbol column not found');
     
     let inserted = 0;
     let skipped = 0;
