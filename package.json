@@ -14,6 +14,7 @@
     "generate-ai-articles": "node scripts/generate-ai-articles.js",
     "generate-mf-articles": "node scripts/generate-mutual-fund-articles.js",
     "generate-sitemap": "node scripts/generate-sitemap.js",
+    "insert-all-stocks": "node scripts/insert-all-stocks.js",
     "seed": "npm run import-posts && npm run generate-keywords && npm run generate-ai-articles",
     "seed:mutual-funds": "node scripts/seed-mutual-funds.js"
   },
