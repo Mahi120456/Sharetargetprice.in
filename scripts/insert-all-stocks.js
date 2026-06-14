@@ -1,10 +1,7 @@
 // scripts/insert-all-stocks.js
-// Run: node scripts/insert-all-stocks.js
-// One-time script to insert all NSE+BSE stocks
-
-const { createClient } = require('@supabase/supabase-js');
-const axios = require('axios');
-require('dotenv').config();
+import { createClient } from '@supabase/supabase-js';
+import axios from 'axios';
+import 'dotenv/config';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -12,51 +9,40 @@ const supabase = createClient(
 );
 
 async function insertAllStocks() {
-  console.log('📥 Fetching stock list from Dhan.co...');
+  console.log('📥 Fetching stock list from GitHub CSV...');
+  
+  // Reliable CSV source (NSE + BSE listed stocks, maintained by community)
+  const csvUrl = 'https://raw.githubusercontent.com/architsharma25/Indian-Stocks-List/main/NSE_BSE_All_Stocks.csv';
   
   try {
-    // 🔥 New CSV URL – All NSE + BSE stocks
-    const csvUrl = 'https://dhan.co/all-stocks-list/';
-    
-    // Note: Dhan page is HTML, we need to fetch the CSV directly.
-    // If Dhan CSV doesn't work, use this alternative:
-    // const csvUrl = 'https://raw.githubusercontent.com/architsharma25/Indian-Stocks-List/main/NSE_BSE_All_Stocks.csv';
-    
     const response = await axios.get(csvUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      }
+      headers: { 'User-Agent': 'Mozilla/5.0' }
     });
     
-    // Parse CSV content from the response
     const lines = response.data.split('\n');
     const headers = lines[0].split(',');
     
-    // Find column indices (Dhan's CSV has different columns)
-    const symbolIndex = headers.findIndex(h => 
-      h.toLowerCase().includes('symbol') || h.toLowerCase().includes('scrip')
-    );
-    const nameIndex = headers.findIndex(h => 
-      h.toLowerCase().includes('name') || h.toLowerCase().includes('company')
-    );
+    const symbolIdx = headers.findIndex(h => h.toLowerCase().includes('symbol'));
+    const nameIdx = headers.findIndex(h => h.toLowerCase().includes('name') || h.toLowerCase().includes('company'));
+    
+    if (symbolIdx === -1) throw new Error('Symbol column not found in CSV');
     
     let inserted = 0;
     let skipped = 0;
     
     for (let i = 1; i < lines.length; i++) {
       const parts = lines[i].split(',');
-      let symbol = symbolIndex !== -1 ? parts[symbolIndex]?.trim() : parts[0]?.trim();
-      let name = nameIndex !== -1 ? parts[nameIndex]?.trim() : symbol;
+      let symbol = parts[symbolIdx]?.trim();
+      if (!symbol) continue;
       
-      if (!symbol || symbol === 'Symbol' || symbol === '') continue;
+      let name = nameIdx !== -1 ? parts[nameIdx]?.trim() : symbol;
       
-      // Clean symbol (remove special characters, spaces)
+      // Clean symbol (keep only alphanumeric)
       symbol = symbol.replace(/[^A-Za-z0-9]/g, '');
       if (symbol.length < 2) continue;
       
-      const slug = symbol.toLowerCase().replace(/&/g, '-');
+      const slug = symbol.toLowerCase();
       
-      // Insert or skip if exists
       const { error } = await supabase
         .from('stocks')
         .upsert(
@@ -67,7 +53,7 @@ async function insertAllStocks() {
       if (error && error.code !== '23505') {
         console.error(`Error for ${symbol}:`, error.message);
         skipped++;
-      } else {
+      } else if (!error) {
         inserted++;
         if (inserted % 100 === 0) console.log(`✅ Inserted ${inserted} stocks...`);
       }
@@ -80,4 +66,4 @@ async function insertAllStocks() {
   }
 }
 
-insertAllStocks().catch(console.error);
+insertAllStocks();
