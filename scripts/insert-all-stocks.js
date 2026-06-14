@@ -8,53 +8,131 @@ function createSlug(name, symbol) {
   return base.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
 }
 
-async function fetchStocksFromGitHub() {
-  console.log('📥 Fetching stock list from GitHub repository...');
-  // Using a reliable GitHub repo that maintains combined NSE+BSE equity list
-  const csvUrl = 'https://raw.githubusercontent.com/shubham9011/nse-bse-stock-list/main/stock_list.csv';
-  // Alternative fallback if above fails
-  const fallbackUrl = 'https://raw.githubusercontent.com/abhijitparida/stock-data/master/nse_eq_symbols.csv';
-  
-  let response;
+// ========== NSE STOCKS via Official API ==========
+async function fetchNSEStocks() {
+  console.log('📥 Fetching NSE stocks via official API...');
+  // Get session cookie first
+  let cookie = '';
   try {
-    response = await axios.get(csvUrl, { timeout: 30000 });
-    console.log('✅ Primary source working');
+    const homeRes = await axios.get('https://www.nseindia.com', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9',
+      }
+    });
+    const setCookie = homeRes.headers['set-cookie'];
+    if (setCookie) cookie = setCookie.map(c => c.split(';')[0]).join('; ');
   } catch (err) {
-    console.warn('Primary source failed, trying fallback...');
+    console.warn('Cookie fetch warning:', err.message);
+  }
+
+  try {
+    // NSE's master equity list API (returns all listed equities)
+    const apiUrl = 'https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20500';
+    // But this only gives 500 stocks. We need all equities. Use a different endpoint?
+    // Actually, NSE has an endpoint for all securities: https://www.nseindia.com/api/equity-list
+    // Let's try that
+    const allEquityUrl = 'https://www.nseindia.com/api/equity-list';
+    const res = await axios.get(allEquityUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0', 'Cookie': cookie }
+    });
+    const stocks = res.data;
+    console.log(`✅ NSE: ${stocks.length} stocks fetched`);
+    return stocks.map(stock => ({
+      symbol: stock.symbol,
+      name: stock.companyName || stock.symbol,
+      slug: createSlug(stock.companyName, stock.symbol),
+      sector: 'General',
+      source: 'NSE'
+    }));
+  } catch (err) {
+    console.error('❌ NSE API failed:', err.message);
+    // Fallback to static list from GitHub
+    return await fetchNSEFallback();
+  }
+}
+
+async function fetchNSEFallback() {
+  console.log('🔄 Using NSE fallback CSV...');
+  const url = 'https://raw.githubusercontent.com/utkarshkant/Indian-Stocks-List/main/List%20of%20Companies%20Listed%20in%20NSE%20(EQ).csv';
+  try {
+    const response = await axios.get(url, { timeout: 30000 });
+    const lines = response.data.split('\n');
+    const headers = lines[0].toLowerCase().split(',');
+    const symbolIdx = headers.findIndex(h => h.includes('symbol'));
+    const nameIdx = headers.findIndex(h => h.includes('name'));
+    const stocks = [];
+    for (let i = 1; i < lines.length; i++) {
+      const parts = lines[i].split(',');
+      let symbol = parts[symbolIdx]?.trim()?.replace(/"/g, '');
+      let name = nameIdx !== -1 ? parts[nameIdx]?.trim()?.replace(/"/g, '') : symbol;
+      if (!symbol || symbol === 'SYMBOL') continue;
+      if (symbol.includes('ETF') || symbol.includes('SGBN')) continue;
+      stocks.push({
+        symbol: symbol,
+        name: name || symbol,
+        slug: createSlug(name, symbol),
+        sector: 'General',
+        source: 'NSE_fallback'
+      });
+    }
+    console.log(`✅ NSE fallback: ${stocks.length} stocks`);
+    return stocks;
+  } catch (err) {
+    console.error('❌ NSE fallback also failed:', err.message);
+    return [];
+  }
+}
+
+// ========== BSE STOCKS via GitHub CSV ==========
+async function fetchBSEStocks() {
+  console.log('📥 Fetching BSE stocks...');
+  const urls = [
+    'https://raw.githubusercontent.com/utkarshkant/Indian-Stocks-List/main/List%20of%20Companies%20Listed%20in%20BSE%20(EQ).csv',
+    'https://raw.githubusercontent.com/shubham9011/nse-bse-stock-list/main/stock_list.csv'
+  ];
+  for (const url of urls) {
     try {
-      response = await axios.get(fallbackUrl, { timeout: 30000 });
-      console.log('✅ Fallback source working');
-    } catch (fallbackErr) {
-      throw new Error('Both sources failed');
+      const response = await axios.get(url, { timeout: 30000 });
+      const lines = response.data.split('\n');
+      const headers = lines[0].toLowerCase().split(',');
+      const symbolIdx = headers.findIndex(h => h.includes('symbol'));
+      const nameIdx = headers.findIndex(h => h.includes('name'));
+      const stocks = [];
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        let symbol = parts[symbolIdx]?.trim()?.replace(/"/g, '');
+        let name = nameIdx !== -1 ? parts[nameIdx]?.trim()?.replace(/"/g, '') : symbol;
+        if (!symbol || symbol === 'SYMBOL') continue;
+        if (symbol.includes('ETF') || symbol.includes('SGBN')) continue;
+        stocks.push({
+          symbol: symbol,
+          name: name || symbol,
+          slug: createSlug(name, symbol),
+          sector: 'General',
+          source: 'BSE'
+        });
+      }
+      console.log(`✅ BSE: ${stocks.length} stocks fetched from ${url.split('/')[5]}`);
+      return stocks;
+    } catch (err) {
+      console.warn(`BSE source failed: ${url}`);
     }
   }
-  
-  const lines = response.data.split('\n');
-  const headers = lines[0].toLowerCase().split(',');
-  // Find symbol and name columns
-  let symbolIdx = headers.findIndex(h => h.includes('symbol') || h === 'symbol');
-  let nameIdx = headers.findIndex(h => h.includes('name') || h === 'name' || h === 'company name');
-  if (symbolIdx === -1) symbolIdx = 0;
-  if (nameIdx === -1) nameIdx = 1;
-  
-  const stocks = [];
-  for (let i = 1; i < lines.length; i++) {
-    const parts = lines[i].split(',');
-    let symbol = parts[symbolIdx]?.trim()?.replace(/"/g, '');
-    let name = nameIdx !== -1 ? parts[nameIdx]?.trim()?.replace(/"/g, '') : symbol;
-    if (!symbol || symbol === '' || symbol === 'SYMBOL') continue;
-    // filter out indices, ETFs, etc.
-    if (symbol.includes('ETF') || symbol.includes('NIFTY') || symbol.includes('BANKNIFTY') || symbol.includes('SGBN')) continue;
-    if (symbol.startsWith('NIFTY') || symbol.startsWith('BANKNIFTY')) continue;
-    stocks.push({
-      symbol: symbol,
-      name: name || symbol,
-      slug: createSlug(name, symbol),
-      sector: 'General',
-    });
-  }
-  console.log(`✅ Fetched ${stocks.length} unique stocks`);
-  return stocks;
+  console.error('❌ All BSE sources failed');
+  return [];
+}
+
+// ========== MERGE & INSERT ==========
+function mergeStocks(nseStocks, bseStocks) {
+  const map = new Map();
+  nseStocks.forEach(stock => map.set(stock.symbol, stock));
+  bseStocks.forEach(stock => {
+    if (!map.has(stock.symbol)) map.set(stock.symbol, stock);
+  });
+  const merged = Array.from(map.values());
+  console.log(`📊 Total unique stocks after merge: ${merged.length}`);
+  return merged;
 }
 
 async function insertStocks(stocks) {
@@ -87,16 +165,16 @@ async function insertStocks(stocks) {
 }
 
 async function main() {
-  console.log('🚀 Starting stock import from GitHub repository...\n');
-  try {
-    const stocks = await fetchStocksFromGitHub();
-    if (stocks.length === 0) throw new Error('No stocks fetched');
-    await insertStocks(stocks);
-    console.log('\n✅ All stocks imported successfully!');
-  } catch (err) {
-    console.error('❌ Error:', err.message);
+  console.log('🚀 Starting stock import (NSE official + BSE fallback)...\n');
+  const nseStocks = await fetchNSEStocks();
+  const bseStocks = await fetchBSEStocks();
+  if (nseStocks.length === 0 && bseStocks.length === 0) {
+    console.error('❌ No stocks fetched. Exiting.');
     process.exit(1);
   }
+  const allStocks = mergeStocks(nseStocks, bseStocks);
+  await insertStocks(allStocks);
+  console.log('\n✅ Import completed.');
 }
 
 main().catch(console.error);
