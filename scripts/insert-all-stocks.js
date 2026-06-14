@@ -1,75 +1,60 @@
-// scripts/insert-all-stocks.js
 import { createClient } from '@supabase/supabase-js';
 import axios from 'axios';
+import * as zlib from 'zlib';
+import { promisify } from 'util';
+import { Readable } from 'stream';
+import csv from 'csv-parser';
 import 'dotenv/config';
 
+const gunzip = promisify(zlib.gunzip);
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
 
-// Reliable CSV source – contains both NSE & BSE stocks (~4,500+ symbols)
-// Source: GitHub community maintained list (updated 2026)
-const CSV_URL = 'https://raw.githubusercontent.com/architsharma25/Indian-Stocks-List/main/NSE_BSE_All_Stocks.csv';
-
-async function insertAllStocks() {
-  console.log('📥 Fetching NSE+BSE stock list from CSV...');
-  
+async function fetchAndInsertStocks() {
+  console.log('📥 Fetching stock list from Upstox public CSV...');
+  const url = 'https://assets.upstox.com/market-quote/instruments/exchange/complete.csv.gz';
   try {
-    const response = await axios.get(CSV_URL, {
-      headers: { 'User-Agent': 'Mozilla/5.0' },
-      timeout: 15000
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    const csvBuffer = await gunzip(response.data);
+    const records = [];
+    await new Promise((resolve, reject) => {
+      const readable = Readable.from(csvBuffer.toString());
+      readable
+        .pipe(csv())
+        .on('data', (data) => records.push(data))
+        .on('end', resolve)
+        .on('error', reject);
     });
-    
-    const lines = response.data.split('\n');
-    const headers = lines[0].split(',');
-    
-    // Find column indices (CSV has 'SYMBOL' and 'NAME OF COMPANY')
-    const symbolIdx = headers.findIndex(h => h.toUpperCase().includes('SYMBOL'));
-    const nameIdx = headers.findIndex(h => h.toUpperCase().includes('NAME'));
-    
-    if (symbolIdx === -1) {
-      throw new Error('CSV format unexpected – symbol column not found');
-    }
-    
-    let inserted = 0;
-    let skipped = 0;
-    
-    for (let i = 1; i < lines.length; i++) {
-      const parts = lines[i].split(',');
-      let symbol = parts[symbolIdx]?.trim();
-      if (!symbol) continue;
-      
-      // Remove double quotes if present
-      symbol = symbol.replace(/^"|"$/g, '');
-      // Keep only alphanumeric (NSE/BSE symbols are letters)
-      const cleanSymbol = symbol.replace(/[^A-Za-z0-9]/g, '');
-      if (cleanSymbol.length < 2) continue;
-      
-      let name = nameIdx !== -1 ? parts[nameIdx]?.trim().replace(/^"|"$/g, '') : cleanSymbol;
-      const slug = cleanSymbol.toLowerCase();
-      
-      const { error } = await supabase
-        .from('stocks')
-        .upsert(
-          { slug, name: name || cleanSymbol, symbol: cleanSymbol, sector: 'General' },
-          { onConflict: 'symbol', ignoreDuplicates: true }
-        );
-      
-      if (error && error.code !== '23505') {
-        console.error(`Error for ${cleanSymbol}:`, error.message);
-        skipped++;
-      } else if (!error) {
-        inserted++;
-        if (inserted % 100 === 0) console.log(`✅ Inserted ${inserted} stocks...`);
+
+    let inserted = 0, skipped = 0;
+    console.log(`✅ Total records: ${records.length}`);
+
+    for (const record of records) {
+      if (record.segment === 'NSE_EQ' || record.segment === 'BSE_EQ') {
+        let symbol = record.trading_symbol;
+        if (!symbol) continue;
+        const cleanSymbol = symbol.replace(/[^A-Za-z0-9]/g, '');
+        if (cleanSymbol.length < 2) continue;
+        const slug = cleanSymbol.toLowerCase();
+        const name = record.name || cleanSymbol;
+        const { error } = await supabase
+          .from('stocks')
+          .upsert({ slug, name, symbol: cleanSymbol, sector: 'General' }, { onConflict: 'symbol', ignoreDuplicates: true });
+        if (error && error.code !== '23505') {
+          console.error(`Error for ${cleanSymbol}:`, error.message);
+          skipped++;
+        } else if (!error) {
+          inserted++;
+          if (inserted % 100 === 0) console.log(`✅ Inserted ${inserted} stocks...`);
+        }
       }
     }
-    
     console.log(`\n🎉 Done! Inserted ${inserted} new stocks. Skipped ${skipped} duplicates.`);
-    
   } catch (err) {
     console.error('❌ Failed:', err.message);
   }
 }
 
-insertAllStocks();
+fetchAndInsertStocks();
