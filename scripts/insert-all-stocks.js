@@ -23,10 +23,15 @@ async function downloadNSEStocks() {
     Readable.from(response.data)
       .pipe(csv())
       .on('data', (row) => {
-        results.push({
-          symbol: row.SYMBOL?.trim(),
-          name: row.NAME OF COMPANY?.trim(),
-        });
+        const symbol = row['SYMBOL']?.trim();
+        const name = row['NAME OF COMPANY']?.trim();
+
+        if (symbol) {
+          results.push({
+            symbol,
+            name,
+          });
+        }
       })
       .on('end', () => resolve(results))
       .on('error', reject);
@@ -45,8 +50,6 @@ async function main() {
     let errors = 0;
 
     for (const stock of stocks) {
-      if (!stock.symbol) continue;
-
       const slug = stock.symbol
         .toLowerCase()
         .replace(/&/g, '-')
@@ -69,22 +72,29 @@ async function main() {
 
       if (error) {
         errors++;
-        console.log(`Error ${stock.symbol}: ${error.message}`);
+        console.error(`❌ ${stock.symbol}: ${error.message}`);
       } else {
         inserted++;
       }
 
       if (inserted % 100 === 0) {
-        console.log(`Inserted ${inserted}`);
+        console.log(`✅ Inserted ${inserted}`);
       }
     }
 
-    console.log('========================');
+    console.log('====================');
+    console.log(`Total Stocks: ${stocks.length}`);
     console.log(`Inserted: ${inserted}`);
     console.log(`Errors: ${errors}`);
-    console.log('Done');
+    console.log('🎉 Import Complete');
   } catch (err) {
-    console.error(err);
+    console.error('FAILED:', err.message);
+
+    if (err.response) {
+      console.error(err.response.status);
+      console.error(err.response.data);
+    }
+
     process.exit(1);
   }
 }
