@@ -1,71 +1,92 @@
-// scripts/insert-all-stocks.js
 import { createClient } from '@supabase/supabase-js';
 import axios from 'axios';
+import csv from 'csv-parser';
+import { Readable } from 'stream';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
 
-const UPSTOX_API_KEY = process.env.UPSTOX_API_KEY;
+const NSE_CSV_URL =
+  'https://archives.nseindia.com/content/equities/EQUITY_L.csv';
 
-async function insertStocksFromUpstox() {
-  if (!UPSTOX_API_KEY) {
-    console.error('UPSTOX_API_KEY not set');
-    process.exit(1);
-  }
+async function downloadNSEStocks() {
+  const response = await axios.get(NSE_CSV_URL, {
+    responseType: 'text',
+    timeout: 30000,
+  });
 
-  const url = 'https://api.upstox.com/v2/market/quote/instrument';
-  const headers = {
-    'Accept': 'application/json',
-    'Api-Version': '2.0',
-    'Authorization': `Bearer ${UPSTOX_API_KEY}`
-  };
+  return new Promise((resolve, reject) => {
+    const results = [];
 
+    Readable.from(response.data)
+      .pipe(csv())
+      .on('data', (row) => {
+        results.push({
+          symbol: row.SYMBOL?.trim(),
+          name: row.NAME OF COMPANY?.trim(),
+        });
+      })
+      .on('end', () => resolve(results))
+      .on('error', reject);
+  });
+}
+
+async function main() {
   try {
-    const response = await axios.get(url, { headers });
-    const instruments = response.data.data?.instruments || [];
-    console.log(`Fetched ${instruments.length} instruments`);
+    console.log('Downloading NSE stock list...');
 
-    const equityStocks = instruments.filter(instr => 
-      (instr.exchange === 'NSE' || instr.exchange === 'BSE') &&
-      instr.segment === 'EQ'
-    );
-    console.log(`Equity stocks: ${equityStocks.length}`);
+    const stocks = await downloadNSEStocks();
 
-    let inserted = 0, errors = 0;
-    for (const stock of equityStocks) {
-      const symbol = stock.symbol;
-      const name = stock.company_name || symbol;
-      const exchange = stock.exchange;
-      let slug = symbol.toLowerCase().replace(/&/g, '-').replace(/[^a-z0-9-]/g, '');
-      if (exchange === 'BSE') slug = `${slug}-bse`;
+    console.log(`Found ${stocks.length} stocks`);
 
-      const data = {
-        slug, name, symbol, exchange,
-        current_price: null, market_cap: null, pe_ratio: null,
-        eps: null, roe: null, roce: null, debt_to_equity: null,
-        book_value: null, high52: null, low52: null, volume: null,
-        target_2025: null, target_2028: null, target_2030: null,
-        target_2035: null, target_2040: null, target_2045: null,
-        target_2050: null, ai_analysis: null, content: null,
-        last_updated: new Date().toISOString(),
-      };
+    let inserted = 0;
+    let errors = 0;
 
-      const { error } = await supabase.from('stocks').upsert(data, { onConflict: 'symbol' });
+    for (const stock of stocks) {
+      if (!stock.symbol) continue;
+
+      const slug = stock.symbol
+        .toLowerCase()
+        .replace(/&/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+
+      const { error } = await supabase
+        .from('stocks')
+        .upsert(
+          {
+            symbol: stock.symbol,
+            name: stock.name,
+            exchange: 'NSE',
+            slug,
+            last_updated: new Date().toISOString(),
+          },
+          {
+            onConflict: 'symbol',
+          }
+        );
+
       if (error) {
-        console.error(`Error for ${symbol}:`, error.message);
         errors++;
+        console.log(`Error ${stock.symbol}: ${error.message}`);
       } else {
         inserted++;
-        if (inserted % 100 === 0) console.log(`Inserted ${inserted} stocks...`);
+      }
+
+      if (inserted % 100 === 0) {
+        console.log(`Inserted ${inserted}`);
       }
     }
-    console.log(`✅ Done. Inserted ${inserted}. Errors: ${errors}`);
+
+    console.log('========================');
+    console.log(`Inserted: ${inserted}`);
+    console.log(`Errors: ${errors}`);
+    console.log('Done');
   } catch (err) {
-    console.error('Failed:', err.message);
-    if (err.response) console.error(err.response.data);
+    console.error(err);
+    process.exit(1);
   }
 }
 
-insertStocksFromUpstox();
+main();
