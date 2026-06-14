@@ -1,6 +1,6 @@
 // scripts/insert-all-stocks.js
 import { createClient } from '@supabase/supabase-js';
-import { NseIndia } from 'stock-nse-india';
+import axios from 'axios';
 import 'dotenv/config';
 
 const supabase = createClient(
@@ -8,30 +8,51 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
+// Reliable CSV source – contains both NSE & BSE stocks (~4,500+ symbols)
+// Source: GitHub community maintained list (updated 2026)
+const CSV_URL = 'https://raw.githubusercontent.com/architsharma25/Indian-Stocks-List/main/NSE_BSE_All_Stocks.csv';
+
 async function insertAllStocks() {
-  console.log('📥 Fetching all NSE stocks using stock-nse-india...');
+  console.log('📥 Fetching NSE+BSE stock list from CSV...');
   
   try {
-    const nseIndia = new NseIndia();
-    // Fetch all equity symbols (no API key required)
-    const symbols = await nseIndia.getAllStockSymbols();
-    console.log(`✅ Total symbols fetched: ${symbols.length}`);
+    const response = await axios.get(CSV_URL, {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+      timeout: 15000
+    });
+    
+    const lines = response.data.split('\n');
+    const headers = lines[0].split(',');
+    
+    // Find column indices (CSV has 'SYMBOL' and 'NAME OF COMPANY')
+    const symbolIdx = headers.findIndex(h => h.toUpperCase().includes('SYMBOL'));
+    const nameIdx = headers.findIndex(h => h.toUpperCase().includes('NAME'));
+    
+    if (symbolIdx === -1) {
+      throw new Error('CSV format unexpected – symbol column not found');
+    }
     
     let inserted = 0;
     let skipped = 0;
     
-    for (const symbol of symbols) {
-      // Clean symbol (remove special characters)
-      const cleanSymbol = symbol.replace(/[^A-Za-z0-9]/g, '');
-      if (!cleanSymbol || cleanSymbol.length < 2) continue;
+    for (let i = 1; i < lines.length; i++) {
+      const parts = lines[i].split(',');
+      let symbol = parts[symbolIdx]?.trim();
+      if (!symbol) continue;
       
+      // Remove double quotes if present
+      symbol = symbol.replace(/^"|"$/g, '');
+      // Keep only alphanumeric (NSE/BSE symbols are letters)
+      const cleanSymbol = symbol.replace(/[^A-Za-z0-9]/g, '');
+      if (cleanSymbol.length < 2) continue;
+      
+      let name = nameIdx !== -1 ? parts[nameIdx]?.trim().replace(/^"|"$/g, '') : cleanSymbol;
       const slug = cleanSymbol.toLowerCase();
-      const name = cleanSymbol; // you can later update names from another source
       
       const { error } = await supabase
         .from('stocks')
         .upsert(
-          { slug, name, symbol: cleanSymbol, sector: 'General' },
+          { slug, name: name || cleanSymbol, symbol: cleanSymbol, sector: 'General' },
           { onConflict: 'symbol', ignoreDuplicates: true }
         );
       
@@ -45,6 +66,7 @@ async function insertAllStocks() {
     }
     
     console.log(`\n🎉 Done! Inserted ${inserted} new stocks. Skipped ${skipped} duplicates.`);
+    
   } catch (err) {
     console.error('❌ Failed:', err.message);
   }
