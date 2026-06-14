@@ -1,10 +1,14 @@
-import * as yf from "yahoo-finance2";
+import YahooFinance from "yahoo-finance2";
 
-console.log("=================================");
-console.log("Yahoo Export Keys:");
-console.log(Object.keys(yf));
-console.log("=================================");
+const yf = new YahooFinance();
 
-console.log("Default Export:");
-console.log(yf.default);
-console.log("=================================");
+async function test() {
+  try {
+    const quote = await yf.quote("RELIANCE.NS");
+    console.log(JSON.stringify(quote, null, 2));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+test();
