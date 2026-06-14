@@ -1,7 +1,7 @@
-name: Insert All NSE Stocks (One Time)
+name: Insert All NSE+BSE Stocks (One Time)
 
 on:
-  workflow_dispatch:   # manual trigger only
+  workflow_dispatch:
 
 jobs:
   insert:
@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install axios @supabase/supabase-js dotenv stock-nse-india
+      - run: npm install axios @supabase/supabase-js dotenv
       - run: node scripts/insert-all-stocks.js
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
